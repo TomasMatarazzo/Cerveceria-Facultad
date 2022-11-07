@@ -1,20 +1,20 @@
 package modelo;
 
+
 import excepciones.MozoIncorrecto;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.TreeSet;
 
 public class Empresa {
     private String nombreEmpresa;
     private TreeSet<Mozo> mozos = new TreeSet<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();;
-    private ArrayList<Producto> productos= new ArrayList<>();
+    private TreeSet<Producto> productos= new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
 
-    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, ArrayList<Mesa> mesas, TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -22,7 +22,7 @@ public class Empresa {
         this.operarios = operarios;
     }
 
-    //Funciones
+    // --------- OPERARIOS ----------
 
     public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
         try{
@@ -62,21 +62,52 @@ public class Empresa {
 
     }
 
-    // Un operario sale del sistema
     public void Logout{
 
 
     }
 
-    //Agregamos un operario al sistema
-    // Aca verificamos el contrato del operario
     
     public void Signup( String apellido, String usuario, String password, boolean activo){
-        Operario operario = new Operario(apellido, usuario, password, activo);
-        operarios.add(operario);
+        try {
+            Operario operario = new Operario(apellido, usuario, password, activo);
+            operarios.add(operario);
+        }
+        catch(Exception e){
+            System.out.printf(e.getMessage());
+        }
     }
 
+    // --------- PRODUCTOS ------------
 
+    public void altaProductos(int id, String nombre, double precioCosto, double precioVenta, int stockInicial){
+        try{
+            Producto prod = new Producto(id,nombre,precioCosto,precioVenta,stockInicial);
+            productos.add(prod);
+        }catch( Exception e){
+            System.out.printf(e.getMessage());
+        }
+    }
+
+    public void bajaProductos( Producto producto){
+        try{
+            // chequear que el producto no se encuentre asociado a una comanda
+            productos.remove(producto);
+        }catch( Exception e){
+            System.out.printf(e.getMessage());
+        }
+    }
+
+    public void modificarProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto){
+        try{
+            producto.setNombre(nombre);
+            producto.setPrecioCosto(precioCosto);
+            producto.setPrecioVenta(precioVenta);
+            producto.setStockInicial(stockInicial);
+        }catch( Exception e){
+            System.out.printf(e.getMessage());
+        }
+    }
 
 
     public String getNombreEmpresa() {
@@ -87,11 +118,11 @@ public class Empresa {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public ArrayList<Mozo> getMozos() {
+    public TreeSet<Mozo> getMozos() {
         return mozos;
     }
 
-    public void setMozos(ArrayList<Mozo> mozos) {
+    public void setMozos(TreeSet<Mozo> mozos) {
         this.mozos = mozos;
     }
 
@@ -103,20 +134,19 @@ public class Empresa {
         this.mesas = mesas;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public TreeSet<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(TreeSet<Producto> productos) {
         this.productos = productos;
     }
 
-    public ArrayList<Operario> getOperarios() {
+    public TreeSet<Operario> getOperarios() {
         return operarios;
     }
 
-    public void setOperarios(ArrayList<Operario> operarios) {
+    public void setOperarios(TreeSet<Operario> operarios) {
         this.operarios = operarios;
     }
->>>>>>> Stashed changes
 }

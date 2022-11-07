@@ -7,12 +7,17 @@ public class Producto {
     private double precioVenta;
     private int stockInicial;
 
-    public Producto(int id_producto, String nombre, double precioCosto, double precioVenta, int stockInicial) {
+    public Producto(int id_producto, String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
         this.id_producto = id_producto;
         this.nombre = nombre;
-        this.precioCosto = precioCosto;
-        this.precioVenta = precioVenta;
+        this.setPrecioCosto(precioCosto);
+        this.setPrecioVenta(precioVenta);
+        this.checkPrecio(precioCosto,precioVenta);
         this.stockInicial = stockInicial;
+    }
+    public void checkPrecio(double precioCosto, double precioVenta) throws Exception{
+        if (precioVenta < precioCosto)
+            throw new Exception();
     }
 
     public int getId_producto() {
@@ -35,16 +40,22 @@ public class Producto {
         return precioCosto;
     }
 
-    public void setPrecioCosto(double precioCosto) {
-        this.precioCosto = precioCosto;
+    public void setPrecioCosto(double precioCosto) throws Exception{
+        if (precioCosto > 0)
+            this.precioCosto = precioCosto;
+        else
+            throw new Exception();
     }
 
     public double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
+    public void setPrecioVenta(double precioVenta) throws Exception {
+        if (precioVenta > 0)
+            this.precioVenta = precioVenta;
+        else
+            throw new Exception();
     }
 
     public int getStockInicial() {
