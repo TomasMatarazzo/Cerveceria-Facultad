@@ -6,5 +6,5 @@ public class Empresa {
     private Mesa mesas;
     private Producto productos;
     private Operario operarios;
-        
+    private Sueldo sueldo;
 }
