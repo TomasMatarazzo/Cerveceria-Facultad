@@ -1,9 +1,7 @@
 package modelo;
 
-import excepciones.MozoIncorrecto;
-
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.TreeSet;
 
 public class Empresa {
 
@@ -11,9 +9,9 @@ public class Empresa {
     private ArrayList<Mozo> mozos = new ArrayList<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();;
     private ArrayList<Producto> productos= new ArrayList<>();
-    private ArrayList<Operario> operarios= new ArrayList<>();
+    private TreeSet<Operario> operarios= new TreeSet<>();
 
-    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, ArrayList<Operario> operarios) {
+    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -23,29 +21,16 @@ public class Empresa {
 
     //Funciones
 
-
-    //ABM MOZOS
-
-    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
-        try {
-            this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
-        }
-        catch (MozoIncorrecto e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void eliminaMozo(){
-
-    }
-
-    public void modificaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
-    }
-
-
     // Un operario se registra dentro del sistema
-    public void Login{
-
+    public boolean Login( String usuario, String password) throws Exception{
+        for (Operario op:operarios ){
+            if ( op.getUsuario().equals(usuario) && op.getPassword() == password ){
+                return true;
+            }
+            else{
+                throw new Exception();
+            }
+        }
 
     }
 
@@ -58,9 +43,9 @@ public class Empresa {
     //Agregamos un operario al sistema
     // Aca verificamos el contrato del operario
     
-    public void Signup(){
-
-
+    public void Signup( String apellido, String usuario, String password, boolean activo){
+        Operario operario = new Operario(apellido, usuario, password, activo);
+        operarios.add(operario);
     }
 
 
@@ -105,4 +90,5 @@ public class Empresa {
     public void setOperarios(ArrayList<Operario> operarios) {
         this.operarios = operarios;
     }
+>>>>>>> Stashed changes
 }
