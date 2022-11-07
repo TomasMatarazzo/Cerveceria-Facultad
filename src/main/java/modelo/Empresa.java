@@ -1,6 +1,9 @@
 package modelo;
 
+import excepciones.MozoIncorrecto;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Empresa {
 
@@ -19,6 +22,26 @@ public class Empresa {
     }
 
     //Funciones
+
+
+    //ABM MOZOS
+
+    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+        try {
+            this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+        }
+        catch (MozoIncorrecto e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void eliminaMozo(){
+
+    }
+
+    public void modificaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
+    }
+
 
     // Un operario se registra dentro del sistema
     public void Login{
@@ -82,5 +105,4 @@ public class Empresa {
     public void setOperarios(ArrayList<Operario> operarios) {
         this.operarios = operarios;
     }
->>>>>>> Stashed changes
 }
