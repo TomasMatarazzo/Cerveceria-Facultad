@@ -1,17 +1,20 @@
 package modelo;
 
+import excepciones.MozoIncorrecto;
+
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 public class Empresa {
-
     private String nombreEmpresa;
-    private ArrayList<Mozo> mozos = new ArrayList<>();
+    private TreeSet<Mozo> mozos = new ArrayList<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();;
     private ArrayList<Producto> productos= new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
 
-    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -20,6 +23,31 @@ public class Empresa {
     }
 
     //Funciones
+
+    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+        try{
+            this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+        }
+        catch (MozoIncorrecto e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
+        try{
+            mozo.setNombreYApellido(nombreYApellido);
+            mozo.setFechaNacimiento(fechaNacimiento);
+            mozo.setCantHijos(cantHijos);
+            mozo.setEstado(estado);
+        }
+        catch (MozoIncorrecto e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void eliminaMozo(Mozo mozo){
+        this.mozos.remove(mozo);
+    }
 
     // Un operario se registra dentro del sistema
     public boolean Login( String usuario, String password) throws Exception{

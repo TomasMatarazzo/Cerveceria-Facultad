@@ -5,6 +5,8 @@ import excepciones.MozoIncorrecto;
 import java.util.Date;
 
 public class Mozo {
+    private static Integer cont=0;
+    private Integer id;
     private String nombreYApellido;
     private Date fechaNacimiento;
     private double cantHijos;
@@ -15,6 +17,16 @@ public class Mozo {
         this.setFechaNacimiento(fechaNacimiento);
         this.setCantHijos(cantHijos);
         this.setEstado(estado);
+        cont++;
+        this.setId(cont);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombreYApellido() {
