@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class Empresa {
     private String nombreEmpresa;
-    private TreeSet<Mozo> mozos = new ArrayList<>();
+    private TreeSet<Mozo> mozos = new TreeSet<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();;
     private ArrayList<Producto> productos= new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
