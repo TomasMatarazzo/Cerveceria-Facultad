@@ -3,14 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Empresa {
-<<<<<<< Updated upstream
-    private String nombre;
-    private Mozo mozos;
-    private Mesa mesas;
-    private Producto productos;
-    private Operario operarios;
-    private Sueldo sueldo;
-=======
+
     private String nombreEmpresa;
     private ArrayList<Mozo> mozos = new ArrayList<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();;
