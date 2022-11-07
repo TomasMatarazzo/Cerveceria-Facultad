@@ -9,11 +9,11 @@ public class Empresa {
 
     private String nombreEmpresa;
     private ArrayList<Mozo> mozos = new ArrayList<>();
-    private ArrayList<Mesa> mesas = new ArrayList<>();;
-    private TreeSet<Producto> productos= new ArrayList<>();
+    private TreeSet<Mesa> mesas = new TreeSet<>();;
+    private TreeSet<Producto> productos= new TreeSet<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
 
-    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, ArrayList<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, TreeSet<Mesa> mesas, TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -82,6 +82,54 @@ public class Empresa {
         }
     }
 
+    // -------- MESAS ----------
+
+    public void altaMesas(int cantidadPersonas, String estado){
+        try{
+            Mesa mesa = new Mesa(cantidadPersonas,estado);
+            mesas.add(mesa);
+        }
+        catch(Exception exception){
+            System.out.printf(exception.getMessage());
+        }
+    }
+
+    public void bajaMesass(Mesa mesa){
+        try{
+            mesas.remove(mesa);
+        }
+        catch(Exception exception){
+            System.out.printf(exception.getMessage());
+        }
+    }
+
+    public void modificaMesas(int cantidadPersonas, String estado, Mesa mesa){
+        try{
+            mesa.setEstado(estado);
+            mesa.setCantidadPersonas(cantidadPersonas);
+        }catch(Exception e){
+            System.out.printf(e.getMessage());
+        }
+
+    }
+
+    // ------- COMANDAS ---------
+
+    public void altaComanda( Mesa mesa, ArrayList<Producto> productos, String estado){
+        // creo el array de pedidos
+        boolean libre = false;
+        if (mesa.getEstado().equalsIgnoreCase("libre") && mesa.getMozo() != null && this.productos.size() !=0){
+            // chequear promocion
+            libre = true
+        }
+        }
+        if (libre){
+            // revisar esto
+            mesa.setEstado("ocupada");
+            Comanda comanda = new Comanda(mesa,productos,estado);
+        }
+    }
+    // ----- GET Y SET ----
 
     public String getNombreEmpresa() {
         return nombreEmpresa;
@@ -99,28 +147,6 @@ public class Empresa {
         this.mozos = mozos;
     }
 
-    public ArrayList<Mesa> getMesas() {
-        return mesas;
-    }
 
-    public void setMesas(ArrayList<Mesa> mesas) {
-        this.mesas = mesas;
-    }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(ArrayList<Producto> productos) {
-        this.productos = productos;
-    }
-
-    public ArrayList<Operario> getOperarios() {
-        return operarios;
-    }
-
-    public void setOperarios(ArrayList<Operario> operarios) {
-        this.operarios = operarios;
-    }
->>>>>>> Stashed changes
 }
