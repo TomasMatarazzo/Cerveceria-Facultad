@@ -39,7 +39,7 @@ public class Operario {
 
         Matcher m = p.matcher(password);
 
-        if (m.matches() && apellido.length() < 10 && apellido.length() > 6)
+        if (m.matches() && apellido.length() >= 6 && apellido.length() <= 12)
             this.password = password;
         else
             throw  new Exception();
