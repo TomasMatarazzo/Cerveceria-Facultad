@@ -17,6 +17,7 @@ public class Mozo {
         this.setEstado(estado);
     }
 
+
     public String getNombreYApellido() {
         return nombreYApellido;
     }

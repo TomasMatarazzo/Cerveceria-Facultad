@@ -1,12 +1,13 @@
 package modelo;
 
-import com.sun.source.tree.Tree;
+
+import excepciones.MozoIncorrecto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeSet;
 
 public class Empresa {
-
     private String nombreEmpresa;
     private ArrayList<Mozo> mozos = new ArrayList<>();
     private TreeSet<Mesa> mesas = new TreeSet<>();;
@@ -23,6 +24,32 @@ public class Empresa {
 
     // --------- OPERARIOS ----------
 
+    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+        try{
+            this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+        }
+        catch (MozoIncorrecto e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
+        try{
+            mozo.setNombreYApellido(nombreYApellido);
+            mozo.setFechaNacimiento(fechaNacimiento);
+            mozo.setCantHijos(cantHijos);
+            mozo.setEstado(estado);
+        }
+        catch (MozoIncorrecto e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void eliminaMozo(Mozo mozo){
+        this.mozos.remove(mozo);
+    }
+
+    // Un operario se registra dentro del sistema
     public boolean Login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             if ( op.getUsuario().equals(usuario) && op.getPassword() == password ){
@@ -139,14 +166,13 @@ public class Empresa {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public ArrayList<Mozo> getMozos() {
+    public TreeSet<Mozo> getMozos() {
         return mozos;
     }
 
-    public void setMozos(ArrayList<Mozo> mozos) {
+    public void setMozos(TreeSet<Mozo> mozos) {
         this.mozos = mozos;
     }
 
 
 
-}
