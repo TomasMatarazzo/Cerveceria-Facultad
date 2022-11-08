@@ -6,15 +6,16 @@ import java.util.Date;
 public class Comanda {
     private Date fecha;
     private Mesa mesa;
-    private ArrayList<Pedido> productos = new ArrayList<>();
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
     private String estado;
 
-    public Comanda( Mesa mesa, ArrayList<Pedido> productos, String estado) throws Exception{
+    public Comanda( Mesa mesa, ArrayList<Pedido> pedidos, String estado) throws Exception{
         this.fecha = new Date();
         this.setMesa(mesa);
-        this.productos = productos;
+        this.pedidos = pedidos;
         this.estado = estado;
     }
+
 
     public Date getFecha() {
         return fecha;
@@ -36,16 +37,17 @@ public class Comanda {
         }
     }
 
-    public ArrayList<Pedido> getProductos() {
-        return productos;
-    }
 
     public void agregarPedido(Pedido pedido){
-        this.productos.add(pedido);
+        this.pedidos.add(pedido);
     }
 
-    public void setProductos(ArrayList<Pedido> productos) {
-        this.productos = productos;
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public String getEstado() {

@@ -3,18 +3,24 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Empresa {
     private String nombreEmpresa;
-    private ArrayList<Mozo> mozos = new ArrayList<>();
+    private TreeSet<Mozo> mozos = new TreeSet<>();
     private TreeSet<Mesa> mesas = new TreeSet<>();;
-    private TreeSet<Producto> productos= new TreeSet<>();
+    private ArrayList<Producto> productos= new ArrayList<>();
+    private ArrayList<Comanda> comandas=new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
+    private ArrayList<ProductoEnPromocion> promocionesProductos;
+    private ArrayList<PromocionTemporal> promocionesTemporales;
 
-    public Empresa(String nombreEmpresa, ArrayList<Mozo> mozos, TreeSet<Mesa> mesas, TreeSet<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -141,7 +147,7 @@ public class Empresa {
     }
 
     // ------- COMANDAS ---------
-
+    /*
     public void altaComanda( Mesa mesa, ArrayList<Producto> productos, String estado){
         // creo el array de pedidos
         boolean libre = false;
@@ -156,7 +162,25 @@ public class Empresa {
             Comanda comanda = new Comanda(mesa,productos,estado);
         }
     }
+    */
     // ----- GET Y SET ----
+
+
+    public ArrayList<ProductoEnPromocion> getPromocionesProductos() {
+        return promocionesProductos;
+    }
+
+    public void setPromocionesProductos(ArrayList<ProductoEnPromocion> promocionesProductos) {
+        this.promocionesProductos = promocionesProductos;
+    }
+
+    public ArrayList<PromocionTemporal> getPromocionesTemporales() {
+        return promocionesTemporales;
+    }
+
+    public void setPromocionesTemporales(ArrayList<PromocionTemporal> promocionesTemporales) {
+        this.promocionesTemporales = promocionesTemporales;
+    }
 
     public String getNombreEmpresa() {
         return nombreEmpresa;
@@ -173,6 +197,19 @@ public class Empresa {
     public void setMozos(TreeSet<Mozo> mozos) {
         this.mozos = mozos;
     }
+
+    public void crearFactura(Mesa mesa,String formaDePago){
+        Comanda comanda = null;
+        for (int i = 0; i < this.comandas.size(); i++){
+            if(this.comandas.get(i).getMesa()==mesa){
+                comanda=this.comandas.get(i);
+            }
+        }
+        Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);
+        this.comandas.remove(comanda);
+    }
+        //agregar factura al mozo
+}
 
 
 

@@ -52,4 +52,9 @@ public class Mesa {
     public void setMozo(Mozo mozo) {
         this.mozo = mozo;
     }
+
+    public void cerrarMesa(){
+        this.estado="libre";
+
+    }
 }
