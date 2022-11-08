@@ -26,23 +26,8 @@ public class Operario {
         return usuario;
     }
 
-    public void setPassword(String password) throws Exception{
-        String regex = "^(?=.*[a-z])(?=."
-                + "*[A-Z])(?=.*\\d)"
-                + "(?=.*[-+_!@#$%^&*., ?]).+$";
-
-        Pattern p = Pattern.compile(regex);
-
-        if (password == null) {
-            throw new Exception();
-        }
-
-        Matcher m = p.matcher(password);
-
-        if (m.matches() && apellido.length() >= 6 && apellido.length() <= 12)
-            this.password = password;
-        else
-            throw  new Exception();
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public String getPassword() {
@@ -50,10 +35,7 @@ public class Operario {
     }
 
     public void setUsuario(String usuario) throws Exception {
-        if (apellido != null && apellido.length() <= 10)
                 this.password = password;
-        else
-            throw new Exception();
     }
 
     public boolean isActivo() {

@@ -26,12 +26,8 @@ public class Mesa {
         return cantidadPersonas;
     }
 
-    public void setCantidadPersonas(int cantidadPersonas) throws Exception{
-        if (cantidadPersonas >= 2 && this.nro >= 1)
+    public void setCantidadPersonas(int cantidadPersonas){
             this.cantidadPersonas = cantidadPersonas;
-        else{
-            throw new Exception();
-        }
     }
 
     public String getEstado() {

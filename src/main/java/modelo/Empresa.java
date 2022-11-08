@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Empresa {
     private String nombreEmpresa;
@@ -30,36 +32,11 @@ public class Empresa {
 
     // --------- OPERARIOS ----------
 
-    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
-        try{
-            this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
-        }
-        catch (MozoIncorrecto e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void modificaMozo(Mozo mozo,String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
-        try{
-            mozo.setNombreYApellido(nombreYApellido);
-            mozo.setFechaNacimiento(fechaNacimiento);
-            mozo.setCantHijos(cantHijos);
-            mozo.setEstado(estado);
-        }
-        catch (MozoIncorrecto e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void eliminaMozo(Mozo mozo){
-        this.mozos.remove(mozo);
-    }
-
-    // Un operario se registra dentro del sistema
-    public boolean Login( String usuario, String password) throws Exception{
+    public Operario Login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
-            if ( op.getUsuario().equals(usuario) && op.getPassword() == password ){
-                return true;
+            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password) ){
+                if (op.isActivo())
+                    return op;
             }
             else{
                 throw new Exception();
@@ -74,19 +51,59 @@ public class Empresa {
     }
 
     
-    public void Signup( String apellido, String usuario, String password, boolean activo){
-        try {
+    public void Signup( String apellido, String usuario, String password, boolean activo) throws Exception{
+        String regex = "^(?=.*[a-z])(?=."
+                + "*[A-Z])(?=.*\\d)"
+                + "(?=.*[-+_!@#$%^&*., ?]).+$";
+        Pattern p = Pattern.compile(regex);
+        if (password == null) {
+            throw new Exception();
+        }
+        Matcher m = p.matcher(password);
+        if (m.matches() && apellido.length() >= 6 && apellido.length() <= 12 && usuario.length() <= 10) {
             Operario operario = new Operario(apellido, usuario, password, activo);
             operarios.add(operario);
         }
-        catch(Exception e){
-            System.out.printf(e.getMessage());
+        else
+            throw  new Exception();
+
+    }
+
+    // --------- MOZOS ----------
+
+    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+        // VERIFICAR LA EDAD
+        Date fechaactual = new Date(System.currentTimeMillis());
+        int milisecondsByDay = 86400000;
+        if((fechaactual.getTime()-fechaNacimiento.getTime())/(milisecondsByDay*365L)>=18){
+            if( cantHijos >= 0 ){
+                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+            }
+            else{
+                throw new MozoIncorrecto("Cant de hijos menor a cero");
+            }
+        }
+        else{
+            throw  new MozoIncorrecto("Edad menor a 18 anos");
         }
     }
 
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
+        mozo.setNombreYApellido(nombreYApellido);
+        mozo.setFechaNacimiento(fechaNacimiento);
+        mozo.setCantHijos(cantHijos);
+        mozo.setEstado(estado);
+    }
+
+    public void eliminaMozo(Mozo mozo){
+        this.mozos.remove(mozo);
+    }
+
+
+
     // --------- PRODUCTOS ------------
 
-    public void altaProductos(int id, String nombre, double precioCosto, double precioVenta, int stockInicial){
+    public void altaProducto(int id, String nombre, double precioCosto, double precioVenta, int stockInicial){
         try{
             Producto prod = new Producto(id,nombre,precioCosto,precioVenta,stockInicial);
             productos.add(prod);
@@ -95,7 +112,7 @@ public class Empresa {
         }
     }
 
-    public void bajaProductos( Producto producto){
+    public void bajaProducto( Producto producto){
         try{
             // chequear que el producto no se encuentre asociado a una comanda
             productos.remove(producto);
@@ -104,7 +121,7 @@ public class Empresa {
         }
     }
 
-    public void modificarProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto){
+    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto){
         try{
             producto.setNombre(nombre);
             producto.setPrecioCosto(precioCosto);
@@ -117,17 +134,17 @@ public class Empresa {
 
     // -------- MESAS ----------
 
-    public void altaMesas(int cantidadPersonas, String estado){
-        try{
+    public void altaMesa(int cantidadPersonas, String estado) throws Exception{
+        if (cantidadPersonas >= 2 ){
             Mesa mesa = new Mesa(cantidadPersonas,estado);
             mesas.add(mesa);
         }
-        catch(Exception exception){
-            System.out.printf(exception.getMessage());
+        else{
+            throw new Exception();
         }
     }
 
-    public void bajaMesass(Mesa mesa){
+    public void bajaMesa(Mesa mesa){
         try{
             mesas.remove(mesa);
         }
@@ -136,7 +153,7 @@ public class Empresa {
         }
     }
 
-    public void modificaMesas(int cantidadPersonas, String estado, Mesa mesa){
+    public void modificaMesa(int cantidadPersonas, String estado, Mesa mesa){
         try{
             mesa.setEstado(estado);
             mesa.setCantidadPersonas(cantidadPersonas);
