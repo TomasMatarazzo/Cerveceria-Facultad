@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ProductoIncorrecto;
+
 public class Producto implements Comparable<Producto>{
     private int id_producto;
     private String nombre;
@@ -15,9 +17,10 @@ public class Producto implements Comparable<Producto>{
         this.checkPrecio(precioCosto,precioVenta);
         this.stockInicial = stockInicial;
     }
-    public void checkPrecio(double precioCosto, double precioVenta) throws Exception{
+
+    public void checkPrecio(double precioCosto, double precioVenta) throws ProductoIncorrecto {
         if (precioVenta < precioCosto)
-            throw new Exception();
+            throw new ProductoIncorrecto("El precio de venta es menor al de costo");
     }
 
     public int getId_producto() {
@@ -40,22 +43,22 @@ public class Producto implements Comparable<Producto>{
         return precioCosto;
     }
 
-    public void setPrecioCosto(double precioCosto) throws Exception{
+    public void setPrecioCosto(double precioCosto) throws ProductoIncorrecto{
         if (precioCosto > 0)
             this.precioCosto = precioCosto;
         else
-            throw new Exception();
+            throw new ProductoIncorrecto("El precio de costo es menor o igual a 0");
     }
 
     public double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(double precioVenta) throws Exception {
+    public void setPrecioVenta(double precioVenta) throws ProductoIncorrecto {
         if (precioVenta > 0)
             this.precioVenta = precioVenta;
         else
-            throw new Exception();
+            throw new ProductoIncorrecto("El precio de venta es menor o igual a 0");
     }
 
     public int getStockInicial() {
