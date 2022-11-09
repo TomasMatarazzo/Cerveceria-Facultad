@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class Estadisticas {
@@ -30,7 +31,10 @@ public class Estadisticas {
         return mozoMax;
     }
 
-//    public static double promedioPorMesa(){
-//        System.out.printf("completar");
-//    }
+    public static void promedioPorMesa(ArrayList<Mesa> mesas){
+        for (Mesa mesa : mesas) {
+            System.out.println("Mesa:" + mesa.getNro());
+            System.out.println("El consumo promedio es: " + mesa.getTotalComandas() / mesa.getCantComandas());
+        }
+    }
 }
