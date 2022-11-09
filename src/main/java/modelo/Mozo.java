@@ -8,12 +8,12 @@ import java.util.Objects;
 
 public class Mozo implements Comparable<Mozo> {
     private String nombreYApellido;
-    private Date fechaNacimiento;
+    private Calendar fechaNacimiento;
     private double cantHijos;
     private int estado;
     private double ventas;
 
-    public Mozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
+    public Mozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
         this.setNombreYApellido(nombreYApellido);
         this.setFechaNacimiento(fechaNacimiento);
         this.setCantHijos(cantHijos);
@@ -30,11 +30,11 @@ public class Mozo implements Comparable<Mozo> {
         this.nombreYApellido = nombreYApellido;
     }
 
-    public Date getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento){
+    public void setFechaNacimiento(Calendar fechaNacimiento){
             this.fechaNacimiento = fechaNacimiento;
     }
 

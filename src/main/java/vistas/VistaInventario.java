@@ -59,9 +59,9 @@ public class VistaInventario extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Mozo mozo1 = new Mozo("ignacitoo", Date.from(Instant.now()),3,0);
-                    Mozo mozo2 = new Mozo("ignacito1o",Date.from(Instant.now()),3,1);
-                    Mozo mozo3 = new Mozo("ignacito2o",Date.from(Instant.now()),3,2);
+                    Mozo mozo1 = new Mozo("ignacitoo", Calendar.getInstance(),3,0);
+                    Mozo mozo2 = new Mozo("ignacito1o",Calendar.getInstance(),3,1);
+                    Mozo mozo3 = new Mozo("ignacito2o",Calendar.getInstance(),3,2);
 
                     TreeSet<Mozo> mozos = new TreeSet<>();
                     mozos.add(mozo1);

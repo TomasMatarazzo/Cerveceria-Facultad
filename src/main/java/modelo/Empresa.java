@@ -6,10 +6,7 @@ import excepciones.StockNoDisponible;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,13 +69,16 @@ public class Empresa {
 
     // --------- MOZOS ----------
 
+
     public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
         // VERIFICAR LA EDAD
         Date fechaactual = new Date(System.currentTimeMillis());
         int milisecondsByDay = 86400000;
         if((fechaactual.getTime()-fechaNacimiento.getTime())/(milisecondsByDay*365L)>=18){
             if( cantHijos >= 0 ){
-                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(fechaNacimiento);
+                this.mozos.add(new Mozo(nombreYApellido,calendar,cantHijos,estado));
             }
             else{
                 throw new MozoIncorrecto("Cant de hijos menor a cero");
@@ -89,7 +89,7 @@ public class Empresa {
         }
     }
 
-    public void modificaMozo(Mozo mozo,String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
         mozo.setNombreYApellido(nombreYApellido);
         mozo.setFechaNacimiento(fechaNacimiento);
         mozo.setCantHijos(cantHijos);
