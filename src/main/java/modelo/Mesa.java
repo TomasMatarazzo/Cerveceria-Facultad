@@ -79,8 +79,8 @@ public class Mesa {
                 ", pedido=" + pedido +
                 '}';
     }
-    public void cerrarMesa(){
-        this.estado="libre";
+    public void cerrarMesa() {
+        this.estado = "libre";
 
-
+    }
 }
