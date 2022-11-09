@@ -1,6 +1,7 @@
-package com.simplilearn.mavenn;
+package controladores.vistas;
 
-import java.awt.BorderLayout;
+import controladores.ControladorPrincipal;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -29,15 +30,25 @@ public class VistaPrincipal extends JFrame {
     private JLabel sueldoVariable;
     private String nombre = "";
     private String sueldo = "";
+    private FormNombreySueldo formSueldo;
 
-    /**
-     * Launch the application.
-     */
+
+    public void setActionListener(ActionListener controlador) {
+        this.btnModificarN.addActionListener(controlador);
+        this.formSueldo.botonModificar.addActionListener(controlador);
+        this.btnEstadisticas.addActionListener(controlador);
+        this.btnComandas.addActionListener(controlador);
+        this.btnGestiones.addActionListener(controlador);
+        this.btnPromociones.addActionListener(controlador);
+
+    }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+
                     VistaPrincipal frame = new VistaPrincipal();
+                    ControladorPrincipal controlador = new ControladorPrincipal(frame);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,7 +59,9 @@ public class VistaPrincipal extends JFrame {
 
 
     public VistaPrincipal( ) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.nombre = "Igna";
+        this.sueldo = "40000";
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 685, 627);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,21 +74,25 @@ public class VistaPrincipal extends JFrame {
         contentPane.add(botonOperario);
 
         btnComandas = new JButton("Comandas");
+        btnComandas.setActionCommand("COMANDAS");
         btnComandas.setFont(new Font("Arial", Font.BOLD, 21));
         btnComandas.setBounds(33, 240, 185, 35);
         contentPane.add(btnComandas);
 
         btnEstadisticas = new JButton("Estadisticas");
+        btnEstadisticas.setActionCommand("ESTADISTICAS");
         btnEstadisticas.setFont(new Font("Arial", Font.BOLD, 21));
         btnEstadisticas.setBounds(33, 297, 185, 35);
         contentPane.add(btnEstadisticas);
 
         btnPromociones = new JButton("Promociones");
+        this.btnPromociones.setActionCommand("PROMOCIONES");
         btnPromociones.setFont(new Font("Arial", Font.BOLD, 21));
         btnPromociones.setBounds(33, 354, 185, 35);
         contentPane.add(btnPromociones);
 
         btnGestiones = new JButton("Gestiones");
+        btnGestiones.setActionCommand("GESTIONES");
         btnGestiones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -100,32 +117,46 @@ public class VistaPrincipal extends JFrame {
         contentPane.add(lblSueldoBase);
 
         btnModificarN = new JButton("Modificar");
+        btnModificarN.setActionCommand("FORMDATOS");
         btnModificarN.setFont(new Font("Arial", Font.BOLD, 21));
         btnModificarN.setBounds(462, 180, 185, 35);
         contentPane.add(btnModificarN);
 
-        botonModificarS = new JButton("Modificar");
-        botonModificarS.setFont(new Font("Arial", Font.BOLD, 21));
-        botonModificarS.setBounds(462, 297, 185, 35);
-        contentPane.add(botonModificarS);
 
-        nombreVariable = new JLabel(this.nombre);
-        nombreVariable.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 21));
+        nombreVariable = new JLabel();
+        nombreVariable.setText(this.nombre);
+        nombreVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
         nombreVariable.setBounds(252, 230, 260, 45);
         contentPane.add(nombreVariable);
 
-        sueldoVariable = new JLabel(this.sueldo);
-        sueldoVariable.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 21));
+        sueldoVariable = new JLabel();
+        sueldoVariable.setText(this.sueldo);
+        sueldoVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
         sueldoVariable.setBounds(252, 344, 260, 45);
         contentPane.add(sueldoVariable);
+
+        formSueldo = new FormNombreySueldo();
+        formSueldo.setVisible(false);
+
+
+    }
+
+    public void showFormSueldo(){
+        this.formSueldo.setVisible(true);
+    }
+
+    public void hideFormSueldo(){
+        this.formSueldo.setVisible(false);
+    }
+    public FormNombreySueldo getFormSueldo() {
+        return formSueldo;
     }
 
     public void setNombre(String nombre){
-        this.nombre = nombre;
+        this.nombreVariable.setText( nombre);
     }
 
-
     public void setSueldo(String sueldo) {
-        this.sueldo = sueldo;
+        this.sueldoVariable.setText( sueldo);
     }
 }

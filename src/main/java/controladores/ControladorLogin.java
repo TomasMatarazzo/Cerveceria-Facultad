@@ -1,7 +1,7 @@
 package controladores;
 
 import modelo.Empresa;
-import vistas.VistaLogin;
+import controladores.vistas.VistaLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

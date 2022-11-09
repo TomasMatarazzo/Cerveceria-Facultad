@@ -2,13 +2,11 @@ package controladores;
 
 import excepciones.MozoIncorrecto;
 import modelo.Empresa;
-import vistas.VistaLogin;
-import vistas.VistaInventario;
-import java.text.DateFormat;
+import controladores.vistas.VistaInventario;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ControladorInventario implements ActionListener{
     private VistaInventario vista;
@@ -42,7 +40,7 @@ public class ControladorInventario implements ActionListener{
                 break;
             case "ELIMINAR_MOZO":
                 System.out.printf("hola");
-                this.modelo.bajaMozo(this.vista.getSelectedMozo());
+                //this.modelo.bajaMozo(this.vista.getSelectedMozo());
                 this.vista.renderListaMozos(this.modelo.getMozos());
                 break;
             case "MODIFICAR_MOZO":
@@ -57,6 +55,7 @@ public class ControladorInventario implements ActionListener{
 
             case "NUEVOPRODUCTO":
                 // CORREGIR LO DEL ID
+                System.out.printf("rnyyt");
                 double costo = Double.parseDouble(this.vista.getFormProducto().getCosto());
                 double venta = Double.parseDouble(this.vista.getFormProducto().getVenta());
                 int stock = Integer.parseInt(this.vista.getFormProducto().getStock());

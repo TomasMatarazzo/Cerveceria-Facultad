@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class Estadisticas {
 
-    public static Mozo mayorVolumenVenta(TreeSet<Mozo> mozos){
+    public static String mayorVolumenVenta(TreeSet<Mozo> mozos){
         double max = -10;
         Mozo mozoMax = null;
         for (Mozo mozo:mozos){
@@ -15,10 +15,10 @@ public class Estadisticas {
             }
         }
 
-        return mozoMax;
+        return mozoMax.getNombreYApellido();
     }
 
-    public static Mozo menorVolumenMesa(TreeSet<Mozo> mozos){
+    public static String menorVolumenVenta(TreeSet<Mozo> mozos){
         double min = 10000000;
         Mozo mozoMax = null;
         for (Mozo mozo:mozos){
@@ -28,13 +28,16 @@ public class Estadisticas {
             }
         }
 
-        return mozoMax;
+        return mozoMax.getNombreYApellido();
     }
 
-    public static void promedioPorMesa(ArrayList<Mesa> mesas){
+    public static double promedioPorMesa(TreeSet<Mesa> mesas){
+        double acum = 0;
+        double acum2 = 0;
         for (Mesa mesa : mesas) {
-            System.out.println("Mesa:" + mesa.getNro());
-            System.out.println("El consumo promedio es: " + mesa.getTotalComandas() / mesa.getCantComandas());
+            acum += mesa.getTotalComandas();
+            acum2 += mesa.getCantComandas();
         }
+        return acum / acum2;
     }
 }

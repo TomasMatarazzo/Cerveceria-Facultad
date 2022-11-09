@@ -12,16 +12,19 @@ import java.util.regex.Pattern;
 
 public class Empresa {
     private String nombreEmpresa;
-    private int sueldoBasico;
+    private double sueldoBasico;
     private TreeSet<Mozo> mozos = new TreeSet<>();
     private TreeSet<Mesa> mesas = new TreeSet<>();;
-    private ArrayList<Producto> productos= new ArrayList<>();
+    private TreeSet<Producto> productos= new TreeSet<>();
     private ArrayList<Comanda> comandas=new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
     private ArrayList<ProductoEnPromocion> promocionesProductos;
     private ArrayList<PromocionTemporal> promocionesTemporales;
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
 
-    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas, ArrayList<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(){}
+
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas,TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -172,8 +175,14 @@ public class Empresa {
 
         return pedido;
     }
+    // ------- PEDIDOS ---------
+
+    public void altaPedido(Pedido pedido){
+        this.pedidos.add(pedido);
+    }
 
     // ------- COMANDAS ---------
+
     public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, String estado) throws Exception {
         boolean libre = false;
         if (mesa.getEstado().equalsIgnoreCase("libre") && mesa.getMozo() != null && this.productos.size() !=0){
@@ -184,11 +193,11 @@ public class Empresa {
     // ----- GET Y SET ----
 
 
-    public int getSueldoBasico() {
+    public double getSueldoBasico() {
         return sueldoBasico;
     }
 
-    public void setSueldoBasico(int sueldoBasico) {
+    public void setSueldoBasico(double sueldoBasico) {
         this.sueldoBasico = sueldoBasico;
     }
 
@@ -246,6 +255,47 @@ public class Empresa {
         return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
     }
         //agregar factura al mozo
+
+
+    public TreeSet<Mesa> getMesas() {
+        return mesas;
+    }
+
+    public void setMesas(TreeSet<Mesa> mesas) {
+        this.mesas = mesas;
+    }
+
+    public TreeSet<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(TreeSet<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public ArrayList<Comanda> getComandas() {
+        return comandas;
+    }
+
+    public void setComandas(ArrayList<Comanda> comandas) {
+        this.comandas = comandas;
+    }
+
+    public TreeSet<Operario> getOperarios() {
+        return operarios;
+    }
+
+    public void setOperarios(TreeSet<Operario> operarios) {
+        this.operarios = operarios;
+    }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }
 
 

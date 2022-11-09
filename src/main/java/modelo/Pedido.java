@@ -37,4 +37,12 @@ public class Pedido {
             throw new StockNoDisponible("No hay stock suficiente");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "producto=" + producto +
+                ", cantidad=" + cantidad +
+                '}';
+    }
 }

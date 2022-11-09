@@ -1,6 +1,5 @@
-package vistas;
+package controladores.vistas;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,30 +7,27 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class FormMesa extends JFrame {
+public class FormNombreySueldo extends JFrame {
 
     private JPanel contentPane;
     private JLabel lblNewLabel;
-    private JTextField inputNro;
+    private JTextField inputNombre;
     private JLabel lblCantidadDeHijos;
-    private JTextField inputCant;
-    public JButton botonNuevaMesa;
+    private JTextField inputSueldo;
+    public JButton botonModificar;
     private JLabel lblCrearMesa;
 
-    public void setActionListener(ActionListener controlador) {
-        this.botonNuevaMesa.addActionListener(controlador);
-
-    }
-
+    /**
+     * Launch the application.
+     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    FormMesa frame = new FormMesa();
+                    FormNombreySueldo frame = new FormNombreySueldo();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -43,52 +39,53 @@ public class FormMesa extends JFrame {
     /**
      * Create the frame.
      */
-    public FormMesa() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public FormNombreySueldo() {
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 615, 365);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        lblNewLabel = new JLabel("Nro");
+        lblNewLabel = new JLabel("Nombre Empresa");
         lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 21));
         lblNewLabel.setBounds(10, 58, 200, 39);
         contentPane.add(lblNewLabel);
 
-        inputNro = new JTextField();
-        inputNro.setBounds(10, 102, 245, 33);
-        contentPane.add(inputNro);
-        inputNro.setColumns(10);
+        inputNombre = new JTextField();
+        inputNombre.setBounds(10, 102, 245, 33);
+        contentPane.add(inputNombre);
+        inputNombre.setColumns(10);
 
-        lblCantidadDeHijos = new JLabel("Cantidad de sillas");
+        lblCantidadDeHijos = new JLabel("Sueldo Base");
         lblCantidadDeHijos.setFont(new Font("Arial", Font.PLAIN, 21));
         lblCantidadDeHijos.setBounds(10, 145, 200, 39);
         contentPane.add(lblCantidadDeHijos);
 
-        inputCant = new JTextField();
-        inputCant.setColumns(10);
-        inputCant.setBounds(10, 185, 245, 33);
-        contentPane.add(inputCant);
+        inputSueldo = new JTextField();
+        inputSueldo.setColumns(10);
+        inputSueldo.setBounds(10, 185, 245, 33);
+        contentPane.add(inputSueldo);
 
-        botonNuevaMesa = new JButton("Nueva mesa");
-        botonNuevaMesa.setActionCommand("NUEVAMESA");
-        botonNuevaMesa.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonNuevaMesa.setBounds(200, 242, 190, 56);
-        contentPane.add(botonNuevaMesa);
+        botonModificar = new JButton("MODIFICAR");
+        botonModificar.setActionCommand("MODIFICAR_DATOS");
+        botonModificar.setFont(new Font("Arial", Font.PLAIN, 21));
+        botonModificar.setBounds(200, 242, 190, 56);
+        contentPane.add(botonModificar);
 
-        lblCrearMesa = new JLabel("CREAR MESA");
+        lblCrearMesa = new JLabel("DATOS EMPRESA");
         lblCrearMesa.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 21));
         lblCrearMesa.setBounds(212, 10, 200, 39);
         contentPane.add(lblCrearMesa);
     }
 
-    public String getCantidadSillas(){
-        return this.inputCant.getText();
+    public String getNombre(){
+        return this.inputNombre.getText();
     }
 
-    public String getNroMesa(){
-        return this.inputNro.getText();
+    public String getSueldo(){
+        return this.inputSueldo.getText();
     }
+
 
 }

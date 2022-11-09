@@ -1,22 +1,16 @@
-package vistas;
-import com.sun.source.tree.Tree;
+package controladores.vistas;
 import controladores.ControladorInventario;
-import controladores.ControladorRegistrarse;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Producto;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 public class VistaInventario extends JFrame {
@@ -55,33 +49,20 @@ public class VistaInventario extends JFrame {
         this.formMesa.botonNuevaMesa.addActionListener(controlador);
         this.formProducto.botonAgregar.addActionListener(controlador);
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Mozo mozo1 = new Mozo("ignacitoo", Calendar.getInstance(),3,0);
-                    Mozo mozo2 = new Mozo("ignacito1o",Calendar.getInstance(),3,1);
-                    Mozo mozo3 = new Mozo("ignacito2o",Calendar.getInstance(),3,2);
 
-                    TreeSet<Mozo> mozos = new TreeSet<>();
-                    mozos.add(mozo1);
-                    mozos.add(mozo2);
-                    mozos.add(mozo3);
-                    VistaInventario frame = new VistaInventario(mozos);
-                    ControladorInventario controlador = new ControladorInventario(frame);
-                    frame.setVisible(true);
+    public void ejecutar() {
+                try {
+                    this.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
     }
 
     /**
      * Create the frame.
      */
     public VistaInventario( TreeSet<Mozo> mozos) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 1013, 798);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -250,7 +231,7 @@ public class VistaInventario extends JFrame {
             listaContratoDefault.addElement(mesa);
         }
         this.listaMesas.setModel(listaContratoDefault);
-        contentPane.add(listaMozos);
+        contentPane.add(listaMesas);
     }
 
     public void renderListaProductos(TreeSet<Producto> productos){
