@@ -70,15 +70,13 @@ public class Empresa {
     // --------- MOZOS ----------
 
 
-    public void agregaMozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+    public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
         // VERIFICAR LA EDAD
-        Date fechaactual = new Date(System.currentTimeMillis());
-        int milisecondsByDay = 86400000;
-        if((fechaactual.getTime()-fechaNacimiento.getTime())/(milisecondsByDay*365L)>=18){
+        Calendar fecha = new GregorianCalendar();
+        fecha.add(Calendar.YEAR, -18);
+        if(fecha.after(fechaNacimiento)){
             if( cantHijos >= 0 ){
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(fechaNacimiento);
-                this.mozos.add(new Mozo(nombreYApellido,calendar,cantHijos,estado));
+                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
             }
             else{
                 throw new MozoIncorrecto("Cant de hijos menor a cero");
