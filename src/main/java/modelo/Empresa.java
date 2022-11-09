@@ -2,6 +2,7 @@ package modelo;
 
 
 import excepciones.MozoIncorrecto;
+import excepciones.StockNoDisponible;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -43,13 +44,12 @@ public class Empresa {
                 throw new Exception();
             }
         }
-
+        return null;
     }
 
-    public void Logout{
+    /*public void Logout{
 
-
-    }
+    }*/
 
     
     public void Signup( String apellido, String usuario, String password, boolean activo) throws Exception{
@@ -85,7 +85,7 @@ public class Empresa {
             }
         }
         else{
-            throw  new MozoIncorrecto("Edad menor a 18 anos");
+            throw new MozoIncorrecto("Edad menor a 18 anos");
         }
     }
 
@@ -164,23 +164,25 @@ public class Empresa {
 
     }
 
+    public Pedido realizarPedido(Producto producto, int cantidad){
+        Pedido pedido=null;
+        try {
+            pedido=new Pedido(producto,cantidad);
+        } catch (StockNoDisponible e) {
+            e.printStackTrace();
+        }
+
+        return pedido;
+    }
+
     // ------- COMANDAS ---------
-    /*
-    public void altaComanda( Mesa mesa, ArrayList<Producto> productos, String estado){
-        // creo el array de pedidos
+    public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, String estado) throws Exception {
         boolean libre = false;
         if (mesa.getEstado().equalsIgnoreCase("libre") && mesa.getMozo() != null && this.productos.size() !=0){
-            // chequear promocion
-            libre = true
-        }
-        }
-        if (libre){
-            // revisar esto
             mesa.setEstado("ocupada");
-            Comanda comanda = new Comanda(mesa,productos,estado);
+            Comanda comanda = new Comanda(mesa,pedidos,estado);
         }
     }
-    */
     // ----- GET Y SET ----
 
 
