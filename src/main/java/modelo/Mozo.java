@@ -2,9 +2,11 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
-public class Mozo {
+public class Mozo implements Comparable<Mozo> {
     private String nombreYApellido;
     private Date fechaNacimiento;
     private double cantHijos;
@@ -58,5 +60,34 @@ public class Mozo {
 
     public void setVentas(double ventas) {
         this.ventas = ventas;
+    }
+
+    @Override
+    public String toString() {
+        return "Mozo{" +
+                "nombreYApellido='" + nombreYApellido + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", cantHijos=" + cantHijos +
+                ", estado=" + estado +
+                ", ventas=" + ventas +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mozo mozo = (Mozo) o;
+        return Objects.equals(getFechaNacimiento(), mozo.getFechaNacimiento());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFechaNacimiento());
+    }
+
+    @Override
+    public int compareTo(Mozo o) {
+        return (this.nombreYApellido.compareTo(o.nombreYApellido));
     }
 }

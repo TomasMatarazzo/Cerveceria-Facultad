@@ -235,9 +235,12 @@ public class Empresa {
         }
         assert comanda != null;
         Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);
+
+        //para estadisticas
         mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());
         mesa.setCantComandas(mesa.getCantComandas()+1);
         mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());
+
         this.comandas.remove(comanda);
     }
 

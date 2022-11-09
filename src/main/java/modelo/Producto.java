@@ -2,7 +2,7 @@ package modelo;
 
 import excepciones.ProductoIncorrecto;
 
-public class Producto {
+public class Producto implements Comparable<Producto>{
     private int id_producto;
     private String nombre;
     private double precioCosto;
@@ -17,6 +17,7 @@ public class Producto {
         this.checkPrecio(precioCosto,precioVenta);
         this.stockInicial = stockInicial;
     }
+
     public void checkPrecio(double precioCosto, double precioVenta) throws ProductoIncorrecto {
         if (precioVenta < precioCosto)
             throw new ProductoIncorrecto("El precio de venta es menor al de costo");
@@ -66,5 +67,22 @@ public class Producto {
 
     public void setStockInicial(int stockInicial) {
         this.stockInicial = stockInicial;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id_producto=" + id_producto +
+                ", nombre='" + nombre + '\'' +
+                ", precioCosto=" + precioCosto +
+                ", precioVenta=" + precioVenta +
+                ", stockInicial=" + stockInicial +
+                '}';
+    }
+
+
+    @Override
+    public int compareTo(Producto o) {
+        return (this.precioCosto < o.precioCosto)?0:1;
     }
 }

@@ -69,8 +69,18 @@ public class Mesa {
         this.mozo = mozo;
     }
 
+    @Override
+    public String toString() {
+        return "Mesa{" +
+                "nro=" + nro +
+                ", cantidadPersonas=" + cantidadPersonas +
+                ", estado='" + estado + '\'' +
+                ", mozo=" + mozo +
+                ", pedido=" + pedido +
+                '}';
+    }
     public void cerrarMesa(){
         this.estado="libre";
 
-    }
+
 }
