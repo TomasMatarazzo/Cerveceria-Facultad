@@ -136,9 +136,9 @@ public class Empresa {
 
     // -------- MESAS ----------
 
-    public void altaMesa(int cantidadPersonas, String estado) throws Exception{
+    public void altaMesa(int cantidadPersonas) throws Exception{
         if (cantidadPersonas >= 2 ){
-            Mesa mesa = new Mesa(cantidadPersonas,estado);
+            Mesa mesa = new Mesa(cantidadPersonas);
             mesas.add(mesa);
         }
         else{

@@ -1,4 +1,4 @@
-package controladores.vistas;
+package vistas;
 
 import modelo.Producto;
 
@@ -7,7 +7,6 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
-import java.awt.Color;
 import java.util.TreeSet;
 
 public class FormPedido extends JFrame {

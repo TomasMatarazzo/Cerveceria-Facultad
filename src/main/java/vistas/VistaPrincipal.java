@@ -1,8 +1,4 @@
-package controladores.vistas;
-
-import controladores.ControladorPrincipal;
-
-import java.awt.EventQueue;
+package vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,20 +37,6 @@ public class VistaPrincipal extends JFrame {
         this.btnGestiones.addActionListener(controlador);
         this.btnPromociones.addActionListener(controlador);
 
-    }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-
-                    VistaPrincipal frame = new VistaPrincipal();
-                    ControladorPrincipal controlador = new ControladorPrincipal(frame);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
 

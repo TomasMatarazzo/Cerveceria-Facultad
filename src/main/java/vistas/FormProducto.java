@@ -1,4 +1,5 @@
-package controladores.vistas;
+package vistas;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,20 +10,19 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 
-public class FormMozo extends JFrame {
+public class FormProducto extends JFrame {
 
     private JPanel contentPane;
     private JLabel lblNewLabel;
     private JTextField inputNombre;
     private JLabel lblFechaDeNacimiento;
-    private JTextField inputFecha;
+    private JTextField inputCosto;
     private JLabel lblNewLabel_2;
+    private JTextField inputVenta;
     private JLabel lblCantidadDeHijos;
-    private JTextField inputCantHijos;
+    private JTextField inputStock;
     public JButton botonAgregar;
-    private JComboBox<String> inputEstado;
 
     public void setActionListener(ActionListener controlador) {
         this.botonAgregar.addActionListener(controlador);
@@ -32,7 +32,7 @@ public class FormMozo extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    FormMozo frame = new FormMozo();
+                    FormProducto frame = new FormProducto();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -44,7 +44,7 @@ public class FormMozo extends JFrame {
     /**
      * Create the frame.
      */
-    public FormMozo() {
+    public FormProducto() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 615, 365);
         contentPane = new JPanel();
@@ -52,7 +52,7 @@ public class FormMozo extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        lblNewLabel = new JLabel("Nombre y Apellido");
+        lblNewLabel = new JLabel("Nombre Producto");
         lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 21));
         lblNewLabel.setBounds(10, 25, 200, 39);
         contentPane.add(lblNewLabel);
@@ -62,57 +62,56 @@ public class FormMozo extends JFrame {
         contentPane.add(inputNombre);
         inputNombre.setColumns(10);
 
-        lblFechaDeNacimiento = new JLabel("Fecha de Nacimiento");
+        lblFechaDeNacimiento = new JLabel("Precio Costo");
         lblFechaDeNacimiento.setFont(new Font("Arial", Font.PLAIN, 21));
         lblFechaDeNacimiento.setBounds(10, 125, 200, 39);
         contentPane.add(lblFechaDeNacimiento);
 
-        inputFecha = new JTextField();
-        inputFecha.setColumns(10);
-        inputFecha.setBounds(10, 174, 245, 33);
-        contentPane.add(inputFecha);
+        inputCosto = new JTextField();
+        inputCosto.setColumns(10);
+        inputCosto.setBounds(10, 174, 245, 33);
+        contentPane.add(inputCosto);
 
-        lblNewLabel_2 = new JLabel("Estado");
+        lblNewLabel_2 = new JLabel("Precio Venta");
         lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 21));
         lblNewLabel_2.setBounds(316, 125, 200, 39);
         contentPane.add(lblNewLabel_2);
 
-        lblCantidadDeHijos = new JLabel("Cantidad de hijos");
+        inputVenta = new JTextField();
+        inputVenta.setColumns(10);
+        inputVenta.setBounds(316, 174, 245, 33);
+        contentPane.add(inputVenta);
+
+        lblCantidadDeHijos = new JLabel("Stock Inicial");
         lblCantidadDeHijos.setFont(new Font("Arial", Font.PLAIN, 21));
         lblCantidadDeHijos.setBounds(316, 25, 200, 39);
         contentPane.add(lblCantidadDeHijos);
 
-        inputCantHijos = new JTextField();
-        inputCantHijos.setColumns(10);
-        inputCantHijos.setBounds(316, 74, 245, 33);
-        contentPane.add(inputCantHijos);
+        inputStock = new JTextField();
+        inputStock.setColumns(10);
+        inputStock.setBounds(316, 74, 245, 33);
+        contentPane.add(inputStock);
 
-        botonAgregar = new JButton("Nuevo mozo");
-        botonAgregar.setActionCommand("NUEVOMOZO");
+        botonAgregar = new JButton("Nuevo producto");
+        botonAgregar.setActionCommand("NUEVOPRODUCTO");
         botonAgregar.setFont(new Font("Arial", Font.PLAIN, 21));
         botonAgregar.setBounds(200, 242, 190, 56);
         contentPane.add(botonAgregar);
-
-        String[] choices = {"nulo","libre","ocupado"};
-
-        inputEstado = new JComboBox(choices) ;
-        inputEstado.setBounds(316, 174, 245, 33);
-        contentPane.add(inputEstado);
     }
 
     public String getNombre(){
         return this.inputNombre.getText();
     }
 
-    public String getCantHijos(){
-        return this.inputCantHijos.getText();
+    public String getCosto(){
+        return this.inputCosto.getText();
     }
 
-    public String getFecha(){
-        return this.inputFecha.getText();
+    public String getStock(){
+        return this.inputStock.getText();
     }
 
-    public int getEstado(){
-        return this.inputEstado.getSelectedIndex();
+    public String getVenta(){
+        return this.inputVenta.getText();
     }
 }

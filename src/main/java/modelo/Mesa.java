@@ -1,6 +1,6 @@
 package modelo;
 
-public class Mesa {
+public class Mesa implements Comparable<Mesa>{
     private static int id;
     private int nro;
     private int cantidadPersonas;
@@ -10,10 +10,10 @@ public class Mesa {
     private int cantComandas;
     private double totalComandas;
 
-    public Mesa( int cantidadPersonas, String estado) throws Exception{
+    public Mesa( int cantidadPersonas) throws Exception{
         this.nro = Mesa.id++;
         this.setCantidadPersonas(cantidadPersonas);
-        this.setEstado(estado);
+        this.setEstado("libre");
         this.cantComandas=0;
         this.totalComandas=0;
     }
@@ -55,7 +55,7 @@ public class Mesa {
     }
 
     public void setEstado(String estado) throws Exception {
-        if (this.estado.equalsIgnoreCase("libre") || this.estado.equalsIgnoreCase("ocupada"))
+        if (estado.equalsIgnoreCase("libre") || estado.equalsIgnoreCase("ocupada"))
             this.estado = estado;
         else
             throw new Exception();
@@ -82,5 +82,10 @@ public class Mesa {
     public void cerrarMesa() {
         this.estado = "libre";
 
+    }
+
+    @Override
+    public int compareTo(Mesa o) {
+        return (this.getNro() > o.getNro()) ? 1 : 0;
     }
 }

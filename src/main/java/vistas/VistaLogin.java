@@ -1,4 +1,4 @@
-package controladores.vistas;
+package vistas;
 import controladores.ControladorLogin;
 
 import java.awt.EventQueue;
@@ -24,23 +24,8 @@ public class VistaLogin extends JFrame {
     public void setActionListener(ActionListener controlador) {
         this.botonLogin.addActionListener(controlador);
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VistaLogin frame = new VistaLogin();
-                    ControladorLogin controlador = new ControladorLogin(frame);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    /**
-     * Create the frame.
-     */
+
     public VistaLogin() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 450, 300);

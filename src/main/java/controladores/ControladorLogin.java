@@ -1,7 +1,7 @@
 package controladores;
 
 import modelo.Empresa;
-import controladores.vistas.VistaLogin;
+import vistas.VistaLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +10,9 @@ public class ControladorLogin implements ActionListener{
     private VistaLogin vista;
     private Empresa modelo;
 
-    public ControladorLogin(VistaLogin vista) {
+    public ControladorLogin(VistaLogin vista, Empresa modelo) {
         this.vista = vista;
+        this.modelo = modelo;
         this.vista.setActionListener(this);
     }
 
@@ -24,16 +25,6 @@ public class ControladorLogin implements ActionListener{
             case "LOGIN":
                 try {
                     System.out.printf(vista.getUsuario() + vista.getContrasena());
-                    //modelo = Empresa.getInstance().login();
-                    //vista.setObservado(modelo);
-//                    modelo.loguearse();
-//                } catch (ErrorDeContrasenaException e1) {
-//                    JOptionPane.showMessageDialog(null, "ERROR: " + e1.getMessage());
-//                    vista.contrasenaInvalida();
-//                } catch (ErrorDeUsuarioException e2) {
-//                    JOptionPane.showMessageDialog(null, "ERROR: " + e2.getMessage());
-//                    vista.nombreUsuarioInvalido();
-//                }
                 }
                 catch(Exception e){
                     System.out.printf("Excepcion");

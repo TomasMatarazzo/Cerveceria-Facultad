@@ -1,18 +1,14 @@
-package controladores.vistas;
-import controladores.ControladorComandas;
+package vistas;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Pedido;
 import modelo.Producto;
-
-import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.TreeSet;
 
 public class VistaComandas extends JFrame {
@@ -25,6 +21,10 @@ public class VistaComandas extends JFrame {
     private JList<Mesa> listaMesas;
     private JList<Pedido> listaProductos;
     private FormPedido formPedido;
+    private TreeSet<Producto> productos;
+    private TreeSet<Mesa> mesas;
+    private TreeSet<Mozo> mozos;
+    private ArrayList<Pedido> pedidos;
 
 
 
@@ -44,7 +44,11 @@ public class VistaComandas extends JFrame {
     /**
      * Create the frame.
      */
-    public VistaComandas( TreeSet<Mozo> mozos , TreeSet<Producto> productos) {
+    public VistaComandas( TreeSet<Producto> productos, TreeSet<Mesa> mesas,TreeSet<Mozo> mozos,ArrayList<Pedido> pedidos) {
+        this.productos = productos;
+        this.mozos = mozos;
+        this.mesas = mesas;
+        this.pedidos = pedidos;
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 1013, 798);
         contentPane = new JPanel();
@@ -79,7 +83,6 @@ public class VistaComandas extends JFrame {
 
         listaMozos = new JList();
         listaMozos.setBounds(10, 153, 979, 143);
-        this.renderListaMozos(mozos);
 
         JLabel lblMozos = new JLabel("Mozos");
         lblMozos.setFont(new Font("Arial", Font.BOLD, 30));
@@ -98,6 +101,10 @@ public class VistaComandas extends JFrame {
 
         formPedido = new FormPedido(productos);
         formPedido.setVisible(false);
+
+        this.renderListaMozos(mozos);
+        this.renderListaMesas(mesas);
+        this.renderListaPedidos(pedidos);
     }
 
     public void hideFormPedido(){
@@ -146,5 +153,13 @@ public class VistaComandas extends JFrame {
         this.listaProductos.setModel(listaContratoDefault);
         contentPane.add(listaMozos);
 
+    }
+
+    public TreeSet<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(TreeSet<Producto> productos) {
+        this.productos = productos;
     }
 }

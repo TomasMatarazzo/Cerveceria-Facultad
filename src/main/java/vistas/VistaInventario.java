@@ -1,16 +1,12 @@
-package controladores.vistas;
-import controladores.ControladorInventario;
+package vistas;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Producto;
-
-import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.TreeSet;
 
 public class VistaInventario extends JFrame {
@@ -61,7 +57,7 @@ public class VistaInventario extends JFrame {
     /**
      * Create the frame.
      */
-    public VistaInventario( TreeSet<Mozo> mozos) {
+    public VistaInventario( TreeSet<Mozo> mozos , TreeSet<Producto> productos, TreeSet<Mesa> mesas) {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 1013, 798);
         contentPane = new JPanel();
@@ -127,6 +123,8 @@ public class VistaInventario extends JFrame {
         listaMozos = new JList();
         listaMozos.setBounds(10, 153, 979, 143);
         this.renderListaMozos(mozos);
+        this.renderListaProductos(productos);
+        this.renderListaMesas(mesas);
         botonIngresarMozo = new JButton("INGRESAR_MOZO");
         botonIngresarMozo.setFont(new Font("Arial", Font.PLAIN, 21));
         botonIngresarMozo.setActionCommand("INGRESAR_MOZO");

@@ -1,22 +1,21 @@
 package controladores;
 
-import excepciones.MozoIncorrecto;
 import excepciones.StockNoDisponible;
 import modelo.Empresa;
-import controladores.vistas.VistaComandas;
+import vistas.VistaComandas;
 import modelo.Pedido;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 
 public class ControladorComandas implements ActionListener{
     private VistaComandas vista;
-    private Empresa modelo = new Empresa();
+    private Empresa modelo;
 
-    public ControladorComandas(VistaComandas vista) {
+    public ControladorComandas(VistaComandas vista, Empresa modelo) {
         this.vista = vista;
+        this.modelo = modelo;
         this.vista.setActionListener(this);
     }
 
@@ -29,7 +28,6 @@ public class ControladorComandas implements ActionListener{
                 this.vista.showFormPedido();
                 break;
             case "CREAR_COMANDA":
-
                 //this.vista.datosMozo();
                 this.vista.hideFormPedido();
                 break;

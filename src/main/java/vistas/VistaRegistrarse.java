@@ -1,4 +1,4 @@
-package controladores.vistas;
+package vistas;
 
 import controladores.ControladorRegistrarse;
 

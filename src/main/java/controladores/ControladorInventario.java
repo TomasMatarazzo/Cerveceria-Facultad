@@ -2,7 +2,7 @@ package controladores;
 
 import excepciones.MozoIncorrecto;
 import modelo.Empresa;
-import controladores.vistas.VistaInventario;
+import vistas.VistaInventario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +10,11 @@ import java.util.Calendar;
 
 public class ControladorInventario implements ActionListener{
     private VistaInventario vista;
-    private Empresa modelo = new Empresa();
+    private Empresa modelo;
 
-    public ControladorInventario(VistaInventario vista) {
+    public ControladorInventario(VistaInventario vista, Empresa modelo) {
         this.vista = vista;
+        this.modelo = modelo;
         this.vista.setActionListener(this);
     }
 
@@ -55,17 +56,14 @@ public class ControladorInventario implements ActionListener{
 
             case "NUEVOPRODUCTO":
                 // CORREGIR LO DEL ID
-                System.out.printf("rnyyt");
                 double costo = Double.parseDouble(this.vista.getFormProducto().getCosto());
                 double venta = Double.parseDouble(this.vista.getFormProducto().getVenta());
                 int stock = Integer.parseInt(this.vista.getFormProducto().getStock());
-                System.out.printf("hola");
                 this.modelo.altaProducto( 0, this.vista.getFormProducto().getNombre(),costo,venta,stock);
                 this.vista.renderListaProductos(this.modelo.getProductos());
                 this.vista.hideFormProducto();
                 break;
             case "INGRESAR_PRODUCTO":
-                System.out.printf("nashe");
                 this.vista.showFormProducto();
                 break;
             case "ELIMINAR_PRODUCTO":
@@ -73,8 +71,16 @@ public class ControladorInventario implements ActionListener{
             case "MODIFICAR_PRODUCTO":
                 break;
             case "NUEVAMESA":
-                System.out.printf(this.vista.getFormMesa().getNroMesa() + this.vista.getFormMesa().getCantidadSillas());
-                this.vista.hideFormMesa();
+                int  nroMesa = Integer.parseInt(this.vista.getFormMesa().getNroMesa());
+                int  nroSillas = Integer.parseInt(this.vista.getFormMesa().getCantidadSillas());
+                try {
+                    this.modelo.altaMesa(nroSillas);
+                    this.vista.renderListaMesas(this.modelo.getMesas());
+                    this.vista.hideFormMesa();
+                }
+                catch(Exception e){
+                    System.out.printf(e.getMessage());
+                }
                 break;
             case "INGRESAR_MESA":
                 this.vista.showFormMesa();

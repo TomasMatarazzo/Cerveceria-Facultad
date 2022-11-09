@@ -1,7 +1,7 @@
 package controladores;
 
 import modelo.Empresa;
-import controladores.vistas.VistaRegistrarse;
+import vistas.VistaRegistrarse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
