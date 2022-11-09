@@ -7,11 +7,31 @@ public class Mesa {
     private String estado;
     private Mozo mozo;
     private Pedido pedido;
+    private int cantComandas;
+    private double totalComandas;
 
     public Mesa( int cantidadPersonas, String estado) throws Exception{
         this.nro = Mesa.id++;
         this.setCantidadPersonas(cantidadPersonas);
         this.setEstado(estado);
+        this.cantComandas=0;
+        this.totalComandas=0;
+    }
+
+    public int getCantComandas() {
+        return cantComandas;
+    }
+
+    public void setCantComandas(int cantComandas) {
+        this.cantComandas = cantComandas;
+    }
+
+    public double getTotalComandas() {
+        return totalComandas;
+    }
+
+    public void setTotalComandas(double totalComandas) {
+        this.totalComandas = totalComandas;
     }
 
     public int getNro() {
@@ -59,4 +79,8 @@ public class Mesa {
                 ", pedido=" + pedido +
                 '}';
     }
+    public void cerrarMesa(){
+        this.estado="libre";
+
+
 }

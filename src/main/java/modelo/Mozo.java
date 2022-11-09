@@ -18,6 +18,7 @@ public class Mozo implements Comparable<Mozo> {
         this.setFechaNacimiento(fechaNacimiento);
         this.setCantHijos(cantHijos);
         this.setEstado(estado);
+        this.ventas=0;
     }
 
 
