@@ -48,4 +48,15 @@ public class Mesa {
     public void setMozo(Mozo mozo) {
         this.mozo = mozo;
     }
+
+    @Override
+    public String toString() {
+        return "Mesa{" +
+                "nro=" + nro +
+                ", cantidadPersonas=" + cantidadPersonas +
+                ", estado='" + estado + '\'' +
+                ", mozo=" + mozo +
+                ", pedido=" + pedido +
+                '}';
+    }
 }

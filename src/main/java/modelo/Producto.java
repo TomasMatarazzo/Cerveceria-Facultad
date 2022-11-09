@@ -1,6 +1,6 @@
 package modelo;
 
-public class Producto {
+public class Producto implements Comparable<Producto>{
     private int id_producto;
     private String nombre;
     private double precioCosto;
@@ -64,5 +64,22 @@ public class Producto {
 
     public void setStockInicial(int stockInicial) {
         this.stockInicial = stockInicial;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id_producto=" + id_producto +
+                ", nombre='" + nombre + '\'' +
+                ", precioCosto=" + precioCosto +
+                ", precioVenta=" + precioVenta +
+                ", stockInicial=" + stockInicial +
+                '}';
+    }
+
+
+    @Override
+    public int compareTo(Producto o) {
+        return (this.precioCosto < o.precioCosto)?0:1;
     }
 }

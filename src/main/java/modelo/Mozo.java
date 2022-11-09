@@ -2,16 +2,18 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
-public class Mozo {
+public class Mozo implements Comparable<Mozo> {
     private String nombreYApellido;
-    private Date fechaNacimiento;
+    private Calendar fechaNacimiento;
     private double cantHijos;
     private int estado;
     private double ventas;
 
-    public Mozo(String nombreYApellido, Date fechaNacimiento, double cantHijos, int estado){
+    public Mozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
         this.setNombreYApellido(nombreYApellido);
         this.setFechaNacimiento(fechaNacimiento);
         this.setCantHijos(cantHijos);
@@ -27,11 +29,11 @@ public class Mozo {
         this.nombreYApellido = nombreYApellido;
     }
 
-    public Date getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento){
+    public void setFechaNacimiento(Calendar fechaNacimiento){
             this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -57,5 +59,34 @@ public class Mozo {
 
     public void setVentas(double ventas) {
         this.ventas = ventas;
+    }
+
+    @Override
+    public String toString() {
+        return "Mozo{" +
+                "nombreYApellido='" + nombreYApellido + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", cantHijos=" + cantHijos +
+                ", estado=" + estado +
+                ", ventas=" + ventas +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mozo mozo = (Mozo) o;
+        return Objects.equals(getFechaNacimiento(), mozo.getFechaNacimiento());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFechaNacimiento());
+    }
+
+    @Override
+    public int compareTo(Mozo o) {
+        return (this.nombreYApellido.compareTo(o.nombreYApellido));
     }
 }

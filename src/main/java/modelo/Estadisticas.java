@@ -30,7 +30,7 @@ public class Estadisticas {
         return mozoMax;
     }
 
-    public static double promedioPorMesa(){
-        System.out.printf("completar");
-    }
+//    public static double promedioPorMesa(){
+//        System.out.printf("completar");
+//    }
 }
