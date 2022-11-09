@@ -16,6 +16,7 @@ public class Mozo {
         this.setFechaNacimiento(fechaNacimiento);
         this.setCantHijos(cantHijos);
         this.setEstado(estado);
+        this.ventas=0;
     }
 
 

@@ -4,15 +4,15 @@ public class PromocionTemporal {
     private String nombre;
     private String formaDePago;
     private int porcentajeDescuento;
-    private String diasDePromo;
+    private int diaDePromo;
     private boolean activo;
     private boolean esAcumulable;
 
-    public PromocionTemporal(String nombre, String formaDePago, int porcentajeDescuento, String diasDePromo, boolean activo, boolean esAcumulable) {
+    public PromocionTemporal(String nombre, String formaDePago, int porcentajeDescuento, int diaDePromo, boolean activo, boolean esAcumulable) {
         this.nombre = nombre;
         this.formaDePago = formaDePago;
         this.porcentajeDescuento = porcentajeDescuento;
-        this.diasDePromo = diasDePromo;
+        this.diaDePromo = diaDePromo;
         this.activo = activo;
         this.esAcumulable = esAcumulable;
     }
@@ -41,12 +41,12 @@ public class PromocionTemporal {
         this.porcentajeDescuento = porcentajeDescuento;
     }
 
-    public String getDiasDePromo() {
-        return diasDePromo;
+    public int getDiasDePromo() {
+        return diaDePromo;
     }
 
-    public void setDiasDePromo(String diasDePromo) {
-        this.diasDePromo = diasDePromo;
+    public void setDiasDePromo(int diaDePromo) {
+        this.diaDePromo = diaDePromo;
     }
 
     public boolean isActivo() {

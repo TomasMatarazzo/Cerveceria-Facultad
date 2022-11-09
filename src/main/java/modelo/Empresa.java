@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 public class Empresa {
     private String nombreEmpresa;
+    private int sueldoBasico;
     private TreeSet<Mozo> mozos = new TreeSet<>();
     private TreeSet<Mesa> mesas = new TreeSet<>();;
     private ArrayList<Producto> productos= new ArrayList<>();
@@ -183,6 +184,14 @@ public class Empresa {
     // ----- GET Y SET ----
 
 
+    public int getSueldoBasico() {
+        return sueldoBasico;
+    }
+
+    public void setSueldoBasico(int sueldoBasico) {
+        this.sueldoBasico = sueldoBasico;
+    }
+
     public ArrayList<ProductoEnPromocion> getPromocionesProductos() {
         return promocionesProductos;
     }
@@ -222,8 +231,16 @@ public class Empresa {
                 comanda=this.comandas.get(i);
             }
         }
+        assert comanda != null;
         Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);
+        mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());
+        mesa.setCantComandas(mesa.getCantComandas()+1);
+        mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());
         this.comandas.remove(comanda);
+    }
+
+    public double calculaSueldo(Mozo mozo){
+        return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
     }
         //agregar factura al mozo
 }

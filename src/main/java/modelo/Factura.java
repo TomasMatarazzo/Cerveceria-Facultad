@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -82,7 +83,7 @@ public class Factura {
             total+=parcial;
         }
         for(int k=0;k<promocionesTemporales.size();k++){
-            if(promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago())){
+            if(promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo()==Date.from(Instant.now()).getDay()){
                 total*= (double) promocionesTemporales.get(k).getPorcentajeDescuento() /100;
             }
         }
