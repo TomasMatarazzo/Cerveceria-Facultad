@@ -1,5 +1,6 @@
 package vistas;
 import controladores.ControladorLogin;
+import interfaces.IVista;
 
 import java.awt.EventQueue;
 
@@ -12,7 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-public class VistaLogin extends JFrame {
+public class VistaLogin extends JFrame implements IVista {
 
     private JPanel contentPane;
     private JTextField inputUsuario;
@@ -69,4 +70,12 @@ public class VistaLogin extends JFrame {
         return this.inputContrasena.getText();
     }
 
+    @Override
+    public void ejecutar() {
+        try {
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

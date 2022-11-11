@@ -1,10 +1,8 @@
 package controladores;
 
-import vistas.VistaComandas;
-import vistas.VistaInventario;
+import interfaces.IVista;
+import vistas.*;
 import modelo.Empresa;
-import vistas.VistaEstadisticas;
-import vistas.VistaPrincipal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,8 +33,17 @@ public class ControladorPrincipal implements ActionListener{
                     System.out.printf("Excepcion");
                 }
                 break;
+            case "NUEVAS_COMANDAS":
+                System.out.printf("hola");
+                VistaNuevaComandas ventanaNuevasComandas = new VistaNuevaComandas(this.modelo.getComandas(),this.modelo.getPedidos());
+                ControladorNuevasComandas controladorNuevasComandas = new ControladorNuevasComandas(ventanaNuevasComandas,this.modelo);
+                ventanaNuevasComandas.ejecutar();
+                break;
             case "REGISTRAR":
-                
+                VistaRegistrarse ventanaRegistrarse = new VistaRegistrarse();
+                ControladorRegistrarse controladorLogin = new ControladorRegistrarse(ventanaRegistrarse,this.modelo);
+                ventanaRegistrarse.ejecutar();
+                break;
             case "ESTADISTICAS":
                 //VistaEstadisticas ventanaEstadisticas = new VistaEstadisticas(Estadisticas.mayorVolumenVenta(this.modelo.getMozos()),Estadisticas.menorVolumenVenta(this.modelo.getMozos()), String.valueOf(Estadisticas.promedioPorMesa(this.modelo.getMesas())));
                 VistaEstadisticas ventanaEstadisticas = new VistaEstadisticas("Martin","Tomas","4523");
@@ -56,6 +63,7 @@ public class ControladorPrincipal implements ActionListener{
                 VistaInventario frame = new VistaInventario(this.modelo.getMozos() , this.modelo.getProductos(), this.modelo.getMesas());
                 ControladorInventario controlador2 = new ControladorInventario(frame,this.modelo);
                 frame.ejecutar();
+                break;
         }
     }
 

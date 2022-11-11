@@ -1,13 +1,14 @@
 package modelo;
 import java.util.regex.*;
 
-public class Operario {
+public class Operario implements Comparable<Operario>{
     private String apellido;
     private String usuario;
     private String password;
     private boolean activo;
+    private boolean administrador = false; // true si es administrador
 
-    public Operario(String apellido, String usuario, String password, boolean activo) throws Exception {
+    public Operario(String apellido, String usuario, String password, boolean activo) {
         this.apellido = apellido;
         this.setUsuario(usuario);
         this.setPassword(password);
@@ -18,6 +19,13 @@ public class Operario {
         return apellido;
     }
 
+    public boolean esAdministrador(){
+        return this.administrador;
+    }
+
+    public void setAdministrador(){
+        this.administrador = true;
+    }
     public void setApellido(String apellido) {
             this.apellido = apellido;
     }
@@ -34,8 +42,8 @@ public class Operario {
         return password;
     }
 
-    public void setUsuario(String usuario) throws Exception {
-                this.password = password;
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
     }
 
     public boolean isActivo() {
@@ -44,5 +52,11 @@ public class Operario {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+
+    @Override
+    public int compareTo(Operario o) {
+        return this.apellido.equalsIgnoreCase(o.apellido) ? 0 : 1;
     }
 }

@@ -10,8 +10,9 @@ public class ControladorRegistrarse implements ActionListener{
     private VistaRegistrarse vista;
     private Empresa modelo;
 
-    public ControladorRegistrarse(VistaRegistrarse vista) {
+    public ControladorRegistrarse(VistaRegistrarse vista, Empresa modelo) {
         this.vista = vista;
+        this.modelo = modelo;
         this.vista.setActionListener(this);
     }
 
@@ -24,6 +25,8 @@ public class ControladorRegistrarse implements ActionListener{
             case "REGISTRARSE":
                 try {
                     System.out.printf(vista.getUsuario() + vista.getContrasena() + vista.getApellido());
+                    modelo.signup(vista.getApellido(),vista.getUsuario(), vista.getContrasena(),true);
+                    this.vista.hideWindow();
                     //modelo = Empresa.getInstance().login();
                     //vista.setObservado(modelo);
 //                    modelo.loguearse();

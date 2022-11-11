@@ -1,10 +1,12 @@
 package vistas;
 
+import modelo.Operario;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.Font;
+import java.awt.*;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,7 @@ public class VistaPrincipal extends JFrame {
     private String nombre = "";
     private String sueldo = "";
     private FormNombreySueldo formSueldo;
+    private JButton btnNuevasComandas;
 
 
     public void setActionListener(ActionListener controlador) {
@@ -36,11 +39,16 @@ public class VistaPrincipal extends JFrame {
         this.btnComandas.addActionListener(controlador);
         this.btnGestiones.addActionListener(controlador);
         this.btnPromociones.addActionListener(controlador);
-
+        this.botonOperario.addActionListener(controlador);
+        this.btnNuevasComandas.addActionListener(controlador);
     }
 
+    public void ejecutar(){
+        this.setVisible(true);
+    }
 
-    public VistaPrincipal( ) {
+    public VistaPrincipal(Operario op) {
+        this.setVisible(false);
         this.nombre = "Igna";
         this.sueldo = "40000";
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -49,28 +57,39 @@ public class VistaPrincipal extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
 
         botonOperario = new JButton("Nuevo operario");
-        botonOperario.setFont(new Font("Arial", Font.BOLD, 21));
-        botonOperario.setBounds(33, 180, 185, 35);
-        contentPane.add(botonOperario);
+        botonOperario.setActionCommand("REGISTRAR");
+        if (op.esAdministrador()) {
+            botonOperario.setFont(new Font("Arial", Font.BOLD, 15));
+            botonOperario.setBounds(33, 180, 185, 35);
+            contentPane.add(botonOperario);
+        }
 
-        btnComandas = new JButton("Comandas");
+        btnComandas = new JButton("Nueva comanda");
         btnComandas.setActionCommand("COMANDAS");
-        btnComandas.setFont(new Font("Arial", Font.BOLD, 21));
-        btnComandas.setBounds(33, 240, 185, 35);
+        btnComandas.setFont(new Font("Arial", Font.BOLD, 15));
+        btnComandas.setBounds(33, 297, 185, 35);
         contentPane.add(btnComandas);
 
         btnEstadisticas = new JButton("Estadisticas");
         btnEstadisticas.setActionCommand("ESTADISTICAS");
         btnEstadisticas.setFont(new Font("Arial", Font.BOLD, 21));
-        btnEstadisticas.setBounds(33, 297, 185, 35);
+        btnEstadisticas.setBounds(33, 354, 185, 35);
         contentPane.add(btnEstadisticas);
 
         btnPromociones = new JButton("Promociones");
+        btnPromociones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         this.btnPromociones.setActionCommand("PROMOCIONES");
         btnPromociones.setFont(new Font("Arial", Font.BOLD, 21));
-        btnPromociones.setBounds(33, 354, 185, 35);
+        btnPromociones.setBounds(33, 402, 185, 35);
         contentPane.add(btnPromociones);
 
         btnGestiones = new JButton("Gestiones");
@@ -80,7 +99,7 @@ public class VistaPrincipal extends JFrame {
             }
         });
         btnGestiones.setFont(new Font("Arial", Font.BOLD, 21));
-        btnGestiones.setBounds(33, 410, 185, 35);
+        btnGestiones.setBounds(33, 460, 185, 35);
         contentPane.add(btnGestiones);
 
         lblNewLabel = new JLabel("Cerveceria");
@@ -116,6 +135,12 @@ public class VistaPrincipal extends JFrame {
         sueldoVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
         sueldoVariable.setBounds(252, 344, 260, 45);
         contentPane.add(sueldoVariable);
+
+        btnNuevasComandas = new JButton("Comandas");
+        btnNuevasComandas.setFont(new Font("Arial", Font.BOLD, 21));
+        btnNuevasComandas.setActionCommand("NUEVAS_COMANDAS");
+        btnNuevasComandas.setBounds(33, 240, 185, 35);
+        contentPane.add(btnNuevasComandas);
 
         formSueldo = new FormNombreySueldo();
         formSueldo.setVisible(false);

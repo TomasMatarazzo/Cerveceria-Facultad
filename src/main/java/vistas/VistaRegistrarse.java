@@ -1,6 +1,7 @@
 package vistas;
 
 import controladores.ControladorRegistrarse;
+import interfaces.IVista;
 
 import java.awt.EventQueue;
 
@@ -13,7 +14,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-public class VistaRegistrarse extends JFrame {
+public class VistaRegistrarse extends JFrame implements IVista {
 
         private JPanel contentPane;
         private JTextField inputApellido;
@@ -29,18 +30,12 @@ public class VistaRegistrarse extends JFrame {
             this.botonRegistrarse.addActionListener(controlador);
         }
 
-        public static void main(String[] args) {
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
+        public void ejecutar(){
                     try {
-                        VistaRegistrarse frame = new VistaRegistrarse();
-                        ControladorRegistrarse controlador = new ControladorRegistrarse(frame);
-                        frame.setVisible(true);
+                        this.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-            });
         }
 
         /**
@@ -108,4 +103,7 @@ public class VistaRegistrarse extends JFrame {
             return this.inputApellido.getText();
         }
 
+        public void hideWindow(){
+            this.setVisible(false);
+        }
 }

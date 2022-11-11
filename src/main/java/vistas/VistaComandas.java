@@ -6,10 +6,11 @@ import modelo.Producto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import java.awt.event.ActionEvent;
 
 public class VistaComandas extends JFrame {
 
@@ -31,13 +32,14 @@ public class VistaComandas extends JFrame {
     public void setActionListener(ActionListener controlador) {
         this.botonIngresarProducto.addActionListener(controlador);
         this.formPedido.botonModificar.addActionListener(controlador);
+        this.botonRegistrarse.addActionListener(controlador);
     }
     public void ejecutar(){
-                try {
-                    this.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        try {
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -49,54 +51,63 @@ public class VistaComandas extends JFrame {
         this.mozos = mozos;
         this.mesas = mesas;
         this.pedidos = pedidos;
+
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBounds(100, 100, 1013, 798);
+        setBounds(100, 100, 901, 670);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
         botonRegistrarse = new JButton("Crear comanda");
-        botonRegistrarse.setActionCommand("CREAR_COMANDO");
+        botonRegistrarse.setActionCommand("CREAR_COMANDa");
         botonRegistrarse.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonRegistrarse.setBounds(445, 703, 214, 33);
+        botonRegistrarse.setBounds(355, 530, 214, 33);
         contentPane.add(botonRegistrarse);
 
-        lblRegistreOperario = new JLabel("Nueva comanda");
+        lblRegistreOperario = new JLabel("Nueva comanda - Seleccione un mozo, mesa y pedido");
+        lblRegistreOperario.setVerticalAlignment(SwingConstants.TOP);
         lblRegistreOperario.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
-        lblRegistreOperario.setBounds(211, 20, 287, 33);
+        lblRegistreOperario.setBounds(68, 10, 771, 45);
         contentPane.add(lblRegistreOperario);
 
         listaProductos = new JList();
-        listaProductos.setBounds(10, 550, 979, 143);
+        listaProductos.setBounds(0, 410, 877, 100);
         contentPane.add(listaProductos);
 
         botonIngresarProducto = new JButton("CREAR PEDIDO");
+        botonIngresarProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         botonIngresarProducto.setFont(new Font("Arial", Font.PLAIN, 21));
         botonIngresarProducto.setActionCommand("FORM_PEDIDO");
-        botonIngresarProducto.setBounds(10, 507, 241, 33);
+        botonIngresarProducto.setBounds(163, 369, 241, 33);
         contentPane.add(botonIngresarProducto);
 
         listaMesas = new JList();
-        listaMesas.setBounds(10, 349, 979, 143);
+        listaMesas.setBounds(0, 259, 877, 100);
         contentPane.add(listaMesas);
 
         listaMozos = new JList();
-        listaMozos.setBounds(10, 153, 979, 143);
+        listaMozos.setBounds(0, 106, 877, 100);
 
         JLabel lblMozos = new JLabel("Mozos");
         lblMozos.setFont(new Font("Arial", Font.BOLD, 30));
-        lblMozos.setBounds(758, 110, 174, 33);
+        lblMozos.setBounds(10, 63, 174, 33);
         contentPane.add(lblMozos);
 
         JLabel lblMesas = new JLabel("Mesas");
         lblMesas.setFont(new Font("Arial", Font.BOLD, 30));
-        lblMesas.setBounds(758, 306, 174, 33);
+        lblMesas.setBounds(10, 216, 174, 33);
         contentPane.add(lblMesas);
 
         JLabel lblProductos = new JLabel("Pedidos");
         lblProductos.setFont(new Font("Arial", Font.BOLD, 30));
-        lblProductos.setBounds(758, 507, 174, 33);
+        lblProductos.setBounds(10, 369, 174, 33);
         contentPane.add(lblProductos);
 
         formPedido = new FormPedido(productos);
@@ -118,6 +129,7 @@ public class VistaComandas extends JFrame {
     public Producto getSelectedProducto(){
         return this.formPedido.getProducto();
     }
+    public Mozo getSelectedMozo(){ return this.listaMozos.getSelectedValue();}
     public String getCantDelPedido(){
         return this.formPedido.getCant();
     }

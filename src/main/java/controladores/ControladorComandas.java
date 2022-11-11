@@ -1,10 +1,8 @@
 package controladores;
 
 import excepciones.StockNoDisponible;
-import modelo.Empresa;
+import modelo.*;
 import vistas.VistaComandas;
-import modelo.Pedido;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +27,10 @@ public class ControladorComandas implements ActionListener{
                 break;
             case "CREAR_COMANDA":
                 //this.vista.datosMozo();
+                Mesa mesa = this.vista.getSelectedMesas();
+                Producto prod = this.vista.getSelectedProducto();
+                Mozo mozo = this.vista.getSelectedMozo();
+                //this.modelo.altaComanda();
                 this.vista.hideFormPedido();
                 break;
             case "CREAR_PEDIDO":

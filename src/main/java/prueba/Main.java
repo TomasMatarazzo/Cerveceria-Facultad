@@ -1,6 +1,9 @@
 package prueba;
 
+import controladores.ControladorLogin;
 import controladores.ControladorPrincipal;
+import modelo.Operario;
+import vistas.VistaLogin;
 import vistas.VistaPrincipal;
 import modelo.Empresa;
 import modelo.Mozo;
@@ -16,7 +19,6 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            System.out.printf("ansdf;lkajsdfl;ka");
             Producto prod1 = new Producto(0, "hola1", 12, 24, 15);
             Producto prod2 = new Producto(2, "hola1", 12, 24, 15);
             Producto prod3 = new Producto(3, "hola1", 12, 24, 15);
@@ -35,13 +37,18 @@ public class Main {
             mozos.add(mozo3);
 
 
-
-            VistaPrincipal frame = new VistaPrincipal();
+            VistaLogin vista = new VistaLogin();
             Empresa empresa = new Empresa();
             empresa.setMozos(mozos);
             empresa.setProductos(productos);
-            ControladorPrincipal controlador = new ControladorPrincipal(frame,empresa);
-            frame.setVisible(true);
+            Operario op = new Operario("matarazzo","ADMIN","ADMIN1234",true);
+            op.setAdministrador();
+            TreeSet<Operario> operarios = new TreeSet<>();
+            operarios.add(op);
+            empresa.setOperarios(operarios);
+            System.out.printf(empresa.getOperarios().first().toString());
+            ControladorLogin controlador = new ControladorLogin(vista,empresa);
+            vista.ejecutar();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -34,10 +34,14 @@ public class Empresa {
 
     // --------- OPERARIOS ----------
 
-    public Operario Login( String usuario, String password) throws Exception{
+    public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
+            System.out.printf("hola");
+            System.out.printf(op.getUsuario() + op.getPassword());
             if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password) ){
+                System.out.printf("hola1");
                 if (op.isActivo())
+                    System.out.printf("hola3");
                     return op;
             }
             else{
@@ -52,22 +56,29 @@ public class Empresa {
     }*/
 
     
-    public void Signup( String apellido, String usuario, String password, boolean activo) throws Exception{
-        String regex = "^(?=.*[a-z])(?=."
-                + "*[A-Z])(?=.*\\d)"
-                + "(?=.*[-+_!@#$%^&*., ?]).+$";
+    public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+
         Pattern p = Pattern.compile(regex);
         if (password == null) {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        if (m.matches() && apellido.length() >= 6 && apellido.length() <= 12 && usuario.length() <= 10) {
+        System.out.printf("\nholaa2");
+        if (true) {
+            System.out.printf("\nholaa4");
             Operario operario = new Operario(apellido, usuario, password, activo);
-            operarios.add(operario);
+            this.operarios.add(operario);
         }
-        else
-            throw  new Exception();
-
+        else {
+            System.out.printf("\n"+ apellido.length());
+            System.out.printf("\n"+ usuario.length());
+            throw new Exception();
+        }
     }
 
     // --------- MOZOS ----------
@@ -183,11 +194,14 @@ public class Empresa {
 
     // ------- COMANDAS ---------
 
-    public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, String estado) throws Exception {
+    // asigno el mozo a la mesa
+    public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, Mozo mozo) throws Exception {
+
         boolean libre = false;
         if (mesa.getEstado().equalsIgnoreCase("libre") && mesa.getMozo() != null && this.productos.size() !=0){
+            mesa.setMozo(mozo);
             mesa.setEstado("ocupada");
-            Comanda comanda = new Comanda(mesa,pedidos,estado);
+            Comanda comanda = new Comanda(mesa,pedidos,"abierta");
         }
     }
     // ----- GET Y SET ----
