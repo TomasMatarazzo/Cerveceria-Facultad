@@ -64,4 +64,15 @@ public class Operario implements Comparable<Operario>,Serializable{
     public int compareTo(Operario o) {
         return this.apellido.equalsIgnoreCase(o.apellido) ? 1 : 0;
     }
+
+    @Override
+    public String toString() {
+        return "Operario{" +
+                "apellido='" + apellido + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", password='" + password + '\'' +
+                ", activo=" + activo +
+                ", administrador=" + administrador +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package controladores;
 
+import Utils.Mensajes;
 import excepciones.MozoIncorrecto;
 import modelo.Empresa;
 import vistas.VistaInventario;
@@ -36,26 +37,31 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "INGRESAR_MOZO":
-                //this.vista.datosMozo();
+                this.vista.estadoAgregar();
+                this.vista.showFormMozo();
+                break;
+            case "INGRESAR_MOZO2":
+                this.vista.estadoModificar();
                 this.vista.showFormMozo();
                 break;
             case "ELIMINAR_MOZO":
-                System.out.printf("hola");
-                //this.modelo.bajaMozo(this.vista.getSelectedMozo());
+                System.out.printf("se eliminio");
+                this.modelo.bajaMozo(this.vista.getSelectedMozo());
                 this.vista.renderListaMozos(this.modelo.getMozos());
                 break;
             case "MODIFICAR_MOZO":
-                // VERIFICAR COMO SE MODIFICA EL MOZO
-                int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
-                Calendar fecha2 = Calendar.getInstance();
-                fecha2.set(1970,10,2);
+
                 try {
-                    this.modelo.modificaMozo(this.vista.getSelectedMozo(),this.vista.getFormMozo().getNombre(),fecha2, cantHijos2, this.vista.getFormMozo().getEstado());
-                } catch (MozoIncorrecto e) {
-                    e.printStackTrace();
+                    int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
+                    Calendar fecha2 = Calendar.getInstance();
+                    fecha2.set(1970, 10, 2);
+                    this.modelo.modificaMozo(this.vista.getSelectedMozo(), this.vista.getFormMozo().getNombre(), fecha2, cantHijos2, this.vista.getFormMozo().getEstado());
+                    this.vista.hideFormMozo();
+                    this.vista.renderListaMozos(this.modelo.getMozos());
                 }
-                this.vista.hideFormMozo();
-                this.vista.renderListaMozos(this.modelo.getMozos());
+                catch (Exception e){
+                    Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
+                }
                 break;
 
             case "NUEVOPRODUCTO":

@@ -5,6 +5,7 @@ import controladores.ControladorPrincipal;
 import modelo.Operario;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
+import vistas.FormPassword;
 import vistas.VistaLogin;
 import vistas.VistaPrincipal;
 import modelo.Empresa;
@@ -52,7 +53,8 @@ public class Main {
             operarios.add(op);
             empresa.setOperarios(operarios);
             System.out.printf(empresa.getOperarios().first().toString());
-            ControladorLogin controlador = new ControladorLogin(vista,empresa);
+            FormPassword form = new FormPassword();
+            ControladorLogin controlador = new ControladorLogin(vista,empresa,form);
             vista.ejecutar();
 
 

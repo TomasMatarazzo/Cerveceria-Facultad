@@ -1,13 +1,12 @@
 package vistas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
+
 import modelo.Comanda;
 import modelo.Pedido;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -35,6 +34,10 @@ public class VistaNuevaComandas extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
 
         btnModificarComanda = new JButton("Modificar comanda");
         btnModificarComanda.setActionCommand("MODIFICAR_COMANDA");

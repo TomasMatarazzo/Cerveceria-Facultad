@@ -1,11 +1,10 @@
 package vistas;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -52,6 +51,11 @@ public class FormMozo extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
+
         lblNewLabel = new JLabel("Nombre y Apellido");
         lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 21));
         lblNewLabel.setBounds(10, 25, 200, 39);
@@ -87,17 +91,28 @@ public class FormMozo extends JFrame {
         inputCantHijos.setBounds(316, 74, 245, 33);
         contentPane.add(inputCantHijos);
 
-        botonAgregar = new JButton("Nuevo mozo");
+        botonAgregar = new JButton();
+        botonAgregar.setText("Agregar mozo");
         botonAgregar.setActionCommand("NUEVOMOZO");
         botonAgregar.setFont(new Font("Arial", Font.PLAIN, 21));
         botonAgregar.setBounds(200, 242, 190, 56);
         contentPane.add(botonAgregar);
 
-        String[] choices = {"nulo","libre","ocupado"};
+        String[] choices = {"activo","ausente","franco"};
 
         inputEstado = new JComboBox(choices) ;
         inputEstado.setBounds(316, 174, 245, 33);
         contentPane.add(inputEstado);
+    }
+
+    public void setModificar(){
+        botonAgregar.setText("Modificar mozo");
+        botonAgregar.setActionCommand("MODIFICAR_MOZO");
+    }
+
+    public void setAgregar(){
+        botonAgregar.setText("Agregar mozo");
+        botonAgregar.setActionCommand("NUEVOMOZO");
     }
 
     public String getNombre(){

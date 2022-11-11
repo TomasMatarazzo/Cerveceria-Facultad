@@ -1,10 +1,12 @@
 package modelo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Comanda{
+/**
+ *
+ */
+public class Comanda {
     private Date fecha;
     private Mesa mesa;
     private ArrayList<Pedido> pedidos = new ArrayList<>();
@@ -18,10 +20,16 @@ public class Comanda{
     }
 
 
+    /**
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -30,10 +38,6 @@ public class Comanda{
         return mesa;
     }
 
-    /**
-     * @param mesa debera ser distinta de null
-     * @throws Exception en caso de querer setear una mesa cuyo estado no es libre
-     */
     public void setMesa(Mesa mesa) throws Exception {
         if (this.mesa.getEstado().equalsIgnoreCase("libre"))
             this.mesa = mesa;
