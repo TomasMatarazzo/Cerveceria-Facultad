@@ -30,6 +30,10 @@ public class Comanda{
         return mesa;
     }
 
+    /**
+     * @param mesa debera ser distinta de null
+     * @throws Exception en caso de querer setear una mesa cuyo estado no es libre
+     */
     public void setMesa(Mesa mesa) throws Exception {
         if (this.mesa.getEstado().equalsIgnoreCase("libre"))
             this.mesa = mesa;

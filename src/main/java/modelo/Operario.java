@@ -56,8 +56,12 @@ public class Operario implements Comparable<Operario>,Serializable{
     }
 
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(Operario o) {
-        return this.apellido.equalsIgnoreCase(o.apellido) ? 0 : 1;
+        return this.apellido.equalsIgnoreCase(o.apellido) ? 1 : 0;
     }
 }

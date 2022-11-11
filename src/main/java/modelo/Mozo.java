@@ -74,6 +74,10 @@ public class Mozo implements Comparable<Mozo>, Serializable {
                 '}';
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

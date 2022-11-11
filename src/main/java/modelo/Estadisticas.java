@@ -6,6 +6,7 @@ import java.util.TreeSet;
 public class Estadisticas {
 
     /**
+     * Permite saber el nombre y apellido del mozo con mayor monto de ventas acumuladas
      * @param mozos debera ser distinto de null<br>
      * @return el nombre y apellido del mozo que tiene el mayor monto de ventas acumulado
      */
@@ -23,6 +24,7 @@ public class Estadisticas {
     }
 
     /**
+     * Permite saber el nombre y apellido del mozo con menor monto de ventas acumuladas
      * @param mozos debera ser distinto de null<br>
      * @return el nombre y apellido del mozo que tiene el menor monto de ventas acumulado
      */
@@ -39,6 +41,11 @@ public class Estadisticas {
         return mozoMax.getNombreYApellido();
     }
 
+    /**
+     * Permite saber el promedio de ventas por mesa
+     * @param mesas debera ser distinto de null
+     * @return un double con el consumo promedio por mesa
+     */
     public static double promedioPorMesa(TreeSet<Mesa> mesas){
         double acum = 0;
         double acum2 = 0;

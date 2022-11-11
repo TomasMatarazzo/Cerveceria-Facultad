@@ -49,7 +49,11 @@ public class ControladorInventario implements ActionListener{
                 int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
                 Calendar fecha2 = Calendar.getInstance();
                 fecha2.set(1970,10,2);
-                this.modelo.modificaMozo(this.vista.getSelectedMozo(),this.vista.getFormMozo().getNombre(),fecha2, cantHijos2, this.vista.getFormMozo().getEstado());
+                try {
+                    this.modelo.modificaMozo(this.vista.getSelectedMozo(),this.vista.getFormMozo().getNombre(),fecha2, cantHijos2, this.vista.getFormMozo().getEstado());
+                } catch (MozoIncorrecto e) {
+                    e.printStackTrace();
+                }
                 this.vista.hideFormMozo();
                 this.vista.renderListaMozos(this.modelo.getMozos());
                 break;

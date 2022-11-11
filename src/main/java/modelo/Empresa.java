@@ -52,9 +52,6 @@ public class Empresa implements Serializable {
         return null;
     }
 
-    /*public void Logout{
-
-    }*/
 
     
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
@@ -85,6 +82,16 @@ public class Empresa implements Serializable {
     // --------- MOZOS ----------
 
 
+    /**
+     * Este metodo permite agregar un nuevo mozo
+     * <pre> la edad ingresada sera mayor o igual a 18
+     * <pre> la cantidad de hijos debera ser mayor o igual a cero
+     * @param nombreYApellido nombre y apellido del mozo a registrar, distinto de vacio
+     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
+     * @param cantHijos cantidad de hijos del mozo a registrar
+     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
+     * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
+     */
     public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
         // VERIFICAR LA EDAD
         Calendar fecha = new GregorianCalendar();
@@ -102,13 +109,38 @@ public class Empresa implements Serializable {
         }
     }
 
-    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
-        mozo.setNombreYApellido(nombreYApellido);
-        mozo.setFechaNacimiento(fechaNacimiento);
-        mozo.setCantHijos(cantHijos);
-        mozo.setEstado(estado);
+    /**
+     * Este metodo permite modificar la informacion de un mozo existente
+     * <pre> la edad ingresada sera mayor o igual a 18
+     * <pre> la cantidad de hijos debera ser mayor o igual a cero
+     * @param mozo mozo a modificar, distinto de null
+     * @param nombreYApellido nuevo nombre y apellido, distinto de null
+     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
+     * @param cantHijos cantidad de hijos del mozo a registrar
+     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
+     */
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
+        Calendar fecha = new GregorianCalendar();
+        fecha.add(Calendar.YEAR, -18);
+        if(fecha.after(fechaNacimiento)){
+            if( cantHijos >= 0 ){
+                mozo.setNombreYApellido(nombreYApellido);
+                mozo.setFechaNacimiento(fechaNacimiento);
+                mozo.setCantHijos(cantHijos);
+                mozo.setEstado(estado);
+            }
+            else{
+                throw new MozoIncorrecto("Cant de hijos menor a cero");
+            }
+        }
+        else{
+            throw new MozoIncorrecto("Edad menor a 18 anos");
+        }
     }
 
+    /**
+     * @param mozo debera ser distinto de null
+     */
     public void eliminaMozo(Mozo mozo){
         this.mozos.remove(mozo);
     }
@@ -117,6 +149,14 @@ public class Empresa implements Serializable {
 
     // --------- PRODUCTOS ------------
 
+    /**
+     * Permite agregar un nuevo producto a nuestro inventario
+     * @param id es unico para cada procucto, entero positivo
+     * @param nombre nombre del producto, no podra estar vacio
+     * @param precioCosto flotante menor a cero
+     * @param precioVenta
+     * @param stockInicial
+     */
     public void altaProducto(int id, String nombre, double precioCosto, double precioVenta, int stockInicial){
         try{
             Producto prod = new Producto(id,nombre,precioCosto,precioVenta,stockInicial);
@@ -126,6 +166,10 @@ public class Empresa implements Serializable {
         }
     }
 
+    /**
+     * Permite dar de baja un producto que no esta asociado a una comanda
+     * @param producto el producto a eliminar debe ser distinto de null y no puede estar asociado a una comanda
+     */
     public void bajaProducto( Producto producto){
         try{
             // chequear que el producto no se encuentre asociado a una comanda
@@ -135,6 +179,14 @@ public class Empresa implements Serializable {
         }
     }
 
+    /**
+     * Permite modificar la informacion de un producto
+     * @param nombre el nombre del producto no puede estar vacio
+     * @param precioCosto flotante mayor a cero y menor o igual que el precio de venta
+     * @param precioVenta flotante mayor a cero y mayor o igual que el precio de costo
+     * @param stockInicial entero mayor o igual a cero
+     * @param producto producto a modificar, debera ser distinto de null
+     */
     public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto){
         try{
             producto.setNombre(nombre);
@@ -148,16 +200,25 @@ public class Empresa implements Serializable {
 
     // -------- MESAS ----------
 
+    /**
+     * Permite dar de alta una nueva mesa
+     * @param cantidadPersonas entero mayor a cero, en caso de ser una sola persona va a la barra, mesa numero cero
+     * @throws Exception si el numero de personas es incorrecto, menor a 1
+     */
     public void altaMesa(int cantidadPersonas) throws Exception{
         if (cantidadPersonas >= 2 ){
             Mesa mesa = new Mesa(cantidadPersonas);
             mesas.add(mesa);
         }
-        else{
+        else if (cantidadPersonas<1){
             throw new Exception();
         }
     }
 
+    /**
+     * Permite dar de baja una mesa registrada en el sistema
+     * @param mesa la mesa a eliminar debera ser distinto de null
+     */
     public void bajaMesa(Mesa mesa){
         try{
             mesas.remove(mesa);
@@ -167,6 +228,12 @@ public class Empresa implements Serializable {
         }
     }
 
+    /**
+     * Permite modificar una mesa
+     * @param cantidadPersonas debera ser entero mayor a cero
+     * @param estado string que toma solo valores libre u ocupada
+     * @param mesa debera ser distinto de null
+     */
     public void modificaMesa(int cantidadPersonas, String estado, Mesa mesa){
         try{
             mesa.setEstado(estado);
@@ -177,6 +244,12 @@ public class Empresa implements Serializable {
 
     }
 
+    /**
+     * Crea un nuevo pedido
+     * @param producto el producto solicitado debera ser distinto de null
+     * @param cantidad debera ser mayor a cero
+     * @return devuelve el nuevo pedido creado
+     */
     public Pedido realizarPedido(Producto producto, int cantidad){
         Pedido pedido=null;
         try {
@@ -189,13 +262,23 @@ public class Empresa implements Serializable {
     }
     // ------- PEDIDOS ---------
 
+    /**
+     * Da de alta un nuevo pedido
+     * @param pedido debe ser distinto de null
+     */
     public void altaPedido(Pedido pedido){
         this.pedidos.add(pedido);
     }
 
     // ------- COMANDAS ---------
 
-    // asigno el mozo a la mesa
+    /**
+     * El metodo permite dar de alta una comanda
+     * @param mesa la mesa debera ser distinta de null
+     * @param pedidos los pedidos deberan ser distintos de null
+     * @param mozo debera ser distinto de null
+     * @throws Exception si el estado es incorrecto
+     */
     public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, Mozo mozo) throws Exception {
 
         boolean libre = false;
@@ -248,6 +331,11 @@ public class Empresa implements Serializable {
         this.mozos = mozos;
     }
 
+    /**
+     * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
+     * @param mesa debera ser distinta de nula
+     * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
+     */
     public void crearFactura(Mesa mesa,String formaDePago){
         Comanda comanda = null;
         for (int i = 0; i < this.comandas.size(); i++){
@@ -266,6 +354,11 @@ public class Empresa implements Serializable {
         this.comandas.remove(comanda);
     }
 
+    /**
+     * Permite calcular el sueldo de cada mozo, a partir del sueldo base y un extra por cada hijo
+     * @param mozo debera ser distinto de nulo
+     * @return un flotante con el sueldo correspondiente a dicho mozo
+     */
     public double calculaSueldo(Mozo mozo){
         return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
     }
