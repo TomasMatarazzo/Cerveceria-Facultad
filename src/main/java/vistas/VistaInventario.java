@@ -5,7 +5,7 @@ import modelo.Producto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.TreeSet;
 
@@ -64,6 +64,11 @@ public class VistaInventario extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
 
         botonRegistrarse = new JButton("Ingresar");
         botonRegistrarse.setActionCommand("REGISTRARSE");
@@ -139,7 +144,7 @@ public class VistaInventario extends JFrame {
 
         botonModificarMozo = new JButton("MODIFICAR_MOZO");
         botonModificarMozo.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonModificarMozo.setActionCommand("INGRESAR_MOZO");
+        botonModificarMozo.setActionCommand("MODIFICAR_MOZO");
         botonModificarMozo.setBounds(294, 110, 132, 33);
         contentPane.add(botonModificarMozo);
 

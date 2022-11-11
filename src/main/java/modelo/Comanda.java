@@ -3,6 +3,9 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ *
+ */
 public class Comanda {
     private Date fecha;
     private Mesa mesa;
@@ -17,10 +20,16 @@ public class Comanda {
     }
 
 
+    /**
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }

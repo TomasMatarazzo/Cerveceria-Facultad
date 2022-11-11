@@ -10,7 +10,9 @@ public class Mozo implements Comparable<Mozo> {
     private String nombreYApellido;
     private Calendar fechaNacimiento;
     private double cantHijos;
-    private int estado;
+    private int estado; // 0 --> activo
+                        // 1 --> ausente
+                        // 2 --> franco
     private double ventas;
 
     public Mozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
@@ -62,15 +64,28 @@ public class Mozo implements Comparable<Mozo> {
         this.ventas = ventas;
     }
 
+    public String estadoToString(){
+        switch (this.estado){
+            case 0->{
+                return "Activo";
+            }
+            case 1->{
+                return "Ausente";
+            }
+            case 2->{
+                return "Franco";
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
-        return "Mozo{" +
-                "nombreYApellido='" + nombreYApellido + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", cantHijos=" + cantHijos +
-                ", estado=" + estado +
-                ", ventas=" + ventas +
-                '}';
+        return
+                "Nombre y Apellido: " + nombreYApellido + '\'' + + '\'' +
+                "           Estado: " + estadoToString() +
+                ",          Cant Hijos: " + ventas
+                ;
     }
 
     @Override

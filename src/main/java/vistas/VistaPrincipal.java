@@ -30,6 +30,7 @@ public class VistaPrincipal extends JFrame {
     private String sueldo = "";
     private FormNombreySueldo formSueldo;
     private JButton btnNuevasComandas;
+    private JButton btnComenzarJornada;
 
 
     public void setActionListener(ActionListener controlador) {
@@ -65,21 +66,21 @@ public class VistaPrincipal extends JFrame {
         botonOperario = new JButton("Nuevo operario");
         botonOperario.setActionCommand("REGISTRAR");
         if (op.esAdministrador()) {
-            botonOperario.setFont(new Font("Arial", Font.BOLD, 15));
-            botonOperario.setBounds(33, 180, 185, 35);
+            botonOperario.setFont(new Font("Arial", Font.BOLD, 18));
+            botonOperario.setBounds(33, 190, 185, 35);
             contentPane.add(botonOperario);
         }
 
         btnComandas = new JButton("Nueva comanda");
         btnComandas.setActionCommand("COMANDAS");
-        btnComandas.setFont(new Font("Arial", Font.BOLD, 15));
-        btnComandas.setBounds(33, 297, 185, 35);
+        btnComandas.setFont(new Font("Arial", Font.BOLD, 18));
+        btnComandas.setBounds(33, 284, 185, 35);
         contentPane.add(btnComandas);
 
         btnEstadisticas = new JButton("Estadisticas");
         btnEstadisticas.setActionCommand("ESTADISTICAS");
         btnEstadisticas.setFont(new Font("Arial", Font.BOLD, 21));
-        btnEstadisticas.setBounds(33, 354, 185, 35);
+        btnEstadisticas.setBounds(33, 327, 185, 35);
         contentPane.add(btnEstadisticas);
 
         btnPromociones = new JButton("Promociones");
@@ -89,7 +90,7 @@ public class VistaPrincipal extends JFrame {
         });
         this.btnPromociones.setActionCommand("PROMOCIONES");
         btnPromociones.setFont(new Font("Arial", Font.BOLD, 21));
-        btnPromociones.setBounds(33, 402, 185, 35);
+        btnPromociones.setBounds(33, 370, 185, 35);
         contentPane.add(btnPromociones);
 
         btnGestiones = new JButton("Gestiones");
@@ -99,12 +100,12 @@ public class VistaPrincipal extends JFrame {
             }
         });
         btnGestiones.setFont(new Font("Arial", Font.BOLD, 21));
-        btnGestiones.setBounds(33, 460, 185, 35);
+        btnGestiones.setBounds(33, 413, 185, 35);
         contentPane.add(btnGestiones);
 
         lblNewLabel = new JLabel("Cerveceria");
         lblNewLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
-        lblNewLabel.setBounds(228, 10, 260, 134);
+        lblNewLabel.setBounds(234, 8, 260, 134);
         contentPane.add(lblNewLabel);
 
         Nombre = new JLabel("Nombre:");
@@ -114,26 +115,30 @@ public class VistaPrincipal extends JFrame {
 
         lblSueldoBase = new JLabel("Sueldo base:");
         lblSueldoBase.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 21));
-        lblSueldoBase.setBounds(252, 284, 260, 61);
+        lblSueldoBase.setBounds(507, 167, 260, 61);
         contentPane.add(lblSueldoBase);
 
         btnModificarN = new JButton("Modificar");
+        btnModificarN.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         btnModificarN.setActionCommand("FORMDATOS");
         btnModificarN.setFont(new Font("Arial", Font.BOLD, 21));
-        btnModificarN.setBounds(462, 180, 185, 35);
+        btnModificarN.setBounds(486, 284, 185, 35);
         contentPane.add(btnModificarN);
 
 
         nombreVariable = new JLabel();
         nombreVariable.setText(this.nombre);
         nombreVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
-        nombreVariable.setBounds(252, 230, 260, 45);
+        nombreVariable.setBounds(252, 230, 216, 45);
         contentPane.add(nombreVariable);
 
         sueldoVariable = new JLabel();
         sueldoVariable.setText(this.sueldo);
         sueldoVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
-        sueldoVariable.setBounds(252, 344, 260, 45);
+        sueldoVariable.setBounds(507, 228, 164, 45);
         contentPane.add(sueldoVariable);
 
         btnNuevasComandas = new JButton("Comandas");
@@ -141,6 +146,12 @@ public class VistaPrincipal extends JFrame {
         btnNuevasComandas.setActionCommand("NUEVAS_COMANDAS");
         btnNuevasComandas.setBounds(33, 240, 185, 35);
         contentPane.add(btnNuevasComandas);
+
+        btnComenzarJornada = new JButton("Comenzar jornada");
+        btnComenzarJornada.setFont(new Font("Arial", Font.BOLD, 21));
+        btnComenzarJornada.setActionCommand("COMENZAR_JORNADA");
+        btnComenzarJornada.setBounds(234, 519, 234, 35);
+        contentPane.add(btnComenzarJornada);
 
         formSueldo = new FormNombreySueldo();
         formSueldo.setVisible(false);

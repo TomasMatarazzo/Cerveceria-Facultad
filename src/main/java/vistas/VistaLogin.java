@@ -2,7 +2,7 @@ package vistas;
 import controladores.ControladorLogin;
 import interfaces.IVista;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 
 public class VistaLogin extends JFrame implements IVista {
@@ -34,6 +33,10 @@ public class VistaLogin extends JFrame implements IVista {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
 
         inputUsuario = new JTextField();
         inputUsuario.setBounds(10, 75, 375, 28);

@@ -59,4 +59,15 @@ public class Operario implements Comparable<Operario>{
     public int compareTo(Operario o) {
         return this.apellido.equalsIgnoreCase(o.apellido) ? 0 : 1;
     }
+
+    @Override
+    public String toString() {
+        return "Operario{" +
+                "apellido='" + apellido + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", password='" + password + '\'' +
+                ", activo=" + activo +
+                ", administrador=" + administrador +
+                '}';
+    }
 }

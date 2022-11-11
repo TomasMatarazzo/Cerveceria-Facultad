@@ -34,6 +34,8 @@ public class Empresa {
 
     // --------- OPERARIOS ----------
 
+
+
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             System.out.printf("hola");
@@ -77,6 +79,26 @@ public class Empresa {
         else {
             System.out.printf("\n"+ apellido.length());
             System.out.printf("\n"+ usuario.length());
+            throw new Exception();
+        }
+    }
+
+    public void modificarPassword( Operario op,String password) throws Exception {
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+
+        Pattern p = Pattern.compile(regex);
+        if (password == null) {
+            throw new Exception();
+        }
+        Matcher m = p.matcher(password);
+        if (true) {
+            op.setPassword(password);
+        }
+        else {
             throw new Exception();
         }
     }
