@@ -3,12 +3,15 @@ package prueba;
 import controladores.ControladorLogin;
 import controladores.ControladorPrincipal;
 import modelo.Operario;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaBIN;
 import vistas.VistaLogin;
 import vistas.VistaPrincipal;
 import modelo.Empresa;
 import modelo.Mozo;
 import modelo.Producto;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.TreeSet;
 
@@ -19,6 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            IPersistencia persistencia=new PersistenciaBIN();
             Producto prod1 = new Producto(0, "hola1", 12, 24, 15);
             Producto prod2 = new Producto(2, "hola1", 12, 24, 15);
             Producto prod3 = new Producto(3, "hola1", 12, 24, 15);
@@ -26,6 +30,8 @@ public class Main {
             productos.add(prod1);
             productos.add(prod2);
             productos.add(prod3);
+
+            System.out.println("1111");
 
             Mozo mozo1 = new Mozo("ignacitoo", Calendar.getInstance(),3,0);
             Mozo mozo2 = new Mozo("ignacito1o",Calendar.getInstance(),3,1);
@@ -35,7 +41,6 @@ public class Main {
             mozos.add(mozo1);
             mozos.add(mozo2);
             mozos.add(mozo3);
-
 
             VistaLogin vista = new VistaLogin();
             Empresa empresa = new Empresa();
@@ -49,6 +54,22 @@ public class Main {
             System.out.printf(empresa.getOperarios().first().toString());
             ControladorLogin controlador = new ControladorLogin(vista,empresa);
             vista.ejecutar();
+
+
+            try {
+                persistencia.abrirOutput("Cerveceria.bin");
+                System.out.println("Crea archivo escritura");
+                System.out.println(empresa);
+                persistencia.escribir(empresa);
+                System.out.println("Empresa grabado exitosamente");
+                persistencia.cerrarOutput();
+                System.out.println("Archivo cerrado");
+            }
+            catch (IOException e){
+                System.out.println(e.getLocalizedMessage());
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

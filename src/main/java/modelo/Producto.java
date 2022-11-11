@@ -53,13 +53,13 @@ public class Producto implements Comparable<Producto>, Serializable {
     /**
      * Permite setear el precio de costo
      * @param precioCosto flotante mayor a cero
-     * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero o mayor al precio de venta
+     * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero
      */
     public void setPrecioCosto(double precioCosto) throws ProductoIncorrecto{
-        if (precioCosto > 0  && this.precioVenta>precioCosto)
+        if (precioCosto > 0)
             this.precioCosto = precioCosto;
         else
-            throw new ProductoIncorrecto("El precio de costo es menor o igual a 0 o mayor al precio de venta");
+            throw new ProductoIncorrecto("El precio de costo es menor o igual a 0");
     }
 
     public double getPrecioVenta() {
@@ -72,10 +72,10 @@ public class Producto implements Comparable<Producto>, Serializable {
      * @throws ProductoIncorrecto se lanza cuando el precio de venta es menor o igual a cero o menor al precio de venta
      */
     public void setPrecioVenta(double precioVenta) throws ProductoIncorrecto {
-        if (precioVenta > 0)
+        if (precioVenta > 0 && precioVenta>this.precioCosto)
             this.precioVenta = precioVenta;
         else
-            throw new ProductoIncorrecto("El precio de venta es menor o igual a 0");
+            throw new ProductoIncorrecto("El precio de venta es menor o igual a 0 o menor al precio de costo");
     }
 
     public int getStockInicial() {
