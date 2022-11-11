@@ -2,7 +2,9 @@ package modelo;
 
 import excepciones.ProductoIncorrecto;
 
-public class Producto implements Comparable<Producto>{
+import java.io.Serializable;
+
+public class Producto implements Comparable<Producto>, Serializable {
     private int id_producto;
     private String nombre;
     private double precioCosto;

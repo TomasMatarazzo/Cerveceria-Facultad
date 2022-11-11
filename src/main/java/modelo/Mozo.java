@@ -2,11 +2,12 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class Mozo implements Comparable<Mozo> {
+public class Mozo implements Comparable<Mozo>, Serializable {
     private String nombreYApellido;
     private Calendar fechaNacimiento;
     private double cantHijos;

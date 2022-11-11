@@ -1,9 +1,10 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Comanda {
+public class Comanda{
     private Date fecha;
     private Mesa mesa;
     private ArrayList<Pedido> pedidos = new ArrayList<>();

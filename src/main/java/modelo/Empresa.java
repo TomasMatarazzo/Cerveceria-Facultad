@@ -4,13 +4,14 @@ package modelo;
 import excepciones.MozoIncorrecto;
 import excepciones.StockNoDisponible;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Empresa {
+public class Empresa implements Serializable {
     private String nombreEmpresa;
     private double sueldoBasico;
     private TreeSet<Mozo> mozos = new TreeSet<>();

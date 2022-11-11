@@ -1,6 +1,12 @@
 package modelo;
 
+<<<<<<< Updated upstream
 public class Mesa implements Comparable<Mesa>{
+=======
+import java.io.Serializable;
+
+public class Mesa implements Serializable{
+>>>>>>> Stashed changes
     private static int id;
     private int nro;
     private int cantidadPersonas;
