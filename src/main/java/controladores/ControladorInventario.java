@@ -50,7 +50,7 @@ public class ControladorInventario implements ActionListener{
                 this.vista.renderListaMozos(this.modelo.getMozos());
                 break;
             case "MODIFICAR_MOZO":
-                // VERIFICAR COMO SE MODIFICA EL MOZO
+
                 try {
                     int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
                     Calendar fecha2 = Calendar.getInstance();
@@ -62,7 +62,6 @@ public class ControladorInventario implements ActionListener{
                 catch (Exception e){
                     Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
                 }
-
                 break;
 
             case "NUEVOPRODUCTO":

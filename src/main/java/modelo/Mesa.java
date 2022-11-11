@@ -1,6 +1,7 @@
 package modelo;
 
-public class Mesa implements Comparable<Mesa>{
+import java.io.Serializable;
+public class Mesa implements Comparable<Mesa>, Serializable {
     private static int id;
     private int nro;
     private int cantidadPersonas;
@@ -54,6 +55,10 @@ public class Mesa implements Comparable<Mesa>{
         return estado;
     }
 
+    /**
+     * @param estado sera una cadena que debera ser "libre" u "ocupada"
+     * @throws Exception en caso de que estado no sea "libre" u "ocupada" se lanzara una excepcion
+     */
     public void setEstado(String estado) throws Exception {
         if (estado.equalsIgnoreCase("libre") || estado.equalsIgnoreCase("ocupada"))
             this.estado = estado;
@@ -84,6 +89,11 @@ public class Mesa implements Comparable<Mesa>{
 
     }
 
+    /**
+     * El metodo permitira ordenar el treeset de acuerdo al numero de mesa
+     * @param o debera ser distinto de null
+     * @return devuelve 1 en caso de que la mesa instancia sea mayor a la recibida por parametro, 0 en caso contrario
+     */
     @Override
     public int compareTo(Mesa o) {
         return (this.getNro() > o.getNro()) ? 1 : 0;

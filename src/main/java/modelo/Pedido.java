@@ -25,13 +25,20 @@ public class Pedido {
         return cantidad;
     }
 
+    /**
+     * @param cantidad entero que sera mayor a cero
+     * @throws StockNoDisponible el stock disponible no es suficiente o el numero ingresado es menor o igual a cero
+     */
     public void setCantidad(int cantidad) throws StockNoDisponible {
-        if (cantidad > 0)
+        if (cantidad > 0 || this.getProducto().getStockInicial()<cantidad)
             this.cantidad = cantidad;
         else
-            throw new StockNoDisponible("La cantidad ingresada es menor o igual a cero");
+            throw new StockNoDisponible("La cantidad ingresada es menor o igual a cero o no se cuenta con stock suficiente");
     }
 
+    /**
+     * @throws StockNoDisponible en caso de no haber stock suficiente
+     */
     public void verificaStock() throws StockNoDisponible{
         if (this.cantidad > this.producto.getStockInicial()){
             throw new StockNoDisponible("No hay stock suficiente");

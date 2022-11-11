@@ -63,6 +63,13 @@ public class Factura {
         return total;
     }
 
+    /**
+     * El metodo permite calcular el total a facturar, recorre todos los pedidos realizados y hace un calculo parcial al que posteriormente se le van
+     * a aplicar descuentos en caso de ser necesario. Primero se recorre el arreglo de promociones de producto para saber si es necesario
+     * aplicarle un descuento, para esto la promocion debera estar activa. Luego recorreremos el arreglo de promociones temporales para
+     * saber si corresponde aplicarselas.
+     * @return devuelve un flotante que debera ser mayor a cero, representa el total a cobrar a la mesa correspondiente
+     */
     public double setTotal() {
         double total=0;
         double parcial;
