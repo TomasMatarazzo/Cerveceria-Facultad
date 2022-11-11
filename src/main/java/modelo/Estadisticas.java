@@ -5,6 +5,10 @@ import java.util.TreeSet;
 
 public class Estadisticas {
 
+    /**
+     * @param mozos debera ser distinto de null<br>
+     * @return el nombre y apellido del mozo que tiene el mayor monto de ventas acumulado
+     */
     public static String mayorVolumenVenta(TreeSet<Mozo> mozos){
         double max = -10;
         Mozo mozoMax = null;
@@ -18,6 +22,10 @@ public class Estadisticas {
         return mozoMax.getNombreYApellido();
     }
 
+    /**
+     * @param mozos debera ser distinto de null<br>
+     * @return el nombre y apellido del mozo que tiene el menor monto de ventas acumulado
+     */
     public static String menorVolumenVenta(TreeSet<Mozo> mozos){
         double min = 10000000;
         Mozo mozoMax = null;

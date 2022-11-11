@@ -2,11 +2,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.regex.*;
 
-<<<<<<< Updated upstream
-public class Operario implements Comparable<Operario>{
-=======
-public class Operario implements Serializable {
->>>>>>> Stashed changes
+public class Operario implements Comparable<Operario>,Serializable{
     private String apellido;
     private String usuario;
     private String password;
