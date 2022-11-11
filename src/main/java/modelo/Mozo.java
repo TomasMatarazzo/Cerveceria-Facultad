@@ -82,7 +82,7 @@ public class Mozo implements Comparable<Mozo> {
     @Override
     public String toString() {
         return
-                "Nombre y Apellido: " + nombreYApellido + '\'' + + '\'' +
+                "Nombre y Apellido: " + nombreYApellido  +
                 "           Estado: " + estadoToString() +
                 ",          Cant Hijos: " + ventas
                 ;

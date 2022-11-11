@@ -124,13 +124,15 @@ public class Empresa {
     }
 
     public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado){
+        System.out.printf(mozo.toString());
         mozo.setNombreYApellido(nombreYApellido);
         mozo.setFechaNacimiento(fechaNacimiento);
         mozo.setCantHijos(cantHijos);
         mozo.setEstado(estado);
+        System.out.printf(mozo.toString());
     }
 
-    public void eliminaMozo(Mozo mozo){
+    public void bajaMozo(Mozo mozo){
         this.mozos.remove(mozo);
     }
 

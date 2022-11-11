@@ -91,17 +91,28 @@ public class FormMozo extends JFrame {
         inputCantHijos.setBounds(316, 74, 245, 33);
         contentPane.add(inputCantHijos);
 
-        botonAgregar = new JButton("Nuevo mozo");
+        botonAgregar = new JButton();
+        botonAgregar.setText("Agregar mozo");
         botonAgregar.setActionCommand("NUEVOMOZO");
         botonAgregar.setFont(new Font("Arial", Font.PLAIN, 21));
         botonAgregar.setBounds(200, 242, 190, 56);
         contentPane.add(botonAgregar);
 
-        String[] choices = {"nulo","libre","ocupado"};
+        String[] choices = {"activo","ausente","franco"};
 
         inputEstado = new JComboBox(choices) ;
         inputEstado.setBounds(316, 174, 245, 33);
         contentPane.add(inputEstado);
+    }
+
+    public void setModificar(){
+        botonAgregar.setText("Modificar mozo");
+        botonAgregar.setActionCommand("MODIFICAR_MOZO");
+    }
+
+    public void setAgregar(){
+        botonAgregar.setText("Agregar mozo");
+        botonAgregar.setActionCommand("NUEVOMOZO");
     }
 
     public String getNombre(){
