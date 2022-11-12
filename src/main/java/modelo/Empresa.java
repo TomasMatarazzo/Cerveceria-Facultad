@@ -66,7 +66,7 @@ public class Empresa implements Serializable {
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])";
+                + "(?=\\S+$).{8,20}$";
 
         if (password == null || password.equals("")) {
             throw new Exception();
@@ -97,7 +97,7 @@ public class Empresa implements Serializable {
     public void modificarPassword(String password) throws Exception {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])";
+                + "(?=\\S+$).{8,20}$";
 
         Pattern p = Pattern.compile(regex);
 
