@@ -5,18 +5,17 @@ import excepciones.ProductoIncorrecto;
 import java.io.Serializable;
 
 public class Producto implements Comparable<Producto>, Serializable {
-    private static int id = 0;
     private int id_producto;
     private String nombre;
     private double precioCosto;
     private double precioVenta;
     private int stockInicial;
 
-    public Producto(String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
-        this.id_producto = ++id;
+    public Producto(int id_producto, String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
+        this.id_producto = id_producto;
         this.nombre = nombre;
-        this.setPrecioVenta(precioVenta);
         this.setPrecioCosto(precioCosto);
+        this.setPrecioVenta(precioVenta);
         this.checkPrecio(precioCosto,precioVenta);
         this.stockInicial = stockInicial;
     }
@@ -54,13 +53,13 @@ public class Producto implements Comparable<Producto>, Serializable {
     /**
      * Permite setear el precio de costo
      * @param precioCosto flotante mayor a cero
-     * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero o mayor al precio de venta
+     * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero
      */
     public void setPrecioCosto(double precioCosto) throws ProductoIncorrecto{
-        if (precioCosto > 0  && this.precioVenta > precioCosto)
+        if (precioCosto > 0)
             this.precioCosto = precioCosto;
         else
-            throw new ProductoIncorrecto("El precio de costo es menor o igual a 0 o mayor al precio de venta");
+            throw new ProductoIncorrecto("El precio de costo es menor o igual a 0");
     }
 
     public double getPrecioVenta() {
@@ -73,10 +72,10 @@ public class Producto implements Comparable<Producto>, Serializable {
      * @throws ProductoIncorrecto se lanza cuando el precio de venta es menor o igual a cero o menor al precio de venta
      */
     public void setPrecioVenta(double precioVenta) throws ProductoIncorrecto {
-        if (precioVenta > 0)
+        if (precioVenta > 0 && precioVenta>this.precioCosto)
             this.precioVenta = precioVenta;
         else
-            throw new ProductoIncorrecto("El precio de venta es menor o igual a 0");
+            throw new ProductoIncorrecto("El precio de venta es menor o igual a 0 o menor al precio de costo");
     }
 
     public int getStockInicial() {
@@ -89,16 +88,18 @@ public class Producto implements Comparable<Producto>, Serializable {
 
     @Override
     public String toString() {
-        return
-                "Producto:  " + nombre +
-                "   precioCosto: " + precioCosto +
-                "   precioVenta: " + precioVenta +
-                "   Stock:  " + stockInicial ;
+        return "Producto{" +
+                "id_producto=" + id_producto +
+                ", nombre='" + nombre + '\'' +
+                ", precioCosto=" + precioCosto +
+                ", precioVenta=" + precioVenta +
+                ", stockInicial=" + stockInicial +
+                '}';
     }
 
 
     @Override
     public int compareTo(Producto o) {
-        return (this.id_producto < o.id_producto)?0:1;
+        return (this.precioCosto < o.precioCosto)?0:1;
     }
 }

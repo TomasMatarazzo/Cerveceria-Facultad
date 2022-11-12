@@ -24,7 +24,6 @@ public class Empresa implements Serializable {
     private ArrayList<PromocionTemporal> promocionesTemporales;
     private ArrayList<Pedido> pedidos = new ArrayList<>();
 
-    public Empresa(){}
 
     public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas,TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
