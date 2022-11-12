@@ -91,7 +91,6 @@ public class Empresa implements Serializable {
 
     /**
      * Modifica la contrasena del administrador
-     * @param op
      * @param password
      * @throws Exception si la password no coincide
      */
