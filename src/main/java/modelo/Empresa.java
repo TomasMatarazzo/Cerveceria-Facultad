@@ -3,7 +3,6 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 import excepciones.StockNoDisponible;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -36,8 +35,6 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
-
-
     /**
      * Login para el operario.
      * @param usuario String de hasta 10 caracteres
@@ -46,19 +43,17 @@ public class Empresa implements Serializable {
      * @throws Exception si no se encuentra al usuario dentro de los operarios o la password es invalida
      */
     public Operario login( String usuario, String password) throws Exception{
-        for (Operario op:operarios ){
-            System.out.printf(op.getUsuario() + op.getPassword());
-            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password) ){
-                if (op.isActivo())
+        for (Operario op : operarios) {
+            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password)) {
+                if (op.isActivo()) {
                     return op;
-            }
-            else{
-                throw new Exception();
+                } else {
+                    throw new Exception();
+                }
             }
         }
         return null;
     }
-
 
     /**
      * Registra a los nuevos operarios
@@ -66,26 +61,29 @@ public class Empresa implements Serializable {
      * @param usuario  String de hasta 10 caracteres
      * @param password String entre 6 y 12 caracteres
      * @param activo Indica si el usuario esta activo o no
-     * @throws Exception Lanza excepcion, si la contrasena es vacia o si no contiene digitos y mayusculas
+     * @throws Exception Lanza excepcion, si la contrasena es vacia o null
      */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])";
 
-
-        Pattern p = Pattern.compile(regex);
-        if (password == null) {
+        if (password == null || password.equals("")) {
             throw new Exception();
         }
+
+        if (usuario == null || usuario.equals("")) {
+            throw new Exception();
+        }
+
+        Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(password);
 
         // pongo true para no poner contrasenas complicadas. dps lo cambian
         // if (m.matches())
         if (m.matches()) {
             this.operarios.add(new Operario(apellido, usuario, password, activo));
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
@@ -93,32 +91,29 @@ public class Empresa implements Serializable {
 
     /**
      * Modifica la contrasena del administrador
-     * @param op
      * @param password
      * @throws Exception si la password no coincide
      */
-    public void modificarPassword( Operario op,String password) throws Exception {
+    public void modificarPassword(String password) throws Exception {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])";
 
-
         Pattern p = Pattern.compile(regex);
-        if (password == null) {
+
+        if (password == null || password.equals("")) {
             throw new Exception();
         }
+
         Matcher m = p.matcher(password);
         if (m.matches()) {
             this.operarios.first().setPassword(password);
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
 
     // --------- MOZOS ----------
-
-
     /**
      * Este metodo permite agregar un nuevo mozo
      * <pre> la edad ingresada sera mayor o igual a 18
@@ -184,7 +179,6 @@ public class Empresa implements Serializable {
 
 
     // --------- PRODUCTOS ------------
-
     /**
      * Permite agregar un nuevo producto a nuestro inventario
      * @param nombre nombre del producto, no podra estar vacio
