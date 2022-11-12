@@ -36,9 +36,6 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
-
-
-
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             System.out.printf(op.getUsuario() + op.getPassword());
@@ -53,8 +50,6 @@ public class Empresa implements Serializable {
         return null;
     }
 
-
-    
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
@@ -101,8 +96,6 @@ public class Empresa implements Serializable {
     }
 
     // --------- MOZOS ----------
-
-
     /**
      * Este metodo permite agregar un nuevo mozo
      * <pre> la edad ingresada sera mayor o igual a 18
@@ -143,7 +136,6 @@ public class Empresa implements Serializable {
 
 
     // --------- PRODUCTOS ------------
-
     /**
      * Permite agregar un nuevo producto a nuestro inventario
      * @param nombre nombre del producto, no podra estar vacio

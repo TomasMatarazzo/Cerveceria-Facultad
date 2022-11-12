@@ -1,13 +1,11 @@
 package modelo;
 
 import org.junit.jupiter.api.*;
-
 import java.util.TreeSet;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("La empresa ")
-class EmpresaTest {
+class OperarioTest {
     Empresa empresa;
 
     @Test
@@ -22,16 +20,9 @@ class EmpresaTest {
 
         @BeforeEach
         void setUp() {
-            TreeSet<Operario> operarios= new TreeSet<>();
             TreeSet<Producto> productos= new TreeSet<>();
 
-            empresa = new Empresa("Cerveceria", null, null, productos, operarios);
-
-//            try {
-//                empresa.signup("Messi", "Messi10", "Messi123", true);
-//            } catch (Exception e) {
-//                fail("ERROR");
-//            }
+            empresa = new Empresa("Cerveceria", null, null, productos, null);
         }
 
         @Test
@@ -40,7 +31,7 @@ class EmpresaTest {
             String apellido = "Messi";
             String username = "Messi10";
             String passwordIncorrecta = null;
-            
+
             assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordIncorrecta, true));
         }
 
@@ -50,12 +41,12 @@ class EmpresaTest {
         }
 
         @Test
-        @DisplayName()
+        @DisplayName(" ")
         void signUpTest3() {
         }
 
         @Test
-        @DisplayName()
+        @DisplayName(" ")
         void signUpTest4() {
         }
 
@@ -112,33 +103,4 @@ class EmpresaTest {
         }
 
     }
-
-
-
-//    @Test
-//    @DisplayName()
-//    void loginTest1() {
-//
-//    }
-//
-//    @Test
-//    @DisplayName()
-//    void loginTest1() {
-//
-//    }
-//
-//    @Test
-//    void signup() {
-//
-//    }
-//
-//    @Test
-//    void modificarPassword() {
-//
-//    }
-//
-//    @Test
-//    void altaProducto() {
-//
-//    }
 }
