@@ -93,7 +93,7 @@ public class VistaInventario extends JFrame {
 
         botonModificarProducto = new JButton("MODIFICAR_PRODUCTO");
         botonModificarProducto.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonModificarProducto.setActionCommand("MODIFICAR_PRODUCTO");
+        botonModificarProducto.setActionCommand("INGRESAR_PRODUCTO2");
         botonModificarProducto.setBounds(294, 507, 132, 33);
         contentPane.add(botonModificarProducto);
 
@@ -111,7 +111,7 @@ public class VistaInventario extends JFrame {
 
         botonModificarMesa = new JButton("MODIFICAR_MESA");
         botonModificarMesa.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonModificarMesa.setActionCommand("MODIFICAR_MESA");
+        botonModificarMesa.setActionCommand("INGRESAR_MESA2");
         botonModificarMesa.setBounds(294, 306, 132, 33);
         contentPane.add(botonModificarMesa);
 

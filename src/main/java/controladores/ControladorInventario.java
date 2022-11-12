@@ -39,8 +39,12 @@ public class ControladorInventario implements ActionListener{
                 this.vista.showFormMozo();
                 break;
             case "INGRESAR_MOZO2":
-                this.vista.estadoModificarMozo();
-                this.vista.showFormMozo();
+                if (this.vista.getSelectedMozo() != null) {
+                    this.vista.estadoModificarMozo();
+                    this.vista.showFormMozo();
+                }else{
+                    Mensajes.lanzarVentanaEmergente("Seleccione un mozo");
+                }
                 break;
             case "ELIMINAR_MOZO":
                 if (this.vista.getSelectedMozo() != null) {
@@ -81,7 +85,17 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "INGRESAR_PRODUCTO":
+                this.vista.estadoAgregarProducto();
                 this.vista.showFormProducto();
+                break;
+            case "INGRESAR_PRODUCTO2":
+                if (this.vista.getSelectedProducto() != null) {
+                    this.vista.estadoModificarProducto();
+                    this.vista.showFormProducto();
+                }
+                else{
+                    Mensajes.lanzarVentanaEmergente("Seleccione un producto");
+                }
                 break;
             case "ELIMINAR_PRODUCTO":
                 System.out.printf("holaa");
@@ -97,6 +111,17 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "MODIFICAR_PRODUCTO":
+                try {
+                    int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
+                    Calendar fecha2 = Calendar.getInstance();
+                    fecha2.set(1970, 10, 2);
+                    this.modelo.modificaProducto(this.vista.getSelectedProducto().getNombre(), this.vista.getSelectedProducto().getPrecioCosto(),this.vista.getSelectedProducto().getPrecioVenta(), this.vista.getSelectedProducto().getStockInicial(), this.vista.getSelectedProducto());
+                    this.vista.hideFormProducto();
+                    this.vista.renderListaProductos(this.modelo.getProductos());
+                }
+                catch (Exception e){
+                    Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
+                }
                 break;
             case "NUEVAMESA":
                 try {
@@ -111,7 +136,16 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "INGRESAR_MESA":
+                this.vista.estadoAgregarMesa();
                 this.vista.showFormMesa();
+                break;
+            case "INGRESAR_MESA2":
+                if (this.vista.getSelectedMesas() != null) {
+                    this.vista.estadoModificarMesa();
+                    this.vista.showFormMesa();
+                }else{
+                    Mensajes.lanzarVentanaEmergente("Seleccione una mesa");
+                }
                 break;
             case "ELIMINAR_MESA":
                 if (this.vista.getSelectedMesas() != null) {

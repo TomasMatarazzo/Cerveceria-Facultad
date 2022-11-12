@@ -115,10 +115,6 @@ public class FormMozo extends JFrame {
         botonAgregar.setActionCommand("NUEVOMOZO");
     }
 
-    public void setAgregarProducto(){
-        botonAgregar.setText("Agregar mozo");
-        botonAgregar.setActionCommand("NUEVOMOZO");
-    }
 
     public String getNombre(){
         return this.inputNombre.getText();

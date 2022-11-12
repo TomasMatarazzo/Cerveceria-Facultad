@@ -95,12 +95,12 @@ public class FormMesa extends JFrame {
     }
 
     public void setModificarMesa(){
-        botonNuevaMesa.setText("Agregar mozo");
-        botonNuevaMesa.setActionCommand("NUEVOMOZO");
+        botonNuevaMesa.setText("Agregar mesa");
+        botonNuevaMesa.setActionCommand("NUEVAMESA");
     }
     public void setAgregarMesa(){
-        botonNuevaMesa.setText("Agregar mozo");
-        botonNuevaMesa.setActionCommand("NUEVOMOZO");
+        botonNuevaMesa.setText("Modificar mesa");
+        botonNuevaMesa.setActionCommand("MODIFICARMESA");
     }
 
 }

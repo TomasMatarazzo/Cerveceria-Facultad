@@ -120,11 +120,11 @@ public class FormProducto extends JFrame {
     }
 
     public void setAgregarProducto(){
-        botonAgregar.setText("Agregar mozo");
-        botonAgregar.setActionCommand("NUEVOMOZO");
+        botonAgregar.setText("Agregar producto");
+        botonAgregar.setActionCommand("NUEVOPRODUCTO");
     }
     public void setModificarProducto(){
-        botonAgregar.setText("Agregar mozo");
-        botonAgregar.setActionCommand("NUEVOMOZO");
+        botonAgregar.setText("Modificar producto");
+        botonAgregar.setActionCommand("MODIFICAR_PRODUCTO");
     }
 }
