@@ -21,7 +21,11 @@ public class ControladorRegistrarse implements ActionListener{
         switch (evento.getActionCommand()) {
             case "REGISTRARSE":
                 try {
+<<<<<<< Updated upstream
                     this.modelo.signup(vista.getApellido(),vista.getUsuario(), vista.getContrasena(),true);
+=======
+                        this.modelo.signup(vista.getApellido(),vista.getUsuario(), vista.getContrasena(),true);
+>>>>>>> Stashed changes
                     this.vista.hideWindow();
                 }
                 catch(Exception e){
