@@ -98,7 +98,6 @@ public class Producto implements Comparable<Producto>, Serializable {
                 '}';
     }
 
-
     @Override
     public int compareTo(Producto o) {
         return (this.precioCosto < o.precioCosto)?0:1;

@@ -3,12 +3,9 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 import excepciones.StockNoDisponible;
-
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.DoubleFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,9 +33,6 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
-
-
-
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             System.out.printf("hola");
@@ -56,26 +50,26 @@ public class Empresa implements Serializable {
         return null;
     }
 
-
-    
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])"
                 + "(?=\\S+$).{8,20}$";
 
-
         Pattern p = Pattern.compile(regex);
         if (password == null) {
             throw new Exception();
         }
+
         Matcher m = p.matcher(password);
         System.out.printf("\nholaa2");
+
         if (true) {
             System.out.printf("\nholaa4");
             Operario operario = new Operario(apellido, usuario, password, activo);
             this.operarios.add(operario);
         }
+
         else {
             System.out.printf("\n"+ apellido.length());
             System.out.printf("\n"+ usuario.length());
@@ -89,23 +83,21 @@ public class Empresa implements Serializable {
                 + "(?=.*[@#$%^&+=])"
                 + "(?=\\S+$).{8,20}$";
 
-
         Pattern p = Pattern.compile(regex);
         if (password == null) {
             throw new Exception();
         }
+
         Matcher m = p.matcher(password);
+
         if (true) {
             op.setPassword(password);
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
 
     // --------- MOZOS ----------
-
-
     /**
      * Este metodo permite agregar un nuevo mozo
      * <pre> la edad ingresada sera mayor o igual a 18
@@ -169,10 +161,7 @@ public class Empresa implements Serializable {
         this.mozos.remove(mozo);
     }
 
-
-
     // --------- PRODUCTOS ------------
-
     /**
      * Permite agregar un nuevo producto a nuestro inventario
      * @param nombre nombre del producto, no podra estar vacio
@@ -227,7 +216,6 @@ public class Empresa implements Serializable {
     }
 
     // -------- MESAS ----------
-
     /**
      * Permite dar de alta una nueva mesa
      * @param cantidadPersonas entero mayor a cero, en caso de ser una sola persona va a la barra, mesa numero cero
@@ -299,7 +287,6 @@ public class Empresa implements Serializable {
     }
 
     // ------- COMANDAS ---------
-
     /**
      * El metodo permite dar de alta una comanda
      * @param mesa
@@ -337,9 +324,8 @@ public class Empresa implements Serializable {
         }
         return 0;
     }
+
     // ----- GET Y SET ----
-
-
     public double getSueldoBasico() {
         return sueldoBasico;
     }
@@ -411,8 +397,8 @@ public class Empresa implements Serializable {
     public double calculaSueldo(Mozo mozo){
         return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
     }
-        //agregar factura al mozo
 
+    //agregar factura al mozo
 
     public TreeSet<Mesa> getMesas() {
         return this.mesas;

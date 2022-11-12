@@ -27,6 +27,7 @@ public class Operario implements Comparable<Operario>,Serializable{
     public void setAdministrador(){
         this.administrador = true;
     }
+
     public void setApellido(String apellido) {
             this.apellido = apellido;
     }
@@ -54,7 +55,6 @@ public class Operario implements Comparable<Operario>,Serializable{
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
 
     /**
      * @param o

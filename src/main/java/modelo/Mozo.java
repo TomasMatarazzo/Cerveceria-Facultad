@@ -1,10 +1,7 @@
 package modelo;
 
-import excepciones.MozoIncorrecto;
-
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class Mozo implements Comparable<Mozo>, Serializable {
@@ -23,7 +20,6 @@ public class Mozo implements Comparable<Mozo>, Serializable {
         this.setEstado(estado);
         this.ventas=0;
     }
-
 
     public String getNombreYApellido() {
         return nombreYApellido;

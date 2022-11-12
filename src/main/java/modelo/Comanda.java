@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- *
- */
 public class Comanda {
     private Date fecha;
     private Mesa mesa;
@@ -20,17 +17,10 @@ public class Comanda {
         this.mesa.setMozo(mozo);
     }
 
-
-    /**
-     * @return
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     * @param fecha
-     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
