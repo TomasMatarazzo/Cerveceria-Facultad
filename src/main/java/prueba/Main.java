@@ -43,24 +43,9 @@ public class Main {
             VistaLogin vista = new VistaLogin();
             Empresa empresa = new Empresa("CerveceriaProgra",mozos,mesas,productos,operarios);
 
-            System.out.printf(empresa.getOperarios().first().toString());
             FormPassword form = new FormPassword();
             ControladorLogin controlador = new ControladorLogin(vista,empresa,form);
             vista.ejecutar();
-
-
-            try {
-                persistencia.abrirOutput("Cerveceria.bin");
-                System.out.println("Crea archivo escritura");
-                System.out.println(empresa);
-                persistencia.escribir(empresa);
-                System.out.println("Empresa grabado exitosamente");
-                persistencia.cerrarOutput();
-                System.out.println("Archivo cerrado");
-            }
-            catch (IOException e){
-                System.out.println(e.getLocalizedMessage());
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

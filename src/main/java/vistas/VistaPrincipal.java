@@ -10,6 +10,7 @@ import java.awt.*;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowListener;
 
 public class VistaPrincipal extends JFrame {
 
@@ -43,6 +44,7 @@ public class VistaPrincipal extends JFrame {
         this.botonOperario.addActionListener(controlador);
         this.btnNuevasComandas.addActionListener(controlador);
         this.btnComenzarJornada.addActionListener(controlador);
+        this.addWindowListener((WindowListener) controlador);
     }
 
     public void ejecutar(){

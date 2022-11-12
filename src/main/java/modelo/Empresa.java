@@ -23,8 +23,10 @@ public class Empresa implements Serializable {
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private boolean arrancoJornada;
 
+    public Empresa() {
+    }
 
-    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas,TreeSet<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas, TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -128,20 +130,7 @@ public class Empresa implements Serializable {
      * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
      */
     public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
-        // VERIFICAR LA EDAD
-        Calendar fecha = new GregorianCalendar();
-        fecha.add(Calendar.YEAR, -18);
-        if(fecha.after(fechaNacimiento)){
-            if( cantHijos >= 0 ){
-                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
-            }
-            else{
-                throw new MozoIncorrecto("Cant de hijos menor a cero");
-            }
-        }
-        else{
-            throw new MozoIncorrecto("Edad menor a 18 anos");
-        }
+        this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
     }
 
     /**
@@ -155,22 +144,10 @@ public class Empresa implements Serializable {
      * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
      */
     public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
-        Calendar fecha = new GregorianCalendar();
-        fecha.add(Calendar.YEAR, -18);
-        if(fecha.after(fechaNacimiento)){
-            if( cantHijos >= 0 ){
-                mozo.setNombreYApellido(nombreYApellido);
-                mozo.setFechaNacimiento(fechaNacimiento);
-                mozo.setCantHijos(cantHijos);
-                mozo.setEstado(estado);
-            }
-            else{
-                throw new MozoIncorrecto("Cant de hijos menor a cero");
-            }
-        }
-        else{
-            throw new MozoIncorrecto("Edad menor a 18 anos");
-        }
+        mozo.setNombreYApellido(nombreYApellido);
+        mozo.setFechaNacimiento(fechaNacimiento);
+        mozo.setCantHijos(cantHijos);
+        mozo.setEstado(estado);
     }
 
     /**
@@ -238,12 +215,7 @@ public class Empresa implements Serializable {
      * @throws Exception si el numero de personas es incorrecto, menor a 1
      */
     public void altaMesa(int cantidadPersonas) throws Exception{
-        if (cantidadPersonas >= 2 ){
-            this.mesas.add(new Mesa(cantidadPersonas));
-        }
-        else {
-            throw new Exception();
-        }
+        this.mesas.add(new Mesa(cantidadPersonas));
     }
 
     /**

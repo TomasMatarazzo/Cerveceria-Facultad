@@ -1,12 +1,17 @@
 package controladores;
 
+import persistencia.IPersistencia;
+import persistencia.PersistenciaBIN;
 import vistas.*;
 import modelo.Empresa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
 
-public class ControladorPrincipal implements ActionListener{
+public class ControladorPrincipal implements ActionListener, WindowListener {
     private VistaPrincipal vista;
     private Empresa modelo;
 
@@ -14,6 +19,7 @@ public class ControladorPrincipal implements ActionListener{
         this.vista = vista;
         this.modelo = modelo;
         this.vista.setActionListener(this);
+        this.vista.addWindowListener(this);
     }
 
     @Override
@@ -68,6 +74,55 @@ public class ControladorPrincipal implements ActionListener{
                 this.vista.terminoJornada();
                 break;
         }
+    }
+
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        try {
+            System.out.println("ENTREE");
+            IPersistencia persistencia = new PersistenciaBIN();
+            Empresa empresa=new Empresa(this.modelo.getNombreEmpresa(),this.modelo.getMozos(),this.modelo.getMesas(),this.modelo.getProductos(),this.modelo.getOperarios());
+            persistencia.abrirOutput("Cerveceria.bin");
+            System.out.println("Crea archivo escritura");
+            persistencia.escribir(empresa);
+            System.out.println("Empresa grabado exitosamente");
+            persistencia.cerrarOutput();
+            System.out.println("Archivo cerrado");
+        }
+        catch (IOException o){
+            System.out.println(o.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 
 
