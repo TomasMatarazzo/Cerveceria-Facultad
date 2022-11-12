@@ -36,7 +36,13 @@ public class Empresa implements Serializable {
     // --------- OPERARIOS ----------
 
 
-
+    /**
+     * Login para el operario.
+     * @param usuario String de hasta 10 caracteres
+     * @param password String entre 6 y 12 caracteres
+     * @return Operario
+     * @throws Exception si no se encuentra al usuario dentro de los operarios o la password es invalida
+     */
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             System.out.printf(op.getUsuario() + op.getPassword());
@@ -52,12 +58,18 @@ public class Empresa implements Serializable {
     }
 
 
-    
+    /**
+     * Registra a los nuevos operarios
+     * @param apellido String
+     * @param usuario  String de hasta 10 caracteres
+     * @param password String entre 6 y 12 caracteres
+     * @param activo Indica si el usuario esta activo o no
+     * @throws Exception Lanza excepcion, si la contrasena es vacia o si no contiene digitos y mayusculas
+     */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=.*[@#$%^&+=])";
 
 
         Pattern p = Pattern.compile(regex);
@@ -65,23 +77,28 @@ public class Empresa implements Serializable {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        if (true) {
-            System.out.println(this.operarios.toString());
+
+        // pongo true para no poner contrasenas complicadas. dps lo cambian
+        // if (m.matches())
+        if (m.matches()) {
             this.operarios.add(new Operario(apellido, usuario, password, activo));
-            System.out.println("\n"+this.operarios.toString());
         }
         else {
-            System.out.printf("\n"+ apellido.length());
-            System.out.printf("\n"+ usuario.length());
             throw new Exception();
         }
     }
 
+
+    /**
+     * Modifica la contrasena del administrador
+     * @param op
+     * @param password
+     * @throws Exception si la password no coincide
+     */
     public void modificarPassword( Operario op,String password) throws Exception {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=.*[@#$%^&+=])";
 
 
         Pattern p = Pattern.compile(regex);
@@ -89,8 +106,7 @@ public class Empresa implements Serializable {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        if (true) {
-            System.out.printf("se cambio la contra");
+        if (m.matches()) {
             this.operarios.first().setPassword(password);
         }
         else {
