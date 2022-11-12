@@ -40,8 +40,7 @@ class EmpresaTest {
             String apellido = "Messi";
             String username = "Messi10";
             String passwordIncorrecta = null;
-
-
+            
             assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordIncorrecta, true));
         }
 

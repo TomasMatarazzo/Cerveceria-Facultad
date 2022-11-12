@@ -22,6 +22,7 @@ public class ControladorRegistrarse implements ActionListener{
             case "REGISTRARSE":
                 try {
                     this.modelo.signup(vista.getApellido(),vista.getUsuario(), vista.getContrasena(),true);
+                    this.vista.hideWindow();
                 }
                 catch(Exception e){
                     System.out.printf("Excepcion");
