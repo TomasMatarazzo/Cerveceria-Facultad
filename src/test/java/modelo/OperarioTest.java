@@ -57,7 +57,7 @@ class OperarioTest {
         void signUpTest3() {
             String apellido = "Messi";
             String username = "Messi10";
-            String password = "Messi1234";
+            String password = "Messi#123";
 
             try {
                 empresa.signup(apellido, username, password, true);
@@ -69,19 +69,31 @@ class OperarioTest {
         }
 
         @Nested
-        @DisplayName("Un operario que intenta loguearse")
+        @DisplayName("El operario que intenta loguearse en el sistema ")
         class LoginTests {
 
-            @BeforeEach
-            void setUp() {
-
-            }
+//            @BeforeEach
+//            void setUp() {
+//                TreeSet<Operario> operarios= new TreeSet<>();
+//
+//                empresa = new Empresa("Cerveceria", null, null, null, operarios);
+//
+//                String apellido = "Messi";
+//                String username = "Messi10";
+//                String password = "Messi1234";
+//
+//                try {
+//                    empresa.signup(apellido, username, password, true);
+//                } catch (Exception e) {
+//                    fail("Esta prueba no deberia disparar una excepcion");
+//                }
+//            }
 
             @Test
             @DisplayName(" lanza excepcion si el nombre de usuario no existe en el sistema")
             void loginTest1() {
                 String usernameInvalido = "Maradona";
-                String password = "Maradona123";
+                String password = "ElDiego%23";
 
                 assertThrows(Exception.class, () -> empresa.login(usernameInvalido, password));
             }
@@ -108,7 +120,7 @@ class OperarioTest {
             @DisplayName(" correctamente retorna una instancia del Operario")
             void loginTest4() {
                 String username = "Messi10";
-                String password= "Messi123";
+                String password= "Messi#123";
 
                 Operario respuestaEsperada = empresa.getOperarios().first();
 

@@ -43,14 +43,13 @@ public class Empresa implements Serializable {
      * @throws Exception si no se encuentra al usuario dentro de los operarios o la password es invalida
      */
     public Operario login( String usuario, String password) throws Exception{
-        for (Operario op:operarios ){
-            System.out.printf(op.getUsuario() + op.getPassword());
-            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password) ){
-                if (op.isActivo())
+        for (Operario op : operarios) {
+            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password)) {
+                if (op.isActivo()) {
                     return op;
-            }
-            else{
-                throw new Exception();
+                } else {
+                    throw new Exception();
+                }
             }
         }
         return null;
@@ -96,21 +95,21 @@ public class Empresa implements Serializable {
      * @param password
      * @throws Exception si la password no coincide
      */
-    public void modificarPassword( Operario op,String password) throws Exception {
+    public void modificarPassword(String password) throws Exception {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])";
 
-
         Pattern p = Pattern.compile(regex);
-        if (password == null) {
+
+        if (password == null || password.equals("")) {
             throw new Exception();
         }
+
         Matcher m = p.matcher(password);
         if (m.matches()) {
             this.operarios.first().setPassword(password);
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
