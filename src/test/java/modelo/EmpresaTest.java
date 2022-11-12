@@ -9,6 +9,8 @@ class EmpresaTest {
 
     @BeforeEach
     void setUp() {
+        Empresa emprese = new Empresa();
+
     }
 
     @AfterEach

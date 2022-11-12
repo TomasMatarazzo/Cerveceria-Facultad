@@ -288,6 +288,8 @@ public class Empresa implements Serializable {
     // ------- COMANDAS ---------
     /**
      * El metodo permite dar de alta una comanda
+     *
+     * <pre> mesa, mozo y pedido distinto de null y vacio
      * @param mesa
      * @param pedido
      * @param mozo
@@ -367,7 +369,7 @@ public class Empresa implements Serializable {
 
     /**
      * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
-     * @param mesa debera ser distinta de nula
+     * @param mesa debera ser distinta de nula y vacio
      * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
      */
     public void crearFactura(Mesa mesa,String formaDePago){
