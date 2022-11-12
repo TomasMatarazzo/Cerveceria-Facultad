@@ -36,6 +36,13 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
+    /**
+     * Login para el operario.
+     * @param usuario String de hasta 10 caracteres
+     * @param password String entre 6 y 12 caracteres
+     * @return Operario
+     * @throws Exception si no se encuentra al usuario dentro de los operarios o la password es invalida
+     */
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
             System.out.printf(op.getUsuario() + op.getPassword());
@@ -50,11 +57,18 @@ public class Empresa implements Serializable {
         return null;
     }
 
+    /**
+     * Registra a los nuevos operarios
+     * @param apellido String
+     * @param usuario  String de hasta 10 caracteres
+     * @param password String entre 6 y 12 caracteres
+     * @param activo Indica si el usuario esta activo o no
+     * @throws Exception Lanza excepcion, si la contrasena es vacia o si no contiene digitos y mayusculas
+     */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=.*[@#$%^&+=])";
 
 
         Pattern p = Pattern.compile(regex);
@@ -62,23 +76,28 @@ public class Empresa implements Serializable {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        if (true) {
-            System.out.println(this.operarios.toString());
+
+        // pongo true para no poner contrasenas complicadas. dps lo cambian
+        // if (m.matches())
+        if (m.matches()) {
             this.operarios.add(new Operario(apellido, usuario, password, activo));
-            System.out.println("\n"+this.operarios.toString());
         }
         else {
-            System.out.printf("\n"+ apellido.length());
-            System.out.printf("\n"+ usuario.length());
             throw new Exception();
         }
     }
 
+
+    /**
+     * Modifica la contrasena del administrador
+     * @param op
+     * @param password
+     * @throws Exception si la password no coincide
+     */
     public void modificarPassword( Operario op,String password) throws Exception {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=.*[@#$%^&+=])";
 
 
         Pattern p = Pattern.compile(regex);
@@ -86,8 +105,7 @@ public class Empresa implements Serializable {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        if (true) {
-            System.out.printf("se cambio la contra");
+        if (m.matches()) {
             this.operarios.first().setPassword(password);
         }
         else {
@@ -107,7 +125,20 @@ public class Empresa implements Serializable {
      * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
      */
     public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
-        this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+        // VERIFICAR LA EDAD
+        Calendar fecha = new GregorianCalendar();
+        fecha.add(Calendar.YEAR, -18);
+        if(fecha.after(fechaNacimiento)){
+            if( cantHijos >= 0 ){
+                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
+            }
+            else{
+                throw new MozoIncorrecto("Cant de hijos menor a cero");
+            }
+        }
+        else{
+            throw new MozoIncorrecto("Edad menor a 18 anos");
+        }
     }
 
     /**
@@ -121,10 +152,22 @@ public class Empresa implements Serializable {
      * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
      */
     public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
-        mozo.setNombreYApellido(nombreYApellido);
-        mozo.setFechaNacimiento(fechaNacimiento);
-        mozo.setCantHijos(cantHijos);
-        mozo.setEstado(estado);
+        Calendar fecha = new GregorianCalendar();
+        fecha.add(Calendar.YEAR, -18);
+        if(fecha.after(fechaNacimiento)){
+            if( cantHijos >= 0 ){
+                mozo.setNombreYApellido(nombreYApellido);
+                mozo.setFechaNacimiento(fechaNacimiento);
+                mozo.setCantHijos(cantHijos);
+                mozo.setEstado(estado);
+            }
+            else{
+                throw new MozoIncorrecto("Cant de hijos menor a cero");
+            }
+        }
+        else{
+            throw new MozoIncorrecto("Edad menor a 18 anos");
+        }
     }
 
     /**
@@ -191,7 +234,12 @@ public class Empresa implements Serializable {
      * @throws Exception si el numero de personas es incorrecto, menor a 1
      */
     public void altaMesa(int cantidadPersonas) throws Exception{
-        this.mesas.add(new Mesa(cantidadPersonas));
+        if (cantidadPersonas >= 2 ){
+            this.mesas.add(new Mesa(cantidadPersonas));
+        }
+        else {
+            throw new Exception();
+        }
     }
 
     /**
