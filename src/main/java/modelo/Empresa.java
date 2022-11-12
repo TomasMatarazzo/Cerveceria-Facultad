@@ -22,7 +22,10 @@ public class Empresa implements Serializable {
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private boolean arrancoJornada;
 
-    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas,TreeSet<Producto> productos, TreeSet<Operario> operarios) {
+    public Empresa() {
+    }
+
+    public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas, TreeSet<Producto> productos, TreeSet<Operario> operarios) {
         this.nombreEmpresa = nombreEmpresa;
         this.mozos = mozos;
         this.mesas = mesas;
@@ -32,7 +35,7 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
-    public Operario login( String usuario, String password) throws Exception{
+    public Operario login( String usuario, String password) throws Exception {
         for (Operario op:operarios ){
             System.out.printf("hola");
             System.out.printf(op.getUsuario() + op.getPassword());
@@ -67,9 +70,7 @@ public class Empresa implements Serializable {
             System.out.printf("\nholaa4");
             Operario operario = new Operario(apellido, usuario, password, activo);
             this.operarios.add(operario);
-        }
-
-        else {
+        } else {
             System.out.printf("\n"+ apellido.length());
             System.out.printf("\n"+ usuario.length());
             throw new Exception();
