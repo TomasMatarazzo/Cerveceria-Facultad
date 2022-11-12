@@ -112,15 +112,15 @@ public class ControladorInventario implements ActionListener{
                 break;
             case "MODIFICAR_PRODUCTO":
                 try {
-                    int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
-                    Calendar fecha2 = Calendar.getInstance();
-                    fecha2.set(1970, 10, 2);
-                    this.modelo.modificaProducto(this.vista.getSelectedProducto().getNombre(), this.vista.getSelectedProducto().getPrecioCosto(),this.vista.getSelectedProducto().getPrecioVenta(), this.vista.getSelectedProducto().getStockInicial(), this.vista.getSelectedProducto());
+                    double costo = Double.parseDouble(this.vista.getFormProducto().getCosto());
+                    double venta = Double.parseDouble(this.vista.getFormProducto().getVenta());
+                    int stock = Integer.parseInt(this.vista.getFormProducto().getStock());
+                    this.modelo.modificaProducto(this.vista.getSelectedProducto().getNombre(),costo,venta,stock, this.vista.getSelectedProducto());
                     this.vista.hideFormProducto();
                     this.vista.renderListaProductos(this.modelo.getProductos());
                 }
                 catch (Exception e){
-                    Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
+                    Mensajes.lanzarVentanaEmergente(e.getMessage());
                 }
                 break;
             case "NUEVAMESA":
@@ -157,6 +157,15 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "MODIFICAR_MESA":
+                try {
+                    int sillas = Integer.parseInt(this.vista.getFormMesa().getCantidadSillas());
+                    this.modelo.modificaMesa(sillas,this.vista.getSelectedMesas().getEstado(), this.vista.getSelectedMesas());
+                    this.vista.hideFormMesa();
+                    this.vista.renderListaMesas(this.modelo.getMesas());
+                }
+                catch (Exception e){
+                    Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
+                }
                 break;
 
         }

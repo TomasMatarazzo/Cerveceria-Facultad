@@ -94,13 +94,13 @@ public class FormMesa extends JFrame {
         return this.inputNro.getText();
     }
 
-    public void setModificarMesa(){
+    public void setAgregarMesa(){
         botonNuevaMesa.setText("Agregar mesa");
         botonNuevaMesa.setActionCommand("NUEVAMESA");
     }
-    public void setAgregarMesa(){
+    public void setModificarMesa(){
         botonNuevaMesa.setText("Modificar mesa");
-        botonNuevaMesa.setActionCommand("MODIFICARMESA");
+        botonNuevaMesa.setActionCommand("MODIFICAR_MESA");
     }
 
 }
