@@ -1,6 +1,9 @@
 package modelo;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,34 +23,49 @@ class OperarioTest {
 
         @BeforeEach
         void setUp() {
-            TreeSet<Producto> productos= new TreeSet<>();
+            TreeSet<Operario> operarios= new TreeSet<>();
 
-            empresa = new Empresa("Cerveceria", null, null, productos, null);
+            empresa = new Empresa("Cerveceria", null, null, null, operarios);
         }
 
         @Test
-        @DisplayName(" lanza excepcion con contrasena NULL")
+        @DisplayName(" lanza excepcion con contrasena incorrecta")
         void signUpTest1() {
             String apellido = "Messi";
             String username = "Messi10";
-            String passwordIncorrecta = null;
 
-            assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordIncorrecta, true));
+            assertAll(
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, null, true)),
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, "", true))
+            );
         }
 
         @Test
-        @DisplayName(" ")
+        @DisplayName(" lanza excepcion con username incorrecto")
         void signUpTest2() {
+            String apellido = "Messi";
+            String password = "Messi1234";
+
+            assertAll(
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, null, password, true)),
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, "", password, true))
+            );
         }
 
         @Test
-        @DisplayName(" ")
+        @DisplayName(" es anadido al sistema")
         void signUpTest3() {
-        }
+            String apellido = "Messi";
+            String username = "Messi10";
+            String password = "Messi1234";
 
-        @Test
-        @DisplayName(" ")
-        void signUpTest4() {
+            try {
+                empresa.signup(apellido, username, password, true);
+            } catch (Exception e) {
+                fail("Esta prueba no deberia disparar una excepcion");
+            }
+
+            assertTrue(empresa.getOperarios().size() == 1, "Error al agregar un operario");
         }
 
         @Nested

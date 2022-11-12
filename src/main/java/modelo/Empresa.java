@@ -3,7 +3,6 @@ package modelo;
 
 import excepciones.MozoIncorrecto;
 import excepciones.StockNoDisponible;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -63,26 +62,29 @@ public class Empresa implements Serializable {
      * @param usuario  String de hasta 10 caracteres
      * @param password String entre 6 y 12 caracteres
      * @param activo Indica si el usuario esta activo o no
-     * @throws Exception Lanza excepcion, si la contrasena es vacia o si no contiene digitos y mayusculas
+     * @throws Exception Lanza excepcion, si la contrasena es vacia o null
      */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])";
 
-
-        Pattern p = Pattern.compile(regex);
-        if (password == null) {
+        if (password == null || password.equals("")) {
             throw new Exception();
         }
+
+        if (usuario == null || usuario.equals("")) {
+            throw new Exception();
+        }
+
+        Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(password);
 
         // pongo true para no poner contrasenas complicadas. dps lo cambian
         // if (m.matches())
         if (m.matches()) {
             this.operarios.add(new Operario(apellido, usuario, password, activo));
-        }
-        else {
+        } else {
             throw new Exception();
         }
     }
