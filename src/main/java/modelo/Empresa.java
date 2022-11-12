@@ -40,18 +40,20 @@ public class Empresa implements Serializable {
      * @param usuario String de hasta 10 caracteres
      * @param password String entre 6 y 12 caracteres
      * @return Operario
-     * @throws Exception si no se encuentra al usuario dentro de los operarios o la password es invalida
+     * @throws Exception si no se encuentra al usuario esta inactivo
      */
-    public Operario login( String usuario, String password) throws Exception{
+    public Operario login(String usuario, String password) throws Exception {
         for (Operario op : operarios) {
-            if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password)) {
+            if (op.getUsuario().equalsIgnoreCase(usuario) && op.getPassword().equalsIgnoreCase(password)) {
                 if (op.isActivo()) {
                     return op;
                 } else {
+
                     throw new Exception();
                 }
             }
         }
+
         return null;
     }
 

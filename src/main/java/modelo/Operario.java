@@ -10,8 +10,8 @@ public class Operario implements Comparable<Operario>,Serializable{
 
     public Operario(String apellido, String usuario, String password, boolean activo) {
         this.apellido = apellido;
-        this.setUsuario(usuario);
-        this.setPassword(password);
+        this.usuario = usuario;
+        this.password = password;
         this.activo = activo;
     }
 
@@ -26,6 +26,7 @@ public class Operario implements Comparable<Operario>,Serializable{
     public void setAdministrador(){
         this.administrador = true;
     }
+
     public void setApellido(String apellido) {
             this.apellido = apellido;
     }
