@@ -17,38 +17,31 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Empresa cerveceria=null;
+
         try {
             IPersistencia persistencia=new PersistenciaBIN();
-            Producto prod1 = new Producto("Hamburguesa",  12, 24, 15);
-            Producto prod2 = new Producto("Parrilla",  12, 24, 15);
-            Producto prod3 = new Producto("PERRITOS",  12, 24, 15);
-            TreeSet<Producto> productos = new TreeSet<>();
-            productos.add(prod1);
-            productos.add(prod2);
-            productos.add(prod3);
 
-            System.out.println("1111");
+            try {
+                persistencia.abrirInput("Cerveceria.bin");
+                System.out.println("Archivo abierto");
+                cerveceria=(Empresa) persistencia.leer();
+                persistencia.cerrarInput();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+            }
 
-            Mozo mozo1 = new Mozo("ignacitoo", Calendar.getInstance(),3,0);
-            Mozo mozo2 = new Mozo("ignacito1o",Calendar.getInstance(),3,1);
-            Mozo mozo3 = new Mozo("ignacito2o",Calendar.getInstance(),3,2);
+            TreeSet<Mozo> mozos = cerveceria.getMozos();
+            TreeSet<Producto> productos = cerveceria.getProductos();
+            TreeSet<Operario> operarios = cerveceria.getOperarios();
+            TreeSet<Mesa> mesas=cerveceria.getMesas();
 
-            TreeSet<Mozo> mozos = new TreeSet<>();
-            TreeSet<Mesa> mesas=new TreeSet<Mesa>();
-            TreeSet<Operario> operarios=new TreeSet<Operario>();
+            operarios.add(new Operario("SUAREZ","IGNACIO","123",true));
 
-            Operario op = new Operario("matarazzo","ADMIN","ADMIN1234",true);
-            op.setAdministrador();
-            operarios.add(op);
-
-            mozos.add(mozo1);
-            mozos.add(mozo2);
-            mozos.add(mozo3);
+            System.out.println(operarios.toString());
 
             VistaLogin vista = new VistaLogin();
             Empresa empresa = new Empresa("CerveceriaProgra",mozos,mesas,productos,operarios);
-
-            System.out.println(empresa);
 
             System.out.printf(empresa.getOperarios().first().toString());
             FormPassword form = new FormPassword();
@@ -68,7 +61,6 @@ public class Main {
             catch (IOException e){
                 System.out.println(e.getLocalizedMessage());
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

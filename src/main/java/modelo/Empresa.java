@@ -66,8 +66,9 @@ public class Empresa implements Serializable {
         }
         Matcher m = p.matcher(password);
         if (true) {
-            Operario operario = new Operario(apellido, usuario, password, activo);
-            this.operarios.add(operario);
+            System.out.println(this.operarios.toString());
+            this.operarios.add(new Operario(apellido, usuario, password, activo));
+            System.out.println("\n"+this.operarios.toString());
         }
         else {
             System.out.printf("\n"+ apellido.length());
