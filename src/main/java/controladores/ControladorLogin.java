@@ -52,7 +52,7 @@ public class ControladorLogin implements ActionListener{
             case "PASSWORD_ADMIN":
                 System.out.printf("evento para cambiar contra");
                 try {
-                    this.modelo.modificarPassword(op,this.form.getPassword());
+                    this.modelo.modificarPassword(this.form.getPassword());
                     VistaPrincipal vistaP = new VistaPrincipal(op);
                     ControladorPrincipal controladorPrincipal = new ControladorPrincipal(vistaP, this.modelo);
                     this.vista.setVisible(false);

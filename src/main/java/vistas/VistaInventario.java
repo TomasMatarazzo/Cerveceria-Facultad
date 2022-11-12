@@ -214,12 +214,14 @@ public class VistaInventario extends JFrame {
     public void renderListaMozos(TreeSet<Mozo> mozos){
         DefaultListModel<Mozo> listaContratoDefault = new DefaultListModel<>();
         this.listaMozos.setModel(listaContratoDefault);
-        for (Mozo mozo : mozos) {
-            listaContratoDefault.addElement(mozo);
+        if(mozos!=null) {
+            for (Mozo mozo : mozos) {
+                listaContratoDefault.addElement(mozo);
+            }
+            this.listaMozos.setModel(listaContratoDefault);
+            contentPane.add(listaMozos);
+            this.listaMozos.clearSelection();
         }
-        this.listaMozos.setModel(listaContratoDefault);
-        contentPane.add(listaMozos);
-        this.listaMozos.clearSelection();
     }
 
     public void renderListaMesas(TreeSet<Mesa> mesas){
@@ -227,24 +229,28 @@ public class VistaInventario extends JFrame {
 
 
         this.listaMesas.setModel(listaContratoDefault);
-        for (Mesa mesa : mesas) {
-            listaContratoDefault.addElement(mesa);
+        if(mesas!=null) {
+            for (Mesa mesa : mesas) {
+                listaContratoDefault.addElement(mesa);
+            }
+            this.listaMesas.setModel(listaContratoDefault);
+            contentPane.add(listaMesas);
+            this.listaMesas.clearSelection();
         }
-        this.listaMesas.setModel(listaContratoDefault);
-        contentPane.add(listaMesas);
-        this.listaMesas.clearSelection();
     }
 
     public void renderListaProductos(TreeSet<Producto> productos){
         DefaultListModel<Producto> listaContratoDefault = new DefaultListModel<>();
 
         this.listaProductos.setModel(listaContratoDefault);
-        for (Producto producto : productos) {
-            listaContratoDefault.addElement(producto);
+        if(productos!=null) {
+            for (Producto producto : productos) {
+                listaContratoDefault.addElement(producto);
+            }
+            this.listaProductos.setModel(listaContratoDefault);
+            contentPane.add(listaMozos);
+            this.listaProductos.clearSelection();
         }
-        this.listaProductos.setModel(listaContratoDefault);
-        contentPane.add(listaMozos);
-        this.listaProductos.clearSelection();
     }
 
     public void estadoModificarMozo(){this.formMozo.setModificarMozo();}
