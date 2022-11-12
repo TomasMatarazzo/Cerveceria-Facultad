@@ -2,15 +2,12 @@ package prueba;
 
 import controladores.ControladorLogin;
 import controladores.ControladorPrincipal;
-import modelo.Operario;
+import modelo.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 import vistas.FormPassword;
 import vistas.VistaLogin;
 import vistas.VistaPrincipal;
-import modelo.Empresa;
-import modelo.Mozo;
-import modelo.Producto;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -39,19 +36,22 @@ public class Main {
             Mozo mozo3 = new Mozo("ignacito2o",Calendar.getInstance(),3,2);
 
             TreeSet<Mozo> mozos = new TreeSet<>();
+            TreeSet<Mesa> mesas=new TreeSet<Mesa>();
+            TreeSet<Operario> operarios=new TreeSet<Operario>();
+
+            Operario op = new Operario("matarazzo","ADMIN","ADMIN1234",true);
+            op.setAdministrador();
+            operarios.add(op);
+
             mozos.add(mozo1);
             mozos.add(mozo2);
             mozos.add(mozo3);
 
             VistaLogin vista = new VistaLogin();
-            Empresa empresa = new Empresa();
-            empresa.setMozos(mozos);
-            empresa.setProductos(productos);
-            Operario op = new Operario("matarazzo","ADMIN","ADMIN1234",true);
-            op.setAdministrador();
-            TreeSet<Operario> operarios = new TreeSet<>();
-            operarios.add(op);
-            empresa.setOperarios(operarios);
+            Empresa empresa = new Empresa("CerveceriaProgra",mozos,mesas,productos,operarios);
+
+            System.out.println(empresa);
+
             System.out.printf(empresa.getOperarios().first().toString());
             FormPassword form = new FormPassword();
             ControladorLogin controlador = new ControladorLogin(vista,empresa,form);
