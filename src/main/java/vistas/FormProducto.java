@@ -118,4 +118,13 @@ public class FormProducto extends JFrame {
     public String getVenta(){
         return this.inputVenta.getText();
     }
+
+    public void setAgregarProducto(){
+        botonAgregar.setText("Agregar mozo");
+        botonAgregar.setActionCommand("NUEVOMOZO");
+    }
+    public void setModificarProducto(){
+        botonAgregar.setText("Agregar mozo");
+        botonAgregar.setActionCommand("NUEVOMOZO");
+    }
 }

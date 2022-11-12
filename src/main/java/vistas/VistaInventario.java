@@ -247,12 +247,16 @@ public class VistaInventario extends JFrame {
         this.listaProductos.clearSelection();
     }
 
-    public void estadoModificar(){
-        this.formMozo.setModificar();
-
+    public void estadoModificarMozo(){this.formMozo.setModificarMozo();}
+    public void estadoAgregarMozo(){
+        this.formMozo.setAgregarMozo();
     }
-
-    public void estadoAgregar(){
-        this.formMozo.setAgregar();
+    public void estadoModificarMesa(){this.formMesa.setModificarMesa();}
+    public void estadoAgregarMesa(){
+        this.formMesa.setAgregarMesa();
+    }
+    public void estadoModificarProducto(){this.formProducto.setModificarProducto();}
+    public void estadoAgregarProducto(){
+        this.formProducto.setAgregarProducto();
     }
 }

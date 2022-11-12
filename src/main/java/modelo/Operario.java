@@ -1,6 +1,5 @@
 package modelo;
 import java.io.Serializable;
-import java.util.regex.*;
 
 public class Operario implements Comparable<Operario>,Serializable{
     private String apellido;

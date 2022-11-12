@@ -94,4 +94,13 @@ public class FormMesa extends JFrame {
         return this.inputNro.getText();
     }
 
+    public void setModificarMesa(){
+        botonNuevaMesa.setText("Agregar mozo");
+        botonNuevaMesa.setActionCommand("NUEVOMOZO");
+    }
+    public void setAgregarMesa(){
+        botonNuevaMesa.setText("Agregar mozo");
+        botonNuevaMesa.setActionCommand("NUEVOMOZO");
+    }
+
 }

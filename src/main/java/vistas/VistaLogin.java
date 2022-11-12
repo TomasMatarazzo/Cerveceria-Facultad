@@ -1,6 +1,5 @@
 package vistas;
 import controladores.ControladorLogin;
-import interfaces.IVista;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 
-public class VistaLogin extends JFrame implements IVista {
+public class VistaLogin extends JFrame{
 
     private JPanel contentPane;
     private JTextField inputUsuario;
@@ -73,7 +72,6 @@ public class VistaLogin extends JFrame implements IVista {
         return this.inputContrasena.getText();
     }
 
-    @Override
     public void ejecutar() {
         try {
             this.setVisible(true);

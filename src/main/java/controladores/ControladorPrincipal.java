@@ -43,7 +43,6 @@ public class ControladorPrincipal implements ActionListener{
                 ventanaRegistrarse.ejecutar();
                 break;
             case "ESTADISTICAS":
-                //VistaEstadisticas ventanaEstadisticas = new VistaEstadisticas(Estadisticas.mayorVolumenVenta(this.modelo.getMozos()),Estadisticas.menorVolumenVenta(this.modelo.getMozos()), String.valueOf(Estadisticas.promedioPorMesa(this.modelo.getMesas())));
                 VistaEstadisticas ventanaEstadisticas = new VistaEstadisticas("Martin","Tomas","4523");
                 ventanaEstadisticas.ejecutar();
                 break;

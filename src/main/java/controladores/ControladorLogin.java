@@ -1,13 +1,12 @@
 package controladores;
 
 import Utils.Mensajes;
-import interfaces.IVista;
 import modelo.Empresa;
 import modelo.Operario;
 import vistas.FormPassword;
 import vistas.VistaLogin;
 import vistas.VistaPrincipal;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,25 +34,23 @@ public class ControladorLogin implements ActionListener{
                     if (op != null) {
                         VistaPrincipal vistaP = new VistaPrincipal(op);
                         ControladorPrincipal controladorPrincipal = new ControladorPrincipal(vistaP, this.modelo);
-                        System.out.printf("nati");
                         if ( op.getPassword() == "ADMIN1234"){
                             this.form.ejecutar();
                         }else{
                             vistaP.ejecutar();
                             this.vista.setVisible(false);
                         }
-                        //vistaP.ejecutar();
-
                     }
                     else{
                         Mensajes.lanzarVentanaEmergente("DATOS INCORRECTOS");
                     }
                 }
                 catch(Exception e){
-                    Mensajes.lanzarVentanaEmergente(e.getMessage());
+                    Mensajes.lanzarVentanaEmergente("Error");
                 }
                 break;
             case "PASSWORD_ADMIN":
+                System.out.printf("evento para cambiar contra");
                 try {
                     this.modelo.modificarPassword(op,this.form.getPassword());
                     VistaPrincipal vistaP = new VistaPrincipal(op);

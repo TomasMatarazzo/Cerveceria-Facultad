@@ -32,7 +32,7 @@ public class Producto implements Comparable<Producto>, Serializable {
     }
 
     public int getId_producto() {
-        return id_producto;
+        return this.id_producto;
     }
 
     public void setId_producto(int id_producto) {
@@ -89,18 +89,23 @@ public class Producto implements Comparable<Producto>, Serializable {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "id_producto=" + id_producto +
-                ", nombre='" + nombre + '\'' +
-                ", precioCosto=" + precioCosto +
-                ", precioVenta=" + precioVenta +
-                ", stockInicial=" + stockInicial +
-                '}';
+        return "Producto:   " + nombre +
+                "      PrecioCosto:   " + precioCosto +
+                "      PrecioVenta:  " + precioVenta +
+                "      Stock:    " + stockInicial;
     }
 
 
     @Override
     public int compareTo(Producto o) {
-        return (this.precioCosto < o.precioCosto)?0:1;
+        if (this.getId_producto() == o.id_producto)
+            return 0;
+        else{
+            if (this.id_producto > o.id_producto){
+                return 1;
+            }else{
+                return -1;
+            }
+        }
     }
 }

@@ -105,12 +105,17 @@ public class FormMozo extends JFrame {
         contentPane.add(inputEstado);
     }
 
-    public void setModificar(){
+    public void setModificarMozo(){
         botonAgregar.setText("Modificar mozo");
         botonAgregar.setActionCommand("MODIFICAR_MOZO");
     }
 
-    public void setAgregar(){
+    public void setAgregarMozo(){
+        botonAgregar.setText("Agregar mozo");
+        botonAgregar.setActionCommand("NUEVOMOZO");
+    }
+
+    public void setAgregarProducto(){
         botonAgregar.setText("Agregar mozo");
         botonAgregar.setActionCommand("NUEVOMOZO");
     }

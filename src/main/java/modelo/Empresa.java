@@ -6,9 +6,7 @@ import excepciones.StockNoDisponible;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.DoubleFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,12 +39,9 @@ public class Empresa implements Serializable {
 
     public Operario login( String usuario, String password) throws Exception{
         for (Operario op:operarios ){
-            System.out.printf("hola");
             System.out.printf(op.getUsuario() + op.getPassword());
             if ( op.getUsuario().equals(usuario) && op.getPassword().equals(password) ){
-                System.out.printf("hola1");
                 if (op.isActivo())
-                    System.out.printf("hola3");
                     return op;
             }
             else{
@@ -70,9 +65,7 @@ public class Empresa implements Serializable {
             throw new Exception();
         }
         Matcher m = p.matcher(password);
-        System.out.printf("\nholaa2");
         if (true) {
-            System.out.printf("\nholaa4");
             Operario operario = new Operario(apellido, usuario, password, activo);
             this.operarios.add(operario);
         }
@@ -96,7 +89,8 @@ public class Empresa implements Serializable {
         }
         Matcher m = p.matcher(password);
         if (true) {
-            op.setPassword(password);
+            System.out.printf("se cambio la contra");
+            this.operarios.first().setPassword(password);
         }
         else {
             throw new Exception();
@@ -170,7 +164,6 @@ public class Empresa implements Serializable {
     }
 
 
-
     // --------- PRODUCTOS ------------
 
     /**
@@ -182,10 +175,7 @@ public class Empresa implements Serializable {
      */
     public void altaProducto( String nombre, double precioCosto, double precioVenta, int stockInicial){
         try{
-            Producto prod = new Producto(nombre,precioCosto,precioVenta,stockInicial);
-            System.out.printf("EL PRODUCTO ES");
-            System.out.printf(prod.toString());
-            this.productos.add(prod);
+            this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));
         }catch( Exception e){
             System.out.printf(e.getMessage());
         }
@@ -195,13 +185,10 @@ public class Empresa implements Serializable {
      * Permite dar de baja un producto que no esta asociado a una comanda
      * @param producto el producto a eliminar debe ser distinto de null y no puede estar asociado a una comanda
      */
+
     public void bajaProducto( Producto producto){
         try{
-            System.out.printf("el producto es\n" );
-            System.out.printf(producto.toString());
-            System.out.printf("\n" + this.productos.toString());
             this.productos.remove(producto);
-            System.out.printf("\n " + this.productos.toString());
         }catch( Exception e){
             System.out.printf(e.getMessage());
         }
@@ -235,10 +222,9 @@ public class Empresa implements Serializable {
      */
     public void altaMesa(int cantidadPersonas) throws Exception{
         if (cantidadPersonas >= 2 ){
-            Mesa mesa = new Mesa(cantidadPersonas);
-            this.mesas.add(mesa);
+            this.mesas.add(new Mesa(cantidadPersonas));
         }
-        else if (cantidadPersonas<1){
+        else {
             throw new Exception();
         }
     }
@@ -272,6 +258,8 @@ public class Empresa implements Serializable {
 
     }
 
+    // ----- PEDIDOS ------
+
     /**
      * Crea un nuevo pedido
      * @param producto el producto solicitado debera ser distinto de null
@@ -281,14 +269,12 @@ public class Empresa implements Serializable {
     public Pedido realizarPedido(Producto producto, int cantidad){
         Pedido pedido=null;
         try {
-            pedido=new Pedido(producto,cantidad);
+            pedido= new Pedido(producto,cantidad);
         } catch (StockNoDisponible e) {
             e.printStackTrace();
         }
-
         return pedido;
     }
-    // ------- PEDIDOS ---------
 
     /**
      * Da de alta un nuevo pedido
@@ -307,6 +293,7 @@ public class Empresa implements Serializable {
      * @param mozo
      * @throws Exception si el estado es incorrecto
      */
+
     public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
 
         boolean libre = false;
@@ -326,17 +313,58 @@ public class Empresa implements Serializable {
         }
     }
 
+    // ----- FACTURA -----
+
     public double generarFactura( Comanda comanda) throws Exception {
         for (Comanda com:this.comandas) {
             if (comanda.equals(com)) {
                 comanda.getMesa().setEstado("libre");
-                Factura factura = new Factura(new Date() ,comanda.getMesa(),comanda.getPedidos(),"Efectivo",null,null);
+                Factura factura = new Factura(Date.from(Instant.now()) ,comanda.getMesa(),comanda.getPedidos(),"Efectivo",this.promocionesProductos,this.promocionesTemporales);
 
+                comanda.getMesa().getMozo().setVentas(comanda.getMesa().getMozo().getVentas()+ factura.getTotal());
+                comanda.getMesa().setCantComandas(comanda.getMesa().getCantComandas()+1);
+                comanda.getMesa().setTotalComandas(comanda.getMesa().getTotalComandas()+ factura.getTotal());
+
+                this.comandas.remove(comanda);
                 return factura.getTotal();
             }
         }
         return 0;
     }
+
+    /**
+     * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
+     * @param mesa debera ser distinta de nula
+     * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
+     */
+    public void crearFactura(Mesa mesa,String formaDePago){
+        Comanda comanda = null;
+        for (int i = 0; i < this.comandas.size(); i++){
+            if(this.comandas.get(i).getMesa()==mesa){
+                comanda=this.comandas.get(i);
+            }
+        }
+        assert comanda != null;
+        Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);
+
+        //para estadisticas
+        mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());
+        mesa.setCantComandas(mesa.getCantComandas()+1);
+        mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());
+
+        this.comandas.remove(comanda);
+    }
+
+    /**
+     * Permite calcular el sueldo de cada mozo, a partir del sueldo base y un extra por cada hijo
+     * @param mozo debera ser distinto de nulo
+     * @return un flotante con el sueldo correspondiente a dicho mozo
+     */
+    public double calculaSueldo(Mozo mozo){
+        return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
+    }
+
+
     // ----- GET Y SET ----
 
 
@@ -379,40 +407,6 @@ public class Empresa implements Serializable {
     public void setMozos(TreeSet<Mozo> mozos) {
         this.mozos = mozos;
     }
-
-    /**
-     * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
-     * @param mesa debera ser distinta de nula
-     * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
-     */
-    public void crearFactura(Mesa mesa,String formaDePago){
-        Comanda comanda = null;
-        for (int i = 0; i < this.comandas.size(); i++){
-            if(this.comandas.get(i).getMesa()==mesa){
-                comanda=this.comandas.get(i);
-            }
-        }
-        assert comanda != null;
-        Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);
-
-        //para estadisticas
-        mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());
-        mesa.setCantComandas(mesa.getCantComandas()+1);
-        mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());
-
-        this.comandas.remove(comanda);
-    }
-
-    /**
-     * Permite calcular el sueldo de cada mozo, a partir del sueldo base y un extra por cada hijo
-     * @param mozo debera ser distinto de nulo
-     * @return un flotante con el sueldo correspondiente a dicho mozo
-     */
-    public double calculaSueldo(Mozo mozo){
-        return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
-    }
-        //agregar factura al mozo
-
 
     public TreeSet<Mesa> getMesas() {
         return this.mesas;

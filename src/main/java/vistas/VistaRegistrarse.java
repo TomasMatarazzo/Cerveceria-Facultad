@@ -1,7 +1,6 @@
 package vistas;
 
 import controladores.ControladorRegistrarse;
-import interfaces.IVista;
 
 import java.awt.*;
 
@@ -13,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 
-public class VistaRegistrarse extends JFrame implements IVista {
+public class VistaRegistrarse extends JFrame{
 
         private JPanel contentPane;
         private JTextField inputApellido;

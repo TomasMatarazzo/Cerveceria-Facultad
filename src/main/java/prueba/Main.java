@@ -1,13 +1,11 @@
 package prueba;
 
 import controladores.ControladorLogin;
-import controladores.ControladorPrincipal;
 import modelo.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 import vistas.FormPassword;
 import vistas.VistaLogin;
-import vistas.VistaPrincipal;
 
 import java.io.IOException;
 import java.util.Calendar;

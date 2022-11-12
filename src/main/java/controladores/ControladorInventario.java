@@ -1,7 +1,6 @@
 package controladores;
 
 import Utils.Mensajes;
-import excepciones.MozoIncorrecto;
 import modelo.Empresa;
 import vistas.VistaInventario;
 
@@ -23,25 +22,24 @@ public class ControladorInventario implements ActionListener{
     public void actionPerformed(ActionEvent evento) {
         switch (evento.getActionCommand()) {
             case "NUEVOMOZO":
-                //this.vista.getFormMozo().getFecha(); que onda la fecha?
-                int cantHijos = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
-                Calendar fecha = Calendar.getInstance();
-                fecha.set(1970,10,2);
                 try {
+                    int cantHijos = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
+                    Calendar fecha = Calendar.getInstance();
+                    fecha.set(1970,10,2);
                     this.modelo.agregaMozo(this.vista.getFormMozo().getNombre(),fecha, cantHijos, this.vista.getFormMozo().getEstado());
                     this.vista.hideFormMozo();
                     this.vista.renderListaMozos(this.modelo.getMozos());
                 }
-                catch(MozoIncorrecto e){
-                    System.out.printf(e.getMessage());
+                catch(Exception e){
+                    Mensajes.lanzarVentanaEmergente("Ingrese correctamente los datos del mozo");
                 }
                 break;
             case "INGRESAR_MOZO":
-                this.vista.estadoAgregar();
+                this.vista.estadoAgregarMozo();
                 this.vista.showFormMozo();
                 break;
             case "INGRESAR_MOZO2":
-                this.vista.estadoModificar();
+                this.vista.estadoModificarMozo();
                 this.vista.showFormMozo();
                 break;
             case "ELIMINAR_MOZO":
@@ -54,7 +52,6 @@ public class ControladorInventario implements ActionListener{
                 }
                 break;
             case "MODIFICAR_MOZO":
-
                 try {
                     int cantHijos2 = Integer.parseInt(this.vista.getFormMozo().getCantHijos());
                     Calendar fecha2 = Calendar.getInstance();
