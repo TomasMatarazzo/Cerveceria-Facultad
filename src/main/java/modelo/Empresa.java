@@ -68,6 +68,7 @@ public class Empresa implements Serializable {
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])";
 
+
         if (password == null || password.equals("")) {
             throw new Exception();
         }
