@@ -1,6 +1,5 @@
 package modelo;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -73,31 +72,31 @@ public class Factura {
     public double setTotal() {
         double total=0;
         double parcial;
-        for (int i=0;i<pedidos.size();i++){
-            parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
-            if (this.promocionesProductos == null || promocionesProductos.size() > 0) {
-                for (int j = 0; j < promocionesProductos.size(); i++) {
-                    if (pedidos.get(i).getProducto() == promocionesProductos.get(j).getProducto()) {
-                        if (promocionesProductos.get(j).isActiva()) {
-                            if (promocionesProductos.get(j).isAplicaDosPorUno()) {
-                                parcial /= 2;
-                            } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
-                                parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
-                            }
-                        }
-                    }
-                }
-                total += parcial;
-            }
-        }
-        if (this.promocionesTemporales == null || promocionesTemporales.size() > 0) {
-            for (int k = 0; k < promocionesTemporales.size(); k++) {
-                if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
-                    total *= (double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
-                }
-            }
-       }
-        return total;
+//        for (int i=0;i<pedidos.size();i++){
+//            parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
+//            if (this.promocionesProductos == null || promocionesProductos.size() > 0) {
+//                for (int j = 0; j < promocionesProductos.size(); i++) {
+//                    if (pedidos.get(i).getProducto() == promocionesProductos.get(j).getProducto()) {
+//                        if (promocionesProductos.get(j).isActiva()) {
+//                            if (promocionesProductos.get(j).isAplicaDosPorUno()) {
+//                                parcial /= 2;
+//                            } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
+//                                parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
+//                            }
+//                        }
+//                    }
+//                }
+//                total += parcial;
+//            }
+//        }
+//        if (this.promocionesTemporales == null || promocionesTemporales.size() > 0) {
+//            for (int k = 0; k < promocionesTemporales.size(); k++) {
+//                if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
+//                    total *= (double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
+//                }
+//            }
+//        }
 
+        return 100;
     }
 }
