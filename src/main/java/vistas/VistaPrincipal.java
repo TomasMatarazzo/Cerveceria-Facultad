@@ -42,6 +42,7 @@ public class VistaPrincipal extends JFrame {
         this.btnPromociones.addActionListener(controlador);
         this.botonOperario.addActionListener(controlador);
         this.btnNuevasComandas.addActionListener(controlador);
+        this.btnComenzarJornada.addActionListener(controlador);
     }
 
     public void ejecutar(){
@@ -144,6 +145,7 @@ public class VistaPrincipal extends JFrame {
         sueldoVariable.setText(this.sueldo);
         sueldoVariable.setFont(new Font("Arial",   Font.ITALIC, 21));
         sueldoVariable.setBounds(507, 228, 164, 45);
+
         contentPane.add(sueldoVariable);
 
         btnNuevasComandas = new JButton("Comandas");
@@ -160,8 +162,25 @@ public class VistaPrincipal extends JFrame {
 
         formSueldo = new FormNombreySueldo();
         formSueldo.setVisible(false);
+        this.btnPromociones.setEnabled(false);
+        this.btnNuevasComandas.setEnabled(false);
+        this.btnEstadisticas.setEnabled(false);
+    }
 
+    public void arrancoJornada(){
+        this.btnPromociones.setEnabled(true);
+        this.btnNuevasComandas.setEnabled(true);
+        this.btnEstadisticas.setEnabled(true);
+        this.btnComenzarJornada.setText("Finalizar jornada");
+        this.btnComenzarJornada.setActionCommand("FINALIZAR_JORNADA");
+    }
 
+    public void terminoJornada(){
+        this.btnPromociones.setEnabled(false);
+        this.btnNuevasComandas.setEnabled(false);
+        this.btnEstadisticas.setEnabled(false);
+        this.btnComenzarJornada.setText("Comenzar jornada");
+        this.btnComenzarJornada.setActionCommand("COMENZAR_JORNADA");
     }
 
     public void showFormSueldo(){

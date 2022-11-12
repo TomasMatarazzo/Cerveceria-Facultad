@@ -23,6 +23,7 @@ public class Empresa implements Serializable {
     private ArrayList<ProductoEnPromocion> promocionesProductos;
     private ArrayList<PromocionTemporal> promocionesTemporales;
     private ArrayList<Pedido> pedidos = new ArrayList<>();
+    private boolean arrancoJornada;
 
 
     public Empresa(String nombreEmpresa, TreeSet<Mozo> mozos, TreeSet<Mesa> mesas,TreeSet<Producto> productos, TreeSet<Operario> operarios) {
@@ -31,6 +32,7 @@ public class Empresa implements Serializable {
         this.mesas = mesas;
         this.productos = productos;
         this.operarios = operarios;
+        this.arrancoJornada = false;
     }
 
     // --------- OPERARIOS ----------

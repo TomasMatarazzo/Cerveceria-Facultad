@@ -62,6 +62,12 @@ public class ControladorPrincipal implements ActionListener{
                 ControladorInventario controlador2 = new ControladorInventario(frame,this.modelo);
                 frame.ejecutar();
                 break;
+            case "COMENZAR_JORNADA":
+                this.vista.arrancoJornada();
+                break;
+            case "FINALIZAR_JORNADA":
+                this.vista.terminoJornada();
+                break;
         }
     }
 

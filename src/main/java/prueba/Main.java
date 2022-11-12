@@ -21,9 +21,9 @@ public class Main {
     public static void main(String[] args) {
         try {
             IPersistencia persistencia=new PersistenciaBIN();
-            Producto prod1 = new Producto(0, "hola1", 12, 24, 15);
-            Producto prod2 = new Producto(2, "hola1", 12, 24, 15);
-            Producto prod3 = new Producto(3, "hola1", 12, 24, 15);
+            Producto prod1 = new Producto("Hamburguesa",  12, 24, 15);
+            Producto prod2 = new Producto("Parrilla",  12, 24, 15);
+            Producto prod3 = new Producto("PERRITOS",  12, 24, 15);
             TreeSet<Producto> productos = new TreeSet<>();
             productos.add(prod1);
             productos.add(prod2);

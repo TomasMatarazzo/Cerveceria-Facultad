@@ -5,14 +5,15 @@ import excepciones.ProductoIncorrecto;
 import java.io.Serializable;
 
 public class Producto implements Comparable<Producto>, Serializable {
+    private static int id;
     private int id_producto;
     private String nombre;
     private double precioCosto;
     private double precioVenta;
     private int stockInicial;
 
-    public Producto(int id_producto, String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
-        this.id_producto = id_producto;
+    public Producto( String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
+        this.id_producto = id++;
         this.nombre = nombre;
         this.setPrecioCosto(precioCosto);
         this.setPrecioVenta(precioVenta);
