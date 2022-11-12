@@ -70,6 +70,7 @@ public class Empresa implements Serializable {
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=\\S+$).{8,20}$";
 
+
         if (password == null || password.equals("")) {
             throw new Exception();
         }

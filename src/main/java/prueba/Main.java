@@ -20,26 +20,29 @@ public class Main {
         Empresa cerveceria=null;
 
         try {
+            TreeSet<Operario> operarios = new TreeSet<>();
+            TreeSet<Mozo> mozos = new TreeSet<>();
+            TreeSet<Producto> productos = new TreeSet<>();
+            TreeSet<Mesa> mesas = new TreeSet<>();
             try {
+                System.out.println("HOLA");
                 IPersistencia persistencia=new PersistenciaBIN();
                 persistencia.abrirInput("Cerveceria.bin");
                 cerveceria=(Empresa) persistencia.leer();
                 persistencia.cerrarInput();
+                mozos = cerveceria.getMozos();
+                productos = cerveceria.getProductos();
+                operarios = cerveceria.getOperarios();
+                mesas=cerveceria.getMesas();
             }catch (IOException e){
-                System.out.println(e.getMessage());
+                System.out.println("Se creo un nuevo archivo binario");
+                operarios.add(new Operario("ADMIN","ADMIN","ADMIN1234",true));
+                System.out.println(operarios.toString());
             }
 
-            /*TreeSet<Mozo> mozos = cerveceria.getMozos();
-            TreeSet<Producto> productos = cerveceria.getProductos();
-            TreeSet<Operario> operarios = cerveceria.getOperarios();
-            TreeSet<Mesa> mesas=cerveceria.getMesas();*/
-            TreeSet<Operario> operarios=new TreeSet<>();
-            operarios.add(new Operario("ADMIN","ADMIN","ADMIN1234",true));
-
-            //System.out.println(operarios.toString());
 
             VistaLogin vista = new VistaLogin();
-            Empresa empresa = new Empresa("CerveceriaProgra",null,null,null,operarios);
+            Empresa empresa = new Empresa("CerveceriaProgra",mozos,mesas,productos,operarios);
 
             FormPassword form = new FormPassword();
             ControladorLogin controlador = new ControladorLogin(vista,empresa,form);
