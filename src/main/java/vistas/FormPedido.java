@@ -25,9 +25,9 @@ public class FormPedido extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Producto prod1 = new Producto(0,"hola1",12,24,15);
-                    Producto prod2 = new Producto(2,"hola1",12,24,15);
-                    Producto prod3 = new Producto(3,"hola1",12,24,15);
+                    Producto prod1 = new Producto("hola1",12,24,15);
+                    Producto prod2 = new Producto("hola1",12,24,15);
+                    Producto prod3 = new Producto("hola1",12,24,15);
 
                     TreeSet<Producto> productos = new TreeSet<>();
                     productos.add(prod1);

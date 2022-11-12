@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.DoubleFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,7 +164,7 @@ public class Empresa implements Serializable {
     /**
      * @param mozo debera ser distinto de null
      */
-    public void eliminaMozo(Mozo mozo){
+    public void bajaMozo(Mozo mozo){
         this.mozos.remove(mozo);
     }
 
@@ -173,16 +174,17 @@ public class Empresa implements Serializable {
 
     /**
      * Permite agregar un nuevo producto a nuestro inventario
-     * @param id es unico para cada procucto, entero positivo
      * @param nombre nombre del producto, no podra estar vacio
      * @param precioCosto flotante menor a cero
      * @param precioVenta
      * @param stockInicial
      */
-    public void altaProducto(int id, String nombre, double precioCosto, double precioVenta, int stockInicial){
+    public void altaProducto( String nombre, double precioCosto, double precioVenta, int stockInicial){
         try{
-            Producto prod = new Producto(id,nombre,precioCosto,precioVenta,stockInicial);
-            productos.add(prod);
+            Producto prod = new Producto(nombre,precioCosto,precioVenta,stockInicial);
+            System.out.printf("EL PRODUCTO ES");
+            System.out.printf(prod.toString());
+            this.productos.add(prod);
         }catch( Exception e){
             System.out.printf(e.getMessage());
         }
@@ -194,8 +196,11 @@ public class Empresa implements Serializable {
      */
     public void bajaProducto( Producto producto){
         try{
-            // chequear que el producto no se encuentre asociado a una comanda
-            productos.remove(producto);
+            System.out.printf("el producto es\n" );
+            System.out.printf(producto.toString());
+            System.out.printf("\n" + this.productos.toString());
+            this.productos.remove(producto);
+            System.out.printf("\n " + this.productos.toString());
         }catch( Exception e){
             System.out.printf(e.getMessage());
         }
@@ -230,7 +235,7 @@ public class Empresa implements Serializable {
     public void altaMesa(int cantidadPersonas) throws Exception{
         if (cantidadPersonas >= 2 ){
             Mesa mesa = new Mesa(cantidadPersonas);
-            mesas.add(mesa);
+            this.mesas.add(mesa);
         }
         else if (cantidadPersonas<1){
             throw new Exception();
@@ -243,7 +248,7 @@ public class Empresa implements Serializable {
      */
     public void bajaMesa(Mesa mesa){
         try{
-            mesas.remove(mesa);
+            this.mesas.remove(mesa);
         }
         catch(Exception exception){
             System.out.printf(exception.getMessage());
@@ -296,19 +301,40 @@ public class Empresa implements Serializable {
 
     /**
      * El metodo permite dar de alta una comanda
-     * @param mesa la mesa debera ser distinta de null
-     * @param pedidos los pedidos deberan ser distintos de null
-     * @param mozo debera ser distinto de null
+     * @param mesa
+     * @param pedido
+     * @param mozo
      * @throws Exception si el estado es incorrecto
      */
-    public void altaComanda( Mesa mesa, ArrayList<Pedido> pedidos, Mozo mozo) throws Exception {
+    public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
 
         boolean libre = false;
-        if (mesa.getEstado().equalsIgnoreCase("libre") && mesa.getMozo() != null && this.productos.size() !=0){
-            mesa.setMozo(mozo);
+        if (mesa.getEstado().equalsIgnoreCase("libre") ){
             mesa.setEstado("ocupada");
-            Comanda comanda = new Comanda(mesa,pedidos,"abierta");
+            mesa.setMozo(mozo);
+            Comanda comanda = new Comanda(mesa,mozo);
+            comanda.agregarPedido(pedido);
+            this.comandas.add(comanda);
         }
+    }
+
+    public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
+        for (Comanda com:this.comandas) {
+            if (comanda.equals(com))
+                com.agregarPedido(ped);
+        }
+    }
+
+    public double generarFactura( Comanda comanda) throws Exception {
+        for (Comanda com:this.comandas) {
+            if (comanda.equals(com)) {
+                comanda.getMesa().setEstado("libre");
+                Factura factura = new Factura(new Date() ,comanda.getMesa(),comanda.getPedidos(),"Efectivo",null,null);
+
+                return factura.getTotal();
+            }
+        }
+        return 0;
     }
     // ----- GET Y SET ----
 
@@ -388,7 +414,7 @@ public class Empresa implements Serializable {
 
 
     public TreeSet<Mesa> getMesas() {
-        return mesas;
+        return this.mesas;
     }
 
     public void setMesas(TreeSet<Mesa> mesas) {
@@ -396,7 +422,7 @@ public class Empresa implements Serializable {
     }
 
     public TreeSet<Producto> getProductos() {
-        return productos;
+        return this.productos;
     }
 
     public void setProductos(TreeSet<Producto> productos) {
@@ -404,7 +430,7 @@ public class Empresa implements Serializable {
     }
 
     public ArrayList<Comanda> getComandas() {
-        return comandas;
+        return this.comandas;
     }
 
     public void setComandas(ArrayList<Comanda> comandas) {
@@ -412,7 +438,7 @@ public class Empresa implements Serializable {
     }
 
     public TreeSet<Operario> getOperarios() {
-        return operarios;
+        return this.operarios;
     }
 
     public void setOperarios(TreeSet<Operario> operarios) {
@@ -420,7 +446,7 @@ public class Empresa implements Serializable {
     }
 
     public ArrayList<Pedido> getPedidos() {
-        return pedidos;
+        return this.pedidos;
     }
 
     public void setPedidos(ArrayList<Pedido> pedidos) {

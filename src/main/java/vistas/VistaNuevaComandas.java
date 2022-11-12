@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 public class VistaNuevaComandas extends JFrame {
 
@@ -27,7 +26,7 @@ public class VistaNuevaComandas extends JFrame {
         this.btnCrearFactura.addActionListener(controlador);
     }
 
-    public VistaNuevaComandas( ArrayList<Comanda> comandas, ArrayList<Pedido> pedidos) {
+    public VistaNuevaComandas(ArrayList<Comanda> comandas, ArrayList<Pedido> pedidos) {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 564, 350);
         contentPane = new JPanel();
@@ -39,7 +38,7 @@ public class VistaNuevaComandas extends JFrame {
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
 
-        btnModificarComanda = new JButton("Modificar comanda");
+        btnModificarComanda = new JButton("Agregar pedido");
         btnModificarComanda.setActionCommand("MODIFICAR_COMANDA");
         btnModificarComanda.setFont(new Font("Arial", Font.PLAIN, 21));
         btnModificarComanda.setBounds(45, 250, 216, 33);
@@ -78,6 +77,8 @@ public class VistaNuevaComandas extends JFrame {
         this.renderListaPedidos(pedidos);
     }
 
+
+
     public void ejecutar(){
         try{
             this.setVisible(true);
@@ -85,6 +86,14 @@ public class VistaNuevaComandas extends JFrame {
         catch (Exception e ){
             System.out.printf(e.getMessage());
         }
+    }
+
+    public Comanda getSelectedComanda(){
+        return this.listaComandas.getSelectedValue();
+    }
+
+    public Pedido getSelectedPedido(){
+        return this.listaPedidos.getSelectedValue();
     }
 
     public void renderListaComandas(ArrayList<Comanda> comandas){

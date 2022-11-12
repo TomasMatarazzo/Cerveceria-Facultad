@@ -55,6 +55,7 @@ public class VistaPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 685, 627);
         contentPane = new JPanel();
+        contentPane.setFont(new Font("Tahoma", Font.PLAIN, 19));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -78,9 +79,13 @@ public class VistaPrincipal extends JFrame {
         contentPane.add(btnComandas);
 
         btnEstadisticas = new JButton("Estadisticas");
+        btnEstadisticas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         btnEstadisticas.setActionCommand("ESTADISTICAS");
         btnEstadisticas.setFont(new Font("Arial", Font.BOLD, 21));
-        btnEstadisticas.setBounds(33, 327, 185, 35);
+        btnEstadisticas.setBounds(33, 413, 185, 35);
         contentPane.add(btnEstadisticas);
 
         btnPromociones = new JButton("Promociones");
@@ -93,14 +98,14 @@ public class VistaPrincipal extends JFrame {
         btnPromociones.setBounds(33, 370, 185, 35);
         contentPane.add(btnPromociones);
 
-        btnGestiones = new JButton("Gestiones");
+        btnGestiones = new JButton("Mozos-Mesas");
         btnGestiones.setActionCommand("GESTIONES");
         btnGestiones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        btnGestiones.setFont(new Font("Arial", Font.BOLD, 21));
-        btnGestiones.setBounds(33, 413, 185, 35);
+        btnGestiones.setFont(new Font("Arial", Font.BOLD, 17));
+        btnGestiones.setBounds(33, 241, 185, 35);
         contentPane.add(btnGestiones);
 
         lblNewLabel = new JLabel("Cerveceria");
@@ -125,7 +130,7 @@ public class VistaPrincipal extends JFrame {
         });
         btnModificarN.setActionCommand("FORMDATOS");
         btnModificarN.setFont(new Font("Arial", Font.BOLD, 21));
-        btnModificarN.setBounds(486, 284, 185, 35);
+        btnModificarN.setBounds(463, 283, 185, 35);
         contentPane.add(btnModificarN);
 
 
@@ -144,13 +149,13 @@ public class VistaPrincipal extends JFrame {
         btnNuevasComandas = new JButton("Comandas");
         btnNuevasComandas.setFont(new Font("Arial", Font.BOLD, 21));
         btnNuevasComandas.setActionCommand("NUEVAS_COMANDAS");
-        btnNuevasComandas.setBounds(33, 240, 185, 35);
+        btnNuevasComandas.setBounds(33, 327, 185, 35);
         contentPane.add(btnNuevasComandas);
 
         btnComenzarJornada = new JButton("Comenzar jornada");
         btnComenzarJornada.setFont(new Font("Arial", Font.BOLD, 21));
         btnComenzarJornada.setActionCommand("COMENZAR_JORNADA");
-        btnComenzarJornada.setBounds(234, 519, 234, 35);
+        btnComenzarJornada.setBounds(216, 519, 234, 35);
         contentPane.add(btnComenzarJornada);
 
         formSueldo = new FormNombreySueldo();

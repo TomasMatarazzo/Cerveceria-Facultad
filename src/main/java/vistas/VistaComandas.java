@@ -63,7 +63,7 @@ public class VistaComandas extends JFrame {
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
         botonRegistrarse = new JButton("Crear comanda");
-        botonRegistrarse.setActionCommand("CREAR_COMANDa");
+        botonRegistrarse.setActionCommand("NUEVA_COMANDA");
         botonRegistrarse.setFont(new Font("Arial", Font.PLAIN, 21));
         botonRegistrarse.setBounds(355, 530, 214, 33);
         contentPane.add(botonRegistrarse);
@@ -79,10 +79,6 @@ public class VistaComandas extends JFrame {
         contentPane.add(listaProductos);
 
         botonIngresarProducto = new JButton("CREAR PEDIDO");
-        botonIngresarProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         botonIngresarProducto.setFont(new Font("Arial", Font.PLAIN, 21));
         botonIngresarProducto.setActionCommand("FORM_PEDIDO");
         botonIngresarProducto.setBounds(163, 369, 241, 33);
@@ -126,9 +122,8 @@ public class VistaComandas extends JFrame {
         this.formPedido.setVisible(true);
     }
 
-    public Producto getSelectedProducto(){
-        return this.formPedido.getProducto();
-    }
+    public Producto getSelectedProducto(){return this.formPedido.getProducto();}
+    public Pedido getSelectedPedido(){ return this.listaProductos.getSelectedValue();}
     public Mozo getSelectedMozo(){ return this.listaMozos.getSelectedValue();}
     public String getCantDelPedido(){
         return this.formPedido.getCant();

@@ -1,6 +1,5 @@
 package controladores;
 
-import interfaces.IVista;
 import vistas.*;
 import modelo.Empresa;
 
@@ -34,7 +33,6 @@ public class ControladorPrincipal implements ActionListener{
                 }
                 break;
             case "NUEVAS_COMANDAS":
-                System.out.printf("hola");
                 VistaNuevaComandas ventanaNuevasComandas = new VistaNuevaComandas(this.modelo.getComandas(),this.modelo.getPedidos());
                 ControladorNuevasComandas controladorNuevasComandas = new ControladorNuevasComandas(ventanaNuevasComandas,this.modelo);
                 ventanaNuevasComandas.ejecutar();

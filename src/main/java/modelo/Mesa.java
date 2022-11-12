@@ -76,13 +76,9 @@ public class Mesa implements Comparable<Mesa>, Serializable {
 
     @Override
     public String toString() {
-        return "Mesa{" +
-                "nro=" + nro +
-                ", cantidadPersonas=" + cantidadPersonas +
-                ", estado='" + estado + '\'' +
-                ", mozo=" + mozo +
-                ", pedido=" + pedido +
-                '}';
+        return
+                "Nro de Mesa: " + nro +
+                "      Estado='" + estado + '\'';
     }
     public void cerrarMesa() {
         this.estado = "libre";

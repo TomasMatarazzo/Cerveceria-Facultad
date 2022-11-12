@@ -45,9 +45,13 @@ public class ControladorInventario implements ActionListener{
                 this.vista.showFormMozo();
                 break;
             case "ELIMINAR_MOZO":
-                System.out.printf("se eliminio");
-                this.modelo.bajaMozo(this.vista.getSelectedMozo());
-                this.vista.renderListaMozos(this.modelo.getMozos());
+                if (this.vista.getSelectedMozo() != null) {
+                    this.modelo.bajaMozo(this.vista.getSelectedMozo());
+                    this.vista.renderListaMozos(this.modelo.getMozos());
+                }
+                else{
+                    Mensajes.lanzarVentanaEmergente("Seleccione un mozo");
+                }
                 break;
             case "MODIFICAR_MOZO":
 
@@ -66,39 +70,64 @@ public class ControladorInventario implements ActionListener{
 
             case "NUEVOPRODUCTO":
                 // CORREGIR LO DEL ID
-                double costo = Double.parseDouble(this.vista.getFormProducto().getCosto());
-                double venta = Double.parseDouble(this.vista.getFormProducto().getVenta());
-                int stock = Integer.parseInt(this.vista.getFormProducto().getStock());
-                this.modelo.altaProducto( 0, this.vista.getFormProducto().getNombre(),costo,venta,stock);
-                this.vista.renderListaProductos(this.modelo.getProductos());
-                this.vista.hideFormProducto();
+                try {
+                    double costo = Double.parseDouble(this.vista.getFormProducto().getCosto());
+                    double venta = Double.parseDouble(this.vista.getFormProducto().getVenta());
+                    int stock = Integer.parseInt(this.vista.getFormProducto().getStock());
+                    this.modelo.altaProducto( this.vista.getFormProducto().getNombre(), costo, venta, stock);
+                    System.out.printf(this.modelo.getProductos().toString());
+                    this.vista.renderListaProductos(this.modelo.getProductos());
+                    this.vista.hideFormProducto();
+                }
+                catch(Exception e){
+                    Mensajes.lanzarVentanaEmergente("Ingrese correctamente los datos");
+                }
                 break;
             case "INGRESAR_PRODUCTO":
                 this.vista.showFormProducto();
                 break;
             case "ELIMINAR_PRODUCTO":
+                System.out.printf("holaa");
+                if (this.vista.getSelectedProducto() != null) {
+                    System.out.printf("PRODUCTO ESSS");
+                    System.out.printf(this.vista.getSelectedProducto().toString());
+                    this.modelo.bajaProducto(this.vista.getSelectedProducto());
+                    this.vista.renderListaProductos(this.modelo.getProductos());
+                }
+                else{
+                    System.out.printf("no");
+                    Mensajes.lanzarVentanaEmergente("Seleccione una mesa");
+                }
                 break;
             case "MODIFICAR_PRODUCTO":
                 break;
             case "NUEVAMESA":
-                int  nroMesa = Integer.parseInt(this.vista.getFormMesa().getNroMesa());
-                int  nroSillas = Integer.parseInt(this.vista.getFormMesa().getCantidadSillas());
                 try {
+                    int  nroMesa = Integer.parseInt(this.vista.getFormMesa().getNroMesa());
+                    int  nroSillas = Integer.parseInt(this.vista.getFormMesa().getCantidadSillas());
                     this.modelo.altaMesa(nroSillas);
                     this.vista.renderListaMesas(this.modelo.getMesas());
                     this.vista.hideFormMesa();
                 }
                 catch(Exception e){
-                    System.out.printf(e.getMessage());
+                    Mensajes.lanzarVentanaEmergente("Ingrese los datos correctamente");
                 }
                 break;
             case "INGRESAR_MESA":
                 this.vista.showFormMesa();
                 break;
             case "ELIMINAR_MESA":
+                if (this.vista.getSelectedMesas() != null) {
+                    this.modelo.bajaMesa(this.vista.getSelectedMesas());
+                    this.vista.renderListaMesas(this.modelo.getMesas());
+                }
+                else{
+                    Mensajes.lanzarVentanaEmergente("Seleccione una mesa");
+                }
                 break;
             case "MODIFICAR_MESA":
                 break;
+
         }
     }
 

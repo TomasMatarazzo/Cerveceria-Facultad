@@ -1,5 +1,6 @@
 package controladores;
 
+import Utils.Mensajes;
 import excepciones.StockNoDisponible;
 import modelo.*;
 import vistas.VistaComandas;
@@ -49,6 +50,24 @@ public class ControladorComandas implements ActionListener{
                 else{
                     lanzarVentanaEmergente("Seleccione el producto o indique cantidad");
                 }
+                break;
+            case "NUEVA_COMANDA":
+                Mozo mozo1 = this.vista.getSelectedMozo();
+                Mesa mesa1 = this.vista.getSelectedMesas();
+                Pedido pedido = this.vista.getSelectedPedido();
+                if (mozo1 != null && mesa1 != null && pedido !=null){
+                    try {
+                        this.modelo.altaComanda(mesa1,mozo1,pedido);
+                        this.vista.setVisible(false);
+                        Mensajes.lanzarVentanaEmergente("Se creo la comanda ya puede agregar pedidos");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Mensajes.lanzarVentanaEmergente("Para crear una comanda debe seleccionar una mesa, un mozo y un producto");
+                }
+                break;
+
         }
     }
 

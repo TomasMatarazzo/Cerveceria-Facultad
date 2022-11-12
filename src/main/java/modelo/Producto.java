@@ -5,17 +5,18 @@ import excepciones.ProductoIncorrecto;
 import java.io.Serializable;
 
 public class Producto implements Comparable<Producto>, Serializable {
+    private static int id = 0;
     private int id_producto;
     private String nombre;
     private double precioCosto;
     private double precioVenta;
     private int stockInicial;
 
-    public Producto(int id_producto, String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
-        this.id_producto = id_producto;
+    public Producto(String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
+        this.id_producto = ++id;
         this.nombre = nombre;
-        this.setPrecioCosto(precioCosto);
         this.setPrecioVenta(precioVenta);
+        this.setPrecioCosto(precioCosto);
         this.checkPrecio(precioCosto,precioVenta);
         this.stockInicial = stockInicial;
     }
@@ -56,7 +57,7 @@ public class Producto implements Comparable<Producto>, Serializable {
      * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero o mayor al precio de venta
      */
     public void setPrecioCosto(double precioCosto) throws ProductoIncorrecto{
-        if (precioCosto > 0  && this.precioVenta>precioCosto)
+        if (precioCosto > 0  && this.precioVenta > precioCosto)
             this.precioCosto = precioCosto;
         else
             throw new ProductoIncorrecto("El precio de costo es menor o igual a 0 o mayor al precio de venta");
@@ -88,18 +89,16 @@ public class Producto implements Comparable<Producto>, Serializable {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "id_producto=" + id_producto +
-                ", nombre='" + nombre + '\'' +
-                ", precioCosto=" + precioCosto +
-                ", precioVenta=" + precioVenta +
-                ", stockInicial=" + stockInicial +
-                '}';
+        return
+                "Producto:  " + nombre +
+                "   precioCosto: " + precioCosto +
+                "   precioVenta: " + precioVenta +
+                "   Stock:  " + stockInicial ;
     }
 
 
     @Override
     public int compareTo(Producto o) {
-        return (this.precioCosto < o.precioCosto)?0:1;
+        return (this.id_producto < o.id_producto)?0:1;
     }
 }

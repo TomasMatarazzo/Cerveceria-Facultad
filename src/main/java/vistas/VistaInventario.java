@@ -70,12 +70,6 @@ public class VistaInventario extends JFrame {
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
 
-        botonRegistrarse = new JButton("Ingresar");
-        botonRegistrarse.setActionCommand("REGISTRARSE");
-        botonRegistrarse.setFont(new Font("Arial", Font.PLAIN, 21));
-        botonRegistrarse.setBounds(264, 703, 132, 33);
-        contentPane.add(botonRegistrarse);
-
         lblRegistreOperario = new JLabel("Registre operario");
         lblRegistreOperario.setFont(new Font("Arial", Font.PLAIN, 21));
         lblRegistreOperario.setBounds(211, 20, 174, 33);
@@ -225,7 +219,7 @@ public class VistaInventario extends JFrame {
         }
         this.listaMozos.setModel(listaContratoDefault);
         contentPane.add(listaMozos);
-        this.listaProductos.clearSelection();
+        this.listaMozos.clearSelection();
     }
 
     public void renderListaMesas(TreeSet<Mesa> mesas){
@@ -238,7 +232,7 @@ public class VistaInventario extends JFrame {
         }
         this.listaMesas.setModel(listaContratoDefault);
         contentPane.add(listaMesas);
-        this.listaProductos.clearSelection();
+        this.listaMesas.clearSelection();
     }
 
     public void renderListaProductos(TreeSet<Producto> productos){
