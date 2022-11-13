@@ -51,10 +51,12 @@ class FacturaTest {
      */
     @Test
     void generarFactura1() {
-        double total;
+        double total, total2 = ((pedido.getCantidad()*producto.getPrecioVenta())/2.)*0.9;
+
         try {
             total =empresa.generarFactura(comanda);
-            assertTrue(total == pedido.getCantidad()*producto.getPrecioVenta(),"ERROR AL CALCULAR TOTAL");
+
+            assertTrue(total == total2,"ERROR AL CALCULAR TOTAL");
 
         } catch (Exception e) {
             fail("NO DEBERIA LANZAR EXCEPCION");

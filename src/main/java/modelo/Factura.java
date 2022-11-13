@@ -17,10 +17,10 @@ public class Factura {
         this.date = date;
         this.mesa = mesa;
         this.pedidos = pedidos;
-        this.total = this.setTotal();
-        this.formaDePago=formaDePago;
         this.promocionesTemporales=promocionesTemporales;
         this.promocionesProductos=promocionesProductos;
+        this.formaDePago=formaDePago;
+        this.total = this.setTotal();
     }
 
     public void setTotal(double total) {
@@ -76,10 +76,10 @@ public class Factura {
         for (int i=0;i<pedidos.size();i++){
            parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
             if (this.promocionesProductos != null){// || promocionesProductos.size() > 0) {
-                for (int j = 0; j < promocionesProductos.size(); i++) {
+                for (int j = 0; j < promocionesProductos.size(); j++) {
                         if (promocionesProductos.get(j).isActiva()) {
                             if (promocionesProductos.get(j).isAplicaDosPorUno()) {
-                                parcial /= 2;
+                                parcial /= 2.;
                             } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
                                 parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
                             }
@@ -91,7 +91,7 @@ public class Factura {
         if (this.promocionesTemporales != null){ //|| promocionesTemporales.size() > 0) {
             for (int k = 0; k < promocionesTemporales.size(); k++) {
                 if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
-                    total *= (double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
+                    total = total - total*(double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
                 }
             }
         }
