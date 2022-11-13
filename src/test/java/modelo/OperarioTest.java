@@ -1,9 +1,6 @@
 package modelo;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,21 +88,29 @@ class OperarioTest {
             }
 
             @Test
-            @DisplayName(" lanza excepcion si el nombre de usuario no existe en el sistema")
+            @DisplayName(" devuelve NULL si el nombre de usuario no existe en el sistema")
             void loginTest1() {
                 String usernameInvalido = "Maradona";
                 String password = "ElDiego%23";
 
-                assertThrows(Exception.class, () -> empresa.login(usernameInvalido, password));
+                try {
+                    assertNull(empresa.login(usernameInvalido, password));
+                } catch (Exception e) {
+                    fail("Esta prueba no deberia disparar una excepcion");
+                }
             }
 
             @Test
-            @DisplayName(" lanza excepcion si la contrasena no coincide")
+            @DisplayName(" devuelve NULL si la contrasena no coincide")
             void loginTest2() {
                 String username = "Messi10";
                 String passwordInvalida = "xxxxx#123";
 
-                assertThrows(Exception.class, () -> empresa.login(username, passwordInvalida));
+                try {
+                    assertNull(empresa.login(username, passwordInvalida));
+                } catch (Exception e) {
+                    fail("Esta prueba no deberia disparar una excepcion");
+                }
             }
 
             @Test
@@ -124,13 +129,10 @@ class OperarioTest {
             @Test
             @DisplayName(" lanza excepcion porque no se encuentra activo")
             void loginTest4() {
-                String username = "Inactivo";
-                String password= "Inactivo11";
-
-                Operario respuestaEsperada = empresa.getOperarios().last();
-
+                Operario operarioInactivo = empresa.getOperarios().last();
+                
                 try {
-                    assertEquals(respuestaEsperada, empresa.login(username, password));
+                    assertThrows(Exception.class, () -> empresa.login(operarioInactivo.getUsuario(), operarioInactivo.getPassword()));
                 } catch (Exception e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
@@ -140,12 +142,12 @@ class OperarioTest {
             @DisplayName(" correctamente retorna una instancia del Operario")
             void loginTest5() {
                 String username = "Messi10";
-                String password= "Messi#123";
+                String password = "Messi#123";
 
                 Operario respuestaEsperada = empresa.getOperarios().first();
 
                 try {
-                    assertEquals(respuestaEsperada, empresa.login(username, password));
+
                 } catch (Exception e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
