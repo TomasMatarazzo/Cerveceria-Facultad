@@ -7,6 +7,7 @@ import excepciones.StockNoDisponible;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.DoubleFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +19,8 @@ public class Empresa implements Serializable {
     private TreeSet<Producto> productos= new TreeSet<>();
     private ArrayList<Comanda> comandas=new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
-    private ArrayList<ProductoEnPromocion> promocionesProductos;
-    private ArrayList<PromocionTemporal> promocionesTemporales;
+    private ArrayList<ProductoEnPromocion> promocionesProductos = new ArrayList<>();
+    private ArrayList<PromocionTemporal> promocionesTemporales = new ArrayList<>();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private boolean arrancoJornada;
 
@@ -67,10 +68,10 @@ public class Empresa implements Serializable {
      * @throws Exception Lanza excepcion, si la contrasena es vacia o si no contiene digitos y mayusculas
      */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
+
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])";
-
+                + "(?=\\S+$).{8,20}$";
 
         Pattern p = Pattern.compile(regex);
         if (password == null) {
@@ -81,6 +82,7 @@ public class Empresa implements Serializable {
         // pongo true para no poner contrasenas complicadas. dps lo cambian
         // if (m.matches())
         if (m.matches()) {
+            System.out.printf("entro");
             this.operarios.add(new Operario(apellido, usuario, password, activo));
         }
         else {
