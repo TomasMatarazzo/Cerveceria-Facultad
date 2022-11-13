@@ -125,8 +125,10 @@ public class Empresa implements Serializable {
      * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
      * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
      */
-    public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto {
+    public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception {
         // VERIFICAR LA EDAD
+        if (estado>3 || estado<0)
+            throw new Exception("Estado Invalido");
         Calendar fecha = new GregorianCalendar();
         fecha.add(Calendar.YEAR, -18);
         if(fecha.after(fechaNacimiento)){
@@ -247,13 +249,10 @@ public class Empresa implements Serializable {
      * Permite dar de baja una mesa registrada en el sistema
      * @param mesa la mesa a eliminar debera ser distinto de null
      */
-    public void bajaMesa(Mesa mesa){
-        try{
-            this.mesas.remove(mesa);
-        }
-        catch(Exception exception){
-            System.out.printf(exception.getMessage());
-        }
+    public void bajaMesa(Mesa mesa)throws Exception{
+        if (this.mesas.size()==0 || !this.mesas.contains(mesa))
+            throw new Exception("No existe mesa");
+        this.mesas.remove(mesa);
     }
 
     /**
@@ -280,13 +279,11 @@ public class Empresa implements Serializable {
      * @param cantidad debera ser mayor a cero
      * @return devuelve el nuevo pedido creado
      */
-    public Pedido realizarPedido(Producto producto, int cantidad){
+    public Pedido realizarPedido(Producto producto, int cantidad)throws StockNoDisponible{
         Pedido pedido=null;
-        try {
+
             pedido= new Pedido(producto,cantidad);
-        } catch (StockNoDisponible e) {
-            e.printStackTrace();
-        }
+
         return pedido;
     }
 
@@ -309,15 +306,16 @@ public class Empresa implements Serializable {
      */
 
     public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
-
         boolean libre = false;
-        if (mesa.getEstado().equalsIgnoreCase("libre") ){
-            mesa.setEstado("ocupada");
-            mesa.setMozo(mozo);
-            Comanda comanda = new Comanda(mesa,mozo);
-            comanda.agregarPedido(pedido);
-            this.comandas.add(comanda);
-        }
+        if (mesa.getEstado().equalsIgnoreCase("ocupada") )
+            throw new Exception("Mesa Ocupada");
+
+        mesa.setEstado("ocupada");
+        mesa.setMozo(mozo);
+        Comanda comanda = new Comanda(mesa,mozo);
+        comanda.agregarPedido(pedido);
+        this.comandas.add(comanda);
+
     }
 
     public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
@@ -330,20 +328,17 @@ public class Empresa implements Serializable {
     // ----- FACTURA -----
 
     public double generarFactura( Comanda comanda) throws Exception {
-        for (Comanda com:this.comandas) {
-            if (comanda.equals(com)) {
-                comanda.getMesa().setEstado("libre");
-                Factura factura = new Factura(Date.from(Instant.now()) ,comanda.getMesa(),comanda.getPedidos(),"Efectivo",this.promocionesProductos,this.promocionesTemporales);
+        if (comanda.getMesa().getEstado().equalsIgnoreCase("libre"))
+            throw new Exception("Imposible crear una Factura sobre una mesa Libre");
+        comanda.getMesa().setEstado("libre");
+        Factura factura = new Factura(Date.from(Instant.now()) ,comanda.getMesa(),comanda.getPedidos(),"Efectivo",this.promocionesProductos,this.promocionesTemporales);
 
-                comanda.getMesa().getMozo().setVentas(comanda.getMesa().getMozo().getVentas()+ factura.getTotal());
-                comanda.getMesa().setCantComandas(comanda.getMesa().getCantComandas()+1);
-                comanda.getMesa().setTotalComandas(comanda.getMesa().getTotalComandas()+ factura.getTotal());
+        comanda.getMesa().getMozo().setVentas(comanda.getMesa().getMozo().getVentas()+ factura.getTotal());
+        comanda.getMesa().setCantComandas(comanda.getMesa().getCantComandas()+1);
+        comanda.getMesa().setTotalComandas(comanda.getMesa().getTotalComandas()+ factura.getTotal());
 
-                this.comandas.remove(comanda);
-                return factura.getTotal();
-            }
-        }
-        return 0;
+        this.comandas.remove(comanda);
+        return factura.getTotal();
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FacturaTest {
+class ComandaTest {
 
     Empresa empresa;
     Comanda comanda;
@@ -22,52 +22,49 @@ class FacturaTest {
         pedido = new Pedido(producto,1);
         mesa = new Mesa(3);
         mozo =new Mozo("Matias",new GregorianCalendar(1990,12,12),0,1);
-        comanda = new Comanda(mesa,mozo);
-        comanda.agregarPedido(pedido);
         empresa = new Empresa("Cerveceria", null, null, null, null);
-        empresa.altaComanda(mesa,mozo,pedido);
     }
 
     @AfterEach
     void tearDown() {
     }
 
+
     /**
-     * metodo GENERAR FACTURA clase Empresa
+     * metodo ALTA COMANDA clase Empresa
      *
      * PRECONDICIONES
      * Comanda distinto vacio y null
+     * Mesa distinto vacio y null
+     * Mozo distinto vacio y null
      *
-     * Se quiere generar una factura valida
+     * Se quiere dar de alta una comanda valida
      */
     @Test
-    void crearFactura1() {
-        double total;
+    void agregarPedidoAComanda1() {
         try {
-            total =empresa.generarFactura(comanda);
-            assertTrue(total == pedido.getCantidad()*producto.getPrecioVenta(),"ERROR AL CALCULAR TOTAL");
+            empresa.altaComanda(mesa,mozo,pedido);
+            assertTrue(empresa.getComandas().size()==1,"ERROR AL CREAR LA COMANDA");
 
         } catch (Exception e) {
             fail("NO DEBERIA LANZAR EXCEPCION");
         }
-
     }
 
+
     /**
-     * Se quiere crear una factura con una mesa Libre
+     * Se quiere dar de alta una comanda en una mesa ya ocupada
      */
     @Test
-    void crearFactura2() throws Exception {
-        double total;
-        mesa.setEstado("Libre");
+    void agregarPedidoAComanda2() throws Exception {
+        mesa.setEstado("ocupada");
         try {
-            total =empresa.generarFactura(comanda);
+            empresa.altaComanda(mesa,mozo,pedido);
             fail("DEBERIA LANZAR EXCEPCION");
 
         } catch (Exception e) {
-            final String msg = "Imposible crear una Factura sobre una mesa Libre";
+            final String msg = "Mesa Ocupada";
             assertEquals(msg, e.getMessage());
         }
     }
-
 }

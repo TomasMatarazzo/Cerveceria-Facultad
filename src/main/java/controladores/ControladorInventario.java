@@ -149,7 +149,13 @@ public class ControladorInventario implements ActionListener{
                 break;
             case "ELIMINAR_MESA":
                 if (this.vista.getSelectedMesas() != null) {
-                    this.modelo.bajaMesa(this.vista.getSelectedMesas());
+
+                    try {
+                        this.modelo.bajaMesa(this.vista.getSelectedMesas());
+                    } catch (Exception e) {
+                        // Mostrar mensaje
+                    }
+
                     this.vista.renderListaMesas(this.modelo.getMesas());
                 }
                 else{

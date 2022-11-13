@@ -41,7 +41,7 @@ class MesaTest {
         empresa.getMesas().add(mesa);
         try {
             empresa.bajaMesa(mesa);
-            assertTrue(empresa.getMozos().size()==0,"ERROR AL BORRAR UNA MESA EXISTENTE");
+            assertTrue(empresa.getMesas().size()==0,"ERROR AL BORRAR UNA MESA EXISTENTE");
         } catch (Exception e) {
             fail("NO DEBERIA LANZAR EXCEPCION");
         }

@@ -50,7 +50,7 @@ class MozoTest {
             try {
                 empresa.agregaMozo(nombre,fechaNac,hijos,estado);
                 assertTrue(empresa.getMozos().size()==1,"ERROR AL AGREGAR UN MOZO VALIDO");
-            } catch (MozoIncorrecto e) {
+            } catch (Exception e) {
                 fail("NO DEBERIA LANZAR EXCEPCION");
             }
 
@@ -69,7 +69,7 @@ class MozoTest {
             try {
                 empresa.agregaMozo(nombre,fechaNac,hijos,estado);
                 fail("AGREGAR UN MOZO CON CANTIDAD DE HIJOS MENOR A CERO NO LANZA EXCEPCION");
-            } catch (MozoIncorrecto e) {
+            } catch (Exception e) {
                 final String msg = "Cant de hijos menor a cero";
                 assertEquals(msg, e.getMessage());
             }
@@ -89,30 +89,11 @@ class MozoTest {
             try {
                 empresa.agregaMozo(nombre,fechaNac,hijos,estado);
                 fail("AGREGAR UN MOZO CON ESTADO INVALIDO NO LANZA EXCEPCION");
-            } catch (MozoIncorrecto e) {
+            } catch (Exception e) {
                 final String msg = "Estado Invalido";
                 assertEquals(msg, e.getMessage());
             }
 
-        }
-
-        /**
-         * Se quiere agregar un mozo con una fecha invalida
-         */
-        @Test
-        void agregarMozo4() {
-            String nombre = "Matias Angelico";
-            Calendar fechaNac = new GregorianCalendar(1996,22,15);
-            int hijos = 1;
-            int estado = 4;
-
-            try {
-                empresa.agregaMozo(nombre,fechaNac,hijos,estado);
-                fail("AGREGAR UN MOZO CON FECHA INVALIDA NO LANZA EXCEPCION");
-            } catch (MozoIncorrecto e) {
-                final String msg = "Fecha de Nacimiento invalida";
-                assertEquals(msg, e.getMessage());
-            }
         }
 
         /**
@@ -128,7 +109,7 @@ class MozoTest {
             try {
                 empresa.agregaMozo(nombre,fechaNac,hijos,estado);
                 fail("AGREGAR UN MOZO MENOR DE EDAD NO LANZA EXCEPCION");
-            } catch (MozoIncorrecto e) {
+            } catch (Exception e) {
                 final String msg = "Edad menor a 18 anos";
                 assertEquals(msg, e.getMessage());
             }
