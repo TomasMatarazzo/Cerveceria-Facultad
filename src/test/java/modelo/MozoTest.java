@@ -103,7 +103,7 @@ class MozoTest {
          * se quiere agregar un mozo menor de edad
          */
         @Test
-        void agregarMozo5() {
+        void agregarMozo4() {
             String nombre = "Matias Angelico";
             Calendar fechaNac = new GregorianCalendar(2014,12,1);
             int hijos = 1;
@@ -170,5 +170,95 @@ class MozoTest {
         }
     }
 
-}
+        /**
+         * metodo MODIFICAR MOZO clase Empresa
+         * <p>
+         * PRECONDICIONES
+         * nombreYApellido distinto de vacio y null
+         * fecha de Nacimiento distinto de null
+         * Estado solo validos ( 1, 2, 3 )
+         * <p>
+         * <p>
+         * Se quiere modificar un mozo correcto
+         */
+        @Test
+        void modificaMozo1() {
+            mozo1 = new Mozo("Lautaro",new GregorianCalendar(1990,11,11),1,1);
+            empresa.getMozos().add(mozo1);
+            String nombreNuevo = "Matias Angelico";
+            Calendar fechaNacNueva = new GregorianCalendar(1996,12,12);
+            int hijosNuevo = 0;
+            int estadoNuevo = 0;
+            try {
+                empresa.modificaMozo(mozo1,nombreNuevo,fechaNacNueva,hijosNuevo,estadoNuevo);
+                assertTrue(mozo1.getEstado()==estadoNuevo && mozo1.getNombreYApellido().equalsIgnoreCase(nombreNuevo)&& mozo1.getFechaNacimiento()==fechaNacNueva&&mozo1.getCantHijos()==estadoNuevo,"ERROR AL MODIFICAR MOZO VALIDO");
+            } catch (Exception e) {
+                fail("NO DEBERIA LANZAR EXCEPCION");
+            }
+
+        }
+
+        /**
+         * Se quiere agregar un mozo con cantidad de hijos menor a cero
+         */
+        @Test
+        void modificarMozo2() {
+            mozo1 = new Mozo("Lautaro",new GregorianCalendar(1990,11,11),1,1);
+            empresa.getMozos().add(mozo1);
+            String nombreNuevo = "Matias Angelico";
+            Calendar fechaNacNueva = new GregorianCalendar(1996,12,12);
+            int hijosNuevo = -1;
+            int estadoNuevo = 0;
+            try {
+                empresa.modificaMozo(mozo1,nombreNuevo,fechaNacNueva,hijosNuevo,estadoNuevo);
+                fail("MODIFICAR UN MOZO CON CANTIDAD DE HIJOS MENOR A CERO NO LANZA EXCEPCION");
+            } catch (Exception e) {
+                final String msg = "Cant de hijos menor a cero";
+                assertEquals(msg, e.getMessage());
+            }
+
+        }
+
+        /**
+         * Se quiere modificar un mozo con estado Invalido ( int > 3 )
+         */
+        @Test
+        void modificarMozo3() {
+            mozo1 = new Mozo("Lautaro",new GregorianCalendar(1990,11,11),1,1);
+            empresa.getMozos().add(mozo1);
+            String nombreNuevo = "Matias Angelico";
+            Calendar fechaNacNueva = new GregorianCalendar(1996,12,12);
+            int hijosNuevo = 0;
+            int estadoNuevo = 4;
+            try {
+                empresa.modificaMozo(mozo1,nombreNuevo,fechaNacNueva,hijosNuevo,estadoNuevo);
+                fail("AGREGAR UN MOZO CON ESTADO INVALIDO NO LANZA EXCEPCION");
+            } catch (Exception e) {
+                final String msg = "Estado Invalido";
+                assertEquals(msg, e.getMessage());
+            }
+
+        }
+
+        /**
+         * se quiere modificar un mozo menor de edad
+         */
+        @Test
+        void modificarMozo4() {
+            mozo1 = new Mozo("Lautaro",new GregorianCalendar(1990,11,11),1,1);
+            empresa.getMozos().add(mozo1);
+            String nombreNuevo = "Matias Angelico";
+            Calendar fechaNacNueva = new GregorianCalendar(2014,12,12);
+            int hijosNuevo = 0;
+            int estadoNuevo = 0;
+            try {
+                empresa.modificaMozo(mozo1,nombreNuevo,fechaNacNueva,hijosNuevo,estadoNuevo);
+                fail("AGREGAR UN MOZO MENOR DE EDAD NO LANZA EXCEPCION");
+            } catch (Exception e) {
+                final String msg = "Edad menor a 18 anos";
+                assertEquals(msg, e.getMessage());
+            }
+        }
+
+    }
 }

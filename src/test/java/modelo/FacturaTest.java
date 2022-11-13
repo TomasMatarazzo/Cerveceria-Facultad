@@ -4,12 +4,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FacturaTest {
 
+    PromocionTemporal promocionTemporal;
+    ProductoEnPromocion productoEnPromocion;
     Empresa empresa;
     Comanda comanda;
     Mozo mozo;
@@ -20,6 +24,8 @@ class FacturaTest {
     @BeforeEach
     void setUp() throws Exception {
         producto = new Producto("coca",100,200,3);
+        promocionTemporal = new PromocionTemporal("2X1","Efectivo",10,new Date().getDay(),true,true);
+        productoEnPromocion = new ProductoEnPromocion(1,producto,"Domingo",true,false,10,20,true);
         pedido = new Pedido(producto,1);
         mesa = new Mesa(3);
         mozo =new Mozo("Matias",new GregorianCalendar(1990,12,12),0,1);
@@ -27,6 +33,8 @@ class FacturaTest {
         comanda.agregarPedido(pedido);
         empresa = new Empresa("Cerveceria", null, null, null, null);
         empresa.altaComanda(mesa,mozo,pedido);
+        empresa.getPromocionesProductos().add(productoEnPromocion);
+        empresa.getPromocionesTemporales().add(promocionTemporal);
     }
 
     @AfterEach

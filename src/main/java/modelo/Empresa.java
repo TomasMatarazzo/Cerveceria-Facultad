@@ -17,8 +17,8 @@ public class Empresa implements Serializable {
     private TreeSet<Producto> productos= new TreeSet<>();
     private ArrayList<Comanda> comandas=new ArrayList<>();
     private TreeSet<Operario> operarios= new TreeSet<>();
-    private ArrayList<ProductoEnPromocion> promocionesProductos;
-    private ArrayList<PromocionTemporal> promocionesTemporales;
+    private ArrayList<ProductoEnPromocion> promocionesProductos = new ArrayList<>();
+    private ArrayList<PromocionTemporal> promocionesTemporales = new ArrayList<>();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private boolean arrancoJornada;
 
@@ -156,7 +156,9 @@ public class Empresa implements Serializable {
      * @param cantHijos cantidad de hijos del mozo a registrar
      * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
      */
-    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws MozoIncorrecto{
+    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception{
+        if (estado>3 || estado<0)
+            throw new Exception("Estado Invalido");
         Calendar fecha = new GregorianCalendar();
         fecha.add(Calendar.YEAR, -18);
         if(fecha.after(fechaNacimiento)){
