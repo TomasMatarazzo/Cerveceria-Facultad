@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MozoTest {
 
     Empresa empresa;
+    Mozo mozo1;
+    Mozo mozo2;
 
     @Nested
     @DisplayName("AGREGAR UN NUEVO MOZO AL SISTEMA")
@@ -19,7 +21,8 @@ class MozoTest {
         @BeforeEach
         void setUp() {
             TreeSet<Mozo> mozos = new TreeSet<>();
-
+            mozo1 = new Mozo("Matias", new GregorianCalendar(2000,12,12),0,1);
+            mozo2 = new Mozo("Tomas", new GregorianCalendar(2000,12,12),0,1);
             empresa = new Empresa("Cerveceria", mozos, null, null, null);
 
         }
@@ -114,5 +117,58 @@ class MozoTest {
                 assertEquals(msg, e.getMessage());
             }
         }
+
+
+    /**
+     * metodo BAJA MOZO clase Empresa
+     *
+     * PRECONDICIONES
+     * MOZO distinto de null
+     *
+     * Se da de baja un mozo presente en la coleccion de mozos
+     */
+    @Test
+    void bajaMozo1() {
+        empresa.getMozos().add(mozo1);
+        try {
+            empresa.bajaMozo(mozo1);
+            assertTrue(empresa.getMozos().size()==0,"ERROR AL BORRAR UNA MESA EXISTENTE");
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
     }
+
+    /**
+     * Se da de baja una mesa NO presente en la coleccion de mesas
+     */
+    @Test
+    void bajaMozo2() {
+
+        empresa.getMozos().add(mozo1);
+        try {
+            empresa.bajaMozo(mozo2);
+            fail("DEBERIA LANZAR EXCEPCION");
+
+        } catch (Exception e) {
+            final String msg = "No existe mozo";
+            assertEquals(msg, e.getMessage());
+        }
+    }
+
+    /**
+     * Se quiere dar de baja una mesa. COLECCION DE MESAS VACIA
+     */
+    @Test
+    void bajaMesa3() {
+        try {
+            empresa.bajaMozo(mozo1);
+            fail("DEBERIA LANZAR EXCEPCION");
+
+        } catch (Exception e) {
+            final String msg = "No existe mozo";
+            assertEquals(msg, e.getMessage());
+        }
+    }
+
+}
 }

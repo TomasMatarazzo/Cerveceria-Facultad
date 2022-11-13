@@ -16,6 +16,7 @@ class FacturaTest {
     Pedido pedido;
     Producto producto;
     Mesa mesa;
+    String formaPago;
     @BeforeEach
     void setUp() throws Exception {
         producto = new Producto("coca",100,200,3);
@@ -41,7 +42,7 @@ class FacturaTest {
      * Se quiere generar una factura valida
      */
     @Test
-    void crearFactura1() {
+    void generarFactura1() {
         double total;
         try {
             total =empresa.generarFactura(comanda);
@@ -57,7 +58,7 @@ class FacturaTest {
      * Se quiere crear una factura con una mesa Libre
      */
     @Test
-    void crearFactura2() throws Exception {
+    void generarFactura2() throws Exception {
         double total;
         mesa.setEstado("Libre");
         try {
@@ -69,5 +70,24 @@ class FacturaTest {
             assertEquals(msg, e.getMessage());
         }
     }
+    /**
+     * metodo CREAR FACTURA clase Empresa
+     *
+     * PRECONDICIONES
+     * Comanda distinto vacio y null
+     *
+     * Se quiere crear una factura valida
+     */
+    @Test
+    void crearFactura1() {
+        formaPago = "efectivo";
+        try {
+            empresa.crearFactura(mesa,formaPago);
+            assertTrue(empresa.getComandas().size()==0,"ERROR AL BORRAR COMANDA");
 
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
+
+    }
 }

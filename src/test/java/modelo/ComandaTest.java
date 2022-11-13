@@ -41,7 +41,7 @@ class ComandaTest {
      * Se quiere dar de alta una comanda valida
      */
     @Test
-    void agregarPedidoAComanda1() {
+    void altaComanda1() {
         try {
             empresa.altaComanda(mesa,mozo,pedido);
             assertTrue(empresa.getComandas().size()==1,"ERROR AL CREAR LA COMANDA");
@@ -56,7 +56,7 @@ class ComandaTest {
      * Se quiere dar de alta una comanda en una mesa ya ocupada
      */
     @Test
-    void agregarPedidoAComanda2() throws Exception {
+    void altaComanda2() throws Exception {
         mesa.setEstado("ocupada");
         try {
             empresa.altaComanda(mesa,mozo,pedido);
@@ -67,4 +67,27 @@ class ComandaTest {
             assertEquals(msg, e.getMessage());
         }
     }
+
+    /**
+     * metodo AGREGAR PEDIDO A COMANDA clase Empresa
+     *
+     * PRECONDICIONES
+     * Comanda distinto vacio y null
+     * Comanda distinto vacio y null
+     *
+     * Se quiere agregar un pedido correcto a una comanda correcta
+     */
+    @Test
+    void agregarPedidoAComanda1() throws Exception {
+        comanda = new Comanda(mesa,mozo);
+        try {
+            empresa.agregarPedidoAComanda(pedido,comanda);
+            assertTrue(comanda.getPedidos().size()==1,"ERROR AL CREAR LA COMANDA");
+
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
+    }
+
+
 }

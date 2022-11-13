@@ -1,5 +1,6 @@
 package modelo;
 
+import excepciones.StockNoDisponible;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ class PedidoTest {
 
     Empresa empresa;
 
+    Pedido pedido2;
+    Pedido pedido;
     Producto producto;
 
     int cantidad;
@@ -41,8 +44,8 @@ class PedidoTest {
     void realizarPedido1() {
         cantidad = 1;
         try {
-            empresa.realizarPedido(producto,cantidad);
-            assertTrue(empresa.getPedidos().size()==0,"ERROR AL AGREGAR UN PEDIDO");
+            pedido = empresa.realizarPedido(producto,cantidad);
+            assertTrue(pedido.getProducto().equals(producto) && pedido.getCantidad()==cantidad,"ERROR AL AGREGAR UN PEDIDO");
         } catch (Exception e) {
             fail("NO DEBERIA LANZAR EXCEPCION");
         }
@@ -59,6 +62,41 @@ class PedidoTest {
             fail("DEBERIA LANZAR EXCEPCION");
 
         } catch (Exception e) {
+            final String msg = "No hay stock suficiente";
+            assertEquals(msg, e.getMessage());
+        }
+    }
+
+    /**
+     * metodo ALTA PEDIDO  clase Empresa
+     *
+     * PRECONDICIONES
+     * pedido distinto de null
+     *
+     * Se quiere realizar un alta de pedido correcta
+     */
+    @Test
+    void altaPedido1() throws StockNoDisponible {
+        pedido = new Pedido(producto,1);
+        try {
+            empresa.altaPedido(pedido);
+            assertTrue(empresa.getPedidos().size()==1,"ERROR AL AGREGAR UN PEDIDO");
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
+    }
+
+    /**
+     * Se quiere realizar un alta de pedido correcta
+     */
+    @Test
+    void altaPedido2() {
+        try {
+            pedido = new Pedido(producto,10);
+            empresa.altaPedido(pedido);
+            fail("DEBERIA LANZAR EXCEPCION");
+
+        } catch (StockNoDisponible e) {
             final String msg = "No hay stock suficiente";
             assertEquals(msg, e.getMessage());
         }

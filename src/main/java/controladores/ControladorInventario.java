@@ -48,7 +48,11 @@ public class ControladorInventario implements ActionListener{
                 break;
             case "ELIMINAR_MOZO":
                 if (this.vista.getSelectedMozo() != null) {
-                    this.modelo.bajaMozo(this.vista.getSelectedMozo());
+                    try {
+                        this.modelo.bajaMozo(this.vista.getSelectedMozo());
+                    } catch (Exception e) {
+                        //mostrar cartel
+                    }
                     this.vista.renderListaMozos(this.modelo.getMozos());
                 }
                 else{

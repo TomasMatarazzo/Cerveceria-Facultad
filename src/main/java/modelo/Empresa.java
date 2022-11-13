@@ -178,7 +178,9 @@ public class Empresa implements Serializable {
     /**
      * @param mozo debera ser distinto de null
      */
-    public void bajaMozo(Mozo mozo){
+    public void bajaMozo(Mozo mozo) throws Exception {
+        if (this.mozos.size()==0 || !this.mozos.contains(mozo))
+            throw new Exception("No existe mozo");
         this.mozos.remove(mozo);
     }
 
@@ -243,7 +245,7 @@ public class Empresa implements Serializable {
             this.mesas.add(new Mesa(cantidadPersonas));
         }
         else {
-            throw new Exception();
+            throw new Exception("Pocas personas para dar de alta una mesa");
         }
     }
 
@@ -321,10 +323,7 @@ public class Empresa implements Serializable {
     }
 
     public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
-        for (Comanda com:this.comandas) {
-            if (comanda.equals(com))
-                com.agregarPedido(ped);
-        }
+        comanda.agregarPedido(ped);
     }
 
     // ----- FACTURA -----

@@ -78,4 +78,62 @@ class MesaTest {
             assertEquals(msg, e.getMessage());
         }
     }
+
+
+    /**
+     * metodo MODIFICA MESA clase Empresa
+     *
+     * PRECONDICIONES
+     * Mesa distinto de null
+     * estado solo valores validos
+     * cantidad de personas enteros positivos
+     *
+     * Se quiere MODIFICAR una mesa valida
+     */
+    @Test
+    void modificaMesa1() {
+        int cantidad = 6;
+        String est = "ocupada";
+        try {
+            empresa.modificaMesa(cantidad,est,mesa);
+            assertTrue(mesa.getCantidadPersonas()==cantidad && mesa.getEstado().equalsIgnoreCase(est),"ERROR AL MODIFICAR UNA MESA ");
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
+    }
+
+    /**
+     * metodo ALTA MESA clase Empresa
+     *
+     * PRECONDICIONES
+     * cantidad de personas enteros positivos
+     *
+     * Se quiere MODIFICAR una mesa valida
+     */
+    @Test
+    void altaMesa1() {
+        int cantidad = 6;
+        try {
+            empresa.altaMesa(cantidad);
+            assertTrue(empresa.getMesas().size()==1,"ERROR AL DAR DE ALTA UNA MESA");
+        } catch (Exception e) {
+            fail("NO DEBERIA LANZAR EXCEPCION");
+        }
+    }
+
+    /**
+     * Se quiere MODIFICAR una mesa con cantidad de personas invalida
+     */
+    @Test
+    void altaMesa2() {
+        int cantidad = 0;
+        try {
+            empresa.altaMesa(cantidad);
+            fail("DEBERIA LANZAR EXCEPCION");
+
+        } catch (Exception e) {
+            final String msg = "Pocas personas para dar de alta una mesa";
+            assertEquals(msg, e.getMessage());
+        }
+    }
 }
