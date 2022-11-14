@@ -1,11 +1,6 @@
 package persistencia;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class PersistenciaBIN implements IPersistencia {
     private FileOutputStream fileoutput = null;
@@ -30,14 +25,12 @@ public class PersistenciaBIN implements IPersistencia {
     public void cerrarOutput() throws IOException {
         if (objectoutput != null)
             objectoutput.close();
-
     }
 
     @Override
     public void cerrarInput() throws IOException {
         if (objectinput != null)
             objectinput.close();
-
     }
 
     @Override

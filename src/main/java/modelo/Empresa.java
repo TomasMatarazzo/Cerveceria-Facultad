@@ -35,6 +35,7 @@ public class Empresa implements Serializable {
     }
 
     // --------- OPERARIOS ----------
+
     /**
      * Login para el operario.
      * @param usuario String de hasta 10 caracteres
@@ -48,7 +49,6 @@ public class Empresa implements Serializable {
                 if (op.isActivo()) {
                     return op;
                 } else {
-
                     throw new Exception();
                 }
             }
@@ -70,7 +70,6 @@ public class Empresa implements Serializable {
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=\\S+$).{8,20}$";
 
-
         if (password == null || password.equals("")) {
             throw new Exception();
         }
@@ -91,11 +90,10 @@ public class Empresa implements Serializable {
         }
     }
 
-
     /**
      * Modifica la contrasena del administrador
      * @param password
-     * @throws Exception si la password no coincide
+     * @throws Exception si la password es incorrecta
      */
     public void modificarPassword(String password) throws Exception {
         String regex = "^(?=.*[0-9])"
@@ -110,13 +108,16 @@ public class Empresa implements Serializable {
 
         Matcher m = p.matcher(password);
         if (m.matches()) {
+            System.out.println("HOlaaaaaaa");
             this.operarios.first().setPassword(password);
+            System.out.println("HOlaaaaaaa");
         } else {
             throw new Exception();
         }
     }
 
     // --------- MOZOS ----------
+
     /**
      * Este metodo permite agregar un nuevo mozo
      * <pre> la edad ingresada sera mayor o igual a 18
@@ -186,8 +187,8 @@ public class Empresa implements Serializable {
         this.mozos.remove(mozo);
     }
 
-
     // --------- PRODUCTOS ------------
+
     /**
      * Permite agregar un nuevo producto a nuestro inventario
      * @param nombre nombre del producto, no podra estar vacio
@@ -195,7 +196,7 @@ public class Empresa implements Serializable {
      * @param precioVenta
      * @param stockInicial
      */
-    public void altaProducto( String nombre, double precioCosto, double precioVenta, int stockInicial){
+    public void altaProducto( String nombre, double precioCosto, double precioVenta, int stockInicial) {
         try{
             this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));
         }catch( Exception e){
@@ -207,13 +208,8 @@ public class Empresa implements Serializable {
      * Permite dar de baja un producto que no esta asociado a una comanda
      * @param producto el producto a eliminar debe ser distinto de null y no puede estar asociado a una comanda
      */
-
-    public void bajaProducto( Producto producto){
-        try{
-            this.productos.remove(producto);
-        }catch( Exception e){
-            System.out.printf(e.getMessage());
-        }
+    public void bajaProducto( Producto producto) {
+        this.productos.remove(producto);
     }
 
     /**
@@ -224,7 +220,7 @@ public class Empresa implements Serializable {
      * @param stockInicial entero mayor o igual a cero
      * @param producto producto a modificar, debera ser distinto de null
      */
-    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto){
+    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto) {
         try{
             producto.setNombre(nombre);
             producto.setPrecioCosto(precioCosto);
@@ -312,7 +308,6 @@ public class Empresa implements Serializable {
      */
 
     public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
-        boolean libre = false;
         if (mesa.getEstado().equalsIgnoreCase("ocupada") )
             throw new Exception("Mesa Ocupada");
 
@@ -321,7 +316,6 @@ public class Empresa implements Serializable {
         Comanda comanda = new Comanda(mesa,mozo);
         comanda.agregarPedido(pedido);
         this.comandas.add(comanda);
-
     }
 
     public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
@@ -378,8 +372,6 @@ public class Empresa implements Serializable {
 
 
     // ----- GET Y SET ----
-
-
     public double getSueldoBasico() {
         return sueldoBasico;
     }
@@ -458,6 +450,19 @@ public class Empresa implements Serializable {
 
     public void setPedidos(ArrayList<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Empresa)) return false;
+        Empresa empresa = (Empresa) o;
+        return Double.compare(empresa.getSueldoBasico(), getSueldoBasico()) == 0 && arrancoJornada == empresa.arrancoJornada && Objects.equals(getNombreEmpresa(), empresa.getNombreEmpresa()) && Objects.equals(getMozos(), empresa.getMozos()) && Objects.equals(getMesas(), empresa.getMesas()) && Objects.equals(getProductos(), empresa.getProductos()) && Objects.equals(getComandas(), empresa.getComandas()) && Objects.equals(getOperarios(), empresa.getOperarios()) && Objects.equals(getPromocionesProductos(), empresa.getPromocionesProductos()) && Objects.equals(getPromocionesTemporales(), empresa.getPromocionesTemporales()) && Objects.equals(getPedidos(), empresa.getPedidos());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNombreEmpresa(), getSueldoBasico(), getMozos(), getMesas(), getProductos(), getComandas(), getOperarios(), getPromocionesProductos(), getPromocionesTemporales(), getPedidos(), arrancoJornada);
     }
 }
 

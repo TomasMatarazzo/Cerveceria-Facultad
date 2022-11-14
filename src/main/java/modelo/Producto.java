@@ -1,7 +1,6 @@
 package modelo;
 
 import excepciones.ProductoIncorrecto;
-
 import java.io.Serializable;
 
 public class Producto implements Comparable<Producto>, Serializable {
@@ -94,7 +93,6 @@ public class Producto implements Comparable<Producto>, Serializable {
                 "      PrecioVenta:  " + precioVenta +
                 "      Stock:    " + stockInicial;
     }
-
 
     @Override
     public int compareTo(Producto o) {

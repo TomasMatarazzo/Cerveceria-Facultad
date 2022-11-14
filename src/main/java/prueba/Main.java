@@ -17,7 +17,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Empresa cerveceria=null;
+        Empresa cerveceria = null;
 
         try {
             TreeSet<Operario> operarios = new TreeSet<>();
@@ -25,21 +25,18 @@ public class Main {
             TreeSet<Producto> productos = new TreeSet<>();
             TreeSet<Mesa> mesas = new TreeSet<>();
             try {
-                System.out.println("HOLA");
                 IPersistencia persistencia=new PersistenciaBIN();
                 persistencia.abrirInput("Cerveceria.bin");
-                cerveceria=(Empresa) persistencia.leer();
+                cerveceria = (Empresa) persistencia.leer();
                 persistencia.cerrarInput();
                 mozos = cerveceria.getMozos();
                 productos = cerveceria.getProductos();
                 operarios = cerveceria.getOperarios();
                 mesas=cerveceria.getMesas();
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Se creo un nuevo archivo binario");
                 operarios.add(new Operario("ADMIN","ADMIN","ADMIN1234",true));
-                System.out.println(operarios.toString());
             }
-
 
             VistaLogin vista = new VistaLogin();
             Empresa empresa = new Empresa("CerveceriaProgra",mozos,mesas,productos,operarios);
@@ -47,7 +44,6 @@ public class Main {
             FormPassword form = new FormPassword();
             ControladorLogin controlador = new ControladorLogin(vista,empresa,form);
             vista.ejecutar();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

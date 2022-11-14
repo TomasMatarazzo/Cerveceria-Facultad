@@ -3,19 +3,17 @@ package modelo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.GregorianCalendar;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ComandaTest {
-
     Empresa empresa;
     Comanda comanda;
     Mozo mozo;
     Pedido pedido;
     Producto producto;
     Mesa mesa;
+
     @BeforeEach
     void setUp() throws Exception {
         producto = new Producto("coca",100,200,3);
@@ -28,7 +26,6 @@ class ComandaTest {
     @AfterEach
     void tearDown() {
     }
-
 
     /**
      * metodo ALTA COMANDA clase Empresa

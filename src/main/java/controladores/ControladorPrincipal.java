@@ -76,19 +76,14 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
         }
     }
 
-
     @Override
     public void windowClosing(WindowEvent e) {
         try {
-            System.out.println("ENTREE");
             IPersistencia persistencia = new PersistenciaBIN();
-            Empresa empresa=new Empresa(this.modelo.getNombreEmpresa(),this.modelo.getMozos(),this.modelo.getMesas(),this.modelo.getProductos(),this.modelo.getOperarios());
+            Empresa empresa = new Empresa(this.modelo.getNombreEmpresa(),this.modelo.getMozos(),this.modelo.getMesas(),this.modelo.getProductos(),this.modelo.getOperarios());
             persistencia.abrirOutput("Cerveceria.bin");
-            System.out.println("Crea archivo escritura");
             persistencia.escribir(empresa);
-            System.out.println("Empresa grabado exitosamente");
             persistencia.cerrarOutput();
-            System.out.println("Archivo cerrado");
         }
         catch (IOException o){
             System.out.println(o.getLocalizedMessage());

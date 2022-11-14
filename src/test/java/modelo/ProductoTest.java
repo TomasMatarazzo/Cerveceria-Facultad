@@ -19,7 +19,7 @@ class ProductoTest {
     }
 
     @Nested
-    @DisplayName("Un operario que intenta registrarse en el sistema ")
+    @DisplayName("Un producto ")
     class productoTest {
 
         @BeforeEach
@@ -27,17 +27,18 @@ class ProductoTest {
             TreeSet<Producto> productos= new TreeSet<>();
 
             empresa = new Empresa("Cerveceria", null, null, productos, null);
-
-            try {
-                empresa.signup("Messi", "Messi10", "Messi123", true);
-            } catch (Exception e) {
-                fail("ERROR registrando");
-            }
         }
 
         @Test
-        @DisplayName("")
-        void name() {
+        @DisplayName("es eliminado de un arbol vacio")
+        void productoTest1() {
+            try {
+                Producto producto = new Producto("Prueba", 100, 150, 100);
+
+                empresa.bajaProducto(producto);
+            } catch (Exception e) {
+                fail("Esta prueba no deberia disparar una excepcion");
+            }
         }
     }
 }

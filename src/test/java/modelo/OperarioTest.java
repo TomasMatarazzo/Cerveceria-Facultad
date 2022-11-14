@@ -71,12 +71,9 @@ class OperarioTest {
 
             @BeforeEach
             void setUp() {
-                String apellido = "Inactivo";
-                String username = "Inactivo11";
-                String password = "Inactivo#123";
-
                 try {
-                    empresa.signup(apellido, username, password, false);
+                    empresa.signup("Messi", "Messi10", "Messi#123", true);
+                    empresa.signup("Inactivo", "Inactivo11", "Inactivo#123", false);
                 } catch (Exception e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
@@ -129,9 +126,8 @@ class OperarioTest {
             @Test
             @DisplayName(" lanza excepcion porque no se encuentra activo")
             void loginTest4() {
-                Operario operarioInactivo = empresa.getOperarios().last();
-                
                 try {
+                    Operario operarioInactivo = empresa.getOperarios().first();
                     assertThrows(Exception.class, () -> empresa.login(operarioInactivo.getUsuario(), operarioInactivo.getPassword()));
                 } catch (Exception e) {
                     fail("Esta prueba no deberia disparar una excepcion");
@@ -141,13 +137,9 @@ class OperarioTest {
             @Test
             @DisplayName(" correctamente retorna una instancia del Operario")
             void loginTest5() {
-                String username = "Messi10";
-                String password = "Messi#123";
-
-                Operario respuestaEsperada = empresa.getOperarios().first();
-
                 try {
-
+                    Operario respuestaEsperada = empresa.getOperarios().last();
+                    assertEquals(respuestaEsperada, empresa.login(respuestaEsperada.getUsuario(), respuestaEsperada.getPassword()));
                 } catch (Exception e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
@@ -155,8 +147,45 @@ class OperarioTest {
         }
     }
 
-    @DisplayName("El administrador que intenta ")
+    @Nested
+    @DisplayName("El administrador que intenta modificar su contrasena por primera vez ")
     class administradorTest {
 
+        @BeforeEach
+        void setUp() {
+            TreeSet<Operario> operarios= new TreeSet<>();
+
+            operarios.add(new Operario("ADMIN","ADMIN","ADMIN1234",true));
+
+            empresa = new Empresa("Cerveceria", null, null, null, operarios);
+        }
+
+        @AfterEach
+        void tearDown() {
+            empresa.getOperarios().clear();
+        }
+
+        @Test
+        @DisplayName(" lanza excepcion con contrasena incorrecta")
+        void modificaPasswordTest1() {
+            assertAll(
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(null)),
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(""))
+            );
+        }
+
+        @Test
+        @DisplayName(" lo logra con una contrasena valida")
+        void modificaPasswordTest2() {
+            try {
+                empresa.modificarPassword("Nueva123");
+
+                Operario admin = empresa.getOperarios().first();
+
+                assertEquals("Nueva123", admin.getPassword());
+            } catch (Exception e) {
+                fail("Esta prueba no deberia disparar una excepcion");
+            }
+        }
     }
 }

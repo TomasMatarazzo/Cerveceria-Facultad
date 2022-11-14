@@ -72,9 +72,8 @@ class FacturaTest {
         double total;
         mesa.setEstado("Libre");
         try {
-            total =empresa.generarFactura(comanda);
+            total = empresa.generarFactura(comanda);
             fail("DEBERIA LANZAR EXCEPCION");
-
         } catch (Exception e) {
             final String msg = "Imposible crear una Factura sobre una mesa Libre";
             assertEquals(msg, e.getMessage());
