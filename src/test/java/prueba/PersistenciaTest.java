@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.TreeSet;
 
@@ -54,9 +55,7 @@ class PersistenciaTest {
         void persistenciaTest2() {
             IPersistencia persistencia = new PersistenciaBIN();
 
-
-            assertThrows(IOException.class, () -> persistencia.abrirOutput("Cerveceria.bin"));
-            assertThrows(IOException.class, () -> persistencia.escribir(empresa));
+            assertThrows(NullPointerException.class, () -> persistencia.escribir(empresa));
         }
 
         @Test
@@ -64,9 +63,20 @@ class PersistenciaTest {
         void persistenciaTest3() {
             IPersistencia persistencia = new PersistenciaBIN();
 
-            assertThrows(IOException.class, () -> persistencia.abrirInput("Cerveceria.bin"));
-            assertThrows(IOException.class, () -> persistencia.leer());
+            assertThrows(NullPointerException.class, () -> persistencia.leer());
         }
+
+        @Test
+        @DisplayName("La clase persistencia lanza excepcion si se intenta abrir el archivo inexistente")
+        void persistenciaTest4() {
+            IPersistencia persistencia = new PersistenciaBIN();
+
+            assertAll(
+                    () -> assertThrows(FileNotFoundException.class, () -> persistencia.abrirInput("Cerveceria.bin")),
+                    () -> assertThrows(FileNotFoundException.class, () -> persistencia.abrirInput("Cerveceria.bin"))
+            );
+        }
+
     }
 
     @Nested
@@ -92,7 +102,7 @@ class PersistenciaTest {
 
             @Test
             @DisplayName("La clase persistir lee y escribe la empresa vacia")
-            void persistenciaTest4() {
+            void persistenciaTest5() {
                 PersistenciaBIN persistencia = new PersistenciaBIN();
                 try {
                     persistencia.abrirOutput("Cerveceria.bin");
@@ -103,9 +113,7 @@ class PersistenciaTest {
                     persistencia.cerrarInput();
 
                     assertEquals(empresa, empresa2);
-                } catch (IOException e) {
-                    fail("Esta prueba no deberia disparar una excepcion");
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
             }
@@ -136,7 +144,7 @@ class PersistenciaTest {
 
             @Test
             @DisplayName("La clase persistir lee y escribe la empresa llena")
-            void persistenciaTest5() {
+            void persistenciaTest6() {
                 PersistenciaBIN persistencia = new PersistenciaBIN();
                 try {
                     persistencia.abrirOutput("Cerveceria.bin");
@@ -147,9 +155,7 @@ class PersistenciaTest {
                     persistencia.cerrarInput();
 
                     assertEquals(empresa, empresa2);
-                } catch (IOException e) {
-                    fail("Esta prueba no deberia disparar una excepcion");
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     fail("Esta prueba no deberia disparar una excepcion");
                 }
             }

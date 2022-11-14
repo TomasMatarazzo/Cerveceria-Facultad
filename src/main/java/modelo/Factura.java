@@ -73,9 +73,10 @@ public class Factura {
     public double setTotal() {
         double total=0;
         double parcial;
-        for (int i=0;i<pedidos.size();i++){
+
+        for (int i=0;i<pedidos.size();i++) {
            parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
-            if (this.promocionesProductos != null){// || promocionesProductos.size() > 0) {
+            if (this.promocionesProductos != null) { // || promocionesProductos.size() > 0) {
                 for (int j = 0; j < promocionesProductos.size(); j++) {
                     if (promocionesProductos.get(j).isActiva()) {
                         if (promocionesProductos.get(j).isAplicaDosPorUno()) {
@@ -88,6 +89,7 @@ public class Factura {
             }
             total += parcial;
         }
+
         if (this.promocionesTemporales != null){ //|| promocionesTemporales.size() > 0) {
             for (int k = 0; k < promocionesTemporales.size(); k++) {
                 if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
@@ -95,6 +97,7 @@ public class Factura {
                 }
             }
         }
+
         return total;
     }
 }

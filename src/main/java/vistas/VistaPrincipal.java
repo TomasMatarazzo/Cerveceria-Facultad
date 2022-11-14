@@ -192,6 +192,7 @@ public class VistaPrincipal extends JFrame {
     public void hideFormSueldo(){
         this.formSueldo.setVisible(false);
     }
+
     public FormNombreySueldo getFormSueldo() {
         return formSueldo;
     }

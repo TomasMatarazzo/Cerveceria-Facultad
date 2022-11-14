@@ -16,6 +16,7 @@ class EstadisticasTest {
     Mozo mozo2;
     Mesa mesa1;
     Mesa mesa2;
+
     @BeforeEach
     void setUp() throws Exception {
         mozos = new TreeSet<>();
