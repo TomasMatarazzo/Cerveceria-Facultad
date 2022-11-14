@@ -108,9 +108,7 @@ public class Empresa implements Serializable {
 
         Matcher m = p.matcher(password);
         if (m.matches()) {
-            System.out.println("HOlaaaaaaa");
             this.operarios.first().setPassword(password);
-            System.out.println("HOlaaaaaaa");
         } else {
             throw new Exception();
         }
@@ -137,12 +135,10 @@ public class Empresa implements Serializable {
         if(fecha.after(fechaNacimiento)){
             if( cantHijos >= 0 ){
                 this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));
-            }
-            else{
+            } else{
                 throw new MozoIncorrecto("Cant de hijos menor a cero");
             }
-        }
-        else{
+        } else{
             throw new MozoIncorrecto("Edad menor a 18 anos");
         }
     }
@@ -168,12 +164,10 @@ public class Empresa implements Serializable {
                 mozo.setFechaNacimiento(fechaNacimiento);
                 mozo.setCantHijos(cantHijos);
                 mozo.setEstado(estado);
-            }
-            else{
+            } else{
                 throw new MozoIncorrecto("Cant de hijos menor a cero");
             }
-        }
-        else{
+        } else{
             throw new MozoIncorrecto("Edad menor a 18 anos");
         }
     }

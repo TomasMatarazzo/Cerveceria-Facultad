@@ -11,7 +11,6 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FacturaTest {
-
     PromocionTemporal promocionTemporal;
     ProductoEnPromocion productoEnPromocion;
     Empresa empresa;

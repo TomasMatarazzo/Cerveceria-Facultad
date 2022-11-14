@@ -77,16 +77,16 @@ public class Factura {
            parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
             if (this.promocionesProductos != null){// || promocionesProductos.size() > 0) {
                 for (int j = 0; j < promocionesProductos.size(); j++) {
-                        if (promocionesProductos.get(j).isActiva()) {
-                            if (promocionesProductos.get(j).isAplicaDosPorUno()) {
-                                parcial /= 2.;
-                            } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
-                                parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
-                            }
+                    if (promocionesProductos.get(j).isActiva()) {
+                        if (promocionesProductos.get(j).isAplicaDosPorUno()) {
+                            parcial /= 2.;
+                        } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
+                            parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
                         }
+                    }
                 }
             }
-                total += parcial;
+            total += parcial;
         }
         if (this.promocionesTemporales != null){ //|| promocionesTemporales.size() > 0) {
             for (int k = 0; k < promocionesTemporales.size(); k++) {
@@ -97,5 +97,4 @@ public class Factura {
         }
         return total;
     }
-
 }
