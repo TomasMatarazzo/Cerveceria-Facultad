@@ -11,6 +11,7 @@ public class Estadisticas {
      */
     public static String mayorVolumenVenta(TreeSet<Mozo> mozos){
         double max = -10;
+        String respuesta;
         Mozo mozoMax = null;
         for (Mozo mozo:mozos){
             if (mozo.getVentas() > max){
@@ -18,8 +19,9 @@ public class Estadisticas {
                 mozoMax = mozo;
             }
         }
-
-        return mozoMax.getNombreYApellido();
+        if (mozoMax == null) respuesta = null;
+        else respuesta = mozoMax.getNombreYApellido();
+        return respuesta;
     }
 
     /**
@@ -29,6 +31,7 @@ public class Estadisticas {
      */
     public static String menorVolumenVenta(TreeSet<Mozo> mozos){
         double min = 10000000;
+        String respuesta;
         Mozo mozoMax = null;
         for (Mozo mozo:mozos){
             if (mozo.getVentas() < min){
@@ -36,8 +39,9 @@ public class Estadisticas {
                 mozoMax = mozo;
             }
         }
-
-        return mozoMax.getNombreYApellido();
+        if (mozoMax == null) respuesta = null;
+        else respuesta = mozoMax.getNombreYApellido();
+        return respuesta;
     }
 
     /**
@@ -52,6 +56,9 @@ public class Estadisticas {
             acum += mesa.getTotalComandas();
             acum2 += mesa.getCantComandas();
         }
-        return acum / acum2;
+        if (acum2 == 0)
+            return 0.;
+        else
+            return acum / acum2;
     }
 }
