@@ -2,10 +2,8 @@ package vistas;
 
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.event.ActionEvent;
 import java.util.TreeSet;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 import controladores.ControladorPrincipal;
 import modelo.*;
@@ -15,14 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VistaPrincipalTest {
+class VistaPrincipalAdminTest {
 
     Robot robot;
     ControladorPrincipal controlador;
     VistaPrincipal vista;
     Empresa empresa;
 
-    public VistaPrincipalTest(){
+    public VistaPrincipalAdminTest(){
         try
         {
             robot = new Robot();
@@ -155,4 +153,15 @@ class VistaPrincipalTest {
         UtilsTest.clickComponent(gestiones, robot);
         assertTrue(controlador.getVentanaEmergente().getClass() == VistaInventario.class, "NO CREA LA VENTANA CORRECTA");
     }
+    @Test
+    public void testBotonPromociones()
+    {
+        robot.delay(UtilsTest.getDelay());
+        JButton nuevaJornada = (JButton) UtilsTest.getComponentForName(controlador.getVista(), "botonComenzarJornada");
+        UtilsTest.clickComponent(nuevaJornada, robot);
+        JButton promociones = (JButton) UtilsTest.getComponentForName(controlador.getVista(), "botonPromociones");
+        UtilsTest.clickComponent(promociones, robot);
+        assertTrue(controlador.getVentanaEmergente().getClass() == VistaPromociones.class, "NO CREA LA VENTANA CORRECTA");
+    }
+
 }

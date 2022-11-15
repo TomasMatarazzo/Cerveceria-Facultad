@@ -13,7 +13,7 @@ import java.util.function.DoubleFunction;
 import controladores.ControladorPromociones;
 import modelo.*;
 
-public class VistaPromociones extends JFrame  {
+public class VistaPromociones extends JFrame implements Ivista {
 
     private JPanel contentPane;
     JList<ProductoEnPromocion> listaPromocionesProductos;
