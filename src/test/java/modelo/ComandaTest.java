@@ -74,8 +74,8 @@ class ComandaTest {
      */
     @Test
     void agregarPedidoAComanda1() {
-        comanda = new Comanda(mesa,mozo);
         try {
+            comanda = new Comanda(mesa,mozo);
             empresa.agregarPedidoAComanda(pedido,comanda);
             assertTrue(comanda.getPedidos().size()==1,"ERROR AL CREAR LA COMANDA");
 
