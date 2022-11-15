@@ -9,7 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 
-public class VistaRegistrarse extends JFrame{
+
+public class VistaRegistrarse extends JFrame implements Ivista{
+
         private JPanel contentPane;
         private JTextField inputApellido;
         private JTextField inputUsuario;

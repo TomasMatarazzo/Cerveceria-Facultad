@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FormPassword extends JFrame {
+public class FormPassword extends JFrame implements  Ivista{
 
     private JPanel contentPane;
     private JTextField inputPassword;

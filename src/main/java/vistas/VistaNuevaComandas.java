@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VistaNuevaComandas extends JFrame {
+public class VistaNuevaComandas extends JFrame implements Ivista{
 
     private JPanel contentPane;
     private JButton btnModificarComanda;

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-public class VistaComandas extends JFrame {
+public class VistaComandas extends JFrame implements Ivista{
 
     private JPanel contentPane;
     private JLabel lblRegistreOperario;

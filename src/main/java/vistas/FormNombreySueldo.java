@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class FormNombreySueldo extends JFrame {
+public class FormNombreySueldo extends JFrame implements Ivista{
 
     private JPanel contentPane;
     private JLabel lblNewLabel;

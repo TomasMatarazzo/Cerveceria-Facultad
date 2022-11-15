@@ -1,5 +1,6 @@
 package vistas;
 
+import modelo.Empresa;
 import modelo.Operario;
 
 import javax.swing.JFrame;
@@ -24,7 +25,6 @@ public class VistaPrincipal extends JFrame {
     private JLabel Nombre;
     private JLabel lblSueldoBase;
     private JButton btnModificarN;
-    private JButton botonModificarS;
     private JLabel nombreVariable;
     private JLabel sueldoVariable;
     private String nombre = "";
@@ -166,6 +166,17 @@ public class VistaPrincipal extends JFrame {
         this.btnPromociones.setEnabled(false);
         this.btnNuevasComandas.setEnabled(false);
         this.btnEstadisticas.setEnabled(false);
+
+        //Seteo los nombres
+        this.btnModificarN.setName("botonModificar");
+        this.botonOperario.setName("botonOperario");
+        this.btnComandas.setName("botonComandas");
+        this.btnEstadisticas.setName("botonEstadisticas");
+        this.btnPromociones.setName("botonPromociones");
+        this.btnGestiones.setName("botonGestiones");
+        this.btnNuevasComandas.setName("botonNuevaComanda");
+        this.btnComenzarJornada.setName("botonComenzarJornada");
+
     }
 
     public void arrancoJornada(){
