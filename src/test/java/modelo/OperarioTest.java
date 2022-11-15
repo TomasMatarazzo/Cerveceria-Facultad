@@ -30,10 +30,16 @@ class OperarioTest {
         void signUpTest1() {
             String apellido = "Messi";
             String username = "Messi10";
+            String passwordInvalida1 = "MESSI123";
+            String passwordInvalida2 = "messi123";
+            String passwordInvalida3 = "lionel";
 
             assertAll(
                     () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, null, true)),
-                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, "", true))
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, "", true)),
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordInvalida1, true)),
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordInvalida2, true)),
+                    () -> assertThrows(Exception.class, () -> empresa.signup(apellido, username, passwordInvalida3, true))
             );
         }
 
@@ -168,9 +174,16 @@ class OperarioTest {
         @Test
         @DisplayName(" lanza excepcion con contrasena incorrecta")
         void modificaPasswordTest1() {
+            String passwordInvalida1 = "ADMIN999";
+            String passwordInvalida2 = "admin999";
+            String passwordInvalida3 = "Admin";
+
             assertAll(
                     () -> assertThrows(Exception.class, () -> empresa.modificarPassword(null)),
-                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(""))
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword("")),
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(passwordInvalida1)),
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(passwordInvalida2)),
+                    () -> assertThrows(Exception.class, () -> empresa.modificarPassword(passwordInvalida3))
             );
         }
 

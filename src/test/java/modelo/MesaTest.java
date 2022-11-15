@@ -1,10 +1,7 @@
 package modelo;
 
-import excepciones.MozoIncorrecto;
 import org.junit.jupiter.api.*;
-
 import java.util.TreeSet;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MesaTest {
@@ -48,8 +45,6 @@ class MesaTest {
             }
         }
 
-
-
         /**
          * metodo ALTA MESA clase Empresa
          * <p>
@@ -68,8 +63,8 @@ class MesaTest {
                 fail("NO DEBERIA LANZAR EXCEPCION");
             }
         }
-
     }
+
     @Nested
     @DisplayName("test mesa conjunto lleno")
     class mesaConjuntoLlenoTest {
