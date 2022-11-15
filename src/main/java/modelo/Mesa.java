@@ -7,7 +7,6 @@ public class Mesa implements Comparable<Mesa>, Serializable {
     private int cantidadPersonas;
     private String estado;
     private Mozo mozo;
-    private Pedido pedido;
     private int cantComandas;
     private double totalComandas;
 

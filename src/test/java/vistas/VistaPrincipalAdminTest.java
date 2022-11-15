@@ -14,18 +14,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VistaPrincipalAdminTest {
-
     Robot robot;
     ControladorPrincipal controlador;
     VistaPrincipal vista;
     Empresa empresa;
 
     public VistaPrincipalAdminTest(){
-        try
-        {
+        try {
             robot = new Robot();
-        } catch (AWTException e)
-        {
+        } catch (AWTException e) {
+
         }
     }
 
@@ -41,7 +39,6 @@ class VistaPrincipalAdminTest {
         vista = new VistaPrincipal(op);
         controlador = new ControladorPrincipal(vista,empresa);
         vista.ejecutar();
-
     }
 
     @AfterEach
