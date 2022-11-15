@@ -291,7 +291,7 @@ public class Empresa implements Serializable {
      * @throws Exception si el estado es incorrecto
      */
 
-    public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
+    public void altaComanda(Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
         if (mesa.getEstado().equalsIgnoreCase("ocupada") )
             throw new Exception("Mesa Ocupada");
 
@@ -302,7 +302,7 @@ public class Empresa implements Serializable {
         this.comandas.add(comanda);
     }
 
-    public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
+    public void agregarPedidoAComanda(Pedido ped, Comanda comanda){
         comanda.agregarPedido(ped);
     }
 
