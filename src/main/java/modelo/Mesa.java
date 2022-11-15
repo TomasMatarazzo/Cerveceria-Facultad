@@ -69,8 +69,11 @@ public class Mesa implements Comparable<Mesa>, Serializable {
         return mozo;
     }
 
-    public void setMozo(Mozo mozo) {
-        this.mozo = mozo;
+    public void setMozo(Mozo mozo) throws Exception {
+        if (mozo.getEstado() == 0)
+            this.mozo = mozo;
+        else
+            throw new Exception();
     }
 
     @Override

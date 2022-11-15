@@ -13,7 +13,7 @@ public class Comanda {
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private String estado;
 
-    public Comanda( Mesa mesa,Mozo mozo) {
+    public Comanda( Mesa mesa,Mozo mozo) throws Exception {
         this.fecha = new Date();
         this.setMesa(mesa);
         this.estado = "abierta";

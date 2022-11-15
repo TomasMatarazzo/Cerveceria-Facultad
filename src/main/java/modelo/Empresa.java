@@ -298,7 +298,6 @@ public class Empresa implements Serializable {
             throw new Exception("Mesa Ocupada");
 
         mesa.setEstado("ocupada");
-        mesa.setMozo(mozo);
         Comanda comanda = new Comanda(mesa,mozo);
         comanda.agregarPedido(pedido);
         this.comandas.add(comanda);

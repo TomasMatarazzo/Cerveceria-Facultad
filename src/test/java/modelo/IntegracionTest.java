@@ -11,40 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class IntegracionTest {
     Empresa empresa;
 
-    @Nested
-    @DisplayName("1. VistaPrincipal ausente")
-    class CasoDePrueba1 {
-        @BeforeEach
-        void setUp() {
-        }
-
-        @AfterEach
-        void tearDown() {
-        }
-
-        @Test
-        void altaComandaTest1() {
-        }
-    }
-
-    @Nested
-    @DisplayName("2. VistaNuevasComandas ausente")
-    class CasoDePrueba2 {
-        @BeforeEach
-        void setUp() {
-        }
-
-        @AfterEach
-        void tearDown() {
-        }
-
-        @Test
-        void altaComandaTest1() {
-        }
-    }
-
     @Test
-    @DisplayName("3. Empresa ausente causa falla de ejecucion lanzando una excepcion")
+    @DisplayName("6. Empresa ausente causa falla de ejecucion lanzando una excepcion")
     void altaComandaTest3() {
         try {
             Empresa empresa = null;
@@ -60,7 +28,6 @@ class IntegracionTest {
     }
 
     @Nested
-    @DisplayName("4. Mesa ausente causa falla de ejecucion lanzando una excepcion")
     class CasoDePrueba4 {
         @BeforeEach
         void setUp() {
@@ -78,6 +45,7 @@ class IntegracionTest {
         }
 
         @Test
+        @DisplayName("7. Mesa ausente causa falla de ejecucion lanzando una excepcion")
         void altaComandaTest4() {
             try {
                 Mesa mesa = null;
@@ -86,6 +54,26 @@ class IntegracionTest {
                 Pedido pedido = new Pedido(producto, 10);
 
                 assertThrows(NullPointerException.class, () -> empresa.altaComanda(mesa, mozo, pedido));
+            } catch (Exception e) {
+                fail("Esta prueba no deberia disparar una excepcion");
+            }
+        }
+
+        @Test
+        @DisplayName("8-9. Mozo de Franco o Ausente lanza una excepcion")
+        void altaComandaTest5() {
+            try {
+                Mesa mesa1 = new Mesa(10);
+                Mesa mesa2 = new Mesa(5);
+                Mozo mozoDeFranco = new Mozo("mozoPrueba1", null, 2, 2);
+                Mozo mozoAusente = new Mozo("mozoPrueba2", null, 2, 1);
+                Producto producto = new Producto("productoPrueba", 100, 150, 100);
+                Pedido pedido = new Pedido(producto, 10);
+
+                assertAll(
+                        () -> assertThrows(Exception.class, () -> empresa.altaComanda(mesa1, mozoDeFranco, pedido)),
+                        () -> assertThrows(Exception.class, () -> empresa.altaComanda(mesa2, mozoAusente, pedido))
+                );
             } catch (Exception e) {
                 fail("Esta prueba no deberia disparar una excepcion");
             }
