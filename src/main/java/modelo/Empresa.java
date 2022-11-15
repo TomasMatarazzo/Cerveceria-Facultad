@@ -81,8 +81,6 @@ public class Empresa implements Serializable {
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(password);
 
-        // pongo true para no poner contrasenas complicadas. dps lo cambian
-        // if (m.matches())
         if (m.matches()) {
             this.operarios.add(new Operario(apellido, usuario, password, activo));
         } else {
@@ -190,12 +188,8 @@ public class Empresa implements Serializable {
      * @param precioVenta
      * @param stockInicial
      */
-    public void altaProducto( String nombre, double precioCosto, double precioVenta, int stockInicial) {
-        try{
-            this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));
-        }catch( Exception e){
-            System.out.printf(e.getMessage());
-        }
+    public void altaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
+        this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));
     }
 
     /**
@@ -214,15 +208,11 @@ public class Empresa implements Serializable {
      * @param stockInicial entero mayor o igual a cero
      * @param producto producto a modificar, debera ser distinto de null
      */
-    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto) {
-        try{
-            producto.setNombre(nombre);
-            producto.setPrecioCosto(precioCosto);
-            producto.setPrecioVenta(precioVenta);
-            producto.setStockInicial(stockInicial);
-        }catch( Exception e){
-            System.out.printf(e.getMessage());
-        }
+    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto) throws Exception {
+        producto.setNombre(nombre);
+        producto.setPrecioCosto(precioCosto);
+        producto.setPrecioVenta(precioVenta);
+        producto.setStockInicial(stockInicial);
     }
 
     // -------- MESAS ----------

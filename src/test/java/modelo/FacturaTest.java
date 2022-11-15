@@ -20,6 +20,7 @@ class FacturaTest {
     Producto producto;
     Mesa mesa;
     String formaPago;
+
     @BeforeEach
     void setUp() throws Exception {
         producto = new Producto("coca",100,200,3);
@@ -56,11 +57,9 @@ class FacturaTest {
             total =empresa.generarFactura(comanda);
 
             assertTrue(total == total2,"ERROR AL CALCULAR TOTAL");
-
         } catch (Exception e) {
             fail("NO DEBERIA LANZAR EXCEPCION");
         }
-
     }
 
     /**

@@ -37,13 +37,19 @@ public class PersistenciaBIN implements IPersistencia {
     public void escribir(Serializable p) throws IOException {
         if (objectoutput != null)
             objectoutput.writeObject(p);
+        else
+            throw new NullPointerException();
     }
 
     @Override
     public Serializable leer() throws IOException, ClassNotFoundException {
-        Serializable p = null;
+        Serializable p;
+
         if (objectinput != null)
             p = (Serializable) objectinput.readObject();
+        else
+            throw new NullPointerException();
+
         return p;
     }
 }

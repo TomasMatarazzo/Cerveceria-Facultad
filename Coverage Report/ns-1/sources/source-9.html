@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Producto</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">modelo</a>
+</div>
+
+<h1>Coverage Summary for Class: Producto (modelo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Producto</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (7/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    51,7%
+  </span>
+  <span class="absValue">
+    (15/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package modelo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import excepciones.ProductoIncorrecto;
+<i class="no-highlight">4</i>&nbsp;import java.io.Serializable;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;public class Producto implements Comparable&lt;Producto&gt;, Serializable {
+<i class="no-highlight">7</i>&nbsp;    private static int id;
+<i class="no-highlight">8</i>&nbsp;    private int id_producto;
+<i class="no-highlight">9</i>&nbsp;    private String nombre;
+<i class="no-highlight">10</i>&nbsp;    private double precioCosto;
+<i class="no-highlight">11</i>&nbsp;    private double precioVenta;
+<i class="no-highlight">12</i>&nbsp;    private int stockInicial;
+<i class="no-highlight">13</i>&nbsp;
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    public Producto( String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        this.id_producto = id++;</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;        this.nombre = nombre;</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;        this.setPrecioCosto(precioCosto);</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        this.setPrecioVenta(precioVenta);</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        this.checkPrecio(precioCosto,precioVenta);</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        this.stockInicial = stockInicial;</b>
+<i class="no-highlight">21</i>&nbsp;    }
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     * @param precioCosto flotante mayor a cero y menor al precio de venta
+<i class="no-highlight">25</i>&nbsp;     * @param precioVenta flotante mayor a cero y mayor al precio de costo
+<i class="no-highlight">26</i>&nbsp;     * @throws ProductoIncorrecto es lanzada si el precio de venta es menor al de costo
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    public void checkPrecio(double precioCosto, double precioVenta) throws ProductoIncorrecto {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        if (precioVenta &lt; precioCosto)</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;            throw new ProductoIncorrecto(&quot;El precio de venta es menor al de costo&quot;);</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    public int getId_producto() {
+<b class="nc"><i class="no-highlight">34</i>&nbsp;        return this.id_producto;</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    public void setId_producto(int id_producto) {
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        this.id_producto = id_producto;</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    public String getNombre() {
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        return nombre;</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    public void setNombre(String nombre) {
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        this.nombre = nombre;</b>
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    public double getPrecioCosto() {
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        return precioCosto;</b>
+<i class="no-highlight">51</i>&nbsp;    }
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    /**
+<i class="no-highlight">54</i>&nbsp;     * Permite setear el precio de costo
+<i class="no-highlight">55</i>&nbsp;     * @param precioCosto flotante mayor a cero
+<i class="no-highlight">56</i>&nbsp;     * @throws ProductoIncorrecto en caso de que el precio de costo sea menor a cero
+<i class="no-highlight">57</i>&nbsp;     */
+<i class="no-highlight">58</i>&nbsp;    public void setPrecioCosto(double precioCosto) throws ProductoIncorrecto{
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        if (precioCosto &gt; 0)</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;            this.precioCosto = precioCosto;</b>
+<i class="no-highlight">61</i>&nbsp;        else
+<b class="nc"><i class="no-highlight">62</i>&nbsp;            throw new ProductoIncorrecto(&quot;El precio de costo es menor o igual a 0&quot;);</b>
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;    public double getPrecioVenta() {
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        return precioVenta;</b>
+<i class="no-highlight">67</i>&nbsp;    }
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    /**
+<i class="no-highlight">70</i>&nbsp;     * Permite setear el precio de venta
+<i class="no-highlight">71</i>&nbsp;     * @param precioVenta flotante mayor o igual a cero y mayor al precio de costo
+<i class="no-highlight">72</i>&nbsp;     * @throws ProductoIncorrecto se lanza cuando el precio de venta es menor o igual a cero o menor al precio de venta
+<i class="no-highlight">73</i>&nbsp;     */
+<i class="no-highlight">74</i>&nbsp;    public void setPrecioVenta(double precioVenta) throws ProductoIncorrecto {
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        if (precioVenta &gt; 0 &amp;&amp; precioVenta&gt;this.precioCosto)</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            this.precioVenta = precioVenta;</b>
+<i class="no-highlight">77</i>&nbsp;        else
+<b class="nc"><i class="no-highlight">78</i>&nbsp;            throw new ProductoIncorrecto(&quot;El precio de venta es menor o igual a 0 o menor al precio de costo&quot;);</b>
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    public int getStockInicial() {
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        return stockInicial;</b>
+<i class="no-highlight">83</i>&nbsp;    }
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;    public void setStockInicial(int stockInicial) {
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        this.stockInicial = stockInicial;</b>
+<i class="no-highlight">87</i>&nbsp;    }
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;    @Override
+<i class="no-highlight">90</i>&nbsp;    public String toString() {
+<b class="nc"><i class="no-highlight">91</i>&nbsp;        return &quot;Producto:   &quot; + nombre +</b>
+<i class="no-highlight">92</i>&nbsp;                &quot;      PrecioCosto:   &quot; + precioCosto +
+<i class="no-highlight">93</i>&nbsp;                &quot;      PrecioVenta:  &quot; + precioVenta +
+<i class="no-highlight">94</i>&nbsp;                &quot;      Stock:    &quot; + stockInicial;
+<i class="no-highlight">95</i>&nbsp;    }
+<i class="no-highlight">96</i>&nbsp;
+<i class="no-highlight">97</i>&nbsp;    @Override
+<i class="no-highlight">98</i>&nbsp;    public int compareTo(Producto o) {
+<b class="nc"><i class="no-highlight">99</i>&nbsp;        if (this.getId_producto() == o.id_producto)</b>
+<b class="nc"><i class="no-highlight">100</i>&nbsp;            return 0;</b>
+<i class="no-highlight">101</i>&nbsp;        else{
+<b class="nc"><i class="no-highlight">102</i>&nbsp;            if (this.id_producto &gt; o.id_producto){</b>
+<b class="nc"><i class="no-highlight">103</i>&nbsp;                return 1;</b>
+<i class="no-highlight">104</i>&nbsp;            }else{
+<b class="nc"><i class="no-highlight">105</i>&nbsp;                return -1;</b>
+<i class="no-highlight">106</i>&nbsp;            }
+<i class="no-highlight">107</i>&nbsp;        }
+<i class="no-highlight">108</i>&nbsp;    }
+<i class="no-highlight">109</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-14 19:18</div>
+</div>
+</body>
+</html>
