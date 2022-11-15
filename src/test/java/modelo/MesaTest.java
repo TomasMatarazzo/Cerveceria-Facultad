@@ -34,7 +34,7 @@ class MesaTest {
          * Se quiere dar de baja una mesa. COLECCION DE MESAS VACIA
          */
         @Test
-        void bajaMesa3() {
+        void bajaMesa1() {
             try {
                 empresa.bajaMesa(mesa2);
                 fail("DEBERIA LANZAR EXCEPCION");
@@ -61,6 +61,23 @@ class MesaTest {
                 assertTrue(empresa.getMesas().size() == 1, "ERROR AL DAR DE ALTA UNA MESA");
             } catch (Exception e) {
                 fail("NO DEBERIA LANZAR EXCEPCION");
+            }
+        }
+
+        /**
+         * Se quiere dar de alta  una mesa con nro personas <2
+         */
+        @Test
+        void altaMesa2() {
+            int cantidad = 1;
+            try {
+                empresa.altaMesa(cantidad);
+                assertTrue(empresa.getMesas().size() == 0, "ERROR AL DAR DE ALTA UNA MESA");
+                fail("DEBERIA LANZAR EXCEPCION");
+
+            } catch (Exception e) {
+                final String msg = "Pocas personas para dar de alta una mesa";
+                assertEquals(msg, e.getMessage());
             }
         }
     }

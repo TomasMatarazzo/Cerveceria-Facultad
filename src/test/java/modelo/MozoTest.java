@@ -137,9 +137,10 @@ class MozoTest {
         void setUp() {
             TreeSet<Mozo> mozos = new TreeSet<>();
             mozo2 = new Mozo("Tomas", new GregorianCalendar(2000,12,12),0,1);
-            mozo1 = new Mozo("Matias", new GregorianCalendar(2000,12,12),0,1);
+            mozo1 = new Mozo("Matias", new GregorianCalendar(2000,12,12),1,1);
             mozos.add(mozo1);
             empresa = new Empresa("Cerveceria", mozos, null, null, null);
+            empresa.setSueldoBasico(1000);
         }
 
         @AfterEach
@@ -344,5 +345,18 @@ class MozoTest {
             }
         }
 
+        /**
+         * se quiere calcular el sueldo de un mozo
+         */
+        @Test
+        void calculaSueldoMozo1() {
+            double sueldo;
+            try {
+                sueldo = empresa.calculaSueldo(mozo1);
+                assertTrue(sueldo == empresa.getSueldoBasico()*(1+0.05*mozo1.getCantHijos()),"ERROR AL MODIFICAR MOZO VALIDO");
+            } catch (Exception e) {
+                fail("NO DEBERIA LANZAR EXCEPCION");
+            }
+        }
     }
 }
