@@ -88,7 +88,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">13</i>&nbsp;    private ArrayList&lt;Pedido&gt; pedidos = new ArrayList&lt;&gt;();</b>
 <i class="no-highlight">14</i>&nbsp;    private String estado;
 <i class="no-highlight">15</i>&nbsp;
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    public Comanda( Mesa mesa,Mozo mozo) throws Exception{</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    public Comanda( Mesa mesa,Mozo mozo) throws Exception {</b>
 <b class="fc"><i class="no-highlight">17</i>&nbsp;        this.fecha = new Date();</b>
 <b class="fc"><i class="no-highlight">18</i>&nbsp;        this.setMesa(mesa);</b>
 <b class="fc"><i class="no-highlight">19</i>&nbsp;        this.estado = &quot;abierta&quot;;</b>
@@ -114,7 +114,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">39</i>&nbsp;        return mesa;</b>
 <i class="no-highlight">40</i>&nbsp;    }
 <i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;    public void setMesa(Mesa mesa) throws Exception {
+<i class="no-highlight">42</i>&nbsp;    public void setMesa(Mesa mesa) {
 <b class="fc"><i class="no-highlight">43</i>&nbsp;        this.mesa = mesa;</b>
 <i class="no-highlight">44</i>&nbsp;    }
 <i class="no-highlight">45</i>&nbsp;
@@ -151,13 +151,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc"><i class="no-highlight">76</i>&nbsp;        return Objects.hash(getMesa());</b>
 <i class="no-highlight">77</i>&nbsp;    }
 <i class="no-highlight">78</i>&nbsp;
-<b class="nc"><i class="no-highlight">79</i>&nbsp;    public void cerrarComanda(){this.estado = &quot;cerrar&quot;;}</b>
-<i class="no-highlight">80</i>&nbsp;
-<i class="no-highlight">81</i>&nbsp;    @Override
-<i class="no-highlight">82</i>&nbsp;    public String toString() {
-<b class="nc"><i class="no-highlight">83</i>&nbsp;        return &quot;Comanda:  &quot; + &quot;Mesa: &quot; + this.getMesa().getNro() + &quot;  Cant-Pedidos: &quot; + this.getPedidos().size();</b>
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">79</i>&nbsp;    public void cerrarComanda(){
+<b class="nc"><i class="no-highlight">80</i>&nbsp;        this.estado = &quot;cerrar&quot;;</b>
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;    @Override
+<i class="no-highlight">84</i>&nbsp;    public String toString() {
+<b class="nc"><i class="no-highlight">85</i>&nbsp;        return &quot;Comanda:  &quot; + &quot;Mesa: &quot; + this.getMesa().getNro() + &quot;  Cant-Pedidos: &quot; + this.getPedidos().size();</b>
+<i class="no-highlight">86</i>&nbsp;    }
+<i class="no-highlight">87</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -184,7 +186,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-14 19:18</div>
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
 </div>
 </body>
 </html>

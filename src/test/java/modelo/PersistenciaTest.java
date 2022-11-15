@@ -1,4 +1,4 @@
-package prueba;
+package modelo;
 
 import modelo.*;
 import org.junit.jupiter.api.*;

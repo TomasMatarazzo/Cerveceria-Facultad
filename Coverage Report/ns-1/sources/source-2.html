@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    59,1%
+    72,7%
   </span>
   <span class="absValue">
-    (26/44)
+    (32/44)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    90%
   </span>
   <span class="absValue">
-    (112/140)
+    (126/140)
   </span>
 </td>
 </tr>
@@ -81,452 +81,453 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">6</i>&nbsp;import java.io.Serializable;
 <i class="no-highlight">7</i>&nbsp;import java.time.Instant;
 <i class="no-highlight">8</i>&nbsp;import java.util.*;
-<i class="no-highlight">9</i>&nbsp;import java.util.regex.Matcher;
-<i class="no-highlight">10</i>&nbsp;import java.util.regex.Pattern;
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;public class Empresa implements Serializable {</b>
-<i class="no-highlight">13</i>&nbsp;    private String nombreEmpresa;
-<i class="no-highlight">14</i>&nbsp;    private double sueldoBasico;
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    private TreeSet&lt;Mozo&gt; mozos = new TreeSet&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    private TreeSet&lt;Mesa&gt; mesas = new TreeSet&lt;&gt;();;</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    private TreeSet&lt;Producto&gt; productos= new TreeSet&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    private ArrayList&lt;Comanda&gt; comandas=new ArrayList&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    private TreeSet&lt;Operario&gt; operarios= new TreeSet&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    private ArrayList&lt;ProductoEnPromocion&gt; promocionesProductos = new ArrayList&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    private ArrayList&lt;PromocionTemporal&gt; promocionesTemporales = new ArrayList&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    private ArrayList&lt;Pedido&gt; pedidos = new ArrayList&lt;&gt;();</b>
-<i class="no-highlight">23</i>&nbsp;    private boolean arrancoJornada;
-<i class="no-highlight">24</i>&nbsp;
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    public Empresa() {</b>
-<i class="no-highlight">26</i>&nbsp;    }
-<i class="no-highlight">27</i>&nbsp;
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    public Empresa(String nombreEmpresa, TreeSet&lt;Mozo&gt; mozos, TreeSet&lt;Mesa&gt; mesas, TreeSet&lt;Producto&gt; productos, TreeSet&lt;Operario&gt; operarios) {</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        this.nombreEmpresa = nombreEmpresa;</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        this.mozos = mozos;</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        this.mesas = mesas;</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        this.productos = productos;</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        this.operarios = operarios;</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        this.arrancoJornada = false;</b>
-<i class="no-highlight">35</i>&nbsp;    }
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    // --------- OPERARIOS ----------
-<i class="no-highlight">38</i>&nbsp;
-<i class="no-highlight">39</i>&nbsp;    /**
-<i class="no-highlight">40</i>&nbsp;     * Login para el operario.
-<i class="no-highlight">41</i>&nbsp;     * @param usuario String de hasta 10 caracteres
-<i class="no-highlight">42</i>&nbsp;     * @param password String entre 6 y 12 caracteres
-<i class="no-highlight">43</i>&nbsp;     * @return Operario
-<i class="no-highlight">44</i>&nbsp;     * @throws Exception si no se encuentra al usuario esta inactivo
-<i class="no-highlight">45</i>&nbsp;     */
-<i class="no-highlight">46</i>&nbsp;    public Operario login(String usuario, String password) throws Exception {
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        for (Operario op : operarios) {</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;            if (op.getUsuario().equalsIgnoreCase(usuario) &amp;&amp; op.getPassword().equalsIgnoreCase(password)) {</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                if (op.isActivo()) {</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                    return op;</b>
-<i class="no-highlight">51</i>&nbsp;                } else {
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                    throw new Exception();</b>
-<i class="no-highlight">53</i>&nbsp;                }
-<i class="no-highlight">54</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        }</b>
-<i class="no-highlight">56</i>&nbsp;
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        return null;</b>
-<i class="no-highlight">58</i>&nbsp;    }
-<i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;    /**
-<i class="no-highlight">61</i>&nbsp;     * Registra a los nuevos operarios
-<i class="no-highlight">62</i>&nbsp;     * @param apellido String
-<i class="no-highlight">63</i>&nbsp;     * @param usuario  String de hasta 10 caracteres
-<i class="no-highlight">64</i>&nbsp;     * @param password String entre 6 y 12 caracteres
-<i class="no-highlight">65</i>&nbsp;     * @param activo Indica si el usuario esta activo o no
-<i class="no-highlight">66</i>&nbsp;     * @throws Exception Lanza excepcion, si la contrasena es vacia o null
-<i class="no-highlight">67</i>&nbsp;     */
-<i class="no-highlight">68</i>&nbsp;    public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        String regex = &quot;^(?=.*[0-9])&quot;</b>
-<i class="no-highlight">70</i>&nbsp;                + &quot;(?=.*[a-z])(?=.*[A-Z])&quot;
-<i class="no-highlight">71</i>&nbsp;                + &quot;(?=\\S+$).{8,20}$&quot;;
-<i class="no-highlight">72</i>&nbsp;
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        if (password == null || password.equals(&quot;&quot;)) {</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">75</i>&nbsp;        }
-<i class="no-highlight">76</i>&nbsp;
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        if (usuario == null || usuario.equals(&quot;&quot;)) {</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">79</i>&nbsp;        }
-<i class="no-highlight">80</i>&nbsp;
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        Pattern p = Pattern.compile(regex);</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;        Matcher m = p.matcher(password);</b>
-<i class="no-highlight">83</i>&nbsp;
-<b class="fc"><i class="no-highlight">84</i>&nbsp;        if (m.matches()) {</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;            this.operarios.add(new Operario(apellido, usuario, password, activo));</b>
-<i class="no-highlight">86</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">87</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">88</i>&nbsp;        }
-<i class="no-highlight">89</i>&nbsp;    }
-<i class="no-highlight">90</i>&nbsp;
-<i class="no-highlight">91</i>&nbsp;    /**
-<i class="no-highlight">92</i>&nbsp;     * Modifica la contrasena del administrador
-<i class="no-highlight">93</i>&nbsp;     * @param password
-<i class="no-highlight">94</i>&nbsp;     * @throws Exception si la password es incorrecta
-<i class="no-highlight">95</i>&nbsp;     */
-<i class="no-highlight">96</i>&nbsp;    public void modificarPassword(String password) throws Exception {
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        String regex = &quot;^(?=.*[0-9])&quot;</b>
-<i class="no-highlight">98</i>&nbsp;                + &quot;(?=.*[a-z])(?=.*[A-Z])&quot;
-<i class="no-highlight">99</i>&nbsp;                + &quot;(?=\\S+$).{8,20}$&quot;;
-<i class="no-highlight">100</i>&nbsp;
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        Pattern p = Pattern.compile(regex);</b>
-<i class="no-highlight">102</i>&nbsp;
-<b class="fc"><i class="no-highlight">103</i>&nbsp;        if (password == null || password.equals(&quot;&quot;)) {</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">105</i>&nbsp;        }
-<i class="no-highlight">106</i>&nbsp;
-<b class="fc"><i class="no-highlight">107</i>&nbsp;        Matcher m = p.matcher(password);</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;        if (m.matches()) {</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;            this.operarios.first().setPassword(password);</b>
-<i class="no-highlight">110</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">111</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">112</i>&nbsp;        }
-<i class="no-highlight">113</i>&nbsp;    }
-<i class="no-highlight">114</i>&nbsp;
-<i class="no-highlight">115</i>&nbsp;    // --------- MOZOS ----------
-<i class="no-highlight">116</i>&nbsp;
-<i class="no-highlight">117</i>&nbsp;    /**
-<i class="no-highlight">118</i>&nbsp;     * Este metodo permite agregar un nuevo mozo
-<i class="no-highlight">119</i>&nbsp;     * &lt;pre&gt; la edad ingresada sera mayor o igual a 18
-<i class="no-highlight">120</i>&nbsp;     * &lt;pre&gt; la cantidad de hijos debera ser mayor o igual a cero
-<i class="no-highlight">121</i>&nbsp;     * @param nombreYApellido nombre y apellido del mozo a registrar, distinto de vacio
-<i class="no-highlight">122</i>&nbsp;     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
-<i class="no-highlight">123</i>&nbsp;     * @param cantHijos cantidad de hijos del mozo a registrar
-<i class="no-highlight">124</i>&nbsp;     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
-<i class="no-highlight">125</i>&nbsp;     * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
-<i class="no-highlight">126</i>&nbsp;     */
-<i class="no-highlight">127</i>&nbsp;    public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception {
-<i class="no-highlight">128</i>&nbsp;        // VERIFICAR LA EDAD
-<b class="fc"><i class="no-highlight">129</i>&nbsp;        if (estado&gt;3 || estado&lt;0)</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;            throw new Exception(&quot;Estado Invalido&quot;);</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;        Calendar fecha = new GregorianCalendar();</b>
-<b class="fc"><i class="no-highlight">132</i>&nbsp;        fecha.add(Calendar.YEAR, -18);</b>
-<b class="fc"><i class="no-highlight">133</i>&nbsp;        if(fecha.after(fechaNacimiento)){</b>
-<b class="fc"><i class="no-highlight">134</i>&nbsp;            if( cantHijos &gt;= 0 ){</b>
-<b class="fc"><i class="no-highlight">135</i>&nbsp;                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));</b>
-<i class="no-highlight">136</i>&nbsp;            } else{
-<b class="fc"><i class="no-highlight">137</i>&nbsp;                throw new MozoIncorrecto(&quot;Cant de hijos menor a cero&quot;);</b>
-<i class="no-highlight">138</i>&nbsp;            }
-<i class="no-highlight">139</i>&nbsp;        } else{
-<b class="fc"><i class="no-highlight">140</i>&nbsp;            throw new MozoIncorrecto(&quot;Edad menor a 18 anos&quot;);</b>
-<i class="no-highlight">141</i>&nbsp;        }
-<i class="no-highlight">142</i>&nbsp;    }
-<i class="no-highlight">143</i>&nbsp;
-<i class="no-highlight">144</i>&nbsp;    /**
-<i class="no-highlight">145</i>&nbsp;     * Este metodo permite modificar la informacion de un mozo existente
-<i class="no-highlight">146</i>&nbsp;     * &lt;pre&gt; la edad ingresada sera mayor o igual a 18
-<i class="no-highlight">147</i>&nbsp;     * &lt;pre&gt; la cantidad de hijos debera ser mayor o igual a cero
-<i class="no-highlight">148</i>&nbsp;     * @param mozo mozo a modificar, distinto de null
-<i class="no-highlight">149</i>&nbsp;     * @param nombreYApellido nuevo nombre y apellido, distinto de null
-<i class="no-highlight">150</i>&nbsp;     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
-<i class="no-highlight">151</i>&nbsp;     * @param cantHijos cantidad de hijos del mozo a registrar
-<i class="no-highlight">152</i>&nbsp;     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
-<i class="no-highlight">153</i>&nbsp;     */
-<i class="no-highlight">154</i>&nbsp;    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception{
-<b class="fc"><i class="no-highlight">155</i>&nbsp;        if (estado&gt;3 || estado&lt;0)</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;            throw new Exception(&quot;Estado Invalido&quot;);</b>
-<b class="fc"><i class="no-highlight">157</i>&nbsp;        Calendar fecha = new GregorianCalendar();</b>
-<b class="fc"><i class="no-highlight">158</i>&nbsp;        fecha.add(Calendar.YEAR, -18);</b>
-<b class="fc"><i class="no-highlight">159</i>&nbsp;        if(fecha.after(fechaNacimiento)){</b>
-<b class="fc"><i class="no-highlight">160</i>&nbsp;            if( cantHijos &gt;= 0 ){</b>
-<b class="fc"><i class="no-highlight">161</i>&nbsp;                mozo.setNombreYApellido(nombreYApellido);</b>
-<b class="fc"><i class="no-highlight">162</i>&nbsp;                mozo.setFechaNacimiento(fechaNacimiento);</b>
-<b class="fc"><i class="no-highlight">163</i>&nbsp;                mozo.setCantHijos(cantHijos);</b>
-<b class="fc"><i class="no-highlight">164</i>&nbsp;                mozo.setEstado(estado);</b>
-<i class="no-highlight">165</i>&nbsp;            } else{
-<b class="fc"><i class="no-highlight">166</i>&nbsp;                throw new MozoIncorrecto(&quot;Cant de hijos menor a cero&quot;);</b>
-<i class="no-highlight">167</i>&nbsp;            }
-<i class="no-highlight">168</i>&nbsp;        } else{
-<b class="fc"><i class="no-highlight">169</i>&nbsp;            throw new MozoIncorrecto(&quot;Edad menor a 18 anos&quot;);</b>
-<i class="no-highlight">170</i>&nbsp;        }
-<i class="no-highlight">171</i>&nbsp;    }
-<i class="no-highlight">172</i>&nbsp;
-<i class="no-highlight">173</i>&nbsp;    /**
-<i class="no-highlight">174</i>&nbsp;     * @param mozo debera ser distinto de null
-<i class="no-highlight">175</i>&nbsp;     */
-<i class="no-highlight">176</i>&nbsp;    public void bajaMozo(Mozo mozo) throws Exception {
-<b class="fc"><i class="no-highlight">177</i>&nbsp;        if (this.mozos.size()==0 || !this.mozos.contains(mozo))</b>
-<b class="fc"><i class="no-highlight">178</i>&nbsp;            throw new Exception(&quot;No existe mozo&quot;);</b>
-<b class="fc"><i class="no-highlight">179</i>&nbsp;        this.mozos.remove(mozo);</b>
-<i class="no-highlight">180</i>&nbsp;    }
-<i class="no-highlight">181</i>&nbsp;
-<i class="no-highlight">182</i>&nbsp;    // --------- PRODUCTOS ------------
-<i class="no-highlight">183</i>&nbsp;
-<i class="no-highlight">184</i>&nbsp;    /**
-<i class="no-highlight">185</i>&nbsp;     * Permite agregar un nuevo producto a nuestro inventario
-<i class="no-highlight">186</i>&nbsp;     * @param nombre nombre del producto, no podra estar vacio
-<i class="no-highlight">187</i>&nbsp;     * @param precioCosto flotante menor a cero
-<i class="no-highlight">188</i>&nbsp;     * @param precioVenta
-<i class="no-highlight">189</i>&nbsp;     * @param stockInicial
-<i class="no-highlight">190</i>&nbsp;     */
-<i class="no-highlight">191</i>&nbsp;    public void altaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
-<b class="nc"><i class="no-highlight">192</i>&nbsp;        this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));</b>
-<i class="no-highlight">193</i>&nbsp;    }
-<i class="no-highlight">194</i>&nbsp;
-<i class="no-highlight">195</i>&nbsp;    /**
-<i class="no-highlight">196</i>&nbsp;     * Permite dar de baja un producto que no esta asociado a una comanda
-<i class="no-highlight">197</i>&nbsp;     * @param producto el producto a eliminar debe ser distinto de null y no puede estar asociado a una comanda
-<i class="no-highlight">198</i>&nbsp;     */
-<i class="no-highlight">199</i>&nbsp;    public void bajaProducto( Producto producto) {
-<b class="fc"><i class="no-highlight">200</i>&nbsp;        this.productos.remove(producto);</b>
-<i class="no-highlight">201</i>&nbsp;    }
-<i class="no-highlight">202</i>&nbsp;
-<i class="no-highlight">203</i>&nbsp;    /**
-<i class="no-highlight">204</i>&nbsp;     * Permite modificar la informacion de un producto
-<i class="no-highlight">205</i>&nbsp;     * @param nombre el nombre del producto no puede estar vacio
-<i class="no-highlight">206</i>&nbsp;     * @param precioCosto flotante mayor a cero y menor o igual que el precio de venta
-<i class="no-highlight">207</i>&nbsp;     * @param precioVenta flotante mayor a cero y mayor o igual que el precio de costo
-<i class="no-highlight">208</i>&nbsp;     * @param stockInicial entero mayor o igual a cero
-<i class="no-highlight">209</i>&nbsp;     * @param producto producto a modificar, debera ser distinto de null
-<i class="no-highlight">210</i>&nbsp;     */
-<i class="no-highlight">211</i>&nbsp;    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto) throws Exception {
-<b class="nc"><i class="no-highlight">212</i>&nbsp;        producto.setNombre(nombre);</b>
-<b class="nc"><i class="no-highlight">213</i>&nbsp;        producto.setPrecioCosto(precioCosto);</b>
-<b class="nc"><i class="no-highlight">214</i>&nbsp;        producto.setPrecioVenta(precioVenta);</b>
-<b class="nc"><i class="no-highlight">215</i>&nbsp;        producto.setStockInicial(stockInicial);</b>
-<i class="no-highlight">216</i>&nbsp;    }
-<i class="no-highlight">217</i>&nbsp;
-<i class="no-highlight">218</i>&nbsp;    // -------- MESAS ----------
-<i class="no-highlight">219</i>&nbsp;
-<i class="no-highlight">220</i>&nbsp;    /**
-<i class="no-highlight">221</i>&nbsp;     * Permite dar de alta una nueva mesa
-<i class="no-highlight">222</i>&nbsp;     * @param cantidadPersonas entero mayor a cero, en caso de ser una sola persona va a la barra, mesa numero cero
-<i class="no-highlight">223</i>&nbsp;     * @throws Exception si el numero de personas es incorrecto, menor a 1
-<i class="no-highlight">224</i>&nbsp;     */
-<i class="no-highlight">225</i>&nbsp;    public void altaMesa(int cantidadPersonas) throws Exception{
-<b class="fc"><i class="no-highlight">226</i>&nbsp;        if (cantidadPersonas &gt;= 2 ){</b>
-<b class="fc"><i class="no-highlight">227</i>&nbsp;            this.mesas.add(new Mesa(cantidadPersonas));</b>
-<i class="no-highlight">228</i>&nbsp;        }
-<i class="no-highlight">229</i>&nbsp;        else {
-<b class="fc"><i class="no-highlight">230</i>&nbsp;            throw new Exception(&quot;Pocas personas para dar de alta una mesa&quot;);</b>
+<i class="no-highlight">9</i>&nbsp;import java.util.function.DoubleFunction;
+<i class="no-highlight">10</i>&nbsp;import java.util.regex.Matcher;
+<i class="no-highlight">11</i>&nbsp;import java.util.regex.Pattern;
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;public class Empresa implements Serializable {</b>
+<i class="no-highlight">14</i>&nbsp;    private String nombreEmpresa;
+<i class="no-highlight">15</i>&nbsp;    private double sueldoBasico;
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    private TreeSet&lt;Mozo&gt; mozos = new TreeSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    private TreeSet&lt;Mesa&gt; mesas = new TreeSet&lt;&gt;();;</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    private TreeSet&lt;Producto&gt; productos= new TreeSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    private ArrayList&lt;Comanda&gt; comandas=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    private TreeSet&lt;Operario&gt; operarios= new TreeSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    private ArrayList&lt;ProductoEnPromocion&gt; promocionesProductos = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    private ArrayList&lt;PromocionTemporal&gt; promocionesTemporales = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    private ArrayList&lt;Pedido&gt; pedidos = new ArrayList&lt;&gt;();</b>
+<i class="no-highlight">24</i>&nbsp;    private boolean arrancoJornada;
+<i class="no-highlight">25</i>&nbsp;
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    public Empresa() {</b>
+<i class="no-highlight">27</i>&nbsp;    }
+<i class="no-highlight">28</i>&nbsp;
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    public Empresa(String nombreEmpresa, TreeSet&lt;Mozo&gt; mozos, TreeSet&lt;Mesa&gt; mesas, TreeSet&lt;Producto&gt; productos, TreeSet&lt;Operario&gt; operarios) {</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        this.nombreEmpresa = nombreEmpresa;</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        this.mozos = mozos;</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        this.mesas = mesas;</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        this.productos = productos;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        this.operarios = operarios;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        this.arrancoJornada = false;</b>
+<i class="no-highlight">36</i>&nbsp;    }
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    // --------- OPERARIOS ----------
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    /**
+<i class="no-highlight">41</i>&nbsp;     * Login para el operario.
+<i class="no-highlight">42</i>&nbsp;     * @param usuario String de hasta 10 caracteres
+<i class="no-highlight">43</i>&nbsp;     * @param password String entre 6 y 12 caracteres
+<i class="no-highlight">44</i>&nbsp;     * @return Operario
+<i class="no-highlight">45</i>&nbsp;     * @throws Exception si no se encuentra al usuario esta inactivo
+<i class="no-highlight">46</i>&nbsp;     */
+<i class="no-highlight">47</i>&nbsp;    public Operario login(String usuario, String password) throws Exception {
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        for (Operario op : operarios) {</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            if (op.getUsuario().equalsIgnoreCase(usuario) &amp;&amp; op.getPassword().equalsIgnoreCase(password)) {</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                if (op.isActivo()) {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                    return op;</b>
+<i class="no-highlight">52</i>&nbsp;                } else {
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                    throw new Exception();</b>
+<i class="no-highlight">54</i>&nbsp;                }
+<i class="no-highlight">55</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        }</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        return null;</b>
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    /**
+<i class="no-highlight">62</i>&nbsp;     * Registra a los nuevos operarios
+<i class="no-highlight">63</i>&nbsp;     * @param apellido String
+<i class="no-highlight">64</i>&nbsp;     * @param usuario  String de hasta 10 caracteres
+<i class="no-highlight">65</i>&nbsp;     * @param password String entre 6 y 12 caracteres
+<i class="no-highlight">66</i>&nbsp;     * @param activo Indica si el usuario esta activo o no
+<i class="no-highlight">67</i>&nbsp;     * @throws Exception Lanza excepcion, si la contrasena es vacia o null
+<i class="no-highlight">68</i>&nbsp;     */
+<i class="no-highlight">69</i>&nbsp;    public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
+<i class="no-highlight">70</i>&nbsp;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        String regex = &quot;^(?=.*[0-9])&quot;</b>
+<i class="no-highlight">72</i>&nbsp;                + &quot;(?=.*[a-z])(?=.*[A-Z])&quot;
+<i class="no-highlight">73</i>&nbsp;                + &quot;(?=\\S+$).{8,20}$&quot;;
+<i class="no-highlight">74</i>&nbsp;
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        if (password == null || password.equals(&quot;&quot;)) {</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">77</i>&nbsp;        }
+<i class="no-highlight">78</i>&nbsp;
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        if (usuario == null || usuario.equals(&quot;&quot;)) {</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">81</i>&nbsp;        }
+<i class="no-highlight">82</i>&nbsp;
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        Pattern p = Pattern.compile(regex);</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        Matcher m = p.matcher(password);</b>
+<i class="no-highlight">85</i>&nbsp;
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        if (m.matches()) {</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            System.out.printf(&quot;entro&quot;);</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;            this.operarios.add(new Operario(apellido, usuario, password, activo));</b>
+<i class="no-highlight">89</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">90</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">91</i>&nbsp;        }
+<i class="no-highlight">92</i>&nbsp;    }
+<i class="no-highlight">93</i>&nbsp;
+<i class="no-highlight">94</i>&nbsp;    /**
+<i class="no-highlight">95</i>&nbsp;     * Modifica la contrasena del administrador
+<i class="no-highlight">96</i>&nbsp;     * @param password
+<i class="no-highlight">97</i>&nbsp;     * @throws Exception si la password es incorrecta
+<i class="no-highlight">98</i>&nbsp;     */
+<i class="no-highlight">99</i>&nbsp;    public void modificarPassword(String password) throws Exception {
+<b class="fc"><i class="no-highlight">100</i>&nbsp;        String regex = &quot;^(?=.*[0-9])&quot;</b>
+<i class="no-highlight">101</i>&nbsp;                + &quot;(?=.*[a-z])(?=.*[A-Z])&quot;
+<i class="no-highlight">102</i>&nbsp;                + &quot;(?=\\S+$).{8,20}$&quot;;
+<i class="no-highlight">103</i>&nbsp;
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        Pattern p = Pattern.compile(regex);</b>
+<i class="no-highlight">105</i>&nbsp;
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        if (password == null || password.equals(&quot;&quot;)) {</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">108</i>&nbsp;        }
+<i class="no-highlight">109</i>&nbsp;
+<b class="fc"><i class="no-highlight">110</i>&nbsp;        Matcher m = p.matcher(password);</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        if (m.matches()) {</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            this.operarios.first().setPassword(password);</b>
+<i class="no-highlight">113</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">114</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">115</i>&nbsp;        }
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;    // --------- MOZOS ----------
+<i class="no-highlight">119</i>&nbsp;
+<i class="no-highlight">120</i>&nbsp;    /**
+<i class="no-highlight">121</i>&nbsp;     * Este metodo permite agregar un nuevo mozo
+<i class="no-highlight">122</i>&nbsp;     * &lt;pre&gt; la edad ingresada sera mayor o igual a 18
+<i class="no-highlight">123</i>&nbsp;     * &lt;pre&gt; la cantidad de hijos debera ser mayor o igual a cero
+<i class="no-highlight">124</i>&nbsp;     * @param nombreYApellido nombre y apellido del mozo a registrar, distinto de vacio
+<i class="no-highlight">125</i>&nbsp;     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
+<i class="no-highlight">126</i>&nbsp;     * @param cantHijos cantidad de hijos del mozo a registrar
+<i class="no-highlight">127</i>&nbsp;     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
+<i class="no-highlight">128</i>&nbsp;     * @throws MozoIncorrecto se lanza en caso de ingresar cantidad de hijos menor a cero o una edad menor a 18 anios
+<i class="no-highlight">129</i>&nbsp;     */
+<i class="no-highlight">130</i>&nbsp;    public void agregaMozo(String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception {
+<i class="no-highlight">131</i>&nbsp;        // VERIFICAR LA EDAD
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        if (estado&gt;3 || estado&lt;0)</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;            throw new Exception(&quot;Estado Invalido&quot;);</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        Calendar fecha = new GregorianCalendar();</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        fecha.add(Calendar.YEAR, -18);</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;        if(fecha.after(fechaNacimiento)){</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;            if( cantHijos &gt;= 0 ){</b>
+<b class="fc"><i class="no-highlight">138</i>&nbsp;                this.mozos.add(new Mozo(nombreYApellido,fechaNacimiento,cantHijos,estado));</b>
+<i class="no-highlight">139</i>&nbsp;            } else{
+<b class="fc"><i class="no-highlight">140</i>&nbsp;                throw new MozoIncorrecto(&quot;Cant de hijos menor a cero&quot;);</b>
+<i class="no-highlight">141</i>&nbsp;            }
+<i class="no-highlight">142</i>&nbsp;        } else{
+<b class="fc"><i class="no-highlight">143</i>&nbsp;            throw new MozoIncorrecto(&quot;Edad menor a 18 anos&quot;);</b>
+<i class="no-highlight">144</i>&nbsp;        }
+<i class="no-highlight">145</i>&nbsp;    }
+<i class="no-highlight">146</i>&nbsp;
+<i class="no-highlight">147</i>&nbsp;    /**
+<i class="no-highlight">148</i>&nbsp;     * Este metodo permite modificar la informacion de un mozo existente
+<i class="no-highlight">149</i>&nbsp;     * &lt;pre&gt; la edad ingresada sera mayor o igual a 18
+<i class="no-highlight">150</i>&nbsp;     * &lt;pre&gt; la cantidad de hijos debera ser mayor o igual a cero
+<i class="no-highlight">151</i>&nbsp;     * @param mozo mozo a modificar, distinto de null
+<i class="no-highlight">152</i>&nbsp;     * @param nombreYApellido nuevo nombre y apellido, distinto de null
+<i class="no-highlight">153</i>&nbsp;     * @param fechaNacimiento fecha de nacimiento del mozo, no puede ser null
+<i class="no-highlight">154</i>&nbsp;     * @param cantHijos cantidad de hijos del mozo a registrar
+<i class="no-highlight">155</i>&nbsp;     * @param estado estado del mozo, entero que toma los valores 1,2 y 3 representan activo, de franco y ausente respectivamente
+<i class="no-highlight">156</i>&nbsp;     */
+<i class="no-highlight">157</i>&nbsp;    public void modificaMozo(Mozo mozo,String nombreYApellido, Calendar fechaNacimiento, double cantHijos, int estado) throws Exception{
+<b class="fc"><i class="no-highlight">158</i>&nbsp;        if (estado&gt;3 || estado&lt;0)</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;            throw new Exception(&quot;Estado Invalido&quot;);</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;        Calendar fecha = new GregorianCalendar();</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;        fecha.add(Calendar.YEAR, -18);</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;        if(fecha.after(fechaNacimiento)){</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;            if( cantHijos &gt;= 0 ){</b>
+<b class="fc"><i class="no-highlight">164</i>&nbsp;                mozo.setNombreYApellido(nombreYApellido);</b>
+<b class="fc"><i class="no-highlight">165</i>&nbsp;                mozo.setFechaNacimiento(fechaNacimiento);</b>
+<b class="fc"><i class="no-highlight">166</i>&nbsp;                mozo.setCantHijos(cantHijos);</b>
+<b class="fc"><i class="no-highlight">167</i>&nbsp;                mozo.setEstado(estado);</b>
+<i class="no-highlight">168</i>&nbsp;            } else{
+<b class="fc"><i class="no-highlight">169</i>&nbsp;                throw new MozoIncorrecto(&quot;Cant de hijos menor a cero&quot;);</b>
+<i class="no-highlight">170</i>&nbsp;            }
+<i class="no-highlight">171</i>&nbsp;        } else{
+<b class="fc"><i class="no-highlight">172</i>&nbsp;            throw new MozoIncorrecto(&quot;Edad menor a 18 anos&quot;);</b>
+<i class="no-highlight">173</i>&nbsp;        }
+<i class="no-highlight">174</i>&nbsp;    }
+<i class="no-highlight">175</i>&nbsp;
+<i class="no-highlight">176</i>&nbsp;    /**
+<i class="no-highlight">177</i>&nbsp;     * @param mozo debera ser distinto de null
+<i class="no-highlight">178</i>&nbsp;     */
+<i class="no-highlight">179</i>&nbsp;    public void bajaMozo(Mozo mozo) throws Exception {
+<b class="fc"><i class="no-highlight">180</i>&nbsp;        if (this.mozos.size()==0 || !this.mozos.contains(mozo))</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;            throw new Exception(&quot;No existe mozo&quot;);</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;        this.mozos.remove(mozo);</b>
+<i class="no-highlight">183</i>&nbsp;    }
+<i class="no-highlight">184</i>&nbsp;
+<i class="no-highlight">185</i>&nbsp;    // --------- PRODUCTOS ------------
+<i class="no-highlight">186</i>&nbsp;
+<i class="no-highlight">187</i>&nbsp;    /**
+<i class="no-highlight">188</i>&nbsp;     * Permite agregar un nuevo producto a nuestro inventario
+<i class="no-highlight">189</i>&nbsp;     * @param nombre nombre del producto, no podra estar vacio
+<i class="no-highlight">190</i>&nbsp;     * @param precioCosto flotante menor a cero
+<i class="no-highlight">191</i>&nbsp;     * @param precioVenta
+<i class="no-highlight">192</i>&nbsp;     * @param stockInicial
+<i class="no-highlight">193</i>&nbsp;     */
+<i class="no-highlight">194</i>&nbsp;    public void altaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial) throws Exception {
+<b class="fc"><i class="no-highlight">195</i>&nbsp;        this.productos.add(new Producto(nombre,precioCosto,precioVenta,stockInicial));</b>
+<i class="no-highlight">196</i>&nbsp;    }
+<i class="no-highlight">197</i>&nbsp;
+<i class="no-highlight">198</i>&nbsp;    /**
+<i class="no-highlight">199</i>&nbsp;     * Permite dar de baja un producto que no esta asociado a una comanda
+<i class="no-highlight">200</i>&nbsp;     * @param producto el producto a eliminar debe ser distinto de null y no puede estar asociado a una comanda
+<i class="no-highlight">201</i>&nbsp;     */
+<i class="no-highlight">202</i>&nbsp;    public void bajaProducto( Producto producto) {
+<b class="fc"><i class="no-highlight">203</i>&nbsp;        this.productos.remove(producto);</b>
+<i class="no-highlight">204</i>&nbsp;    }
+<i class="no-highlight">205</i>&nbsp;
+<i class="no-highlight">206</i>&nbsp;    /**
+<i class="no-highlight">207</i>&nbsp;     * Permite modificar la informacion de un producto
+<i class="no-highlight">208</i>&nbsp;     * @param nombre el nombre del producto no puede estar vacio
+<i class="no-highlight">209</i>&nbsp;     * @param precioCosto flotante mayor a cero y menor o igual que el precio de venta
+<i class="no-highlight">210</i>&nbsp;     * @param precioVenta flotante mayor a cero y mayor o igual que el precio de costo
+<i class="no-highlight">211</i>&nbsp;     * @param stockInicial entero mayor o igual a cero
+<i class="no-highlight">212</i>&nbsp;     * @param producto producto a modificar, debera ser distinto de null
+<i class="no-highlight">213</i>&nbsp;     */
+<i class="no-highlight">214</i>&nbsp;    public void modificaProducto(String nombre, double precioCosto, double precioVenta, int stockInicial, Producto producto) throws Exception {
+<b class="fc"><i class="no-highlight">215</i>&nbsp;        producto.setNombre(nombre);</b>
+<b class="fc"><i class="no-highlight">216</i>&nbsp;        producto.setPrecioCosto(precioCosto);</b>
+<b class="fc"><i class="no-highlight">217</i>&nbsp;        producto.setPrecioVenta(precioVenta);</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;        producto.setStockInicial(stockInicial);</b>
+<i class="no-highlight">219</i>&nbsp;    }
+<i class="no-highlight">220</i>&nbsp;
+<i class="no-highlight">221</i>&nbsp;    // -------- MESAS ----------
+<i class="no-highlight">222</i>&nbsp;
+<i class="no-highlight">223</i>&nbsp;    /**
+<i class="no-highlight">224</i>&nbsp;     * Permite dar de alta una nueva mesa
+<i class="no-highlight">225</i>&nbsp;     * @param cantidadPersonas entero mayor a cero, en caso de ser una sola persona va a la barra, mesa numero cero
+<i class="no-highlight">226</i>&nbsp;     * @throws Exception si el numero de personas es incorrecto, menor a 1
+<i class="no-highlight">227</i>&nbsp;     */
+<i class="no-highlight">228</i>&nbsp;    public void altaMesa(int cantidadPersonas) throws Exception{
+<b class="fc"><i class="no-highlight">229</i>&nbsp;        if (cantidadPersonas &gt;= 2 ){</b>
+<b class="fc"><i class="no-highlight">230</i>&nbsp;            this.mesas.add(new Mesa(cantidadPersonas));</b>
 <i class="no-highlight">231</i>&nbsp;        }
-<i class="no-highlight">232</i>&nbsp;    }
-<i class="no-highlight">233</i>&nbsp;
-<i class="no-highlight">234</i>&nbsp;    /**
-<i class="no-highlight">235</i>&nbsp;     * Permite dar de baja una mesa registrada en el sistema
-<i class="no-highlight">236</i>&nbsp;     * @param mesa la mesa a eliminar debera ser distinto de null
-<i class="no-highlight">237</i>&nbsp;     */
-<i class="no-highlight">238</i>&nbsp;    public void bajaMesa(Mesa mesa)throws Exception{
-<b class="fc"><i class="no-highlight">239</i>&nbsp;        if (this.mesas.size()==0 || !this.mesas.contains(mesa))</b>
-<b class="fc"><i class="no-highlight">240</i>&nbsp;            throw new Exception(&quot;No existe mesa&quot;);</b>
-<b class="fc"><i class="no-highlight">241</i>&nbsp;        this.mesas.remove(mesa);</b>
-<i class="no-highlight">242</i>&nbsp;    }
-<i class="no-highlight">243</i>&nbsp;
-<i class="no-highlight">244</i>&nbsp;    /**
-<i class="no-highlight">245</i>&nbsp;     * Permite modificar una mesa
-<i class="no-highlight">246</i>&nbsp;     * @param cantidadPersonas debera ser entero mayor a cero
-<i class="no-highlight">247</i>&nbsp;     * @param estado string que toma solo valores libre u ocupada
-<i class="no-highlight">248</i>&nbsp;     * @param mesa debera ser distinto de null
-<i class="no-highlight">249</i>&nbsp;     */
-<i class="no-highlight">250</i>&nbsp;    public void modificaMesa(int cantidadPersonas, String estado, Mesa mesa){
-<i class="no-highlight">251</i>&nbsp;        try{
-<b class="fc"><i class="no-highlight">252</i>&nbsp;            mesa.setEstado(estado);</b>
-<b class="fc"><i class="no-highlight">253</i>&nbsp;            mesa.setCantidadPersonas(cantidadPersonas);</b>
-<b class="nc"><i class="no-highlight">254</i>&nbsp;        }catch(Exception e){</b>
-<b class="nc"><i class="no-highlight">255</i>&nbsp;            System.out.printf(e.getMessage());</b>
-<b class="fc"><i class="no-highlight">256</i>&nbsp;        }</b>
-<i class="no-highlight">257</i>&nbsp;
-<i class="no-highlight">258</i>&nbsp;    }
-<i class="no-highlight">259</i>&nbsp;
-<i class="no-highlight">260</i>&nbsp;    // ----- PEDIDOS ------
-<i class="no-highlight">261</i>&nbsp;
-<i class="no-highlight">262</i>&nbsp;    /**
-<i class="no-highlight">263</i>&nbsp;     * Crea un nuevo pedido
-<i class="no-highlight">264</i>&nbsp;     * @param producto el producto solicitado debera ser distinto de null
-<i class="no-highlight">265</i>&nbsp;     * @param cantidad debera ser mayor a cero
-<i class="no-highlight">266</i>&nbsp;     * @return devuelve el nuevo pedido creado
-<i class="no-highlight">267</i>&nbsp;     */
-<i class="no-highlight">268</i>&nbsp;    public Pedido realizarPedido(Producto producto, int cantidad)throws StockNoDisponible{
-<b class="fc"><i class="no-highlight">269</i>&nbsp;        Pedido pedido=null;</b>
-<i class="no-highlight">270</i>&nbsp;
-<b class="fc"><i class="no-highlight">271</i>&nbsp;            pedido= new Pedido(producto,cantidad);</b>
-<i class="no-highlight">272</i>&nbsp;
-<b class="fc"><i class="no-highlight">273</i>&nbsp;        return pedido;</b>
-<i class="no-highlight">274</i>&nbsp;    }
+<i class="no-highlight">232</i>&nbsp;        else {
+<b class="fc"><i class="no-highlight">233</i>&nbsp;            throw new Exception(&quot;Pocas personas para dar de alta una mesa&quot;);</b>
+<i class="no-highlight">234</i>&nbsp;        }
+<i class="no-highlight">235</i>&nbsp;    }
+<i class="no-highlight">236</i>&nbsp;
+<i class="no-highlight">237</i>&nbsp;    /**
+<i class="no-highlight">238</i>&nbsp;     * Permite dar de baja una mesa registrada en el sistema
+<i class="no-highlight">239</i>&nbsp;     * @param mesa la mesa a eliminar debera ser distinto de null
+<i class="no-highlight">240</i>&nbsp;     */
+<i class="no-highlight">241</i>&nbsp;    public void bajaMesa(Mesa mesa)throws Exception{
+<b class="fc"><i class="no-highlight">242</i>&nbsp;        if (this.mesas.size()==0 || !this.mesas.contains(mesa))</b>
+<b class="fc"><i class="no-highlight">243</i>&nbsp;            throw new Exception(&quot;No existe mesa&quot;);</b>
+<b class="fc"><i class="no-highlight">244</i>&nbsp;        this.mesas.remove(mesa);</b>
+<i class="no-highlight">245</i>&nbsp;    }
+<i class="no-highlight">246</i>&nbsp;
+<i class="no-highlight">247</i>&nbsp;    /**
+<i class="no-highlight">248</i>&nbsp;     * Permite modificar una mesa
+<i class="no-highlight">249</i>&nbsp;     * @param cantidadPersonas debera ser entero mayor a cero
+<i class="no-highlight">250</i>&nbsp;     * @param estado string que toma solo valores libre u ocupada
+<i class="no-highlight">251</i>&nbsp;     * @param mesa debera ser distinto de null
+<i class="no-highlight">252</i>&nbsp;     */
+<i class="no-highlight">253</i>&nbsp;    public void modificaMesa(int cantidadPersonas, String estado, Mesa mesa){
+<i class="no-highlight">254</i>&nbsp;        try{
+<b class="fc"><i class="no-highlight">255</i>&nbsp;            mesa.setEstado(estado);</b>
+<b class="fc"><i class="no-highlight">256</i>&nbsp;            mesa.setCantidadPersonas(cantidadPersonas);</b>
+<b class="nc"><i class="no-highlight">257</i>&nbsp;        }catch(Exception e){</b>
+<b class="nc"><i class="no-highlight">258</i>&nbsp;            System.out.printf(e.getMessage());</b>
+<b class="fc"><i class="no-highlight">259</i>&nbsp;        }</b>
+<i class="no-highlight">260</i>&nbsp;
+<i class="no-highlight">261</i>&nbsp;    }
+<i class="no-highlight">262</i>&nbsp;
+<i class="no-highlight">263</i>&nbsp;    // ----- PEDIDOS ------
+<i class="no-highlight">264</i>&nbsp;
+<i class="no-highlight">265</i>&nbsp;    /**
+<i class="no-highlight">266</i>&nbsp;     * Crea un nuevo pedido
+<i class="no-highlight">267</i>&nbsp;     * @param producto el producto solicitado debera ser distinto de null
+<i class="no-highlight">268</i>&nbsp;     * @param cantidad debera ser mayor a cero
+<i class="no-highlight">269</i>&nbsp;     * @return devuelve el nuevo pedido creado
+<i class="no-highlight">270</i>&nbsp;     */
+<i class="no-highlight">271</i>&nbsp;    public Pedido realizarPedido(Producto producto, int cantidad)throws StockNoDisponible{
+<b class="fc"><i class="no-highlight">272</i>&nbsp;        Pedido pedido=null;</b>
+<i class="no-highlight">273</i>&nbsp;
+<b class="fc"><i class="no-highlight">274</i>&nbsp;            pedido= new Pedido(producto,cantidad);</b>
 <i class="no-highlight">275</i>&nbsp;
-<i class="no-highlight">276</i>&nbsp;    /**
-<i class="no-highlight">277</i>&nbsp;     * Da de alta un nuevo pedido
-<i class="no-highlight">278</i>&nbsp;     * @param pedido debe ser distinto de null
-<i class="no-highlight">279</i>&nbsp;     */
-<i class="no-highlight">280</i>&nbsp;    public void altaPedido(Pedido pedido){
-<b class="fc"><i class="no-highlight">281</i>&nbsp;        this.pedidos.add(pedido);</b>
-<i class="no-highlight">282</i>&nbsp;    }
-<i class="no-highlight">283</i>&nbsp;
-<i class="no-highlight">284</i>&nbsp;    // ------- COMANDAS ---------
-<i class="no-highlight">285</i>&nbsp;
-<i class="no-highlight">286</i>&nbsp;    /**
-<i class="no-highlight">287</i>&nbsp;     * El metodo permite dar de alta una comanda
-<i class="no-highlight">288</i>&nbsp;     * @param mesa
-<i class="no-highlight">289</i>&nbsp;     * @param pedido
-<i class="no-highlight">290</i>&nbsp;     * @param mozo
-<i class="no-highlight">291</i>&nbsp;     * @throws Exception si el estado es incorrecto
-<i class="no-highlight">292</i>&nbsp;     */
-<i class="no-highlight">293</i>&nbsp;
-<i class="no-highlight">294</i>&nbsp;    public void altaComanda( Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
-<b class="fc"><i class="no-highlight">295</i>&nbsp;        if (mesa.getEstado().equalsIgnoreCase(&quot;ocupada&quot;) )</b>
-<b class="fc"><i class="no-highlight">296</i>&nbsp;            throw new Exception(&quot;Mesa Ocupada&quot;);</b>
-<i class="no-highlight">297</i>&nbsp;
-<b class="fc"><i class="no-highlight">298</i>&nbsp;        mesa.setEstado(&quot;ocupada&quot;);</b>
-<b class="fc"><i class="no-highlight">299</i>&nbsp;        mesa.setMozo(mozo);</b>
-<b class="fc"><i class="no-highlight">300</i>&nbsp;        Comanda comanda = new Comanda(mesa,mozo);</b>
-<b class="fc"><i class="no-highlight">301</i>&nbsp;        comanda.agregarPedido(pedido);</b>
-<b class="fc"><i class="no-highlight">302</i>&nbsp;        this.comandas.add(comanda);</b>
-<i class="no-highlight">303</i>&nbsp;    }
-<i class="no-highlight">304</i>&nbsp;
-<i class="no-highlight">305</i>&nbsp;    public void agregarPedidoAComanda( Pedido ped , Comanda comanda){
-<b class="fc"><i class="no-highlight">306</i>&nbsp;        comanda.agregarPedido(ped);</b>
-<i class="no-highlight">307</i>&nbsp;    }
-<i class="no-highlight">308</i>&nbsp;
-<i class="no-highlight">309</i>&nbsp;    // ----- FACTURA -----
-<i class="no-highlight">310</i>&nbsp;
-<i class="no-highlight">311</i>&nbsp;    public double generarFactura( Comanda comanda) throws Exception {
-<b class="fc"><i class="no-highlight">312</i>&nbsp;        if (comanda.getMesa().getEstado().equalsIgnoreCase(&quot;libre&quot;))</b>
-<b class="fc"><i class="no-highlight">313</i>&nbsp;            throw new Exception(&quot;Imposible crear una Factura sobre una mesa Libre&quot;);</b>
-<b class="fc"><i class="no-highlight">314</i>&nbsp;        comanda.getMesa().setEstado(&quot;libre&quot;);</b>
-<b class="fc"><i class="no-highlight">315</i>&nbsp;        Factura factura = new Factura(Date.from(Instant.now()) ,comanda.getMesa(),comanda.getPedidos(),&quot;Efectivo&quot;,this.promocionesProductos,this.promocionesTemporales);</b>
-<i class="no-highlight">316</i>&nbsp;
-<b class="fc"><i class="no-highlight">317</i>&nbsp;        comanda.getMesa().getMozo().setVentas(comanda.getMesa().getMozo().getVentas()+ factura.getTotal());</b>
-<b class="fc"><i class="no-highlight">318</i>&nbsp;        comanda.getMesa().setCantComandas(comanda.getMesa().getCantComandas()+1);</b>
-<b class="fc"><i class="no-highlight">319</i>&nbsp;        comanda.getMesa().setTotalComandas(comanda.getMesa().getTotalComandas()+ factura.getTotal());</b>
-<i class="no-highlight">320</i>&nbsp;
-<b class="fc"><i class="no-highlight">321</i>&nbsp;        this.comandas.remove(comanda);</b>
-<b class="fc"><i class="no-highlight">322</i>&nbsp;        return factura.getTotal();</b>
-<i class="no-highlight">323</i>&nbsp;    }
-<i class="no-highlight">324</i>&nbsp;
-<i class="no-highlight">325</i>&nbsp;    /**
-<i class="no-highlight">326</i>&nbsp;     * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
-<i class="no-highlight">327</i>&nbsp;     * @param mesa debera ser distinta de nula
-<i class="no-highlight">328</i>&nbsp;     * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
-<i class="no-highlight">329</i>&nbsp;     */
-<i class="no-highlight">330</i>&nbsp;    public void crearFactura(Mesa mesa,String formaDePago){
-<b class="fc"><i class="no-highlight">331</i>&nbsp;        Comanda comanda = null;</b>
-<b class="fc"><i class="no-highlight">332</i>&nbsp;        for (int i = 0; i &lt; this.comandas.size(); i++){</b>
-<b class="fc"><i class="no-highlight">333</i>&nbsp;            if(this.comandas.get(i).getMesa()==mesa){</b>
-<b class="fc"><i class="no-highlight">334</i>&nbsp;                comanda=this.comandas.get(i);</b>
-<i class="no-highlight">335</i>&nbsp;            }
-<i class="no-highlight">336</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">337</i>&nbsp;        assert comanda != null;</b>
-<b class="fc"><i class="no-highlight">338</i>&nbsp;        Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);</b>
-<i class="no-highlight">339</i>&nbsp;
-<i class="no-highlight">340</i>&nbsp;        //para estadisticas
-<b class="fc"><i class="no-highlight">341</i>&nbsp;        mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());</b>
-<b class="fc"><i class="no-highlight">342</i>&nbsp;        mesa.setCantComandas(mesa.getCantComandas()+1);</b>
-<b class="fc"><i class="no-highlight">343</i>&nbsp;        mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());</b>
-<i class="no-highlight">344</i>&nbsp;
-<b class="fc"><i class="no-highlight">345</i>&nbsp;        this.comandas.remove(comanda);</b>
-<i class="no-highlight">346</i>&nbsp;    }
-<i class="no-highlight">347</i>&nbsp;
-<i class="no-highlight">348</i>&nbsp;    /**
-<i class="no-highlight">349</i>&nbsp;     * Permite calcular el sueldo de cada mozo, a partir del sueldo base y un extra por cada hijo
-<i class="no-highlight">350</i>&nbsp;     * @param mozo debera ser distinto de nulo
-<i class="no-highlight">351</i>&nbsp;     * @return un flotante con el sueldo correspondiente a dicho mozo
-<i class="no-highlight">352</i>&nbsp;     */
-<i class="no-highlight">353</i>&nbsp;    public double calculaSueldo(Mozo mozo){
-<b class="nc"><i class="no-highlight">354</i>&nbsp;        return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());</b>
-<i class="no-highlight">355</i>&nbsp;    }
-<i class="no-highlight">356</i>&nbsp;
+<b class="fc"><i class="no-highlight">276</i>&nbsp;        return pedido;</b>
+<i class="no-highlight">277</i>&nbsp;    }
+<i class="no-highlight">278</i>&nbsp;
+<i class="no-highlight">279</i>&nbsp;    /**
+<i class="no-highlight">280</i>&nbsp;     * Da de alta un nuevo pedido
+<i class="no-highlight">281</i>&nbsp;     * @param pedido debe ser distinto de null
+<i class="no-highlight">282</i>&nbsp;     */
+<i class="no-highlight">283</i>&nbsp;    public void altaPedido(Pedido pedido){
+<b class="fc"><i class="no-highlight">284</i>&nbsp;        this.pedidos.add(pedido);</b>
+<i class="no-highlight">285</i>&nbsp;    }
+<i class="no-highlight">286</i>&nbsp;
+<i class="no-highlight">287</i>&nbsp;    // ------- COMANDAS ---------
+<i class="no-highlight">288</i>&nbsp;
+<i class="no-highlight">289</i>&nbsp;    /**
+<i class="no-highlight">290</i>&nbsp;     * El metodo permite dar de alta una comanda
+<i class="no-highlight">291</i>&nbsp;     * @param mesa
+<i class="no-highlight">292</i>&nbsp;     * @param pedido
+<i class="no-highlight">293</i>&nbsp;     * @param mozo
+<i class="no-highlight">294</i>&nbsp;     * @throws Exception si el estado es incorrecto
+<i class="no-highlight">295</i>&nbsp;     */
+<i class="no-highlight">296</i>&nbsp;    public void altaComanda(Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
+<b class="fc"><i class="no-highlight">297</i>&nbsp;        if (mesa.getEstado().equalsIgnoreCase(&quot;ocupada&quot;) )</b>
+<b class="fc"><i class="no-highlight">298</i>&nbsp;            throw new Exception(&quot;Mesa Ocupada&quot;);</b>
+<i class="no-highlight">299</i>&nbsp;
+<b class="fc"><i class="no-highlight">300</i>&nbsp;        mesa.setEstado(&quot;ocupada&quot;);</b>
+<b class="fc"><i class="no-highlight">301</i>&nbsp;        Comanda comanda = new Comanda(mesa,mozo);</b>
+<b class="fc"><i class="no-highlight">302</i>&nbsp;        comanda.agregarPedido(pedido);</b>
+<b class="fc"><i class="no-highlight">303</i>&nbsp;        this.comandas.add(comanda);</b>
+<i class="no-highlight">304</i>&nbsp;    }
+<i class="no-highlight">305</i>&nbsp;
+<i class="no-highlight">306</i>&nbsp;    public void agregarPedidoAComanda(Pedido ped, Comanda comanda){
+<b class="fc"><i class="no-highlight">307</i>&nbsp;        comanda.agregarPedido(ped);</b>
+<i class="no-highlight">308</i>&nbsp;    }
+<i class="no-highlight">309</i>&nbsp;
+<i class="no-highlight">310</i>&nbsp;    // ----- FACTURA -----
+<i class="no-highlight">311</i>&nbsp;
+<i class="no-highlight">312</i>&nbsp;    public double generarFactura( Comanda comanda) throws Exception {
+<b class="fc"><i class="no-highlight">313</i>&nbsp;        if (comanda.getMesa().getEstado().equalsIgnoreCase(&quot;libre&quot;))</b>
+<b class="fc"><i class="no-highlight">314</i>&nbsp;            throw new Exception(&quot;Imposible crear una Factura sobre una mesa Libre&quot;);</b>
+<b class="fc"><i class="no-highlight">315</i>&nbsp;        comanda.getMesa().setEstado(&quot;libre&quot;);</b>
+<b class="fc"><i class="no-highlight">316</i>&nbsp;        Factura factura = new Factura(Date.from(Instant.now()) ,comanda.getMesa(),comanda.getPedidos(),&quot;Efectivo&quot;,this.promocionesProductos,this.promocionesTemporales);</b>
+<i class="no-highlight">317</i>&nbsp;
+<b class="fc"><i class="no-highlight">318</i>&nbsp;        comanda.getMesa().getMozo().setVentas(comanda.getMesa().getMozo().getVentas()+ factura.getTotal());</b>
+<b class="fc"><i class="no-highlight">319</i>&nbsp;        comanda.getMesa().setCantComandas(comanda.getMesa().getCantComandas()+1);</b>
+<b class="fc"><i class="no-highlight">320</i>&nbsp;        comanda.getMesa().setTotalComandas(comanda.getMesa().getTotalComandas()+ factura.getTotal());</b>
+<i class="no-highlight">321</i>&nbsp;
+<b class="fc"><i class="no-highlight">322</i>&nbsp;        this.comandas.remove(comanda);</b>
+<b class="fc"><i class="no-highlight">323</i>&nbsp;        return factura.getTotal();</b>
+<i class="no-highlight">324</i>&nbsp;    }
+<i class="no-highlight">325</i>&nbsp;
+<i class="no-highlight">326</i>&nbsp;    /**
+<i class="no-highlight">327</i>&nbsp;     * El metodo permite crear una factura para cerrar la mesa, se actualizan valores para el calculo de estadisticas y se elimina la comanda
+<i class="no-highlight">328</i>&nbsp;     * @param mesa debera ser distinta de nula
+<i class="no-highlight">329</i>&nbsp;     * @param formaDePago debera tomar uno de los siguientes valores efectivo - tarjeta - mercPago - ctaDNI
+<i class="no-highlight">330</i>&nbsp;     */
+<i class="no-highlight">331</i>&nbsp;    public void crearFactura(Mesa mesa,String formaDePago){
+<b class="fc"><i class="no-highlight">332</i>&nbsp;        Comanda comanda = null;</b>
+<b class="fc"><i class="no-highlight">333</i>&nbsp;        for (int i = 0; i &lt; this.comandas.size(); i++){</b>
+<b class="fc"><i class="no-highlight">334</i>&nbsp;            if(this.comandas.get(i).getMesa()==mesa){</b>
+<b class="fc"><i class="no-highlight">335</i>&nbsp;                comanda=this.comandas.get(i);</b>
+<i class="no-highlight">336</i>&nbsp;            }
+<i class="no-highlight">337</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">338</i>&nbsp;        assert comanda != null;</b>
+<b class="fc"><i class="no-highlight">339</i>&nbsp;        Factura factura=new Factura(Date.from(Instant.now()),mesa,comanda.getPedidos(),formaDePago, this.promocionesProductos, this.promocionesTemporales);</b>
+<i class="no-highlight">340</i>&nbsp;
+<i class="no-highlight">341</i>&nbsp;        //para estadisticas
+<b class="fc"><i class="no-highlight">342</i>&nbsp;        mesa.getMozo().setVentas(mesa.getMozo().getVentas()+ factura.getTotal());</b>
+<b class="fc"><i class="no-highlight">343</i>&nbsp;        mesa.setCantComandas(mesa.getCantComandas()+1);</b>
+<b class="fc"><i class="no-highlight">344</i>&nbsp;        mesa.setTotalComandas(mesa.getTotalComandas()+ factura.getTotal());</b>
+<i class="no-highlight">345</i>&nbsp;
+<b class="fc"><i class="no-highlight">346</i>&nbsp;        this.comandas.remove(comanda);</b>
+<i class="no-highlight">347</i>&nbsp;    }
+<i class="no-highlight">348</i>&nbsp;
+<i class="no-highlight">349</i>&nbsp;    /**
+<i class="no-highlight">350</i>&nbsp;     * Permite calcular el sueldo de cada mozo, a partir del sueldo base y un extra por cada hijo
+<i class="no-highlight">351</i>&nbsp;     * @param mozo debera ser distinto de nulo
+<i class="no-highlight">352</i>&nbsp;     * @return un flotante con el sueldo correspondiente a dicho mozo
+<i class="no-highlight">353</i>&nbsp;     */
+<i class="no-highlight">354</i>&nbsp;    public double calculaSueldo(Mozo mozo){
+<b class="nc"><i class="no-highlight">355</i>&nbsp;        return this.getSueldoBasico() * (1+0.05* mozo.getCantHijos());</b>
+<i class="no-highlight">356</i>&nbsp;    }
 <i class="no-highlight">357</i>&nbsp;
-<i class="no-highlight">358</i>&nbsp;    // ----- GET Y SET ----
-<i class="no-highlight">359</i>&nbsp;    public double getSueldoBasico() {
-<b class="nc"><i class="no-highlight">360</i>&nbsp;        return sueldoBasico;</b>
-<i class="no-highlight">361</i>&nbsp;    }
-<i class="no-highlight">362</i>&nbsp;
-<i class="no-highlight">363</i>&nbsp;    public void setSueldoBasico(double sueldoBasico) {
-<b class="nc"><i class="no-highlight">364</i>&nbsp;        this.sueldoBasico = sueldoBasico;</b>
-<i class="no-highlight">365</i>&nbsp;    }
-<i class="no-highlight">366</i>&nbsp;
-<i class="no-highlight">367</i>&nbsp;    public ArrayList&lt;ProductoEnPromocion&gt; getPromocionesProductos() {
-<b class="fc"><i class="no-highlight">368</i>&nbsp;        return promocionesProductos;</b>
-<i class="no-highlight">369</i>&nbsp;    }
-<i class="no-highlight">370</i>&nbsp;
-<i class="no-highlight">371</i>&nbsp;    public void setPromocionesProductos(ArrayList&lt;ProductoEnPromocion&gt; promocionesProductos) {
-<b class="nc"><i class="no-highlight">372</i>&nbsp;        this.promocionesProductos = promocionesProductos;</b>
-<i class="no-highlight">373</i>&nbsp;    }
-<i class="no-highlight">374</i>&nbsp;
-<i class="no-highlight">375</i>&nbsp;    public ArrayList&lt;PromocionTemporal&gt; getPromocionesTemporales() {
-<b class="fc"><i class="no-highlight">376</i>&nbsp;        return promocionesTemporales;</b>
-<i class="no-highlight">377</i>&nbsp;    }
-<i class="no-highlight">378</i>&nbsp;
-<i class="no-highlight">379</i>&nbsp;    public void setPromocionesTemporales(ArrayList&lt;PromocionTemporal&gt; promocionesTemporales) {
-<b class="nc"><i class="no-highlight">380</i>&nbsp;        this.promocionesTemporales = promocionesTemporales;</b>
-<i class="no-highlight">381</i>&nbsp;    }
-<i class="no-highlight">382</i>&nbsp;
-<i class="no-highlight">383</i>&nbsp;    public String getNombreEmpresa() {
-<b class="nc"><i class="no-highlight">384</i>&nbsp;        return nombreEmpresa;</b>
-<i class="no-highlight">385</i>&nbsp;    }
-<i class="no-highlight">386</i>&nbsp;
-<i class="no-highlight">387</i>&nbsp;    public void setNombreEmpresa(String nombreEmpresa) {
-<b class="nc"><i class="no-highlight">388</i>&nbsp;        this.nombreEmpresa = nombreEmpresa;</b>
-<i class="no-highlight">389</i>&nbsp;    }
-<i class="no-highlight">390</i>&nbsp;
-<i class="no-highlight">391</i>&nbsp;    public TreeSet&lt;Mozo&gt; getMozos() {
-<b class="fc"><i class="no-highlight">392</i>&nbsp;        return mozos;</b>
-<i class="no-highlight">393</i>&nbsp;    }
-<i class="no-highlight">394</i>&nbsp;
-<i class="no-highlight">395</i>&nbsp;    public void setMozos(TreeSet&lt;Mozo&gt; mozos) {
-<b class="nc"><i class="no-highlight">396</i>&nbsp;        this.mozos = mozos;</b>
-<i class="no-highlight">397</i>&nbsp;    }
-<i class="no-highlight">398</i>&nbsp;
-<i class="no-highlight">399</i>&nbsp;    public TreeSet&lt;Mesa&gt; getMesas() {
-<b class="fc"><i class="no-highlight">400</i>&nbsp;        return this.mesas;</b>
-<i class="no-highlight">401</i>&nbsp;    }
-<i class="no-highlight">402</i>&nbsp;
-<i class="no-highlight">403</i>&nbsp;    public void setMesas(TreeSet&lt;Mesa&gt; mesas) {
-<b class="nc"><i class="no-highlight">404</i>&nbsp;        this.mesas = mesas;</b>
-<i class="no-highlight">405</i>&nbsp;    }
-<i class="no-highlight">406</i>&nbsp;
-<i class="no-highlight">407</i>&nbsp;    public TreeSet&lt;Producto&gt; getProductos() {
-<b class="nc"><i class="no-highlight">408</i>&nbsp;        return this.productos;</b>
-<i class="no-highlight">409</i>&nbsp;    }
-<i class="no-highlight">410</i>&nbsp;
-<i class="no-highlight">411</i>&nbsp;    public void setProductos(TreeSet&lt;Producto&gt; productos) {
-<b class="nc"><i class="no-highlight">412</i>&nbsp;        this.productos = productos;</b>
-<i class="no-highlight">413</i>&nbsp;    }
-<i class="no-highlight">414</i>&nbsp;
-<i class="no-highlight">415</i>&nbsp;    public ArrayList&lt;Comanda&gt; getComandas() {
-<b class="fc"><i class="no-highlight">416</i>&nbsp;        return this.comandas;</b>
-<i class="no-highlight">417</i>&nbsp;    }
-<i class="no-highlight">418</i>&nbsp;
-<i class="no-highlight">419</i>&nbsp;    public void setComandas(ArrayList&lt;Comanda&gt; comandas) {
-<b class="nc"><i class="no-highlight">420</i>&nbsp;        this.comandas = comandas;</b>
-<i class="no-highlight">421</i>&nbsp;    }
-<i class="no-highlight">422</i>&nbsp;
-<i class="no-highlight">423</i>&nbsp;    public TreeSet&lt;Operario&gt; getOperarios() {
-<b class="fc"><i class="no-highlight">424</i>&nbsp;        return this.operarios;</b>
-<i class="no-highlight">425</i>&nbsp;    }
-<i class="no-highlight">426</i>&nbsp;
-<i class="no-highlight">427</i>&nbsp;    public void setOperarios(TreeSet&lt;Operario&gt; operarios) {
-<b class="nc"><i class="no-highlight">428</i>&nbsp;        this.operarios = operarios;</b>
-<i class="no-highlight">429</i>&nbsp;    }
-<i class="no-highlight">430</i>&nbsp;
-<i class="no-highlight">431</i>&nbsp;    public ArrayList&lt;Pedido&gt; getPedidos() {
-<b class="fc"><i class="no-highlight">432</i>&nbsp;        return this.pedidos;</b>
-<i class="no-highlight">433</i>&nbsp;    }
-<i class="no-highlight">434</i>&nbsp;
-<i class="no-highlight">435</i>&nbsp;    public void setPedidos(ArrayList&lt;Pedido&gt; pedidos) {
-<b class="nc"><i class="no-highlight">436</i>&nbsp;        this.pedidos = pedidos;</b>
-<i class="no-highlight">437</i>&nbsp;    }
-<i class="no-highlight">438</i>&nbsp;
-<i class="no-highlight">439</i>&nbsp;    @Override
-<i class="no-highlight">440</i>&nbsp;    public boolean equals(Object o) {
-<b class="nc"><i class="no-highlight">441</i>&nbsp;        if (this == o) return true;</b>
-<b class="nc"><i class="no-highlight">442</i>&nbsp;        if (!(o instanceof Empresa)) return false;</b>
-<b class="nc"><i class="no-highlight">443</i>&nbsp;        Empresa empresa = (Empresa) o;</b>
-<b class="nc"><i class="no-highlight">444</i>&nbsp;        return Double.compare(empresa.getSueldoBasico(), getSueldoBasico()) == 0 &amp;&amp; arrancoJornada == empresa.arrancoJornada &amp;&amp; Objects.equals(getNombreEmpresa(), empresa.getNombreEmpresa()) &amp;&amp; Objects.equals(getMozos(), empresa.getMozos()) &amp;&amp; Objects.equals(getMesas(), empresa.getMesas()) &amp;&amp; Objects.equals(getProductos(), empresa.getProductos()) &amp;&amp; Objects.equals(getComandas(), empresa.getComandas()) &amp;&amp; Objects.equals(getOperarios(), empresa.getOperarios()) &amp;&amp; Objects.equals(getPromocionesProductos(), empresa.getPromocionesProductos()) &amp;&amp; Objects.equals(getPromocionesTemporales(), empresa.getPromocionesTemporales()) &amp;&amp; Objects.equals(getPedidos(), empresa.getPedidos());</b>
-<i class="no-highlight">445</i>&nbsp;    }
-<i class="no-highlight">446</i>&nbsp;
-<i class="no-highlight">447</i>&nbsp;    @Override
-<i class="no-highlight">448</i>&nbsp;    public int hashCode() {
-<b class="nc"><i class="no-highlight">449</i>&nbsp;        return Objects.hash(getNombreEmpresa(), getSueldoBasico(), getMozos(), getMesas(), getProductos(), getComandas(), getOperarios(), getPromocionesProductos(), getPromocionesTemporales(), getPedidos(), arrancoJornada);</b>
-<i class="no-highlight">450</i>&nbsp;    }
-<i class="no-highlight">451</i>&nbsp;}
-<i class="no-highlight">452</i>&nbsp;
+<i class="no-highlight">358</i>&nbsp;
+<i class="no-highlight">359</i>&nbsp;    // ----- GET Y SET ----
+<i class="no-highlight">360</i>&nbsp;    public double getSueldoBasico() {
+<b class="fc"><i class="no-highlight">361</i>&nbsp;        return sueldoBasico;</b>
+<i class="no-highlight">362</i>&nbsp;    }
+<i class="no-highlight">363</i>&nbsp;
+<i class="no-highlight">364</i>&nbsp;    public void setSueldoBasico(double sueldoBasico) {
+<b class="nc"><i class="no-highlight">365</i>&nbsp;        this.sueldoBasico = sueldoBasico;</b>
+<i class="no-highlight">366</i>&nbsp;    }
+<i class="no-highlight">367</i>&nbsp;
+<i class="no-highlight">368</i>&nbsp;    public ArrayList&lt;ProductoEnPromocion&gt; getPromocionesProductos() {
+<b class="fc"><i class="no-highlight">369</i>&nbsp;        return promocionesProductos;</b>
+<i class="no-highlight">370</i>&nbsp;    }
+<i class="no-highlight">371</i>&nbsp;
+<i class="no-highlight">372</i>&nbsp;    public void setPromocionesProductos(ArrayList&lt;ProductoEnPromocion&gt; promocionesProductos) {
+<b class="nc"><i class="no-highlight">373</i>&nbsp;        this.promocionesProductos = promocionesProductos;</b>
+<i class="no-highlight">374</i>&nbsp;    }
+<i class="no-highlight">375</i>&nbsp;
+<i class="no-highlight">376</i>&nbsp;    public ArrayList&lt;PromocionTemporal&gt; getPromocionesTemporales() {
+<b class="fc"><i class="no-highlight">377</i>&nbsp;        return promocionesTemporales;</b>
+<i class="no-highlight">378</i>&nbsp;    }
+<i class="no-highlight">379</i>&nbsp;
+<i class="no-highlight">380</i>&nbsp;    public void setPromocionesTemporales(ArrayList&lt;PromocionTemporal&gt; promocionesTemporales) {
+<b class="nc"><i class="no-highlight">381</i>&nbsp;        this.promocionesTemporales = promocionesTemporales;</b>
+<i class="no-highlight">382</i>&nbsp;    }
+<i class="no-highlight">383</i>&nbsp;
+<i class="no-highlight">384</i>&nbsp;    public String getNombreEmpresa() {
+<b class="fc"><i class="no-highlight">385</i>&nbsp;        return nombreEmpresa;</b>
+<i class="no-highlight">386</i>&nbsp;    }
+<i class="no-highlight">387</i>&nbsp;
+<i class="no-highlight">388</i>&nbsp;    public void setNombreEmpresa(String nombreEmpresa) {
+<b class="nc"><i class="no-highlight">389</i>&nbsp;        this.nombreEmpresa = nombreEmpresa;</b>
+<i class="no-highlight">390</i>&nbsp;    }
+<i class="no-highlight">391</i>&nbsp;
+<i class="no-highlight">392</i>&nbsp;    public TreeSet&lt;Mozo&gt; getMozos() {
+<b class="fc"><i class="no-highlight">393</i>&nbsp;        return mozos;</b>
+<i class="no-highlight">394</i>&nbsp;    }
+<i class="no-highlight">395</i>&nbsp;
+<i class="no-highlight">396</i>&nbsp;    public void setMozos(TreeSet&lt;Mozo&gt; mozos) {
+<b class="nc"><i class="no-highlight">397</i>&nbsp;        this.mozos = mozos;</b>
+<i class="no-highlight">398</i>&nbsp;    }
+<i class="no-highlight">399</i>&nbsp;
+<i class="no-highlight">400</i>&nbsp;    public TreeSet&lt;Mesa&gt; getMesas() {
+<b class="fc"><i class="no-highlight">401</i>&nbsp;        return this.mesas;</b>
+<i class="no-highlight">402</i>&nbsp;    }
+<i class="no-highlight">403</i>&nbsp;
+<i class="no-highlight">404</i>&nbsp;    public void setMesas(TreeSet&lt;Mesa&gt; mesas) {
+<b class="nc"><i class="no-highlight">405</i>&nbsp;        this.mesas = mesas;</b>
+<i class="no-highlight">406</i>&nbsp;    }
+<i class="no-highlight">407</i>&nbsp;
+<i class="no-highlight">408</i>&nbsp;    public TreeSet&lt;Producto&gt; getProductos() {
+<b class="fc"><i class="no-highlight">409</i>&nbsp;        return this.productos;</b>
+<i class="no-highlight">410</i>&nbsp;    }
+<i class="no-highlight">411</i>&nbsp;
+<i class="no-highlight">412</i>&nbsp;    public void setProductos(TreeSet&lt;Producto&gt; productos) {
+<b class="nc"><i class="no-highlight">413</i>&nbsp;        this.productos = productos;</b>
+<i class="no-highlight">414</i>&nbsp;    }
+<i class="no-highlight">415</i>&nbsp;
+<i class="no-highlight">416</i>&nbsp;    public ArrayList&lt;Comanda&gt; getComandas() {
+<b class="fc"><i class="no-highlight">417</i>&nbsp;        return this.comandas;</b>
+<i class="no-highlight">418</i>&nbsp;    }
+<i class="no-highlight">419</i>&nbsp;
+<i class="no-highlight">420</i>&nbsp;    public void setComandas(ArrayList&lt;Comanda&gt; comandas) {
+<b class="nc"><i class="no-highlight">421</i>&nbsp;        this.comandas = comandas;</b>
+<i class="no-highlight">422</i>&nbsp;    }
+<i class="no-highlight">423</i>&nbsp;
+<i class="no-highlight">424</i>&nbsp;    public TreeSet&lt;Operario&gt; getOperarios() {
+<b class="fc"><i class="no-highlight">425</i>&nbsp;        return this.operarios;</b>
+<i class="no-highlight">426</i>&nbsp;    }
+<i class="no-highlight">427</i>&nbsp;
+<i class="no-highlight">428</i>&nbsp;    public void setOperarios(TreeSet&lt;Operario&gt; operarios) {
+<b class="nc"><i class="no-highlight">429</i>&nbsp;        this.operarios = operarios;</b>
+<i class="no-highlight">430</i>&nbsp;    }
+<i class="no-highlight">431</i>&nbsp;
+<i class="no-highlight">432</i>&nbsp;    public ArrayList&lt;Pedido&gt; getPedidos() {
+<b class="fc"><i class="no-highlight">433</i>&nbsp;        return this.pedidos;</b>
+<i class="no-highlight">434</i>&nbsp;    }
+<i class="no-highlight">435</i>&nbsp;
+<i class="no-highlight">436</i>&nbsp;    public void setPedidos(ArrayList&lt;Pedido&gt; pedidos) {
+<b class="nc"><i class="no-highlight">437</i>&nbsp;        this.pedidos = pedidos;</b>
+<i class="no-highlight">438</i>&nbsp;    }
+<i class="no-highlight">439</i>&nbsp;
+<i class="no-highlight">440</i>&nbsp;    @Override
+<i class="no-highlight">441</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i class="no-highlight">442</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i class="no-highlight">443</i>&nbsp;        if (!(o instanceof Empresa)) return false;</b>
+<b class="fc"><i class="no-highlight">444</i>&nbsp;        Empresa empresa = (Empresa) o;</b>
+<b class="fc"><i class="no-highlight">445</i>&nbsp;        return Double.compare(empresa.getSueldoBasico(), getSueldoBasico()) == 0 &amp;&amp; arrancoJornada == empresa.arrancoJornada &amp;&amp; Objects.equals(getNombreEmpresa(), empresa.getNombreEmpresa()) &amp;&amp; Objects.equals(getMozos(), empresa.getMozos()) &amp;&amp; Objects.equals(getMesas(), empresa.getMesas()) &amp;&amp; Objects.equals(getProductos(), empresa.getProductos()) &amp;&amp; Objects.equals(getComandas(), empresa.getComandas()) &amp;&amp; Objects.equals(getOperarios(), empresa.getOperarios()) &amp;&amp; Objects.equals(getPromocionesProductos(), empresa.getPromocionesProductos()) &amp;&amp; Objects.equals(getPromocionesTemporales(), empresa.getPromocionesTemporales()) &amp;&amp; Objects.equals(getPedidos(), empresa.getPedidos());</b>
+<i class="no-highlight">446</i>&nbsp;    }
+<i class="no-highlight">447</i>&nbsp;
+<i class="no-highlight">448</i>&nbsp;    @Override
+<i class="no-highlight">449</i>&nbsp;    public int hashCode() {
+<b class="nc"><i class="no-highlight">450</i>&nbsp;        return Objects.hash(getNombreEmpresa(), getSueldoBasico(), getMozos(), getMesas(), getProductos(), getComandas(), getOperarios(), getPromocionesProductos(), getPromocionesTemporales(), getPedidos(), arrancoJornada);</b>
+<i class="no-highlight">451</i>&nbsp;    }
+<i class="no-highlight">452</i>&nbsp;}
 <i class="no-highlight">453</i>&nbsp;
 <i class="no-highlight">454</i>&nbsp;
+<i class="no-highlight">455</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -553,7 +554,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-14 19:18</div>
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
 </div>
 </body>
 </html>

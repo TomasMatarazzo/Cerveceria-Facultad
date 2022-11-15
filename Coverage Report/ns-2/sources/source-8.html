@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > VistaComandas</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">vistas</a>
+</div>
+
+<h1>Coverage Summary for Class: VistaComandas (vistas)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VistaComandas</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (6/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81,8%
+  </span>
+  <span class="absValue">
+    (72/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package vistas;
+<i class="no-highlight">2</i>&nbsp;import modelo.Mesa;
+<i class="no-highlight">3</i>&nbsp;import modelo.Mozo;
+<i class="no-highlight">4</i>&nbsp;import modelo.Pedido;
+<i class="no-highlight">5</i>&nbsp;import modelo.Producto;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import javax.swing.*;
+<i class="no-highlight">8</i>&nbsp;import javax.swing.border.EmptyBorder;
+<i class="no-highlight">9</i>&nbsp;import java.awt.*;
+<i class="no-highlight">10</i>&nbsp;import java.awt.event.ActionListener;
+<i class="no-highlight">11</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">12</i>&nbsp;import java.util.TreeSet;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;public class VistaComandas extends JFrame implements Ivista{
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    private JPanel contentPane;
+<i class="no-highlight">17</i>&nbsp;    private JLabel lblRegistreOperario;
+<i class="no-highlight">18</i>&nbsp;    private JButton botonIngresarProducto;
+<i class="no-highlight">19</i>&nbsp;    private JButton botonRegistrarse;
+<i class="no-highlight">20</i>&nbsp;    private JList&lt;Mozo&gt; listaMozos;
+<i class="no-highlight">21</i>&nbsp;    private JList&lt;Mesa&gt; listaMesas;
+<i class="no-highlight">22</i>&nbsp;    private JList&lt;Pedido&gt; listaProductos;
+<i class="no-highlight">23</i>&nbsp;    private FormPedido formPedido;
+<i class="no-highlight">24</i>&nbsp;    private TreeSet&lt;Producto&gt; productos;
+<i class="no-highlight">25</i>&nbsp;    private TreeSet&lt;Mesa&gt; mesas;
+<i class="no-highlight">26</i>&nbsp;    private TreeSet&lt;Mozo&gt; mozos;
+<i class="no-highlight">27</i>&nbsp;    private ArrayList&lt;Pedido&gt; pedidos;
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    public void setActionListener(ActionListener controlador) {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        this.botonIngresarProducto.addActionListener(controlador);</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        this.formPedido.botonModificar.addActionListener(controlador);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        this.botonRegistrarse.addActionListener(controlador);</b>
+<i class="no-highlight">33</i>&nbsp;    }
+<i class="no-highlight">34</i>&nbsp;    public void ejecutar(){
+<i class="no-highlight">35</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            this.setVisible(true);</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        }</b>
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * Create the frame.
+<i class="no-highlight">45</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    public VistaComandas( TreeSet&lt;Producto&gt; productos, TreeSet&lt;Mesa&gt; mesas,TreeSet&lt;Mozo&gt; mozos,ArrayList&lt;Pedido&gt; pedidos) {</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        this.productos = productos;</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        this.mozos = mozos;</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        this.mesas = mesas;</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        this.pedidos = pedidos;</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        setBounds(100, 100, 901, 670);</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        contentPane = new JPanel();</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        setContentPane(contentPane);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        contentPane.setLayout(null);</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        this.setLocation(x, y);</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        botonRegistrarse = new JButton(&quot;Crear comanda&quot;);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        botonRegistrarse.setActionCommand(&quot;NUEVA_COMANDA&quot;);</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        botonRegistrarse.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        botonRegistrarse.setBounds(355, 530, 214, 33);</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        contentPane.add(botonRegistrarse);</b>
+<i class="no-highlight">67</i>&nbsp;
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        lblRegistreOperario = new JLabel(&quot;Nueva comanda - Seleccione un mozo, mesa y pedido&quot;);</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        lblRegistreOperario.setVerticalAlignment(SwingConstants.TOP);</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        lblRegistreOperario.setFont(new Font(&quot;Arial&quot;, Font.BOLD | Font.ITALIC, 30));</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        lblRegistreOperario.setBounds(68, 10, 771, 45);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        contentPane.add(lblRegistreOperario);</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        listaProductos = new JList();</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        listaProductos.setBounds(0, 410, 877, 100);</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        contentPane.add(listaProductos);</b>
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        botonIngresarProducto = new JButton(&quot;CREAR PEDIDO&quot;);</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        botonIngresarProducto.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        botonIngresarProducto.setActionCommand(&quot;FORM_PEDIDO&quot;);</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        botonIngresarProducto.setBounds(163, 369, 241, 33);</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        contentPane.add(botonIngresarProducto);</b>
+<i class="no-highlight">83</i>&nbsp;
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        listaMesas = new JList();</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        listaMesas.setBounds(0, 259, 877, 100);</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        contentPane.add(listaMesas);</b>
+<i class="no-highlight">87</i>&nbsp;
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        listaMozos = new JList();</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        listaMozos.setBounds(0, 106, 877, 100);</b>
+<i class="no-highlight">90</i>&nbsp;
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        JLabel lblMozos = new JLabel(&quot;Mozos&quot;);</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        lblMozos.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 30));</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        lblMozos.setBounds(10, 63, 174, 33);</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        contentPane.add(lblMozos);</b>
+<i class="no-highlight">95</i>&nbsp;
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        JLabel lblMesas = new JLabel(&quot;Mesas&quot;);</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        lblMesas.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 30));</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        lblMesas.setBounds(10, 216, 174, 33);</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        contentPane.add(lblMesas);</b>
+<i class="no-highlight">100</i>&nbsp;
+<b class="fc"><i class="no-highlight">101</i>&nbsp;        JLabel lblProductos = new JLabel(&quot;Pedidos&quot;);</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        lblProductos.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 30));</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        lblProductos.setBounds(10, 369, 174, 33);</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        contentPane.add(lblProductos);</b>
+<i class="no-highlight">105</i>&nbsp;
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        formPedido = new FormPedido(productos);</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;        formPedido.setVisible(false);</b>
+<i class="no-highlight">108</i>&nbsp;
+<b class="fc"><i class="no-highlight">109</i>&nbsp;        this.renderListaMozos(mozos);</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;        this.renderListaMesas(mesas);</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        this.renderListaPedidos(pedidos);</b>
+<i class="no-highlight">112</i>&nbsp;    }
+<i class="no-highlight">113</i>&nbsp;
+<i class="no-highlight">114</i>&nbsp;    public void hideFormPedido(){
+<b class="nc"><i class="no-highlight">115</i>&nbsp;        this.formPedido.setVisible(false);</b>
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;    public void showFormPedido(){
+<b class="nc"><i class="no-highlight">119</i>&nbsp;        this.formPedido.setVisible(true);</b>
+<i class="no-highlight">120</i>&nbsp;    }
+<i class="no-highlight">121</i>&nbsp;
+<b class="nc"><i class="no-highlight">122</i>&nbsp;    public Producto getSelectedProducto(){return this.formPedido.getProducto();}</b>
+<b class="nc"><i class="no-highlight">123</i>&nbsp;    public Pedido getSelectedPedido(){ return this.listaProductos.getSelectedValue();}</b>
+<b class="nc"><i class="no-highlight">124</i>&nbsp;    public Mozo getSelectedMozo(){ return this.listaMozos.getSelectedValue();}</b>
+<i class="no-highlight">125</i>&nbsp;    public String getCantDelPedido(){
+<b class="nc"><i class="no-highlight">126</i>&nbsp;        return this.formPedido.getCant();</b>
+<i class="no-highlight">127</i>&nbsp;    }
+<i class="no-highlight">128</i>&nbsp;    public Mesa getSelectedMesas(){
+<b class="nc"><i class="no-highlight">129</i>&nbsp;        return this.listaMesas.getSelectedValue();</b>
+<i class="no-highlight">130</i>&nbsp;    }
+<i class="no-highlight">131</i>&nbsp;
+<i class="no-highlight">132</i>&nbsp;    public void renderListaMozos(TreeSet&lt;Mozo&gt; mozos){
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        DefaultListModel&lt;Mozo&gt; listaContratoDefault = new DefaultListModel&lt;&gt;();</b>
+<i class="no-highlight">134</i>&nbsp;
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        for (Mozo mozo : mozos) {</b>
+<b class="nc"><i class="no-highlight">136</i>&nbsp;            listaContratoDefault.addElement(mozo);</b>
+<b class="nc"><i class="no-highlight">137</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">138</i>&nbsp;        this.listaMozos.setModel(listaContratoDefault);</b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;        contentPane.add(listaMozos);</b>
+<i class="no-highlight">140</i>&nbsp;    }
+<i class="no-highlight">141</i>&nbsp;
+<i class="no-highlight">142</i>&nbsp;    public void renderListaMesas(TreeSet&lt;Mesa&gt; mesas){
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        DefaultListModel&lt;Mesa&gt; listaContratoDefault = new DefaultListModel&lt;&gt;();</b>
+<i class="no-highlight">144</i>&nbsp;
+<b class="fc"><i class="no-highlight">145</i>&nbsp;        for (Mesa mesa : mesas) {</b>
+<b class="nc"><i class="no-highlight">146</i>&nbsp;            listaContratoDefault.addElement(mesa);</b>
+<b class="nc"><i class="no-highlight">147</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        this.listaMesas.setModel(listaContratoDefault);</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;        contentPane.add(listaMozos);</b>
+<i class="no-highlight">150</i>&nbsp;    }
+<i class="no-highlight">151</i>&nbsp;
+<i class="no-highlight">152</i>&nbsp;    public void renderListaPedidos(ArrayList&lt;Pedido&gt; pedidos) {
+<b class="fc"><i class="no-highlight">153</i>&nbsp;        DefaultListModel&lt;Pedido&gt; listaContratoDefault = new DefaultListModel&lt;&gt;();</b>
+<i class="no-highlight">154</i>&nbsp;
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        for (Pedido pedido : pedidos)</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;            listaContratoDefault.addElement(pedido);</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;        this.listaProductos.setModel(listaContratoDefault);</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;        contentPane.add(listaMozos);</b>
+<i class="no-highlight">159</i>&nbsp;
+<i class="no-highlight">160</i>&nbsp;    }
+<i class="no-highlight">161</i>&nbsp;
+<i class="no-highlight">162</i>&nbsp;    public TreeSet&lt;Producto&gt; getProductos() {
+<b class="nc"><i class="no-highlight">163</i>&nbsp;        return productos;</b>
+<i class="no-highlight">164</i>&nbsp;    }
+<i class="no-highlight">165</i>&nbsp;
+<i class="no-highlight">166</i>&nbsp;    public void setProductos(TreeSet&lt;Producto&gt; productos) {
+<b class="nc"><i class="no-highlight">167</i>&nbsp;        this.productos = productos;</b>
+<i class="no-highlight">168</i>&nbsp;    }
+<i class="no-highlight">169</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > VistaRegistrarse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">vistas</a>
+</div>
+
+<h1>Coverage Summary for Class: VistaRegistrarse (vistas)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VistaRegistrarse</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42,9%
+  </span>
+  <span class="absValue">
+    (3/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88,7%
+  </span>
+  <span class="absValue">
+    (47/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package vistas;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.awt.*;
+<i class="no-highlight">4</i>&nbsp;import javax.swing.JFrame;
+<i class="no-highlight">5</i>&nbsp;import javax.swing.JPanel;
+<i class="no-highlight">6</i>&nbsp;import javax.swing.border.EmptyBorder;
+<i class="no-highlight">7</i>&nbsp;import javax.swing.JTextField;
+<i class="no-highlight">8</i>&nbsp;import javax.swing.JButton;
+<i class="no-highlight">9</i>&nbsp;import javax.swing.JLabel;
+<i class="no-highlight">10</i>&nbsp;import java.awt.event.ActionListener;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;public class VistaRegistrarse extends JFrame implements Ivista{
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;        private JPanel contentPane;
+<i class="no-highlight">16</i>&nbsp;        private JTextField inputApellido;
+<i class="no-highlight">17</i>&nbsp;        private JTextField inputUsuario;
+<i class="no-highlight">18</i>&nbsp;        private JLabel lblNewLabel;
+<i class="no-highlight">19</i>&nbsp;        private JLabel lblContrasena;
+<i class="no-highlight">20</i>&nbsp;        private JLabel lblPassword;
+<i class="no-highlight">21</i>&nbsp;        private JTextField inputPassword;
+<i class="no-highlight">22</i>&nbsp;        private JLabel lblRegistreOperario;
+<i class="no-highlight">23</i>&nbsp;        private JButton botonRegistrarse;
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;        public void setActionListener(ActionListener controlador) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;            this.botonRegistrarse.addActionListener(controlador);</b>
+<i class="no-highlight">27</i>&nbsp;        }
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;        public void ejecutar(){
+<i class="no-highlight">30</i>&nbsp;                    try {
+<b class="fc"><i class="no-highlight">31</i>&nbsp;                        this.setVisible(true);</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;                    } catch (Exception e) {</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;                        e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;                    }</b>
+<i class="no-highlight">35</i>&nbsp;        }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;        /**
+<i class="no-highlight">38</i>&nbsp;         * Create the frame.
+<i class="no-highlight">39</i>&nbsp;         */
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        public VistaRegistrarse() {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            setBounds(100, 100, 550, 500);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            contentPane = new JPanel();</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            setContentPane(contentPane);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;            int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            this.setLocation(x, y);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            contentPane.setLayout(null);</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            inputApellido = new JTextField();</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            inputApellido.setBounds(10, 128, 375, 28);</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;            contentPane.add(inputApellido);</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            inputApellido.setColumns(10);</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            inputUsuario = new JTextField();</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            inputUsuario.setColumns(10);</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            inputUsuario.setBounds(10, 209, 375, 28);</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;            contentPane.add(inputUsuario);</b>
+<i class="no-highlight">61</i>&nbsp;
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            botonRegistrarse = new JButton(&quot;Ingresar&quot;);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            botonRegistrarse.setActionCommand(&quot;REGISTRARSE&quot;);</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            botonRegistrarse.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            botonRegistrarse.setBounds(224, 396, 132, 33);</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            contentPane.add(botonRegistrarse);</b>
+<i class="no-highlight">67</i>&nbsp;
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            lblNewLabel = new JLabel(&quot;Apellido&quot;);</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            lblNewLabel.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;            lblNewLabel.setBounds(10, 85, 116, 33);</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            contentPane.add(lblNewLabel);</b>
+<i class="no-highlight">72</i>&nbsp;
+<b class="fc"><i class="no-highlight">73</i>&nbsp;            lblContrasena = new JLabel(&quot;Usuario&quot;);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            lblContrasena.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;            lblContrasena.setBounds(10, 166, 116, 33);</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            contentPane.add(lblContrasena);</b>
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;            lblPassword = new JLabel(&quot;Password&quot;);</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;            lblPassword.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;            lblPassword.setBounds(10, 247, 116, 33);</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            contentPane.add(lblPassword);</b>
+<i class="no-highlight">82</i>&nbsp;
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            inputPassword = new JTextField();</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            inputPassword.setColumns(10);</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;            inputPassword.setBounds(10, 290, 375, 28);</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;            contentPane.add(inputPassword);</b>
+<i class="no-highlight">87</i>&nbsp;
+<b class="fc"><i class="no-highlight">88</i>&nbsp;            lblRegistreOperario = new JLabel(&quot;Registre operario&quot;);</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;            lblRegistreOperario.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;            lblRegistreOperario.setBounds(211, 20, 174, 33);</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;            contentPane.add(lblRegistreOperario);</b>
+<i class="no-highlight">92</i>&nbsp;        }
+<i class="no-highlight">93</i>&nbsp;
+<i class="no-highlight">94</i>&nbsp;        public String getUsuario() {
+<b class="nc"><i class="no-highlight">95</i>&nbsp;            return this.inputUsuario.getText();</b>
+<i class="no-highlight">96</i>&nbsp;        }
+<i class="no-highlight">97</i>&nbsp;
+<i class="no-highlight">98</i>&nbsp;        public String getContrasena() {
+<b class="nc"><i class="no-highlight">99</i>&nbsp;            return this.inputPassword.getText();</b>
+<i class="no-highlight">100</i>&nbsp;        }
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;        public String getApellido() {
+<b class="nc"><i class="no-highlight">103</i>&nbsp;            return this.inputApellido.getText();</b>
+<i class="no-highlight">104</i>&nbsp;        }
+<i class="no-highlight">105</i>&nbsp;
+<i class="no-highlight">106</i>&nbsp;        public void hideWindow(){
+<b class="nc"><i class="no-highlight">107</i>&nbsp;            this.setVisible(false);</b>
+<i class="no-highlight">108</i>&nbsp;        }
+<i class="no-highlight">109</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > VistaEstadisticas</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">vistas</a>
+</div>
+
+<h1>Coverage Summary for Class: VistaEstadisticas (vistas)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VistaEstadisticas</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,6%
+  </span>
+  <span class="absValue">
+    (48/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package vistas;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import javax.swing.JFrame;
+<i class="no-highlight">4</i>&nbsp;import javax.swing.JPanel;
+<i class="no-highlight">5</i>&nbsp;import javax.swing.border.EmptyBorder;
+<i class="no-highlight">6</i>&nbsp;import javax.swing.JLabel;
+<i class="no-highlight">7</i>&nbsp;import java.awt.*;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;public class VistaEstadisticas extends JFrame implements Ivista{
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;    private JPanel contentPane;
+<i class="no-highlight">12</i>&nbsp;    private JLabel lblNewLabel;
+<i class="no-highlight">13</i>&nbsp;    private JLabel lblCantidadDeHijos;
+<i class="no-highlight">14</i>&nbsp;    private JLabel lblCrearMesa;
+<i class="no-highlight">15</i>&nbsp;    private JLabel promedioVariable;
+<i class="no-highlight">16</i>&nbsp;    private JLabel menosVentasVariables;
+<i class="no-highlight">17</i>&nbsp;    private JLabel lblConsumoPromedioX_2;
+<i class="no-highlight">18</i>&nbsp;    private JLabel maxVentasVariable;
+<i class="no-highlight">19</i>&nbsp;    private String maxVentas;
+<i class="no-highlight">20</i>&nbsp;    private String minVentas;
+<i class="no-highlight">21</i>&nbsp;    private String promedioMesa;
+<i class="no-highlight">22</i>&nbsp;
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    public VistaEstadisticas( String maxVentas , String minVentas , String promedioMesa) {</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        this.maxVentas = maxVentas;</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        this.minVentas = minVentas;</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        this.promedioMesa = promedioMesa;</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        setBounds(100, 100, 677, 442);</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        contentPane = new JPanel();</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        setContentPane(contentPane);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        contentPane.setLayout(null);</b>
+<i class="no-highlight">33</i>&nbsp;
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        this.setLocation(x, y);</b>
+<i class="no-highlight">38</i>&nbsp;
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        lblNewLabel = new JLabel(&quot;Empleado con menos ventas&quot;);</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        lblNewLabel.setFont(new Font(&quot;Arial&quot;, Font.BOLD | Font.ITALIC, 21));</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        lblNewLabel.setBounds(18, 69, 307, 39);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        contentPane.add(lblNewLabel);</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        lblCantidadDeHijos = new JLabel(&quot;Empleado con mas ventas&quot;);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        lblCantidadDeHijos.setFont(new Font(&quot;Arial&quot;, Font.BOLD | Font.ITALIC, 21));</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        lblCantidadDeHijos.setBounds(174, 189, 294, 39);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        contentPane.add(lblCantidadDeHijos);</b>
+<i class="no-highlight">48</i>&nbsp;
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        lblCrearMesa = new JLabel(&quot;ESTADISTICAS&quot;);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        lblCrearMesa.setForeground(Color.BLUE);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        lblCrearMesa.setFont(new Font(&quot;Arial&quot;, Font.BOLD | Font.ITALIC, 21));</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        lblCrearMesa.setBounds(228, 10, 200, 39);</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        contentPane.add(lblCrearMesa);</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        promedioVariable = new JLabel();</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        promedioVariable.setText(this.promedioMesa);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        promedioVariable.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        promedioVariable.setBounds(335, 118, 307, 39);</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        contentPane.add(promedioVariable);</b>
+<i class="no-highlight">60</i>&nbsp;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        menosVentasVariables = new JLabel();</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        menosVentasVariables.setText(this.minVentas);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        menosVentasVariables.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        menosVentasVariables.setBounds(18, 118, 307, 39);</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        contentPane.add(menosVentasVariables);</b>
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        lblConsumoPromedioX_2 = new JLabel(&quot;Consumo promedio x Mesas&quot;);</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        lblConsumoPromedioX_2.setFont(new Font(&quot;Arial&quot;, Font.BOLD | Font.ITALIC, 21));</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        lblConsumoPromedioX_2.setBounds(335, 69, 307, 39);</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        contentPane.add(lblConsumoPromedioX_2);</b>
+<i class="no-highlight">71</i>&nbsp;
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        maxVentasVariable = new JLabel();</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        maxVentasVariable.setText(this.maxVentas);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        maxVentasVariable.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 21));</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        maxVentasVariable.setBounds(174, 236, 307, 39);</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        contentPane.add(maxVentasVariable);</b>
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    public void ejecutar(){
+<i class="no-highlight">80</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            this.setVisible(true);</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i class="no-highlight">83</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        }</b>
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    public void setMaxVentas(String maxVentas) {
+<b class="nc"><i class="no-highlight">88</i>&nbsp;        this.maxVentas = maxVentas;</b>
+<i class="no-highlight">89</i>&nbsp;    }
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;    public void setMinVentas(String minVentas) {
+<b class="nc"><i class="no-highlight">92</i>&nbsp;        this.minVentas = minVentas;</b>
+<i class="no-highlight">93</i>&nbsp;    }
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;    public void setPromedioMesa(String promedioMesa) {
+<b class="nc"><i class="no-highlight">96</i>&nbsp;        this.promedioMesa = promedioMesa;</b>
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
+</div>
+</body>
+</html>

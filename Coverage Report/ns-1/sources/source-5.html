@@ -58,10 +58,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    82,6%
+    84%
   </span>
   <span class="absValue">
-    (19/23)
+    (21/25)
   </span>
 </td>
 </tr>
@@ -82,94 +82,96 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">7</i>&nbsp;    private int cantidadPersonas;
 <i class="no-highlight">8</i>&nbsp;    private String estado;
 <i class="no-highlight">9</i>&nbsp;    private Mozo mozo;
-<i class="no-highlight">10</i>&nbsp;    private Pedido pedido;
-<i class="no-highlight">11</i>&nbsp;    private int cantComandas;
-<i class="no-highlight">12</i>&nbsp;    private double totalComandas;
-<i class="no-highlight">13</i>&nbsp;
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    public Mesa( int cantidadPersonas) throws Exception{</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;        this.nro = Mesa.id++;</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;        this.setCantidadPersonas(cantidadPersonas);</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;        this.setEstado(&quot;libre&quot;);</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;        this.cantComandas=0;</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;        this.totalComandas=0;</b>
-<i class="no-highlight">20</i>&nbsp;    }
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    public int getCantComandas() {
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        return cantComandas;</b>
-<i class="no-highlight">24</i>&nbsp;    }
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;    public void setCantComandas(int cantComandas) {
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        this.cantComandas = cantComandas;</b>
-<i class="no-highlight">28</i>&nbsp;    }
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;    public double getTotalComandas() {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        return totalComandas;</b>
-<i class="no-highlight">32</i>&nbsp;    }
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;    public void setTotalComandas(double totalComandas) {
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        this.totalComandas = totalComandas;</b>
-<i class="no-highlight">36</i>&nbsp;    }
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;    public int getNro() {
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        return nro;</b>
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;    public void setNro(int nro) {
-<b class="nc"><i class="no-highlight">43</i>&nbsp;        this.nro = nro;</b>
-<i class="no-highlight">44</i>&nbsp;    }
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;    public int getCantidadPersonas() {
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        return cantidadPersonas;</b>
-<i class="no-highlight">48</i>&nbsp;    }
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;    public void setCantidadPersonas(int cantidadPersonas){
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            this.cantidadPersonas = cantidadPersonas;</b>
-<i class="no-highlight">52</i>&nbsp;    }
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    public String getEstado() {
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        return estado;</b>
-<i class="no-highlight">56</i>&nbsp;    }
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    /**
-<i class="no-highlight">59</i>&nbsp;     * @param estado sera una cadena que debera ser &quot;libre&quot; u &quot;ocupada&quot;
-<i class="no-highlight">60</i>&nbsp;     * @throws Exception en caso de que estado no sea &quot;libre&quot; u &quot;ocupada&quot; se lanzara una excepcion
-<i class="no-highlight">61</i>&nbsp;     */
-<i class="no-highlight">62</i>&nbsp;    public void setEstado(String estado) throws Exception {
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        if (estado.equalsIgnoreCase(&quot;libre&quot;) || estado.equalsIgnoreCase(&quot;ocupada&quot;))</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            this.estado = estado;</b>
-<i class="no-highlight">65</i>&nbsp;        else
-<b class="nc"><i class="no-highlight">66</i>&nbsp;            throw new Exception();</b>
-<i class="no-highlight">67</i>&nbsp;    }
-<i class="no-highlight">68</i>&nbsp;
-<i class="no-highlight">69</i>&nbsp;    public Mozo getMozo() {
-<b class="fc"><i class="no-highlight">70</i>&nbsp;        return mozo;</b>
-<i class="no-highlight">71</i>&nbsp;    }
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;    public void setMozo(Mozo mozo) {
-<b class="fc"><i class="no-highlight">74</i>&nbsp;        this.mozo = mozo;</b>
-<i class="no-highlight">75</i>&nbsp;    }
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;    @Override
-<i class="no-highlight">78</i>&nbsp;    public String toString() {
-<b class="nc"><i class="no-highlight">79</i>&nbsp;        return</b>
-<i class="no-highlight">80</i>&nbsp;                &quot;Nro de Mesa: &quot; + nro +
-<i class="no-highlight">81</i>&nbsp;                &quot;      Estado=&#39;&quot; + estado + &#39;\&#39;&#39;;
-<i class="no-highlight">82</i>&nbsp;    }
-<i class="no-highlight">83</i>&nbsp;    public void cerrarMesa() {
-<b class="nc"><i class="no-highlight">84</i>&nbsp;        this.estado = &quot;libre&quot;;</b>
-<i class="no-highlight">85</i>&nbsp;
-<i class="no-highlight">86</i>&nbsp;    }
+<i class="no-highlight">10</i>&nbsp;    private int cantComandas;
+<i class="no-highlight">11</i>&nbsp;    private double totalComandas;
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    public Mesa( int cantidadPersonas) throws Exception {</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        this.nro = Mesa.id++;</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        this.setCantidadPersonas(cantidadPersonas);</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;        this.setEstado(&quot;libre&quot;);</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;        this.cantComandas=0;</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        this.totalComandas=0;</b>
+<i class="no-highlight">19</i>&nbsp;    }
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;    public int getCantComandas() {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        return cantComandas;</b>
+<i class="no-highlight">23</i>&nbsp;    }
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    public void setCantComandas(int cantComandas) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        this.cantComandas = cantComandas;</b>
+<i class="no-highlight">27</i>&nbsp;    }
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    public double getTotalComandas() {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        return totalComandas;</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    public void setTotalComandas(double totalComandas) {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        this.totalComandas = totalComandas;</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    public int getNro() {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        return nro;</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    public void setNro(int nro) {
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        this.nro = nro;</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    public int getCantidadPersonas() {
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        return cantidadPersonas;</b>
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    public void setCantidadPersonas(int cantidadPersonas){
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            this.cantidadPersonas = cantidadPersonas;</b>
+<i class="no-highlight">51</i>&nbsp;    }
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    public String getEstado() {
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        return estado;</b>
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;    /**
+<i class="no-highlight">58</i>&nbsp;     * @param estado sera una cadena que debera ser &quot;libre&quot; u &quot;ocupada&quot;
+<i class="no-highlight">59</i>&nbsp;     * @throws Exception en caso de que estado no sea &quot;libre&quot; u &quot;ocupada&quot; se lanzara una excepcion
+<i class="no-highlight">60</i>&nbsp;     */
+<i class="no-highlight">61</i>&nbsp;    public void setEstado(String estado) throws Exception {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        if (estado.equalsIgnoreCase(&quot;libre&quot;) || estado.equalsIgnoreCase(&quot;ocupada&quot;))</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            this.estado = estado;</b>
+<i class="no-highlight">64</i>&nbsp;        else
+<b class="nc"><i class="no-highlight">65</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;    public Mozo getMozo() {
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        return mozo;</b>
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;    public void setMozo(Mozo mozo) throws Exception {
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        if (mozo.getEstado() == 0)</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            this.mozo = mozo;</b>
+<i class="no-highlight">75</i>&nbsp;        else
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            throw new Exception();</b>
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    @Override
+<i class="no-highlight">80</i>&nbsp;    public String toString() {
+<b class="nc"><i class="no-highlight">81</i>&nbsp;        return</b>
+<i class="no-highlight">82</i>&nbsp;                &quot;Nro de Mesa: &quot; + nro +
+<i class="no-highlight">83</i>&nbsp;                &quot;      Estado=&#39;&quot; + estado + &#39;\&#39;&#39;;
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;    public void cerrarMesa() {
+<b class="nc"><i class="no-highlight">86</i>&nbsp;        this.estado = &quot;libre&quot;;</b>
 <i class="no-highlight">87</i>&nbsp;
-<i class="no-highlight">88</i>&nbsp;    /**
-<i class="no-highlight">89</i>&nbsp;     * El metodo permitira ordenar el treeset de acuerdo al numero de mesa
-<i class="no-highlight">90</i>&nbsp;     * @param o debera ser distinto de null
-<i class="no-highlight">91</i>&nbsp;     * @return devuelve 1 en caso de que la mesa instancia sea mayor a la recibida por parametro, 0 en caso contrario
-<i class="no-highlight">92</i>&nbsp;     */
-<i class="no-highlight">93</i>&nbsp;    @Override
-<i class="no-highlight">94</i>&nbsp;    public int compareTo(Mesa o) {
-<b class="fc"><i class="no-highlight">95</i>&nbsp;        return (this.getNro() &gt; o.getNro()) ? 1 : 0;</b>
-<i class="no-highlight">96</i>&nbsp;    }
-<i class="no-highlight">97</i>&nbsp;}
+<i class="no-highlight">88</i>&nbsp;    }
+<i class="no-highlight">89</i>&nbsp;
+<i class="no-highlight">90</i>&nbsp;    /**
+<i class="no-highlight">91</i>&nbsp;     * El metodo permitira ordenar el treeset de acuerdo al numero de mesa
+<i class="no-highlight">92</i>&nbsp;     * @param o debera ser distinto de null
+<i class="no-highlight">93</i>&nbsp;     * @return devuelve 1 en caso de que la mesa instancia sea mayor a la recibida por parametro, 0 en caso contrario
+<i class="no-highlight">94</i>&nbsp;     */
+<i class="no-highlight">95</i>&nbsp;    @Override
+<i class="no-highlight">96</i>&nbsp;    public int compareTo(Mesa o) {
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        return (this.getNro() &gt; o.getNro()) ? 1 : 0;</b>
+<i class="no-highlight">98</i>&nbsp;    }
+<i class="no-highlight">99</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -196,7 +198,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-14 19:18</div>
+    <div style="float:right;">generated on 2022-11-15 19:17</div>
 </div>
 </body>
 </html>
