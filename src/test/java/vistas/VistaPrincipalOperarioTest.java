@@ -110,7 +110,7 @@ class VistaPrincipalOperarioTest {
         UtilsTest.clickComponent(estadisticas, robot);
         assertTrue(controlador.getVentanaEmergente().getClass() == VistaEstadisticas.class, "NO CREA LA VENTANA CORRECTA");
     }
-    
+
     @Test
     public void testBotonNuevaComanda()
     {
