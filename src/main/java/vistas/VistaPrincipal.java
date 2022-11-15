@@ -33,7 +33,6 @@ public class VistaPrincipal extends JFrame {
     private JButton btnNuevasComandas;
     private JButton btnComenzarJornada;
 
-
     public void setActionListener(ActionListener controlador) {
         this.btnModificarN.addActionListener(controlador);
         this.formSueldo.botonModificar.addActionListener(controlador);

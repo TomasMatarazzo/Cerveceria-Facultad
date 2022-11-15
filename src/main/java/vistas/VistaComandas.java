@@ -26,8 +26,6 @@ public class VistaComandas extends JFrame {
     private TreeSet<Mozo> mozos;
     private ArrayList<Pedido> pedidos;
 
-
-
     public void setActionListener(ActionListener controlador) {
         this.botonIngresarProducto.addActionListener(controlador);
         this.formPedido.botonModificar.addActionListener(controlador);

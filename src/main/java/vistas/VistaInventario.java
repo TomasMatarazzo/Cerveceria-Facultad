@@ -30,7 +30,6 @@ public class VistaInventario extends JFrame {
     private FormMozo formMozo;
     private FormProducto formProducto;
 
-
     public void setActionListener(ActionListener controlador) {
         this.botonIngresarProducto.addActionListener(controlador);
         this.botonEliminarProducto.addActionListener(controlador);
@@ -204,9 +203,11 @@ public class VistaInventario extends JFrame {
     public Mozo getSelectedMozo(){
         return this.listaMozos.getSelectedValue();
     }
+
     public Producto getSelectedProducto(){
         return this.listaProductos.getSelectedValue();
     }
+
     public Mesa getSelectedMesas(){
         return this.listaMesas.getSelectedValue();
     }

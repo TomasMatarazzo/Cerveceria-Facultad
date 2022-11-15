@@ -77,8 +77,6 @@ public class VistaNuevaComandas extends JFrame {
         this.renderListaPedidos(pedidos);
     }
 
-
-
     public void ejecutar(){
         try{
             this.setVisible(true);

@@ -84,7 +84,6 @@ public class VistaEstadisticas extends JFrame {
         }
     }
 
-
     public void setMaxVentas(String maxVentas) {
         this.maxVentas = maxVentas;
     }

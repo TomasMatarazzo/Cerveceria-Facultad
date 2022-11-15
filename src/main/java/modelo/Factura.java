@@ -7,7 +7,7 @@ import java.util.Date;
 public class Factura {
     private Date date;
     private Mesa mesa;
-    private ArrayList<Pedido> pedidos=new ArrayList<>();
+    private ArrayList<Pedido> pedidos;
     private double total;
     private String formaDePago;
     private ArrayList<ProductoEnPromocion> promocionesProductos;
@@ -17,9 +17,9 @@ public class Factura {
         this.date = date;
         this.mesa = mesa;
         this.pedidos = pedidos;
-        this.promocionesTemporales=promocionesTemporales;
-        this.promocionesProductos=promocionesProductos;
-        this.formaDePago=formaDePago;
+        this.promocionesTemporales = promocionesTemporales;
+        this.promocionesProductos = promocionesProductos;
+        this.formaDePago = formaDePago;
         this.total = this.setTotal();
     }
 
@@ -71,17 +71,16 @@ public class Factura {
      * @return devuelve un flotante que debera ser mayor a cero, representa el total a cobrar a la mesa correspondiente
      */
     public double setTotal() {
-        double total=0;
+        double total = 0;
         double parcial;
-
-        for (int i=0;i<pedidos.size();i++) {
-           parcial=pedidos.get(i).getCantidad()*pedidos.get(i).getProducto().getPrecioVenta();
-            if (this.promocionesProductos != null) { // || promocionesProductos.size() > 0) {
-                for (int j = 0; j < promocionesProductos.size(); j++) {
-                    if (promocionesProductos.get(j).isActiva()) {
-                        if (promocionesProductos.get(j).isAplicaDosPorUno()) {
-                            parcial /= 2.;
-                        } else if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
+        for (int i = 0; i < pedidos.size(); i++) {
+           parcial = pedidos.get(i).getCantidad() * pedidos.get(i).getProducto().getPrecioVenta();
+            for (int j = 0; j < promocionesProductos.size(); j++) {
+                if (promocionesProductos.get(j).isActiva()) {
+                    if (promocionesProductos.get(j).isAplicaDosPorUno()) {
+                        parcial /= 2.;
+                    } else {
+                        if (promocionesProductos.get(j).isAplicaDtoPorCantidad() && pedidos.get(i).getCantidad() >= promocionesProductos.get(j).getDtoPorCantidad_CantMinima()) {
                             parcial = promocionesProductos.get(j).getDtoPorCantidad_PrecioUnitario() * pedidos.get(i).getCantidad();
                         }
                     }
@@ -89,15 +88,11 @@ public class Factura {
             }
             total += parcial;
         }
-
-        if (this.promocionesTemporales != null){ //|| promocionesTemporales.size() > 0) {
-            for (int k = 0; k < promocionesTemporales.size(); k++) {
-                if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
-                    total = total - total*(double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
-                }
+        for (int k = 0; k < promocionesTemporales.size(); k++) {
+            if (promocionesTemporales.get(k).isActivo() && promocionesTemporales.get(k).getFormaDePago().equals(this.getFormaDePago()) && promocionesTemporales.get(k).getDiasDePromo() == Date.from(Instant.now()).getDay()) {
+                total = total - total*(double) promocionesTemporales.get(k).getPorcentajeDescuento() / 100;
             }
         }
-
         return total;
     }
 }
