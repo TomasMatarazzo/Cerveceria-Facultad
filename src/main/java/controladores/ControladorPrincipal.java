@@ -14,10 +14,12 @@ import java.io.IOException;
 public class ControladorPrincipal implements ActionListener, WindowListener {
     private VistaPrincipal vista;
     private Empresa modelo;
+    private Ivista ventanaEmergente;
 
     public ControladorPrincipal(VistaPrincipal vista, Empresa modelo) {
         this.vista = vista;
         this.modelo = modelo;
+        this.ventanaEmergente = null;
         this.vista.setActionListener(this);
         this.vista.addWindowListener(this);
     }
@@ -27,34 +29,40 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
         switch (evento.getActionCommand()) {
             case "FORMDATOS":
                 this.vista.showFormSueldo();
+                this.setVentanaEmergente(this.vista.getFormSueldo());
                 break;
             case "MODIFICAR_DATOS":
                 try {
                     this.vista.setNombre(this.vista.getFormSueldo().getNombre());
                     this.vista.setSueldo(this.vista.getFormSueldo().getSueldo());
                     this.vista.hideFormSueldo();
+                    this.setVentanaEmergente(this.vista.getFormSueldo());
                 }
                 catch(Exception e){
                     System.out.printf("Excepcion");
                 }
                 break;
-            case "NUEVAS_COMANDAS":
-                VistaNuevaComandas ventanaNuevasComandas = new VistaNuevaComandas(this.modelo.getComandas(),this.modelo.getPedidos());
-                ControladorNuevasComandas controladorNuevasComandas = new ControladorNuevasComandas(ventanaNuevasComandas,this.modelo);
+            case "NUEVAS_COMANDAS": {
+                VistaNuevaComandas ventanaNuevasComandas = new VistaNuevaComandas(this.modelo.getComandas(), this.modelo.getPedidos());
+                this.setVentanaEmergente(ventanaNuevasComandas);
+                ControladorNuevasComandas controladorNuevasComandas = new ControladorNuevasComandas(ventanaNuevasComandas, this.modelo);
                 ventanaNuevasComandas.ejecutar();
-                break;
+                break;}
             case "REGISTRAR":
                 VistaRegistrarse ventanaRegistrarse = new VistaRegistrarse();
+                this.ventanaEmergente = ventanaRegistrarse;
                 ControladorRegistrarse controladorLogin = new ControladorRegistrarse(ventanaRegistrarse,this.modelo);
                 ventanaRegistrarse.ejecutar();
                 break;
-            case "ESTADISTICAS":
+            case "ESTADISTICAS":{
                 VistaEstadisticas ventanaEstadisticas = new VistaEstadisticas("Martin","Tomas","4523");
+                this.setVentanaEmergente(ventanaEstadisticas);
                 ventanaEstadisticas.ejecutar();
-                break;
+                break;}
             case "COMANDAS":
                 try {
                     VistaComandas vistaComandas = new VistaComandas(this.modelo.getProductos(),this.modelo.getMesas(), this.modelo.getMozos(), this.modelo.getPedidos());
+                    this.ventanaEmergente = vistaComandas;
                     ControladorComandas controlador = new ControladorComandas(vistaComandas,this.modelo);
                     vistaComandas.ejecutar();
                 }
@@ -64,6 +72,7 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
                 break;
             case "GESTIONES":
                 VistaInventario frame = new VistaInventario(this.modelo.getMozos() , this.modelo.getProductos(), this.modelo.getMesas());
+                this.ventanaEmergente = frame;
                 ControladorInventario controlador2 = new ControladorInventario(frame,this.modelo);
                 frame.ejecutar();
                 break;
@@ -74,6 +83,7 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
                 this.vista.terminoJornada();
                 break;
         }
+
     }
 
     @Override
@@ -120,5 +130,14 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
 
     }
 
+    public VistaPrincipal getVista() {
+        return vista;
+    }
 
+    public Ivista getVentanaEmergente() {
+        return ventanaEmergente;
+    }
+    public void setVentanaEmergente(Ivista ventana){
+        this.ventanaEmergente = ventana;
+    }
 }

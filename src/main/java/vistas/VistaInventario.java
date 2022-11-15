@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.TreeSet;
 
-public class VistaInventario extends JFrame {
+public class VistaInventario extends JFrame implements Ivista{
 
     private JPanel contentPane;
     private JLabel lblRegistreOperario;

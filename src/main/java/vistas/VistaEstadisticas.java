@@ -6,7 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.*;
 
-public class VistaEstadisticas extends JFrame {
+public class VistaEstadisticas extends JFrame implements Ivista{
 
     private JPanel contentPane;
     private JLabel lblNewLabel;
