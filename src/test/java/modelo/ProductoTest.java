@@ -43,7 +43,7 @@ class ProductoTest {
             }
         }
         /**
-         * Se quiere crear un nuevo producto con precio de consto = 0
+         * Se quiere crear un nuevo producto con precio de costo = 0
          */
         @Test
         void agregaProductoTest2() {

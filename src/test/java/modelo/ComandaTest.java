@@ -48,14 +48,13 @@ class ComandaTest {
         }
     }
 
-
     /**
      * Se quiere dar de alta una comanda en una mesa ya ocupada
      */
     @Test
-    void altaComanda2() throws Exception {
-        mesa.setEstado("ocupada");
+    void altaComanda2(){
         try {
+            mesa.setEstado("ocupada");
             empresa.altaComanda(mesa,mozo,pedido);
             fail("DEBERIA LANZAR EXCEPCION");
 
@@ -70,12 +69,11 @@ class ComandaTest {
      *
      * PRECONDICIONES
      * Comanda distinto vacio y null
-     * Comanda distinto vacio y null
      *
      * Se quiere agregar un pedido correcto a una comanda correcta
      */
     @Test
-    void agregarPedidoAComanda1() throws Exception {
+    void agregarPedidoAComanda1() {
         comanda = new Comanda(mesa,mozo);
         try {
             empresa.agregarPedidoAComanda(pedido,comanda);
@@ -85,6 +83,4 @@ class ComandaTest {
             fail("NO DEBERIA LANZAR EXCEPCION");
         }
     }
-
-
 }

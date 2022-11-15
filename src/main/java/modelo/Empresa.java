@@ -353,7 +353,7 @@ public class Empresa implements Serializable {
      * @return un flotante con el sueldo correspondiente a dicho mozo
      */
     public double calculaSueldo(Mozo mozo){
-        return this.getSueldoBasico()*(1+0.05* mozo.getCantHijos());
+        return this.getSueldoBasico() * (1+0.05* mozo.getCantHijos());
     }
 
 
