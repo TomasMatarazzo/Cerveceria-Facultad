@@ -2,14 +2,15 @@ package controladores;
 
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
+import modelo.PromocionTemporal;
 import vistas.*;
 import modelo.Empresa;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControladorPrincipal implements ActionListener, WindowListener {
     private VistaPrincipal vista;
@@ -81,6 +82,14 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
                 break;
             case "FINALIZAR_JORNADA":
                 this.vista.terminoJornada();
+                break;
+            case "PROMOCIONES":
+                ArrayList<PromocionTemporal> promocionTemporals = new ArrayList<>();
+                PromocionTemporal prom = new PromocionTemporal("hola","efectivo",30,1,true,true);
+                promocionTemporals.add(prom);
+                VistaPromociones frame2 = new VistaPromociones(promocionTemporals);
+                ControladorPromociones controlador = new ControladorPromociones(frame2, this.modelo);
+                frame2.ejecutar();
                 break;
         }
 

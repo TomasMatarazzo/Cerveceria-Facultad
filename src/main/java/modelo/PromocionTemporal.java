@@ -64,4 +64,9 @@ public class PromocionTemporal {
     public void setEsAcumulable(boolean esAcumulable) {
         this.esAcumulable = esAcumulable;
     }
+
+    @Override
+    public String toString() {
+        return "Promocion temporal:   " + this.nombre + "Estado:" + this.isActivo();
+    }
 }

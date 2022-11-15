@@ -6,6 +6,7 @@ import excepciones.StockNoDisponible;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.DoubleFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,6 +67,7 @@ public class Empresa implements Serializable {
      * @throws Exception Lanza excepcion, si la contrasena es vacia o null
      */
     public void signup( String apellido, String usuario, String password, boolean activo) throws Exception{
+
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=\\S+$).{8,20}$";
@@ -82,6 +84,7 @@ public class Empresa implements Serializable {
         Matcher m = p.matcher(password);
 
         if (m.matches()) {
+            System.out.printf("entro");
             this.operarios.add(new Operario(apellido, usuario, password, activo));
         } else {
             throw new Exception();
