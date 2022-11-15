@@ -113,7 +113,7 @@ class ProductoTest {
     }
 
     @Nested
-    @DisplayName("test producto  conjunto vacio")
+    @DisplayName("test producto  conjunto lleno")
     class productoConjuntoLLenoTest {
 
         @BeforeEach
@@ -135,7 +135,7 @@ class ProductoTest {
          * Se quiere crear un nuevo producto VALIDO
          */
         @Test
-        void altaProductoTest1() {
+        void agregaProductoTest1() {
             String nombre = "Sprite";
             double precioCosto = 100, precioVenta = 200;
             int stock = 10;
