@@ -28,7 +28,7 @@ class FacturaTest {
         productoEnPromocion = new ProductoEnPromocion(1,producto,"Domingo",true,false,10,20,true);
         pedido = new Pedido(producto,1);
         mesa = new Mesa(3);
-        mozo =new Mozo("Matias",new GregorianCalendar(1990,12,12),0,1);
+        mozo = new Mozo("Matias",new GregorianCalendar(1990,12,12),0,0);
         comanda = new Comanda(mesa,mozo);
         comanda.agregarPedido(pedido);
         empresa = new Empresa("Cerveceria", null, null, null, null);
@@ -54,7 +54,7 @@ class FacturaTest {
         double total, total2 = ((pedido.getCantidad()*producto.getPrecioVenta())/2.)*0.9;
 
         try {
-            total =empresa.generarFactura(comanda);
+            total = empresa.generarFactura(comanda);
 
             assertTrue(total == total2,"ERROR AL CALCULAR TOTAL");
         } catch (Exception e) {

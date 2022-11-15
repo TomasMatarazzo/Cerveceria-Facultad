@@ -19,7 +19,7 @@ class ComandaTest {
         producto = new Producto("coca",100,200,3);
         pedido = new Pedido(producto,1);
         mesa = new Mesa(3);
-        mozo =new Mozo("Matias",new GregorianCalendar(1990,12,12),0,1);
+        mozo =new Mozo("Matias",new GregorianCalendar(1990,12,12),0,0);
         empresa = new Empresa("Cerveceria", null, null, null, null);
     }
 
