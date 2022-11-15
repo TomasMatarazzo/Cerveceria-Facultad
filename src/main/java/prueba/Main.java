@@ -35,7 +35,9 @@ public class Main {
                 mesas=cerveceria.getMesas();
             } catch (IOException e) {
                 System.out.println("Se creo un nuevo archivo binario");
-                operarios.add(new Operario("ADMIN","ADMIN","ADMIN1234",true));
+                Operario admin = new Operario("ADMIN","ADMIN","ADMIN1234",true);
+                admin.setAdministrador();
+                operarios.add(admin);
             }
 
             VistaLogin vista = new VistaLogin();
