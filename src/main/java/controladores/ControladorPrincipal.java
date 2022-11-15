@@ -63,7 +63,7 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
             case "COMANDAS":
                 try {
                     VistaComandas vistaComandas = new VistaComandas(this.modelo.getProductos(),this.modelo.getMesas(), this.modelo.getMozos(), this.modelo.getPedidos());
-                    this.ventanaEmergente = vistaComandas;
+                    this.setVentanaEmergente(vistaComandas);
                     ControladorComandas controlador = new ControladorComandas(vistaComandas,this.modelo);
                     vistaComandas.ejecutar();
                 }
@@ -88,6 +88,7 @@ public class ControladorPrincipal implements ActionListener, WindowListener {
                 PromocionTemporal prom = new PromocionTemporal("hola","efectivo",30,1,true,true);
                 promocionTemporals.add(prom);
                 VistaPromociones frame2 = new VistaPromociones(promocionTemporals);
+                this.setVentanaEmergente(frame2);
                 ControladorPromociones controlador = new ControladorPromociones(frame2, this.modelo);
                 frame2.ejecutar();
                 break;
