@@ -13,7 +13,7 @@ public class Comanda {
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private String estado;
 
-    public Comanda( Mesa mesa,Mozo mozo) throws Exception{
+    public Comanda( Mesa mesa,Mozo mozo) {
         this.fecha = new Date();
         this.setMesa(mesa);
         this.estado = "abierta";
@@ -39,7 +39,7 @@ public class Comanda {
         return mesa;
     }
 
-    public void setMesa(Mesa mesa) throws Exception {
+    public void setMesa(Mesa mesa) {
         this.mesa = mesa;
     }
 
@@ -76,7 +76,9 @@ public class Comanda {
         return Objects.hash(getMesa());
     }
 
-    public void cerrarComanda(){this.estado = "cerrar";}
+    public void cerrarComanda(){
+        this.estado = "cerrar";
+    }
 
     @Override
     public String toString() {

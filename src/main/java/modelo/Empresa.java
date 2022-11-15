@@ -293,7 +293,6 @@ public class Empresa implements Serializable {
      * @param mozo
      * @throws Exception si el estado es incorrecto
      */
-
     public void altaComanda(Mesa mesa, Mozo mozo, Pedido pedido) throws Exception {
         if (mesa.getEstado().equalsIgnoreCase("ocupada") )
             throw new Exception("Mesa Ocupada");

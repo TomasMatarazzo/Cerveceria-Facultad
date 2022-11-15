@@ -78,12 +78,7 @@ public class VistaNuevaComandas extends JFrame implements Ivista{
     }
 
     public void ejecutar(){
-        try{
-            this.setVisible(true);
-        }
-        catch (Exception e ){
-            System.out.printf(e.getMessage());
-        }
+        this.setVisible(true);
     }
 
     public Comanda getSelectedComanda(){

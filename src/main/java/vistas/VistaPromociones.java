@@ -44,7 +44,7 @@ public class VistaPromociones extends JFrame  {
 
     public VistaPromociones( ArrayList<PromocionTemporal> promocionTemporals) {
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBounds(100, 100, 879, 587);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

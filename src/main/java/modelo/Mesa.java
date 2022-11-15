@@ -11,7 +11,7 @@ public class Mesa implements Comparable<Mesa>, Serializable {
     private int cantComandas;
     private double totalComandas;
 
-    public Mesa( int cantidadPersonas) throws Exception{
+    public Mesa( int cantidadPersonas) throws Exception {
         this.nro = Mesa.id++;
         this.setCantidadPersonas(cantidadPersonas);
         this.setEstado("libre");
