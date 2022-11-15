@@ -191,5 +191,23 @@ class MesaTest {
                 assertEquals(msg, e.getMessage());
             }
         }
+
+        /**
+         * Se quiere establecer una mesa con un estado incorrecto
+         */
+        @Test
+        void setEstado() {
+            assertThrows(Exception.class, () -> mesa2.setEstado("EstadoIncorrecto"));
+        }
+
+        /**
+         * Se quiere liberar una mesa
+         */
+        @Test
+        void cerrarMesa() {
+            mesa2.cerrarMesa();
+
+            assertTrue(mesa2.getEstado().equals("libre"));
+        }
     }
 }
